@@ -46,10 +46,34 @@ Kesadaran masyarakat, terutama generasi muda, akan pentingnya kesehatan mental m
 # BAB 2: Analisis Solusi
 
 ## 2.1 Deskripsi Perangkat Lunak
-Abstraksikan solusi perangkat lunak yang diusulkan dari sudut pandang pengguna. Jelaskan target platform yang akan digunakan (misalnya: desktop application) beserta alasan pemilihannya. Deskripsikan juga nilai unik (inovasi inti) dari perangkat lunak kalian dan apa yang membedakannya dari solusi yang sudah ada.
+Aplikasi *mobile* ini memantau kesehatan mental remaja dan mengirimkan ringkasan data ke orang tua. Remaja mencatat suasana hati serta durasi tidur, lalu mencari kontak psikolog terdekat. Orang tua memantau grafik tren perilaku anak melalui dasbor ringkasan.
+
+### 2.1.1 Platform Target dan Justifikasi
+Pengembang memilih aplikasi *mobile* Android / Cross-platform. Remaja dan orang tua berinteraksi rutin lewat ponsel pintar, memungkinkan pengiriman notifikasi pengingat jurnal dan pelacakan lokasi GPS fasilitas psikolog.
+
+### 2.1.2 Nilai Unik (*Unique Value Proposition*)
+1. **Integrasi Layanan:** Menggabungkan pencatatan kebiasaan fisik dan suasana hati dengan direktori rujukan psikolog pada satu platform terpadu.
+2. **Perlindungan Privasi:** Menyajikan ringkasan grafik kondisi anak kepada orang tua tanpa membuka teks jurnal pribadi.
+3. **Rujukan Terarah:** Menyediakan rincian lokasi dan jadwal konsultasi psikolog lokal.
+
+---
 
 ## 2.2 Asumsi dan Batasan
-Definisikan secara tegas asumsi (baik teknis maupun dari sisi pengguna) yang menjadi dasar pengembangan. Tuliskan batasan seperti regulasi/hukum, keterbatasan sumber daya, dan ruang lingkup solusi.
+
+### 2.2.1 Asumsi Pengembangan
+1. **Asumsi Pengguna:** Remaja mencatat kondisi emosi dan aktivitas harian dengan jujur. Dan orang tua mampu membaca grafik ringkasan metrik pada perangkat.
+2. **Asumsi Teknis:** Perangkat terhubung ke jaringan internet aktif untuk proses sinkronisasi basis data. Dan perangkat mengaktifkan modul GPS untuk pemetaan lokasi.
+3. **Asumsi Data Layanan:** Tim menyusun data direktori psikolog mitra ke dalam basis data lokal untuk kebutuhan prototipe.
+
+### 2.2.2 Batasan Sistem (*Constraints & Scope*)
+1. **Cakupan Medis:** Sistem berfungsi sebagai instrumen penapisan (*screening*) awal. Psikiater memegang wewenang penuh penegakan diagnosis klinis.
+2. **Penanganan Kedaruratan:** Sistem memuat daftar kontak darurat resmi untuk panggilan telepon manual tanpa layanan intervensi krisis langsung 24 jam.
+3. **Privasi Data (UU PDP):** Dasbor orang tua hanya memuat kalkulasi metrik ringkas. Catatan teks jurnal pribadi anak tetap terlindungi secara penuh.
+4. **Ruang Lingkup Proyek**
+   - **4.1** Tim beranggotakan lima orang menuntaskan sistem dalam durasi satu semester perkuliahan.
+   - **4.2** Pelacakan fisik mengandalkan masukan manual tanpa integrasi sensor *smartwatch*.
+   - **4.3** Alur konsultasi dibatasi pada reservasi jadwal tanpa integrasi gerbang pembayaran (*payment gateway*).
+uang lingkup solusi.
 
 ---
 
@@ -88,7 +112,9 @@ Buatlah *Activity Diagram* atau *Swimlane Diagram* yang menunjukkan alur kerja p
 
 # Referensi
 - Diagram UML: https://www.drawio.com/, https://staruml.io/
-- https://berkas.dpr.go.id/pusaka/files/isu_sepekan/Isu%20Sepekan---I-PUSLIT-Februari-2025-217.pdf 
-- https://ugm.ac.id/id/berita/23086-hasil-survei-i-namhs-satu-dari-tiga-remaja-indonesia-memiliki-masalah-kesehatan-mental/ 
+- https://berkas.dpr.go.id/pusaka/files/isu_sepekan/Isu%20Sepekan---I-PUSLIT-Februari-2025-217.pdf
+- https://ugm.ac.id/id/berita/23086-hasil-survei-i-namhs-satu-dari-tiga-remaja-indonesia-memiliki-masalah-kesehatan-mental/
 - https://kemkes.go.id/id/alarm-kesehatan-mental-anak-ckg-temukan-ratusan-ribu-anak-bergejala-cemas-dan-depresi
 - https://www.un.org/sustainabledevelopment/health/
+- https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
+- https://keswa.kemkes.go.id/
