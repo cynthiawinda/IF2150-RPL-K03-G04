@@ -60,8 +60,8 @@ Buatlah daftar seluruh aktor (pengguna) yang akan berinteraksi langsung dengan s
 
 | Aktor | Deskripsi |
 | :--- | :--- |
-| *Kasir* | *Pengguna ini bertindak sebagai pihak yang bertanggung jawab untuk memproses transaksi harian dan melayani pembayaran pelanggan. Karakteristik dari pengguna ini adalah mengutamakan kecepatan dan keakuratan saat bertransaksi.* |
-| ... | ... |
+| *Pengguna* | *Pengguna ini bertindak sebagai pihak yang diawasi(?) oleh wali. Karakteristik yang diawasi oleh wali dari pengguna ini adalah pola hidup, kesehatan fisik, kesehatan mental, dan kebiasaan pengguna.* |
+| *Wali* | *Wali merupakan pihak yang mengawasi kehidupan pengguna. Karakteristik dari wali adalah kemudahan penggunaan aplikasi, kelengkapan metrik-metrik penunjang pengawasan, dan update informasi secara real-time.* |
 
 
 ## 3.2 Kebutuhan Pengguna Awal
