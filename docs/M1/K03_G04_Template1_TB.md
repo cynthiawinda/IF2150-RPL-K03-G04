@@ -98,17 +98,18 @@ Definisikan apa yang ingin dicapai oleh pengguna saat menggunakan sistem ini dal
 | ... | ... | ... | ... |
 
 ## 3.3 Model Proses Bisnis
-Buatlah *Activity Diagram* atau *Swimlane Diagram* yang menunjukkan alur kerja proses bisnis dari sistem solusi. Diagram ini harus memvisualisasikan bagaimana alur operasional di dunia nyata berjalan lebih efisien dengan adanya interaksi antara aktor (yang didefinisikan pada poin 3.1) dan sistem perangkat lunak. Perhatikan notasi yang digunakan dalam pembuatannya.
-<br>
+Model proses bisnis aplikasi dirancang untuk memfasilitasi pencatatan kondisi harian oleh remaja sekaligus memberikan pemantauan terarah kepada orang tua/wali dengan tetap menjaga privasi data pribadi remaja. Proses bisnis utama pada sistem terbagi menjadi dua alur, yaitu **alur pencatatan harian dan pemantauan orang tua/wali** serta **alur pencarian rujukan layanan psikolog terdekat**.
 
-<p align="center">
-<img alt="Contoh Activity Diagram" src="./assets/diagram/diagram-act-1.avif" width="70%">
-</p>
-<p align="center">
-<i>Gambar 1. Contoh Activity Diagram</i>
-</p>
+### 3.3.1 Alur Pencatatan Harian dan Pemantauan Orang Tua/Wali
+Alur ini menggambarkan proses ketika remaja melakukan pencatatan kondisi harian berupa suasana hati (*mood*) dan durasi tidur. Data tersebut kemudian divalidasi dan diolah oleh sistem menjadi metrik serta grafik tren yang dapat diakses oleh orang tua/wali yang telah terhubung. Orang tua/wali hanya dapat melihat ringkasan kondisi dan tren tanpa dapat mengakses isi narasi jurnal pribadi remaja.
+(flowchart masih dibuat)
+Berdasarkan diagram tersebut, remaja menjadi aktor utama dalam proses pencatatan data harian. Sistem bertanggung jawab melakukan validasi, penyimpanan, dan pengolahan data menjadi informasi berupa metrik serta tren. Selanjutnya, wali memperoleh notifikasi dan dapat memantau kondisi remaja melalui dashboard. Untuk menjaga privasi, isi narasi jurnal pribadi tidak ditampilkan pada dashboard wali.
 
-<br>
+### 3.3.2 Alur Pencarian Rujukan Layanan Psikolog Terdekat
+Alur ini menggambarkan proses pencarian layanan psikolog ketika remaja membutuhkan bantuan profesional. Sistem memanfaatkan lokasi perangkat setelah pengguna memberikan izin akses GPS untuk mencari fasilitas psikolog yang tersedia di sekitar lokasi pengguna. Pengguna kemudian dapat melihat informasi fasilitas dan melakukan reservasi jadwal tanpa adanya transaksi pembayaran secara langsung di dalam sistem.
+(flowchart masih dibuat)
+Pada alur ini, remaja berinteraksi langsung dengan sistem untuk mencari layanan psikolog berdasarkan lokasi. Sistem menentukan lokasi pengguna, mencocokkannya dengan direktori fasilitas psikolog, kemudian memberikan rekomendasi berdasarkan kedekatan lokasi dan ketersediaan jadwal. Setelah memilih fasilitas dan jadwal yang sesuai, remaja dapat melakukan reservasi. Proses pembayaran tidak termasuk dalam ruang lingkup sistem.
+
 
 # Referensi
 - Diagram UML: https://www.drawio.com/, https://staruml.io/
