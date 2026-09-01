@@ -46,35 +46,57 @@ Kesadaran masyarakat, terutama generasi muda, akan pentingnya kesehatan mental m
 # BAB 2: Analisis Solusi
 
 ## 2.1 Deskripsi Perangkat Lunak
-Aplikasi *mobile* ini memantau kesehatan mental remaja dan mengirimkan ringkasan data ke orang tua. Remaja mencatat suasana hati serta durasi tidur, lalu mencari kontak psikolog terdekat. Orang tua memantau grafik tren perilaku anak melalui dasbor ringkasan.
+Perangkat lunak yang diusulkan merupakan sistem pemantauan kesehatan mental terintegrasi yang ditujukan bagi kalangan remaja dengan melibatkan peran orang tua/wali serta tenaga profesional secara proporsional. Sistem ini memposisikan diri sebagai platform refleksi mandiri bagi remaja sekaligus instrumen pemantauan preventif bagi orang tua. 
 
-### 2.1.1 Platform Target dan Justifikasi
-Pengembang memilih aplikasi *mobile* Android / Cross-platform. Remaja dan orang tua berinteraksi rutin lewat ponsel pintar, memungkinkan pengiriman notifikasi pengingat jurnal dan pelacakan lokasi GPS fasilitas psikolog.
+Dari sudut pandang remaja, aplikasi menyediakan ruang aman untuk mencatat dinamika emosi harian (*mood tracking*), menuliskan jurnal reflektif, serta mendokumentasikan pola istirahat. Dari sudut pandang orang tua/wali, aplikasi berperan sebagai dasbor pemantauan berkala yang menyajikan visualisasi tren emosional anak. Apabila sistem mendeteksi indikasi masalah emosional yang memerlukan penanganan lebih lanjut, aplikasi menyediakan jalur rujukan langsung ke direktori layanan psikolog terdekat.
 
-### 2.1.2 Nilai Unik (*Unique Value Proposition*)
-1. **Integrasi Layanan:** Menggabungkan pencatatan kebiasaan fisik dan suasana hati dengan direktori rujukan psikolog pada satu platform terpadu.
-2. **Perlindungan Privasi:** Menyajikan ringkasan grafik kondisi anak kepada orang tua tanpa membuka teks jurnal pribadi.
-3. **Rujukan Terarah:** Menyediakan rincian lokasi dan jadwal konsultasi psikolog lokal.
+### Target Platform dan Justifikasi
+Perangkat lunak ini dirancang dan diimplementasikan pada platform **mobile (Android / *Cross-platform*)**. Pemilihan platform *mobile* didasari oleh beberapa pertimbangan teknis dan kebutuhan operasional:
+
+1. **Portabilitas dan Aksesibilitas Tinggi:** Ponsel pintar merupakan perangkat personal yang selalu menyertai aktivitas harian remaja. Hal ini memungkinkan pencatatan kondisi emosional dan jurnal dilakukan secara langsung (*real-time*) tepat saat emosi dirasakan, tanpa kendala ruang dan waktu seperti pada komputer desktop.
+2. **Integrasi Modul GPS:** Aplikasi memanfaatkan modul *Global Positioning System* (GPS) bawaan perangkat keras ponsel untuk menentukan titik koordinat pengguna secara presisi guna menghitung jarak serta merekomendasikan fasilitas psikolog terdekat.
+3. **Kebutuhan Komunikasi Asinkron (*Push Notifications*):** Sistem mengandalkan layanan notifikasi bawaan sistem operasi *mobile* untuk mengirimkan pengingat pencatatan rutin kepada remaja, pembaruan tren berkala kepada orang tua, serta konfirmasi jadwal konsultasi secara tepat waktu.
+4. **Faktor Kerahasiaan Personal:** Karakteristik ponsel sebagai *single-user device* memberikan perlindungan privasi yang lebih aman bagi remaja saat menuangkan catatan reflektifnya dibandingkan jika aplikasi diakses melalui perangkat komputer bersama keluarga.
+
+### Nilai Keunikan (*Unique Value Proposition*)
+Inovasi dan pembeda utama dari perangkat lunak ini dibandingkan solusi yang sudah beredar di pasaran meliputi:
+
+1. **Pemantauan Kolaboratif Berbasis Privasi:** Menerapkan pemisahan data yang ketat antara anak dan orang tua. Wali hanya memperoleh visualisasi grafik indeks suasana hati dan ringkasan metrik perilaku, sedangkan isi teks narasi jurnal harian anak tetap terenkripsi dan tidak dapat diakses oleh pihak mana pun.
+2. **Korelasi Pola Istirahat dan Kondisi Mental:** Mengombinasikan data durasi tidur harian dengan pencatatan suasana hati dalam satu analisis terpadu untuk membantu pengguna memahami keterkaitan antara kebiasaan fisik dan kestabilan emosi.
+3. **Keterhubungan Langsung ke Layanan Profesional:** Menyediakan alur rujukan terarah menuju tenaga ahli melalui direktori psikolog terverifikasi, lengkap dengan estimasi jarak, profil praktisi, serta fasilitas reservasi jadwal temu.
 
 ---
 
 ## 2.2 Asumsi dan Batasan
 
-### 2.2.1 Asumsi Pengembangan
-1. **Asumsi Pengguna:** Remaja mencatat kondisi emosi dan aktivitas harian dengan jujur. Dan orang tua mampu membaca grafik ringkasan metrik pada perangkat.
-2. **Asumsi Teknis:** Perangkat terhubung ke jaringan internet aktif untuk proses sinkronisasi basis data. Dan perangkat mengaktifkan modul GPS untuk pemetaan lokasi.
-3. **Asumsi Data Layanan:** Tim menyusun data direktori psikolog mitra ke dalam basis data lokal untuk kebutuhan prototipe.
+### Asumsi Pengembangan
+Dasar perancangan dan operasional perangkat lunak ini dibangun di atas beberapa asumsi:
 
-### 2.2.2 Batasan Sistem (*Constraints & Scope*)
-1. **Cakupan Medis:** Sistem berfungsi sebagai instrumen penapisan (*screening*) awal. Psikiater memegang wewenang penuh penegakan diagnosis klinis.
-2. **Penanganan Kedaruratan:** Sistem memuat daftar kontak darurat resmi untuk panggilan telepon manual tanpa layanan intervensi krisis langsung 24 jam.
-3. **Privasi Data (UU PDP):** Dasbor orang tua hanya memuat kalkulasi metrik ringkas. Catatan teks jurnal pribadi anak tetap terlindungi secara penuh.
-4. **Ruang Lingkup Proyek**
-   - **4.1** Tim beranggotakan lima orang menuntaskan sistem dalam durasi satu semester perkuliahan.
-   - **4.2** Pelacakan fisik mengandalkan masukan manual tanpa integrasi sensor *smartwatch*.
-   - **4.3** Alur konsultasi dibatasi pada reservasi jadwal tanpa integrasi gerbang pembayaran (*payment gateway*).
-uang lingkup solusi.
+#### **Asumsi Pengguna:** 
+  1. Remaja diasumsikan memiliki kesadaran dan kejujuran dalam mencatat kondisi emosional serta durasi tidur harian secara berkala.
+  2. Orang tua/wali diasumsikan mampu membaca visualisasi grafik statistik pada antarmuka aplikasi dan menyepakati batas privasi anak sejak awal.
+  3. Pengguna bersedia memberikan izin akses sistem pada perangkat, terutama perizinan notifikasi dan modul lokasi (GPS).
+#### **Asumsi Teknis:**
+  1. Perangkat ponsel pintar pengguna menjalankan sistem operasi minimum Android 8.0 (Oreo) ke atas dengan kapasitas penyimpanan yang memadai.
+  2. Perangkat memiliki sensor GPS yang berfungsi normal serta konektivitas internet (data seluler atau Wi-Fi) yang stabil untuk proses sinkronisasi data ke peladen *cloud*.
+#### **Asumsi Data:**
+  * Informasi profil fasilitas kesehatan mental, kontak, dan jadwal praktik psikolog yang dihimpun ke dalam basis data diasumsikan valid, beroperasi aktif, dan memiliki izin praktik resmi.
 
+### Batasan Sistem
+Untuk menjaga fokus implementasi dan kepatuhan terhadap regulasi, sistem menetapkan batasan-batasan sebagai berikut:
+
+#### **Batasan Hukum dan Regulasi:**
+  1. **Kepatuhan UU PDP:** Merujuk pada Undang-Undang No. 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP), data catatan kesehatan mental dikategorikan sebagai data pribadi yang bersifat spesifik. Sistem wajib menerapkan enkripsi data pada tingkat penyimpanan dan transmisi, membatasi akses narasi jurnal secara ketat, serta menerapkan mekanisme persetujuan eksplisit (*explicit consent*) sebelum metrik dibagikan kepada wali.
+#### **Batasan Sumber Daya:**
+  1. **Waktu:** Pengembangan dibatasi oleh durasi satu semester akademik perkuliahan (sekitar 14–16 minggu kerja).
+  2. **Tenaga Kerja:** Dikerjakan oleh tim kecil berskala 5 mahasiswa dengan pembagian peran kerja terdistribusi.
+  3. **Anggaran Finansial (*Budget*):** Proyek dikembangkan tanpa alokasi pendanaan khusus (*zero-budget*). Seluruh infrastruktur komputasi awan, basis data, dan API pihak ketiga dibatasi pada pemanfaatan kuota tingkat gratis (*free-tier*).
+#### **Batasan Ruang Lingkup Solusi:**
+  1. **Batas Fungsi Medis:** Perangkat lunak bertindak murni sebagai instrumen penapisan awal (*early screening*) dan pemantauan mandiri. Sistem tidak memberikan diagnosis medis klinis ataupun peresepan obat; diagnosis definitif sepenuhnya menjadi ranah psikolog dan psikiater berlisensi.
+  2. **Ketiadaan Layanan Intervensi Krisis Langsung:** Aplikasi tidak menyediakan tim tanggap darurat krisis 24 jam mandiri, melainkan hanya menyediakan tombol panggilan cepat (*direct emergency call*) ke nomor *hotline* resmi pemerintah/instansi berwenang.
+  3. **Mekanisme Input Data:** Pencatatan durasi tidur dan aktivitas mengandalkan masukan mandiri (*manual input*) dari pengguna tanpa integrasi ke sensor perangkat sandang (*smartwatch/wearables*).
+  4. **Ruang Lingkup Transaksi:** Fitur rujukan tenaga profesional hanya mencakup pencarian direktori dan formulir reservasi jadwal, tanpa integrasi gerbang pembayaran (*payment gateway*) di dalam aplikasi.
+     
 ---
 
 # BAB 3: Spesifikasi Kebutuhan dan Proses Bisnis
@@ -120,10 +142,11 @@ Pada alur ini, remaja berinteraksi langsung dengan sistem untuk mencari layanan 
 
 
 # Referensi
-- Diagram UML: https://www.drawio.com/, https://staruml.io/
-- https://berkas.dpr.go.id/pusaka/files/isu_sepekan/Isu%20Sepekan---I-PUSLIT-Februari-2025-217.pdf
-- https://ugm.ac.id/id/berita/23086-hasil-survei-i-namhs-satu-dari-tiga-remaja-indonesia-memiliki-masalah-kesehatan-mental/
-- https://kemkes.go.id/id/alarm-kesehatan-mental-anak-ckg-temukan-ratusan-ribu-anak-bergejala-cemas-dan-depresi
-- https://www.un.org/sustainabledevelopment/health/
-- https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
-- https://keswa.kemkes.go.id/
+
+1. **Republik Indonesia.** (2022). *Undang-Undang Republik Indonesia Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi*. JDIH BPK RI. https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
+2. **Kementerian Kesehatan Republik Indonesia.** (2026). *Direktorat Kesehatan Jiwa (Keswa)*. https://keswa.kemkes.go.id/
+3. **Kementerian Kesehatan Republik Indonesia.** (2025). *Alarm Kesehatan Mental Anak, CKG Temukan Ratusan Ribu Anak Bergejala Cemas dan Depresi*. https://kemkes.go.id/id/alarm-kesehatan-mental-anak-ckg-temukan-ratusan-ribu-anak-bergejala-cemas-dan-depresi
+4. **Universitas Gadjah Mada.** (2022). *Hasil Survei I-NAMHS: Satu dari Tiga Remaja Indonesia Memiliki Masalah Kesehatan Mental*. https://ugm.ac.id/id/berita/23086-hasil-survei-i-namhs-satu-dari-tiga-remaja-indonesia-memiliki-masalah-kesehatan-mental/
+5. **Pusat Analisis Keparlemenan BK DPR RI.** (2025). *Isu Sepekan: Penanganan Masalah Kesehatan Mental Remaja di Indonesia*. https://berkas.dpr.go.id/pusaka/files/isu_sepekan/Isu%20Sepekan---I-PUSLIT-Februari-2025-217.pdf
+6. **United Nations.** (2015). *Sustainable Development Goal 3: Good Health and Well-Being*. https://www.un.org/sustainabledevelopment/health/
+7. **Draw.io & StarUML.** *Unified Modeling Language (UML) Modeling Tools*. https://www.drawio.com/, https://staruml.io/
