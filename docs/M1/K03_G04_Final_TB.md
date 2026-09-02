@@ -102,22 +102,32 @@ Untuk menjaga fokus implementasi dan kepatuhan terhadap regulasi, sistem menetap
 # BAB 3: Spesifikasi Kebutuhan dan Proses Bisnis
 
 ## 3.1 Identifikasi Aktor
-Buatlah daftar seluruh aktor (pengguna) yang akan berinteraksi langsung dengan sistem solusi yang kalian kembangkan. Berikan penjelasan singkat mengenai peran dan karakteristik dari masing-masing aktor tersebut.
 
 | Aktor | Deskripsi |
 | :--- | :--- |
-| *Pengguna* | *Pengguna ini bertindak sebagai pihak yang diawasi(?) oleh wali. Karakteristik yang diawasi oleh wali dari pengguna ini adalah pola hidup, kesehatan fisik, kesehatan mental, dan kebiasaan pengguna.* |
-| *Wali* | *Wali merupakan pihak yang mengawasi kehidupan pengguna. Karakteristik dari wali adalah kemudahan penggunaan aplikasi, kelengkapan metrik-metrik penunjang pengawasan, dan update informasi secara real-time.* |
+| Mahasiswa | Mahasiswa merupakan pengguna utama yang melakukan pencatatan kondisi diri secara mandiri, meliputi suasana hati, pola makan, tidur, aktivitas fisik, dan kondisi kesehatan lainnya. Mahasiswa dapat melihat perkembangan kondisi dirinya, memperoleh rekomendasi atas informasi kesehatannya, melakukan konsultasi dengan tenaga profesional, serta menghubungi layanan darurat ketika membutuhkan bantuan. Karakteristik dari aktor ini adalah kemudahan penggunaan, kecepatan input data, keamanan dan privasi, visualisasi informasi, akses konsultasi, dan akses bantuan darurat. |
+| Orang Tua / Wali | Wali merupakan pihak yang berperan dalam memantau kondisi mahasiswa berdasarkan informasi yang dibagikan. Wali dapat melihat ringkasan perkembangan kondisi pengguna, menerima notifikasi apabila terdapat kondisi yang memerlukan perhatian, serta memperoleh informasi lain yang dapat membantu proses pengawasan. Karakteristik dari aktor ini adalah kemudahan penggunaan, kelengkapan metrik pemantauan, kemudahan memahami kondisi pengguna, notifikasi, dan informasi real-time. |
+| Psikolog | Psikolog merupakan tenaga ahli yang memberikan layanan konsultasi dan pendampingan psikologis kepada pengguna. Psikolog dapat melihat informasi kesehatan dan riwayat kondisi yang telah diberikan oleh pengguna, melakukan konsultasi, memberikan asesmen atau rekomendasi, serta memantau perkembangan kondisi psikologis pengguna. Karakteristik dari aktor ini adalah kemudahan penggunaan, kelengkapan data psikologis, riwayat kondisi pengguna, keamanan data, dan kemudahan konsultasi. |
+| Psikiater | Psikiater merurpakan tenaga medis yang memberikan konsultasi dan penanganan terkait kondisi kesehatan jiwa pengguna. Psikiater dapat mengakses informasi yang relevan dengan persetujuan pengguna, melakukan asesmen, memberikan rekomendasi penanganan, serta melakukan tindak lanjut terhadap kondisi pengguna. Karakteristik dari aktor ini adalah kemudahan penggunaan, kelengkapan riwayat kesehatan, akurasi informasi, keamanan data medis, dan kemudahan konsultasi. |
+| Instansi Pemerintah | Instansi Pemerintah merupakan pihak yang menerima permintaan bantuan ketika pengguna mengalami kondisi darurat. Mereka dapat menerima informasi yang diperlukan untuk proses penanganan, seperti identitas pengguna, lokasi, dan jenis keadaan darurat. Karakteristik dari aktor ini adalah kecepatan menerima laporan, kelengkapan informasi darurat, akurasi lokasi, informasi real-time, dan kemudahan koordinasi. |
+| Administrator | Administrator merupakan pihak yang bertanggung jawab terhadap pengelolaan sistem, akun pengguna, data layanan, serta operasional aplikasi. Karakteristik dari aktor ini adalah kemudahan pengelolaan sistem, kemudahan pengelolaan akun dan hak akses, kemudahan pemantauan sistem, keamanan data, serta kemudahan pengelolaan informasi.|
 
 
 ## 3.2 Kebutuhan Pengguna Awal
-Definisikan apa yang ingin dicapai oleh pengguna saat menggunakan sistem ini dalam format *User Story* (Sebagai [Aktor], saya ingin [Aktivitas/Kebutuhan], sehingga [Tujuan/Nilai]). Pastikan kalian berfokus pada "apa yang ingin dilakukan pengguna".
+
 
 | ID | Aktor | Kebutuhan / Aktivitas | Tujuan / Nilai |
 | :--- | :--- | :--- | :--- |
-| US-01 | *Kasir* |  *Memindai barcode barang* | *Proses pembayaran berjalan cepat dan akurat* |
-| US-02 | *[Nama Aktor]* | *[Kebutuhan pengguna]* | *[Tujuan yang dicapai pengguna]* |
-| ... | ... | ... | ... |
+| US-01 | *Mahasiswa* |  *Membuat akun dan mendaftarkan informasi awal serta kontak wali* | *Mempermudah penggunaan aplikasi dan menyediakan informasi yang diperlukan untuk pemantauan* |
+| US-02 | *Mahasiswa* | *Mendapatkan pengingat untuk melakukan daily check-in* | *Menjaga konsistensi pencatatan kondisi diri* |
+| US-03 | *Mahasiswa* | *Mencatat kondisi mood, aktivitas fisik, pola makan, dan tidur secara berkala* | *Memantau kondisi kesehatan fisik dan mental sehari-hari* |
+| US-04 | *Mahasiswa* | *Melihat hasil pengolahan dan statistik kondisi diri* | *Memahami pola dan perubahan kondisi kesehatan dari waktu ke waktu* |
+| US-05 | *Mahasiswa / Wali* | *Mendapatkan laporan rangkuman kondisi kesehatan secara berkala* | *Memahami perkembangan kondisi diri dan mengetahui kondisi yang perlu diperhatikan* |
+| US-06 | *Mahasiswa* | *Mendapatkan rekomendasi psikolog atau psikiater* | *Menemukan tenaga profesional yang sesuai dengan kebutuhan dan preferensi.* |
+| US-07 | *Mahasiswa / Psikolog / Psikiater* | *Menjadwalkan dan mengonfirmasi konsultasi* | *Mempermudah pengguna mendapatkan layanan konsultasi dengan tenaga profesional* |
+| US-08 | *Wali* | *Menerima notifikasi ketika terjadi kondisi darurat atau pola kebiasaan yang aneh* | *Membantu wali memantau kondisi pengguna dan memberikan bantuan/perhatian yang diperlukan* |
+| US-09 | *Wali* | *Mengonfirmasi penerimaan dan tindak lanjut notifikasi darurat* | *Memastikan penindaklanjutan kondisi darurat* |
+
 
 ## 3.3 Deskripsi Aktivitas
 Berikut adalah daftar seluruh aktivitas yang terdapat dalam sistem solusi, lengkap dengan ID dan penjelasan.
@@ -125,18 +135,18 @@ Berikut adalah daftar seluruh aktivitas yang terdapat dalam sistem solusi, lengk
 | :--- | :--- | :--- | :--- |
 | A01 | *Melakukan Registrasi* | *User membuat akun termasuk riwayat kesehatan mental dan mendaftarkan kontak keluarga/wali.* | *US-01* |
 | A02 | *Mengirim Reminder* | *Sistem mengirim notifikasi pengingat jika user belum check-in di waktu tertentu.* | *US-02* |
-| A03 | *Melakukan Daily Check-in* | *User mengisi kebutuhan daily check-in, mulai dari skala mood harian, mengisi detail aktivitas fisik, hingga pola makan dan tidur harian.* | ... |
-| A04 | *Memantau Daily Check-in* | *Sistem memantau user rutin melakukan daily check-in setiap hari atau tidak.* | ... |
-| A05 | *Menyimpan Data* | *Sistem menyimpan histori daily check-in user ke database untuk keperluan analisis dan laporan.* | ... |
-| A06 | *Mengolah Data* | *Sistem menghitung dan menganalisis statistik input daily check-in user dalam suatu periode.* | ... |
-| A07 | *Menyusun Laporan* | *Sistem membuat dokumen rangkuman laporan terstruktur terkait kondisi kesehatan mental user dalam suatu periode, termasuk prediksi kondisi darurat.* | ... |
-| A08 | *Memberi Rekomendasi Tenaga Medis* | *Sistem memberikan pilihan psikolog/psikiater berdasarkan lokasi, biaya, dan analisis kondisi user.* | ... |
-| A09 | *Merencanakan Konsultasi* | *User memilih tenaga medis sesuai preferensinya lalu menjadwalkan konsultasi melalui sistem.* | ... |
-| A10 | *Mengonfirmasi Konsultasi* | *Tenaga medis mengecek jadwal konsultasi lalu mengonfirmasi pengajuan konsultasi user.* | ... |
-| A11 | *Mengirim Laporan* | *Sistem mengirimkan laporan dalam suatu periode kepada user dan/atau keluarga/wali.* | ... |
-| A12 | *Mendeteksi Kondisi Darurat* | *Sistem menandai kondisi darurat ketika ketidakaktifan check-in berhari-hari disertai tren laporan kesehatan memburuk.* | ... |
-| A13 | *Mengirim Notifikasi Darurat* | *Sistem mengirim notifikasi atau pesan ke kontak keluarga/wali yang terdaftar saat kondisi darurat terdeteksi.* | ... |
-| A14 | *Mengonfirmasi Notifikasi Darurat* | *Keluarga/wali mengonfirmasi telah menerima dan menindaklanjuti notifikasi darurat.* | ... |
+| A03 | *Melakukan Daily Check-in* | *User mengisi kebutuhan daily check-in, mulai dari skala mood harian, mengisi detail aktivitas fisik, hingga pola makan dan tidur harian.* | *US-03* |
+| A04 | *Memantau Daily Check-in* | *Sistem memantau user rutin melakukan daily check-in setiap hari atau tidak.* | *US-02* |
+| A05 | *Menyimpan Data* | *Sistem menyimpan histori daily check-in user ke database untuk keperluan analisis dan laporan.* | *US-03* |
+| A06 | *Mengolah Data* | *Sistem menghitung dan menganalisis statistik input daily check-in user dalam suatu periode.* | *US-04* |
+| A07 | *Menyusun Laporan* | *Sistem membuat dokumen rangkuman laporan terstruktur terkait kondisi kesehatan mental user dalam suatu periode, termasuk prediksi kondisi darurat.* | *US-05* |
+| A08 | *Memberi Rekomendasi Tenaga Medis* | *Sistem memberikan pilihan psikolog/psikiater berdasarkan lokasi, biaya, dan analisis kondisi user.* | *US-06* |
+| A09 | *Merencanakan Konsultasi* | *User memilih tenaga medis sesuai preferensinya lalu menjadwalkan konsultasi melalui sistem.* | *US-07* |
+| A10 | *Mengonfirmasi Konsultasi* | *Tenaga medis mengecek jadwal konsultasi lalu mengonfirmasi pengajuan konsultasi user.* | *US-07* |
+| A11 | *Mengirim Laporan* | *Sistem mengirimkan laporan dalam suatu periode kepada user dan/atau keluarga/wali.* | *US-05* |
+| A12 | *Mendeteksi Kondisi Darurat* | *Sistem menandai kondisi darurat ketika ketidakaktifan check-in berhari-hari disertai tren laporan kesehatan memburuk.* | *US-05/US-08* |
+| A13 | *Mengirim Notifikasi Darurat* | *Sistem mengirim notifikasi atau pesan ke kontak keluarga/wali yang terdaftar saat kondisi darurat terdeteksi.* | *US-08* |
+| A14 | *Mengonfirmasi Notifikasi Darurat* | *Keluarga/wali mengonfirmasi telah menerima dan menindaklanjuti notifikasi darurat.* | *US-09* |
 
 ## 3.4 Model Proses Bisnis
 Model proses bisnis aplikasi dirancang untuk memfasilitasi pencatatan kondisi harian oleh remaja sekaligus memberikan pemantauan terarah kepada orang tua/wali dengan tetap menjaga privasi data pribadi remaja. Proses bisnis utama pada sistem terbagi menjadi dua alur, yaitu **alur pencatatan harian dan pemantauan orang tua/wali** serta **alur pencarian rujukan layanan psikolog terdekat**.
