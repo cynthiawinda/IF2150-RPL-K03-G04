@@ -120,12 +120,23 @@ Definisikan apa yang ingin dicapai oleh pengguna saat menggunakan sistem ini dal
 | ... | ... | ... | ... |
 
 ## 3.3 Deskripsi Aktivitas
-Buatlah daftar seluruh aktivitas yang terdapat dalam sistem solusi, lengkap dengan ID dan penjelasan. Telusuri hubungan aktivitas tersebut dengan *user story* yang sudah dituliskan sebelumnya. Bisa dibuat dalam bentuk tabel.
+Berikut adalah daftar seluruh aktivitas yang terdapat dalam sistem solusi, lengkap dengan ID dan penjelasan.
 | ID | Aktivitas | Penjelasan | ID User Story |
 | :--- | :--- | :--- | :--- |
-| A01 | *Melakukan Pemesanan* | *Pelanggan memulai proses dengan memesan produk.* | *US-01* |
-| A02 | *Memproses Pesanan* | *Sistem memproses dan menyiapkan detail sesuai dengan pesanan.* | *US-02*|
-| ... | ... | ... | ... |
+| A01 | *Melakukan Registrasi* | *User membuat akun termasuk riwayat kesehatan mental dan mendaftarkan kontak keluarga/wali.* | *US-01* |
+| A02 | *Mengirim Reminder* | *Sistem mengirim notifikasi pengingat jika user belum check-in di waktu tertentu.* | *US-02* |
+| A03 | *Melakukan Daily Check-in* | *User mengisi kebutuhan daily check-in, mulai dari skala mood harian, mengisi detail aktivitas fisik, hingga pola makan dan tidur harian.* | ... |
+| A04 | *Memantau Daily Check-in* | *Sistem memantau user rutin melakukan daily check-in setiap hari atau tidak.* | ... |
+| A05 | *Menyimpan Data* | *Sistem menyimpan histori daily check-in user ke database untuk keperluan analisis dan laporan.* | ... |
+| A06 | *Mengolah Data* | *Sistem menghitung dan menganalisis statistik input daily check-in user dalam suatu periode.* | ... |
+| A07 | *Menyusun Laporan* | *Sistem membuat dokumen rangkuman laporan terstruktur terkait kondisi kesehatan mental user dalam suatu periode, termasuk prediksi kondisi darurat.* | ... |
+| A08 | *Memberi Rekomendasi Tenaga Medis* | *Sistem memberikan pilihan psikolog/psikiater berdasarkan lokasi, biaya, dan analisis kondisi user.* | ... |
+| A09 | *Merencanakan Konsultasi* | *User memilih tenaga medis sesuai preferensinya lalu menjadwalkan konsultasi melalui sistem.* | ... |
+| A10 | *Mengonfirmasi Konsultasi* | *Tenaga medis mengecek jadwal konsultasi lalu mengonfirmasi pengajuan konsultasi user.* | ... |
+| A11 | *Mengirim Laporan* | *Sistem mengirimkan laporan dalam suatu periode kepada user dan/atau keluarga/wali.* | ... |
+| A12 | *Mendeteksi Kondisi Darurat* | *Sistem menandai kondisi darurat ketika ketidakaktifan check-in berhari-hari disertai tren laporan kesehatan memburuk.* | ... |
+| A13 | *Mengirim Notifikasi Darurat* | *Sistem mengirim notifikasi atau pesan ke kontak keluarga/wali yang terdaftar saat kondisi darurat terdeteksi.* | ... |
+| A14 | *Mengonfirmasi Notifikasi Darurat* | *Keluarga/wali mengonfirmasi telah menerima dan menindaklanjuti notifikasi darurat.* | ... |
 
 ## 3.4 Model Proses Bisnis
 Model proses bisnis aplikasi dirancang untuk memfasilitasi pencatatan kondisi harian oleh remaja sekaligus memberikan pemantauan terarah kepada orang tua/wali dengan tetap menjaga privasi data pribadi remaja. Proses bisnis utama pada sistem terbagi menjadi dua alur, yaitu **alur pencatatan harian dan pemantauan orang tua/wali** serta **alur pencarian rujukan layanan psikolog terdekat**.
