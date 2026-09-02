@@ -23,18 +23,25 @@
 
 ### Daftar Isi
 * [Milestone 1](#milestone-1)
-* Notes: Copy bagian Daftar Isi seperti Milestone 1 untuk Milestone berikutnya, contoh ``* [Milestone 2](#milestone-2)``. Ketika Daftar isi diklik maka akan langsung diarahkan ke bagian bawah sesuai dengan Milestone tujuan.
-
 
 ---
 
 ### Milestone 1
-**Periode:** 27/09/2026 - 02/09/2026
+**Periode:** 27/08/2026 - 02/09/2026
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
-| *04-05-2026* | *[Nama Mahasiswa]* | *[Jelaskan Pekerjaan secara Singkat]* | *[Durasi Pengerjaan]* | *[On Progress/Done]* | [Kendala yang dialami, jika tidak ada cukup tandai "-"] | 
-| *05-05-2026* | *John Doe* | *Mendesain diagram kelas* | *3* | *Done* | *-* | 
+| *28-08-2026* | *Seluruh anggota kelompok* | *Brainstorming pemilihan SDG, ide solusi perangkat lunak, dan fitur-fitur utamanya* | *3* | *Done* | *Bingung mau realistis atau idealis* | 
+| *30-08-2026* | *Cynthia Winda Wijaya* | *Menulis bagian 1.2* | *1,5* | *Done* | *-* | 
+| *30-08-2026* | *Sophia Imelda Rogate Marpaung* | *Menulis bagian 1.1* | *2* | *Done* | *-* | 
+| *30-08-2026* | *Rendy Salastra Putra* | *Menambah identifikasi aktor awal* | *2* | *Done* | *-* | 
+| *30-08-2026* | *Haikal Muhammad Royyan* | *Menambah analisis solusi* | *2* | *Done* | *-* | 
+| *31-08-2026* | *Christabelcyne Costan* | *Menulis model proses bisnis* | *2* | *Done* | *-* | 
+| *01-09-2026* | *Sophia Imelda Rogate Marpaung* | *Mengisi form asistensi* | *0,5* | *Done* | *-* | 
+| *01-09-2026* | *Sophia Imelda Rogate Marpaung* | *Menambah template 3.3* | *0,25* | *Done* | *-* | 
+| *01-09-2026* | *Haikal Muhammad Royyan* | *Revisi analisis solusi* | *1* | *Done* | *-* | 
+| *02-09-2026* | *Sophia Imelda Rogate Marpaung* | *Mengisi tabel deskripsi aktivitas* | *2* | *Done* | *-* |
+| *02-09-2026* | *Rendy Salastra Putra* | *Menambah isi bab 3.1 dan 3.2* | *2* | *Done* | *-* | 
 | | | | | | | |
 
 **Catatan/Evaluasi Milestone 1:**
