@@ -4,20 +4,20 @@
 
 | Informasi | Keterangan |
 |---|---|
-| Kelas | *[Kelas]* |
-| Nomor Kelompok | *[Nomor Kelompok]* |
-| Nama Kelompok | *[Nama Kelompok]* |
+| Kelas | *03* |
+| Nomor Kelompok | *04* |
+| Nama Kelompok | *pakespinwheel* |
 | Nama Perangkat Lunak | *[Nama P/L]* |
 
 **Anggota Kelompok:**
 
 | NIM | Nama |
 |---|---|
-| *[NIM 1]* | *[Nama Anggota 1]* |
-| *[NIM 2]* | *[Nama Anggota 2]* |
-| *[NIM 3]* | *[Nama Anggota 3]* |
-| *[NIM 4]* | *[Nama Anggota 4]* |
-| *[NIM 5]* | *[Nama Anggota 5]* |
+| *13525021* | *Haikal Muhammad Royyan* |
+| *13525066* | *Cynthia Winda Wijaya* |
+| *13525081* | *Rendy Salastra Putra* |
+| *13525090* | *Sophia Imelda Rogate Marpaung* |
+| *13525141* | *Christabelcyne Costan* |
 
 ---
 
@@ -52,8 +52,8 @@ Kami yang bertanda tangan di bawah ini menyatakan bahwa seluruh log penggunaan A
 
 | Tanda Tangan | Nama Anggota |
 | :---: | :--- |
-| <img src="./assets/ttd-anggota1.png" width="100"> | **[NIM - Nama Anggota 1]** |
-| <img src="./assets/ttd-anggota2.png" width="100"> | **[NIM - Nama Anggota 2]** |
-| <img src="./assets/ttd-anggota3.png" width="100"> | **[NIM - Nama Anggota 3]** |
-| <img src="./assets/ttd-anggota4.png" width="100"> | **[NIM - Nama Anggota 4]** |
-| <img src="./assets/ttd-anggota5.png" width="100"> | **[NIM - Nama Anggota 5]** |
+| <img src="./assets/ttd-anggota1.png" width="100"> | **13525021 - Haikal Muhammad Royyan** |
+| <img src="./assets/ttd-anggota2.png" width="100"> | **13525066 - Cynthia Winda Wijaya** |
+| <img src="./assets/ttd-anggota3.png" width="100"> | **13525081 - Rendy Salastra Putra** |
+| <img src="./assets/ttd-anggota4.png" width="100"> | **13525090 - Sophia Imelda Rogate Marpaung** |
+| <img src="./assets/ttd-anggota5.png" width="100"> | **13525141 - Christabelcyne Costan** |
