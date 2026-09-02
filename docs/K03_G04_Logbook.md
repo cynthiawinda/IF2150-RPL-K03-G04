@@ -7,7 +7,7 @@
 | Kelas | *03* |
 | Nomor Kelompok | *04* |
 | Nama Kelompok | *pakespinwheel* |
-| Nama Perangkat Lunak | *[Nama P/L]* |
+| Nama Perangkat Lunak | *Mahasehat: Mental Health Monitoring App for Students* |
 
 **Anggota Kelompok:**
 
@@ -43,12 +43,5 @@
 | *02-09-2026* | *Sophia Imelda Rogate Marpaung* | *Mengisi tabel deskripsi aktivitas* | *2* | *Done* | *-* |
 | *02-09-2026* | *Rendy Salastra Putra* | *Menambah isi bab 3.1 dan 3.2* | *2* | *Done* | *-* |
 | *02-09-2026* | *Haikal Muhammad Royyan* | *Revisi analisis solusi* | *1* | *Done* | *-* | 
-| | | | | | | |
-
-**Catatan/Evaluasi Milestone 1:**
-* *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
 
 ---
-
-
-``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
