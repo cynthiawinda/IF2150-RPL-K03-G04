@@ -9,8 +9,8 @@
 | **Kelas** | *03* |
 | **Nomor Kelompok** | *04*  |
 | **Nama Kelompok** | *pakespinwheel*  |
-| **Nama Perangkat Lunak** | *\[Nama P/L\]*  |
-| **Dokumen** | *K03_G04_Final_TB.md*  |
+| **Nama Perangkat Lunak** | *Mahasehat: Mental Health Monitoring App for Students*  |
+| **Dokumen** | *K03_G04_TB.md*  |
 
 ### Anggota Kelompok
 
