@@ -41,7 +41,8 @@
 | *01-09-2026* | *Sophia Imelda Rogate Marpaung* | *Menambah template 3.3* | *0,25* | *Done* | *-* | 
 | *01-09-2026* | *Haikal Muhammad Royyan* | *Revisi analisis solusi* | *1* | *Done* | *-* | 
 | *02-09-2026* | *Sophia Imelda Rogate Marpaung* | *Mengisi tabel deskripsi aktivitas* | *2* | *Done* | *-* |
-| *02-09-2026* | *Rendy Salastra Putra* | *Menambah isi bab 3.1 dan 3.2* | *2* | *Done* | *-* | 
+| *02-09-2026* | *Rendy Salastra Putra* | *Menambah isi bab 3.1 dan 3.2* | *2* | *Done* | *-* |
+| *02-09-2026* | *Haikal Muhammad Royyan* | *Revisi analisis solusi* | *1* | *Done* | *-* | 
 | | | | | | | |
 
 **Catatan/Evaluasi Milestone 1:**
