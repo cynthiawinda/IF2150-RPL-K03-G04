@@ -155,9 +155,8 @@ Pada alur ini, remaja berinteraksi langsung dengan sistem untuk mencari layanan 
 # Referensi
 
 1. **Republik Indonesia.** (2022). *Undang-Undang Republik Indonesia Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi*. JDIH BPK RI. https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
-2. **Kementerian Kesehatan Republik Indonesia.** (2026). *Direktorat Kesehatan Jiwa (Keswa)*. https://kemkes.go.id/
+2. **Kementerian Kesehatan Republik Indonesia.** (2025). *Informasi Layanan dan Panduan Kesehatan Jiwa*. Portal Ayo Sehat Kemenkes RI. https://ayosehat.kemkes.go.id/topik-penyakit/kesehatan-mental
 3. **Kementerian Kesehatan Republik Indonesia.** (2025). *Alarm Kesehatan Mental Anak, CKG Temukan Ratusan Ribu Anak Bergejala Cemas dan Depresi*. https://kemkes.go.id/id/alarm-kesehatan-mental-anak-ckg-temukan-ratusan-ribu-anak-bergejala-cemas-dan-depresi
 4. **Universitas Gadjah Mada.** (2022). *Hasil Survei I-NAMHS: Satu dari Tiga Remaja Indonesia Memiliki Masalah Kesehatan Mental*. https://ugm.ac.id/id/berita/23086-hasil-survei-i-namhs-satu-dari-tiga-remaja-indonesia-memiliki-masalah-kesehatan-mental/
 5. **Pusat Analisis Keparlemenan BK DPR RI.** (2025). *Isu Sepekan: Penanganan Masalah Kesehatan Mental Remaja di Indonesia*. https://berkas.dpr.go.id/pusaka/files/isu_sepekan/Isu%20Sepekan---I-PUSLIT-Februari-2025-217.pdf
 6. **United Nations.** (2015). *Sustainable Development Goal 3: Good Health and Well-Being*. https://www.un.org/sustainabledevelopment/health/
-7. **Draw.io & StarUML.** *Unified Modeling Language (UML) Modeling Tools*. https://www.drawio.com/, https://staruml.io/
