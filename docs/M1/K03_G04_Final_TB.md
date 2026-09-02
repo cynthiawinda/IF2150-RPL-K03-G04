@@ -46,27 +46,26 @@ Kesadaran masyarakat, terutama generasi muda, akan pentingnya kesehatan mental m
 # BAB 2: Analisis Solusi
 
 ## 2.1 Deskripsi Perangkat Lunak
-Perangkat lunak ini merupakan sistem pemantauan kesehatan mental berbasis web yang mengintegrasikan pencatatan kondisi mandiri pelajar, dasbor analitik tren bagi orang tua atau wali, serta direktori rujukan fasilitas kesehatan mental. Sistem menjembatani kebutuhan pelajar dalam mendokumentasikan dinamika emosional harian secara privat, sekaligus memberikan visibilitas bagi wali untuk mendeteksi dini indikasi gangguan psikologis.
+Sistem ini merupakan aplikasi berbasis web yang dirancang untuk memantau kesehatan mental kalangan pelajar secara berkala, mencakup siswa sekolah hingga mahasiswa perguruan tinggi. Masalah yang sering terjadi adalah kebiasaan pelajar memendam tekanan emosional dan beban akademik seorang diri, baik bagi yang tinggal bersama keluarga maupun yang sedang merantau, sehingga pihak wali kerap terlambat menyadari memburuknya kondisi psikologis mereka. Untuk menjembatani masalah tersebut, aplikasi ini menyediakan ruang pencatatan mandiri yang privat bagi pelajar, dasbor ringkasan perkembangan bagi orang tua atau wali tanpa melanggar ruang pribadi pengguna, serta jalur rujukan ke layanan konseling profesional terdekat.
 
-Sistem membagi interaksi pengguna ke dalam tiga subsistem utama:
-1. **Subsistem Pencatatan Mandiri Pelajar (*Student Self-Logging*):** Pelajar mengisi data harian (*daily check-in*) yang mencakup skala suasana hati kuantitatif (skala 1 sampai 5), durasi tidur, label aktivitas pemicu (*tags*), serta catatan refleksi teks bebas (*journaling*).
-2. **Subsistem Dasbor Pemantauan Wali (*Guardian Oversight Dashboard*):** Sistem mengolah data kuantitatif pelajar menjadi grafik deret waktu (*time-series*) yang menampilkan fluktuasi suasana hati mingguan dan rata-rata durasi tidur harian. Dasbor ini menerapkan pemisahan data. Wali hanya membaca visualisasi statistik agregat tanpa akses terhadap teks jurnal reflektif pelajar.
-3. **Subsistem Penapisan dan Rujukan Layanan (*Screening & Referral Directory*):** Saat parameter suasana hati menunjukkan penurunan berkelanjutan dalam kurun waktu evaluasi tertentu, antarmuka menyajikan kuesioner penapisan lanjutan dan membuka direktori faskes kesehatan jiwa terdekat berbasis lokasi pengguna, lengkap dengan profil praktisi dan formulir reservasi jadwal temu.
+Secara umum, alur kerja sistem terbagi ke dalam tiga fitur utama:
 
-### Target Platform dan Justifikasi
-Sistem dibangun pada platform **Web berbasis *Progressive Web App* (PWA) dengan pendekatan *Mobile-First*** berdasarkan pertimbangan teknis berikut:
+1. **Pencatatan Harian Pelajar:** Fitur ini digunakan pelajar setiap hari untuk mencatat kondisi yang sedang dialami. Pelajar memilih tingkatan suasana hati dari angka 1 (sangat buruk) sampai 5 (sangat baik), memasukkan perkiraan jam tidur malam sebelumnya, memilih faktor pemicu emosi harian (seperti tugas akademik, ujian, perkuliahan, pertemanan, atau masalah keluarga), serta menuliskan cerita bebas pada kolom buku harian digital.
+2. **Dasbor Pemantau Orang Tua atau Wali:** Sistem mengolah data angka pencatatan harian menjadi visualisasi grafik mingguan yang mudah dibaca oleh orang tua atau pihak wali. Dari dasbor ini, wali dapat melihat pola naik-turun suasana hati dan rata-rata jam istirahat pelajar. Sistem menerapkan pembatasan data yang tegas, yaitu wali hanya memiliki akses terhadap grafik rangkuman data dan tidak dapat membaca isi tulisan curhat atau buku harian pribadi yang ditulis oleh pelajar.
+3. **Pencarian Tempat Konseling dan Bantuan Awal:** Apabila catatan suasana hati pelajar menunjukkan penurunan berkelanjutan selama beberapa hari berturut-turut, sistem secara otomatis memunculkan kuesioner singkat untuk mengevaluasi tingkat stres atau kejenuhan (*burnout*). Jika hasil evaluasi mengindikasikan perlunya konsultasi lanjutan, sistem menyajikan daftar fasilitas kesehatan mental atau tempat praktik psikolog terdekat, lengkap dengan alamat, kontak, kisaran biaya layanan, dan formulir untuk membuat janji temu.
 
-1. **Aksesibilitas Multi-Aktor:** Pelajar mengakses modul pencatatan melalui peramban ponsel pintar atau menyematkannya ke layar utama (*Add to Home Screen*) tanpa kewajiban mengunduh berkas instalasi dari toko aplikasi. Pada saat yang sama, wali dan tenaga profesional dapat membaca grafik visualisasi data dan jadwal konsultasi melalui peramban desktop atau tablet.
-2. **Pemanfaatan *HTML5 Geolocation API*:** Penentuan titik koordinat pengguna untuk kalkulasi jarak fasilitas psikolog terdekat menggunakan antarmuka standar *HTML5 Geolocation API*. Pendekatan ini meniadakan ketergantungan pada SDK pemetaan *native* platform tertentu dan mendukung komputasi jarak spasial (seperti formula *Haversine*) di tingkat peramban maupun peladen.
-3. **Penyimpanan Lokal dan Layanan Latar Belakang (*Service Worker & Web Push*):** Arsitektur PWA memanfaatkan *Service Worker* dan *Cache Storage API* untuk mengelola aset statis aplikasi, menjaga ketersediaan antarmuka saat konektivitas jaringan pengguna tidak stabil di lingkungan sekolah atau tempat tinggal. Pemanfaatan *Push API* dan *Notification API* menangani pengiriman pengingat jadwal pencatatan harian pelajar dan pemberitahuan tren kondisi kepada wali.
-4. **Efisiensi Siklus Pengembangan dan Distribusi Kode:** Arsitektur web berbasis komputasi awan mendukung alur integrasi dan distribusi berkelanjutan (*Continuous Integration/Continuous Deployment* - CI/CD). Pengujian fungsionalitas dan demonstrasi sistem dapat dilakukan langsung melalui tautan peramban (*URL*) tanpa kompilasi paket aplikasi biner pada berbagai variasi sistem operasi perangkat penguji.
+### Bentuk Aplikasi dan Alasan Pemilihan
+Aplikasi ini dibangun berbasis situs web yang dioptimalkan khusus untuk tampilan layar ponsel (*mobile-friendly*), dengan pertimbangan praktis berikut:
 
-### Nilai Keunikan (*Unique Value Proposition*)
-Dibandingkan aplikasi pemantau suasana hati yang telah ada, sistem ini membawa beberapa nilai pembeda:
+1. **Kemudahan Akses Lintas Perangkat:** Pelajar dapat langsung membuka tautan aplikasi melalui peramban ponsel di sela-sela jam pelajaran atau kuliah, serta dapat menyematkan ikon pintasan aplikasi di menu utama ponsel tanpa membebani kapasitas memori penyimpanan. Di sisi lain, orang tua, wali, maupun pihak konselor dapat membuka dasbor dengan nyaman melalui layar laptop atau tablet.
+2. **Pemanfaatan Fitur Lokasi Bawaan Ponsel:** Penentuan jarak ke fasilitas kesehatan atau psikolog terdekat memanfaatkan fitur pembaca lokasi yang sudah menjadi standar bawaan pada peramban web pengguna. Pendekatan ini membuat sistem tidak memerlukan modul atau program tambahan yang rumit untuk menghitung perkiraan jarak tempuh.
+3. **Tetap Ringan dan Memiliki Pengingat:** Berkas tampilan web disimpan di penyimpanan lokal peramban sehingga halaman tetap dapat dibuka dengan responsif meskipun koneksi internet di area sekolah, kampus, atau tempat tinggal sedang lambat. Aplikasi juga dilengkapi fitur pengingat rutin melalui notifikasi peramban agar pelajar konsisten mengisi catatan harian.
+4. **Pengembangan dan Pengujian Efisien:** Berbasis situs web mempermudah alur kerja tim pengembang dalam melakukan uji coba berkala bersama dosen pembimbing maupun pengguna. Perbaikan antarmuka atau pembaruan kode dapat langsung dicoba secara daring melalui tautan web tanpa perlu membuat dan membagikan berkas instalasi aplikasi secara berulang.
 
-1. **Pemisahan Akses Data Berbasis Peran (*Role-Based Access Control* - RBAC):** Sistem memisahkan hak akses antara pelajar dan wali. Catatan narasi jurnal pelajar tersimpan dengan enkripsi tingkat data (*field-level encryption*) yang terikat pada kunci sesi pelajar. Akun wali hanya menerima visualisasi statistik tren afektif dan metrik durasi tidur tanpa kemampuan membuka teks jurnal. Pelajar memiliki kendali penuh untuk menautkan atau memutus tautan pemantauan wali sewaktu-waktu.
-2. **Korelasi Multivariat Durasi Tidur dan Suasana Hati:** Sistem memetakan hubungan antara durasi tidur harian dan kestabilan emosi pengguna dalam rentang waktu 7 hingga 30 hari. Visualisasi analitik ini membantu pelajar mengenali dampak pola istirahat fisik terhadap kestabilan emosional harian.
-3. **Alur Rujukan Layanan Profesional Terpadu:** Sistem menggabungkan deteksi dini berbasis log data dengan direktori layanan terverifikasi. Pengguna dapat menelusuri data faskes terdekat, memeriksa profil kualifikasi praktisi, melihat estimasi biaya, dan mengisi formulir reservasi jadwal temu dalam satu ekosistem aplikasi.
+### Keunggulan Sistem
+1. **Menjaga Batas Privasi Pengguna:** Kendala utama pada aplikasi pemantau keluarga adalah enggannya pelajar bersikap jujur karena merasa diawasi secara penuh. Sistem ini menerapkan pemisahan data yang ketat, yaitu isi tulisan curhat tersimpan aman dan hanya bisa diakses oleh pelajar yang bersangkutan, sedangkan wali hanya menerima visualisasi tren emosi dan durasi tidur. Pelajar juga memegang kendali penuh untuk menyetujui, menautkan, atau memutus izin akses pemantauan wali sewaktu-waktu.
+2. **Menghubungkan Pola Istirahat dengan Kondisi Emosi:** Berbeda dengan aplikasi buku harian biasa yang hanya memuat teks, sistem ini menyandingkan data durasi tidur dengan perubahan suasana hati harian dalam grafik mingguan hingga bulanan. Visualisasi ini membantu pelajar memahami secara nyata dampak kurang tidur terhadap penurunan konsentrasi dan kestabilan emosi mereka.
+3. **Alur Bantuan yang Konkret dan Terpadu:** Sistem tidak berhenti sebatas pencatatan grafik suasana hati. Ketika terdeteksi indikasi tekanan emosional yang berkepanjangan, aplikasi langsung mengarahkan pengguna ke pilihan solusi nyata berupa daftar fasilitas kesehatan mental terdekat beserta formulir pendaftaran jadwal konsultasi, sehingga pengguna tidak perlu mencari rujukan secara terpisah.
 
 ---
 
@@ -74,36 +73,36 @@ Dibandingkan aplikasi pemantau suasana hati yang telah ada, sistem ini membawa b
 
 ### Asumsi Pengembangan
 
-#### **Asumsi Pengguna:**
-1. Pelajar mengisi data suasana hati, durasi tidur, dan aktivitas harian secara berkala sesuai kondisi aktual tanpa manipulasi data buatan.
-2. Orang tua atau wali memiliki pemahaman dasar dalam membaca grafik visualisasi data pada peramban serta menyetujui batasan privasi terkait kerahasiaan teks jurnal pelajar.
-3. Pengguna memberikan izin akses saat peramban meminta otorisasi pembacaan koordinat lokasi (*geolocation*) dan penerimaan notifikasi (*push notifications*).
+#### Asumsi Pengguna
+1. Pelajar mengisi data suasana hati, waktu tidur, dan pilihan aktivitas harian secara mandiri dan jujur sesuai dengan kondisi yang dialami.
+2. Orang tua atau wali memahami cara membaca grafik perkembangan sederhana yang ditampilkan pada dasbor, serta menghargai batas privasi catatan tertulis pelajar.
+3. Pengguna memberikan izin akses saat peramban meminta otorisasi pembacaan lokasi dan izin pengiriman notifikasi pengingat harian.
 
-#### **Asumsi Teknis:**
-1. Perangkat keras pengguna menjalankan peramban modern yang mematuhi standar W3C untuk spesifikasi *Service Worker*, IndexedDB, dan Web Storage (antara lain peramban berbasis Chromium, Gecko, atau WebKit versi mutakhir).
-2. Perangkat pengguna memiliki modul sensor penentu lokasi yang aktif (GPS atau triangulasi jaringan seluler/Wi-Fi).
-3. Koneksi internet pengguna berfungsi memadai pada interval waktu tertentu untuk sinkronisasi data lokal ke peladen komputasi awan.
+#### Asumsi Teknis
+1. Pengguna menjalankan aplikasi melalui peramban web modern versi terkini (seperti Google Chrome, Mozilla Firefox, atau Safari).
+2. Perangkat pengguna memiliki fungsi penunjuk lokasi yang aktif (melalui sensor GPS atau jaringan seluler/Wi-Fi).
+3. Perangkat pengguna terhubung ke internet agar catatan yang diisi di ponsel bisa tersimpan ke sistem.
 
-#### **Asumsi Data:**
-1. Data master fasilitas kesehatan mental, kontak resmi, alamat fisik, dan izin praktik tenaga psikolog yang dihimpun dalam basis data berstatus legal, aktif beroperasi, serta terverifikasi pada wilayah percontohan.
+#### Asumsi Data
+1. Data alamat fasilitas layanan kesehatan mental, nomor kontak klinik, dan izin praktik tenaga psikolog yang dihimpun ke dalam sistem merupakan data resmi yang masih aktif dan valid di wilayah uji coba.
 
 ### Batasan Sistem
 
-#### **Batasan Regulasi dan Hukum:**
-1. **Kepatuhan UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP):** Rekam kesehatan mental dikelola sebagai data pribadi spesifik. Sesuai Pasal 25 UU PDP mengenai pemrosesan data anak, sistem mewajibkan persetujuan orang tua atau wali (*parental consent*) pada saat pendaftaran akun pelajar. Sistem menerapkan enkripsi data pada jalur transmisi (TLS 1.3) dan pada media penyimpanan (*encryption at-rest*), serta memberi hak otonomi kepada pelajar untuk menyetujui pembagian ringkasan metrik ke akun wali.
+#### Batasan Aturan dan Perlindungan Data
+1. Berdasarkan Pasal 25 UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP) yang mewajibkan izin orang tua bagi pelajar di bawah 18 tahun, sedangkan pelajar di atas usia tersebut dapat mendaftar langsung secara mandiri. Selain itu, karena catatan emosi termasuk data kesehatan pribadi menurut Pasal 4 UU PDP, datanya wajib dilindungi dan pembagian grafik ke akun wali hanya berjalan atas persetujuan pelajar.
 
-#### **Batasan Sumber Daya:**
-1. **Waktu:** Seluruh tahapan rekayasa perangkat lunak, mulai dari analisis kebutuhan hingga pengujian sistem, dibatasi dalam kurun waktu satu semester akademik perkuliahan (14 sampai 16 minggu kerja).
-2. **Tenaga Kerja:** Proyek dikerjakan oleh tim pengembang yang terdiri atas lima mahasiswa sarjana Teknik Informatika dengan pembagian peran kerja terdistribusi di tengah beban mata kuliah paralel lainnya.
-3. **Anggaran:** Pengembangan berjalan tanpa dukungan pendanaan eksternal (*zero-budget*). Pemanfaatan infrastruktur peladen awan (*serverless runtime*), basis data, dan antarmuka pihak ketiga dibatasi pada kuota gratis (*free-tier*).
+#### Batasan Pengerjaan Proyek
+1. **Waktu Pengerjaan:** Proses perancangan, pembuatan antarmuka, penulisan kode program, hingga pengujian sistem dibatasi dalam rentang waktu satu semester akademik (sekitar 14 sampai 16 minggu).
+2. **Kapasitas Tim Pengembang:** Aplikasi dikembangkan oleh kelompok yang terdiri atas lima mahasiswa Teknik Informatika, dengan pembagian tugas yang diselaraskan bersama beban perkuliahan paralel lainnya.
+3. **Biaya Pengembangan:** Proyek ini dikerjakan tanpa anggaran khusus, sehingga kebutuhan server dan penyimpanan data sepenuhnya mengandalkan layanan gratis (*free-tier*).
 
-#### **Batasan Ruang Lingkup Solusi:**
-1. **Batas Fungsi Medis:** Sistem berfungsi sebagai sarana pendataan mandiri dan penapisan awal (*early screening*), bukan instrumen diagnosis klinis psikiatri maupun peresepan obat-obatan. Penegakan diagnosis dan intervensi medis tetap menjadi wewenang psikolog klinis dan psikiater berlisensi.
-2. **Ketiadaan Layanan Tanggap Krisis 24 Jam:** Sistem tidak menyediakan tim operator atau regu tanggap krisis darurat mandiri. Fitur kedaruratan dibatasi pada penyediaan tombol pengalihan panggilan telepon (*intent call* `tel:`) ke nomor saluran siaga (*hotline*) resmi pemerintah (seperti layanan darurat kesehatan jiwa Kemenkes RI 119 ekstensi 8).
-3. **Pencatatan Aktivitas Fisik Manual:** Sistem tidak menyediakan modul komunikasi nirkabel (seperti Web Bluetooth API) ke sensor perangkat sandang (*smartwatch* atau *sleep tracker*). Seluruh data durasi istirahat dan aktivitas mengandalkan masukan manual oleh pelajar.
-4. **Peniadaan Modul Transaksi Finansial:** Fitur rujukan ke tenaga profesional mencakup pencarian ketersediaan slot waktu, penyerahan formulir data awal, dan konfirmasi jadwal konsultasi. Sistem tidak mengintegrasikan gerbang pembayaran (*payment gateway*). Transaksi finansial diselesaikan di luar sistem pada fasilitas layanan terkait.
-5. **Cakupan Wilayah Data Direktori:** Basis data fasilitas kesehatan mental dan profil praktisi dibatasi pada kawasan percontohan regional tertentu (area Bandung Raya dan sekitarnya) menggunakan data sekunder terverifikasi, tanpa sinkronisasi langsung ke sistem basis data keanggotaan organisasi profesi nasional.
-   
+#### Batasan Fitur dan Ruang Lingkup
+1. **Batasan Fungsi Medis:** Sistem ini murni berfungsi sebagai sarana pencatatan mandiri dan deteksi dini tingkat stres, bukan instrumen medis untuk menetapkan diagnosis gangguan kejiwaan formal ataupun memberikan resep obat. Penetapan diagnosis dan tindakan medis lanjutan tetap sepenuhnya berada di bawah wewenang psikolog atau psikiater berlisensi.
+2. **Batasan Layanan Darurat:** Sistem tidak menyediakan tenaga medis atau operator yang berjaga selama 24 jam. Untuk situasi darurat, aplikasi hanya menyediakan tombol pintasan yang langsung mengarahkan panggilan ke kontak bantuan resmi, seperti saluran kesehatan jiwa 119 ekstensi 8.
+3. **Pencatatan Aktivitas Istirahat Manual:** Sistem tidak terhubung langsung ke sensor jam tangan pintar (*smartwatch*). Durasi waktu tidur dan pemilihan jenis pemicu aktivitas diisi secara manual oleh pelajar pada formulir harian.
+4. **Peniadaan Transaksi Finansial di Aplikasi:** Fitur konsultasi hanya mencakup pencarian informasi ketersediaan jadwal dan pengisian formulir reservasi temu. Sistem tidak memproses transaksi pembayaran secara daring. Seluruh biaya konsultasi diselesaikan langsung oleh pengguna di tempat fasilitas layanan yang dipilih.
+5. **Cakupan Wilayah Terbatas:** Basis data fasilitas kesehatan dan daftar tenaga psikolog pada tahap awal percontohan ini dibatasi pada area regional tertentu (wilayah Bandung Raya dan sekitarnya) menggunakan data publik terverifikasi yang dihimpun oleh tim pengembang., sistem menyajikan daftar fasilitas kesehatan mental atau tempat praktik psikolog terdekat, lengkap dengan alamat, kontak, kisaran biaya layanan, dan formulir untuk membuat janji temu.
+  
 ---
 
 # BAB 3: Spesifikasi Kebutuhan dan Proses Bisnis
