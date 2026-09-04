@@ -43,10 +43,22 @@ Dipersiapkan oleh:
 # BAB 1: Deskripsi Umum
 
 ## 1.1 Deskripsi Umum Sistem
+Mahasehat merupakan sistem pemantauan kesehatan mental berbasis web responsif yang dirancang untuk kalangan pelajar dan mahasiswa. Sistem ini dikembangkan untuk menjawab permasalahan nyata di lingkungan pendidikan, di mana banyak pelajar cenderung memendam stres akademik maupun masalah pribadi seorang diri. Di sisi lain, orang tua atau wali kerap terlambat menyadari penurunan kondisi psikologis anak karena minimnya komunikasi atau keterbatasan jarak bagi mahasiswa rantau. Mahasehat memadukan pencatatan mandiri oleh pelajar, dasbor pemantauan bagi wali, serta alur rujukan bantuan profesional ke dalam satu sistem yang tetap mengutamakan kerahasiaan data pribadi pengguna.
 
-Abstraksikan sistem solusi menurut sudut pandang pengguna yang telah ditentukan. Jelaskan secara ringkas mengenai apa saja ekspektasi pengguna terhadap sistem yang akan dikembangkan, alur kerja sistem yang diinginkan, serta harapan dari penerapan solusi dalam bentuk narasi.
+### Ekspektasi Pengguna terhadap Sistem
+Kebutuhan tiap kelompok pengguna terhadap sistem dirangkum sebagai berikut:
+1. **Pelajar:** Membutuhkan sarana pencatatan kondisi harian (*daily check-in*) yang cepat diakses lewat peramban ponsel tanpa membebani rutinitas harian. Ekspektasi paling mendasar adalah adanya jaminan privasi penuh. Pelajar bersedia mengisi data secara jujur apabila catatan curahan hati atau jurnal bebas mereka terjamin tidak bisa dibaca oleh pihak lain, termasuk orang tua. Selain itu, pelajar mengharapkan solusi konkret yang langsung mengarahkan ke layanan bantuan ketika kondisi mereka memburuk.
+2. **Orang Tua / Wali:** Menginginkan sarana untuk memantau stabilitas kondisi anak secara berkala tanpa terkesan mengintervensi ruang pribadi anak. Wali mengharapkan visualisasi data yang sederhana dan mudah dipahami, serta notifikasi peringatan otomatis jika terdeteksi indikasi stres berkepanjangan atau anomali pengisian data.
+3. **Tenaga Profesional (Psikolog/Psikiater):** Mengharapkan alur pendaftaran konsultasi awal yang terdata dengan rapi. Riwayat tren tidur dan catatan suasana hati yang dibagikan atas izin pengguna juga diharapkan dapat membantu proses asesmen awal saat konsultasi berlangsung.
 
-> *Sistem adalah kesatuan utuh antara perangkat lunak, pengguna, perangkat keras, dan proses bisnis (urutan langkah logis yang dilakukan di dunia nyata untuk menyelesaikan suatu pekerjaan atau mencapai tujuan tertentu).*
+### Alur Kerja Sistem yang Diinginkan
+Alur interaksi sistem dirancang melalui tahapan fungsional berikut:
+1. **Pencatatan Mandiri Berkala:** Pelajar menerima notifikasi pengingat harian dari peramban untuk memasukkan skala suasana hati (1–5), perkiraan durasi tidur, faktor pemicu stres (seperti beban tugas, perkuliahan, atau masalah relasi), serta tulisan refleksi diri opsional pada kolom jurnal.
+2. **Pengolahan Data dan Dasbor Terpisah:** Data numerik yang dihimpun diolah menjadi grafik tren mingguan atau bulanan. Pelajar dapat melihat korelasi antara pola istirahat dengan perubahan suasana hatinya. Sedangkan akun wali yang terhubung hanya bisa melihat grafik ringkasan, tanpa bisa membaca isi jurnal pelajar.
+3. **Peringatan Otomatis dan Rujukan Bantuan:** Apabila tren suasana hati terus menurun, sistem akan memunculkan kuesioner evaluasi kejenuhan (burnout) kepada pelajar. Jika hasilnya mengindikasikan perlunya bantuan lebih lanjut, sistem langsung menampilkan rekomendasi klinik atau psikolog terdekat lengkap dengan perkiraan tarif dan formulir janji temu di akun pelajar. Di saat yang sama, sistem mengirimkan notifikasi perhatian ke dasbor wali agar dapat memantau situasi. Tombol darurat menuju saluran bantuan resmi juga disediakan jika terjadi kondisi kritis.
+
+### Harapan Penerapan Solusi
+Pemisahan hak akses ini dirancang agar pelajar merasa aman saat berinteraksi dengan sistem. Selama ini, keengganan pelajar untuk mencatat kondisi emosionalnya secara rutin sering kali dipicu oleh rasa cemas bahwa tulisan pribadinya akan dihakimi atau diawasi berlebihan oleh orang tua. Dengan kepastian bahwa catatan jurnal bersifat privat dan wali hanya menerima visualisasi grafik tren, pelajar diharapkan tidak ragu untuk mengisi data secara jujur dan konsisten. Data yang valid inilah yang menjadi dasar bagi sistem untuk mendeteksi indikasi penurunan kondisi psikologis secara tepat. Namun, Mahasehat tetap tidak diposisikan sebagai pengganti diagnosis klinis dari psikolog atau psikiater. Perangkat lunak ini murni berfungsi sebagai sarana deteksi awal sekaligus jembatan rujukan, sehingga pelajar yang mulai mengalami tekanan mental berat dapat menyadari kondisinya lebih dini dan segera terhubung dengan penanganan profesional.
 
 ## 1.2 Deskripsi Pengguna Perangkat Lunak
 
