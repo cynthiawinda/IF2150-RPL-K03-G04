@@ -55,5 +55,6 @@
 | *09-09-2026* | *Haikal Muhammad Royyan* | *Revisi deskripsi umum sistem* | *1* | *Done* | *-* |
 | *09-09-2026* | *Sophia Imelda Rogate Marpaung* | *Melengkapi tabel perubahan, merevisi pemetaan kebutuhan, dan penyelarasan istilah* | *0,5* | *Done* | *-* |
 | *09-09-2026* | *Rendy Salastra Putra* | *Mengisi daftar perubahan antara T1 dan T2* | *0,25* | *Done* | *-* |
+| *09-09-2026* | *Christabelcyne Costan* | *Revisi isi kebutuhan nonfungsional* | *0,2* | *Done* | *-* |
 
 ---
