@@ -74,3 +74,20 @@
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- |
+| *11-09-2026* | *Semua anggota kelompok* | *Pembagian tugas untuk Milestone 3* | *0,5* | *Done* | *-* |
+| *11-09-2026* | *Sophia Imelda Rogate Marpaung* | *Melengkapi bagian yang dibutuhkan dari M2 dan menambah draft identifikasi use case* | *2* | *Done* | *-* |
+| *13-09-2026* | *Haikal Muhammad Royyan* | *Menambah skenario UC05 & UC06* | *2* | *Done* | *-* |
+| *13-09-2026* | *Haikal Muhammad Royyan* | *Revisi skenario UC05 & UC06* | *1* | *Done* | *-* |
+| *13-09-2026* | *Cynthia Winda Wijaya* | *Menambah skenario UC01 & UC02* | *1,5* | *Done* | *-* |
+| *13-09-2026* | *Rendy Salastra Putra* | *Mengisi skenario normal UC03 & UC04* | *2* | *Done* | *-* |
+| *14-09-2026* | *Sophia Imelda Rogate Marpaung* | *Mengisi skenario UC07 & UC08* | *2* | *Done* | *-* |
+| *14-09-2026* | *Haikal Muhammad Royyan* | *Revisi skenario alternatif UC06* | *1* | *Done* | *-* |
+| *14-09-2026* | *Cynthia Winda Wijaya* | *Merevisi skenario UC01 & UC02* | *0,5* | *Done* | *-* |
+| *14-09-2026* | *Sophia Imelda Rogate Marpaung* | *Menambah use case masuk dan keluar akun pengguna* | *2* | *Done* | *-* |
+| *15-09-2026* | *Sophia Imelda Rogate Marpaung* | *Menambah skenario UC09 & UC10* | *2* | *Done* | *-* |
+| *15-09-2026* | *Haikal Muhammad Royyan* | *Revisi skenario UC06* | *1* | *Done* | *-* |
+| *15-09-2026* | *Cynthia Winda Wijaya* | *Menambah KF22, KF23, dan KF24* | *0,5* | *Done* | *-* |
+| *15-09-2026* | *Rendy Salastra Putra* | *Menambah skenario alternatif UC03 & UC04* | *2* | *Done* | *-* |
+| *16-09-2026* | *Sophia Imelda Rogate Marpaung* | *Melengkapi form asistensi* | *1* | *Done* | *-* |
+| *16-09-2026* | *Christabelcyne Costan* | *Menambah 3.3 use case diagram dan use case diagram ke assets* | *2,5* | *Done* | *-* |
+| *16-09-2026* | *Sophia Imelda Rogate Marpaung* | *Menambah skenario alternatif UC09, menghapus sisa template, memperbaiki typo, dan memperbaiki format logbook* | *1* | *Done* | *-* |
