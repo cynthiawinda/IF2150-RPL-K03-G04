@@ -23,6 +23,8 @@
 
 ### Daftar Isi
 * [Milestone 1](#milestone-1)
+* [Milestone 2](#milestone-2)
+* [Milestone 3](#milestone-3)
 
 ---
 
@@ -44,6 +46,14 @@
 | *02-09-2026* | *Rendy Salastra Putra* | *Menambah isi bab 3.1 dan 3.2* | *2* | *Done* | *Analisis kebutuhan kayanya belum begitu sempurna soalnya tugasnya mendahului materi* |
 | *02-09-2026* | *Haikal Muhammad Royyan* | *Revisi analisis solusi* | *1* | *Done* | *-* | 
 | *02-09-2026* | *Christabelcyne Costan* | *Revisi model proses bisnis dan pembuatan diagram alir* | *3,5* | *Done* | *-* | 
+
+---
+
+### Milestone 2
+**Periode:** 02/09/2026 - 09/09/2026
+
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
 | *04-09-2026* | *Semua anggota kelompok* | *Pembagian tugas untuk Milestone 2* | *0,5* | *Done* | *-* |
 | *04-09-2026* | *Haikal Muhammad Royyan* | *Penambahan deskripsi umum sistem* | *2* | *Done* | *-* |
 | *07-09-2026* | *Sophia Imelda Rogate Marpaung* | *Penambahan pemetaan kebutuhan dan pelengkapan identitas kelompok* | *2* | *Done* | *-* |
@@ -58,3 +68,9 @@
 | *09-09-2026* | *Christabelcyne Costan* | *Revisi isi kebutuhan nonfungsional* | *0,2* | *Done* | *-* |
 
 ---
+
+### Milestone 3
+**Periode:** 09/09/2026 - 16/09/2026
+
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- |
