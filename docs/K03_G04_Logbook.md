@@ -92,3 +92,10 @@
 | *16-09-2026* | *Christabelcyne Costan* | *Menambah 3.3 use case diagram dan use case diagram ke assets* | *2,5* | *Done* | *-* |
 | *16-09-2026* | *Sophia Imelda Rogate Marpaung* | *Menambah skenario alternatif UC09, menghapus sisa template, memperbaiki typo, dan memperbaiki format logbook* | *1* | *Done* | *-* |
 | *16-09-2026* | *Christabelcyne Costan* | *Revisi use case diagram* | *0,5* | *Done* | *-* |
+
+### Milestone 4
+**Periode:** 16/09/2026 - 23/09/2026
+
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| *...* | *...* | *...* | *...* | *...* | *...* |
