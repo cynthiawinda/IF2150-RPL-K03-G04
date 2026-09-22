@@ -98,4 +98,16 @@
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| *...* | *...* | *...* | *...* | *...* | *...* |
+| *18-09-2026* | *Semua anggota kelompok* | *Pembagian tugas untuk Milestone 4* | *0,5* | *Done* | *-* |
+| *18-09-2026* | *Cynthia Winda Wijaya* | *Menyalin bagian yang dibutuhkan dari M3* | *2* | *Done* | *-* |
+| *19-09-2026* | *Sophia Imelda Rogate Marpaung* | *Melengkapi bagian yang dibutuhkan dari M3 dan menambah template pembahasan diagram kelasper use case* | *2* | *Done* | *-* |
+| *20-09-2026* | *Cynthia Winda Wijaya* | *Mengubah aktor pada UC01 dan menambah skenario UC yang kurang* | *0,5* | *Done* | *-* |
+| *20-09-2026* | *Sophia Imelda Rogate Marpaung* | *Menambah draft kelas UC09 dan UC10* | *1* | *Done* | *-* |
+| *20-09-2026* | *Rendy Salastra Putra* | *Menambah draft kelas UC01, UC02, dan UC07* | *0,5* | *Done* | *-* |
+| *21-09-2026* | *Christabelcyne Costan* | *Menambah draft kelas UC03 dan UC04* | *0,5* | *Done* | *-* |
+| *21-09-2026* | *Rendy Salastra Putra* | *Merevisi draft kelas UC01, UC02, dan UC07* | *0,5* | *Done* | *-* |
+| *22-09-2026* | *Sophia Imelda Rogate Marpaung* | *Merevisi kelas UC09 dan UC10* | *2* | *Done* | *-* |
+| *22-09-2026* | *Sophia Imelda Rogate Marpaung* | *Menambah diagram kelas UC09 dan UC10* | *1* | *Done* | *-* |
+| *23-09-2026* | *Christabelcyne Costan* | *Merevisi kelas UC03 dan UC04* | *2* | *Done* | *-* |
+| *23-09-2026* | *Rendy Salastra Putra* | *Merevisi draft kelas UC01, UC02, dan UC07* | *1,5* | *Done* | *-* |
+| *23-09-2026* | *Christabelcyne Costan* | *Menambah diagram kelas UC03 dan UC04, memperbaiki file UC04 pada docs* | *1* | *Done* | *-* |
