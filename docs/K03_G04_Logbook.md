@@ -25,6 +25,7 @@
 * [Milestone 1](#milestone-1)
 * [Milestone 2](#milestone-2)
 * [Milestone 3](#milestone-3)
+* [Milestone 4](#milestone-4)
 
 ---
 
@@ -111,3 +112,10 @@
 | *23-09-2026* | *Christabelcyne Costan* | *Merevisi kelas UC03 dan UC04* | *2* | *Done* | *-* |
 | *23-09-2026* | *Rendy Salastra Putra* | *Merevisi draft kelas UC01, UC02, dan UC07* | *1,5* | *Done* | *-* |
 | *23-09-2026* | *Christabelcyne Costan* | *Menambah diagram kelas UC03 dan UC04, memperbaiki file UC04 pada docs* | *1* | *Done* | *-* |
+| *23-09-2026* | *Haikal Muhammad Royyan* | *Menambah diagram kelas UC05, UC06, dan UC08* | *2* | *Done* | *-* |
+| *23-09-2026* | *Sophia Imelda Rogate Marpaung* | *Mengisi form asistensi* | *1* | *Done* | *-* |
+| *23-09-2026* | *Haikal Muhammad Royyan* | *Merevisi diagram kelas UC05, UC06, dan UC08* | *1* | *Done* | *-* |
+| *23-09-2026* | *Rendy Salastra Putra* | *Mengisi form AI Usage untuk M4* | *0,25* | *Done* | *-* |
+| *23-09-2026* | *Rendy Salastra Putra* | *Melengkapi UC01, UC02, dan UC07* | *2* | *Done* | *-* |
+| *23-09-2026* | *Cynthia Winda Wijaya* | *Menambah C13-C33 dan use case  yang berhubungan dengan kelas C33* | *2* | *Done* | *-* |
+| *23-09-2026* | *Cynthia Winda Wijaya* | *Menambah diagram kelas keseluruhan dan traceability* | *2* | *Done* | *-* |
