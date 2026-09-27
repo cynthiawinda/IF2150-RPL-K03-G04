@@ -40,10 +40,10 @@ Dipersiapkan oleh:
 # BAB 1: Pendahuluan
 
 ## 1.1 Tujuan Penulisan Dokumen
-Tuliskan dengan ringkas tujuan dokumen SKPL ini dibuat dan siapa saja yang akan menggunakan dokumen ini.
+Dokumen Spesifikasi Kebutuhan Perangkat Lunak (SKPL) ini dibuat untuk menjelaskan kebutuhan, fungsi, dan batasan dari perangkat lunak yang akan dikembangkan. Dokumen ini menjadi acuan bagi tim pengembang dalam proses perancangan dan implementasi sistem, serta bagi pihak terkait untuk memahami fitur dan kebutuhan perangkat lunak yang telah ditentukan.
 
 ## 1.2 Lingkup Masalah
-Tuliskan dengan ringkas nama aplikasi dan deskripsi singkatnya. Bagian ini maksimal berisi satu paragraf, dapat diringkas dari BAB 1 *Analisis Permasalahan* pada dokumen *Topic Brainstorming*.
+Mahasehat merupakan aplikasi terpadu untuk membantu pelajar dalam memantau kondisi kesehatan sehari-hari dan memperoleh akses layanan kesehatan mental. Aplikasi ini menyediakan fitur pencatatan kondisi seperti suasana hati, aktivitas fisik, pola makan, tidur, serta refleksi harian. Berdasarkan data tersebut aplikasi ini menyajikan perkembangan kondisi pelajar dalam bentuk statistik dan laporan. Selain itu, aplikasi ini menyediakan informasi dan akses untuk mencari tenaga kesehatan, melihat jadwal yang tersedia, serta mengajukan konsultasi. Aplikasi ini melibatkan orang tua/wali dalam pemantauan dan pengendalian kondisi pelajar.
 
 ## 1.3 Definisi, Istilah, dan Singkatan
 
