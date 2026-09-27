@@ -30,7 +30,7 @@ Dipersiapkan oleh:
 
 | Revisi | Deskripsi |
 | :--- | :--- |
-| *A* | *Deskripsikan perubahan yang dilakukan dari dokumen sebelumnya pada dokumen ini. Jika tidak terdapat perubahan, harap kosongkan tabel.* |
+| *A* | *Menyesuaikan tabel traceablity yang sebelumnya tidak sesuai dengan identifikasi kelas.* |
 | *B* |  |
 | *C* |  |
 | ... |  |
@@ -78,7 +78,7 @@ Tabel 1.4. Aturan Penomoran
 Dokumentasi P/L yang dirujuk oleh dokumen ini. Referensi dapat berupa buku, panduan, ataupun dokumentasi lain yang dipakai dalam pengembangan P/L ini.
 
 ## 1.6 Deskripsi Umum Dokumen (Ikhtisar)
-Tuliskan sistematika pembahasan dokumen SKPL ini secara runut (misalnya: BAB 2 membahas deskripsi umum P/L, BAB 3 membahas kebutuhan fungsional dan non-fungsional, dst).
+BAB 1 membahas pendahuluan, yang berisi tujuan, lingkup masalah, definisi, istilah, serta singkatan, aturan penomoran, referensi, dan deskripsi umum dokumen. BAB 2 membahas deskripsi perangkat lunak yang mencakup deskripsi umum sistem dan P/L, pengguna dan kebutuhan pengguna P/L, batasan P/L, dan lingkungan operasi P/L. BAB 3 membahas deskripsi kebutuhan P/L, yaitu kebutuhan fungsional dan kebutuhan non-fungsional. BAB 4 membahas pemodelan use case, yaitu identifikasi aktor, use case, use case diagram, dan skenario use case. BAB 5 membahas pemodelan kelas yang berisi identifikasi kelas, diagram kelas per use case, diagram kelas keseluruhan. BAB 6 membahas traceability, yang menunjukkan keterkaitan antara kelas, use case, dan kebutuhan fungsional.
 
 ---
 
