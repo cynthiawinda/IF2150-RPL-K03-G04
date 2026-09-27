@@ -124,11 +124,26 @@ Tuliskan seluruh jenis pengguna (*role*/aktor) yang terlibat dalam perangkat lun
 | *Tenaga Kesehatan* | *Pengguna ini bertindak sebagai pihak yang bertanggung jawab untuk memberikan layanan konsultasi dan penanganan terkait kondisi kesehatan pelajar sesuai dengan ruang lingkup profesinya masing-masing. Karakteristik dari pengguna ini adalah mengutamakan kelengkapan informasi, kemudahan akses, serta keamanan dan kerahasiaan data pengguna. Tenaga kesehatan yang berkaitan adalah psikolog dan psikiater.* |
 
 ## 2.4 Batasan Perangkat Lunak
-Batasan yang harus dituliskan, di antaranya:
-1. *P/L harus memakai file data/API dari sistem lain (sebutkan, misal Payment Gateway dummy).*
-2. *P/L harus memakai format data yang sama dengan sistem lain.*
-3. *P/L harus berfungsi pada platform tertentu (misal: web browser modern, atau desktop Windows dan Linux).*
-4. *...*
+
+Mahasehat memiliki beberapa batasan sebagai berikut:
+
+1. Mahasehat merupakan aplikasi berbasis web yang dapat dibuka melalui *browser* pada ponsel atau komputer. Aplikasi memerlukan koneksi internet dan belum dapat digunakan secara *offline*.
+
+2. Beberapa fitur Mahasehat menggunakan layanan dari luar sistem. Geolocation API dan Google Maps Platform digunakan untuk mengakses lokasi pengguna dan menghitung jarak ke fasilitas kesehatan. Google Calendar API digunakan untuk melihat ketersediaan jadwal, sedangkan *Mail Server* digunakan untuk mengirim pengingat, notifikasi darurat, dan informasi akun. Data yang dikirim dan diterima mengikuti format dari layanan yang digunakan.
+
+3. Izin lokasi tidak wajib diberikan. Jika pengguna menolak izin tersebut, daftar tenaga kesehatan, alamat fasilitas, dan perkiraan biaya konsultasi tetap dapat dilihat, tetapi informasi jarak tidak ditampilkan.
+
+4. Hak akses dibedakan berdasarkan peran pengguna. Orang tua/wali hanya dapat melihat rangkuman kondisi pelajar dan tidak dapat membaca isi jurnal pribadinya.
+
+5. Pelajar yang berusia di bawah 18 tahun memerlukan persetujuan orang tua/wali untuk mengaktifkan akun. Pelajar yang sudah berusia 18 tahun atau lebih tidak memerlukan persetujuan tersebut.
+
+6. Mahasehat hanya membantu pencatatan kondisi, pemantauan awal, pemberian informasi rujukan, dan penjadwalan konsultasi. Aplikasi tidak memberikan diagnosis atau resep obat. Status darurat yang ditampilkan merupakan hasil dari aturan pemantauan sistem, bukan diagnosis dari tenaga kesehatan. Ketersediaan aplikasi selama 24 jam tidak berarti tenaga medis atau operator selalu siaga, serta tidak menjamin waktu respons dari pihak luar.
+
+7. Fitur konsultasi hanya mencakup pencarian tenaga kesehatan, pengajuan jadwal, dan pengecekan status pengajuan. Pembayaran konsultasi secara daring tidak tersedia di dalam aplikasi.
+
+8. Data *daily check-in* diisi secara manual oleh pelajar. Mahasehat belum terhubung dengan jam tangan pintar atau perangkat sensor kesehatan lainnya.
+
+9. Pada tahap awal, data fasilitas dan tenaga kesehatan hanya mencakup wilayah Bandung Raya dan sekitarnya.
 
 ## 2.5 Lingkungan Operasi Perangkat Lunak
 Perangkat lunak Mahasehat dirancang untuk beroperasi pada arsitektur berbasis web responsif (client-server). Spesifikasi lingkungan operasi yang dibutuhkan untuk menjalankan sistem disajikan pada Tabel 2.5.
