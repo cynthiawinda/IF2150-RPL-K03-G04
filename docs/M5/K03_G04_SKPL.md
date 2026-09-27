@@ -130,16 +130,26 @@ Batasan yang harus dituliskan, di antaranya:
 4. *...*
 
 ## 2.5 Lingkungan Operasi Perangkat Lunak
-Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroperasi. Bagian ini digunakan untuk memastikan pengguna memiliki spesifikasi yang cukup untuk menjalankan P/L. Misalnya mencakup komponen server, client, OS, DBMS, tetapi tidak menutupi kemungkinan komponen lain.
+Perangkat lunak Mahasehat dirancang untuk beroperasi pada arsitektur berbasis web responsif (client-server). Spesifikasi lingkungan operasi yang dibutuhkan untuk menjalankan sistem disajikan pada Tabel 2.5.
 
+Tabel 2.5. Spesifikasi Lingkungan Operasi Perangkat Lunak
 | Komponen | Spesifikasi |
 | :--- | :--- |
-| *Server* | *[contoh: Node.js v20, dijalankan pada layanan cloud]* |
-| *Client* | *[contoh: Web Browser modern (Chrome, Firefox terbaru)]* |
-| *DBMS* | *[contoh: PostgreSQL 15]* |
-| *OS* | *[contoh: Cross-platform (Windows/Linux/MacOS) melalui browser]* |
-| *...* | *...* |
+| *Server Application* | Node.js v20.x LTS or Express.js |
+| *Database Management System (DBMS)* | PostgreSQL 15+ |
+| *Client Side (Perangkat Pengguna)* | Web browser modern |
+| *External APIs & Services* | Geolocation API & Google Maps Platform |
+| *External APIs & Services* | Google Calendar API |
+| *External APIs & Services* | SMTP or Mail Service (Nodemailer/SendGrid) |
+| *Operating System for Server* | Ubuntu Server 22.04 LTS or Linux Cloud Environment |
+| *Protokol Keamanan* | HTTPS dengan sertifikat SSL/TLS & enkripsi AES-256 |
 
+references:
+- https://nodejs.org/docs/latest-v20.x/api/
+- https://expressjs.com/
+- https://www.postgresql.org/docs/15/
+- https://developers.google.com/maps/documentation/geolocation/
+- https://developers.google.com/calendar/api
 ---
 
 # BAB 3: Deskripsi Kebutuhan Perangkat Lunak
