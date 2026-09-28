@@ -76,7 +76,12 @@ Tabel 1.4. Aturan Penomoran
 | *...* | *...* | *...* |
 
 ## 1.5 Referensi
-Dokumentasi P/L yang dirujuk oleh dokumen ini. Referensi dapat berupa buku, panduan, ataupun dokumentasi lain yang dipakai dalam pengembangan P/L ini.
+- Diagram UML: [https://www.drawio.com/](https://www.drawio.com/)
+- https://nodejs.org/docs/latest-v20.x/api/
+- https://expressjs.com/
+- https://www.postgresql.org/docs/15/
+- https://developers.google.com/maps/documentation/geolocation/
+- https://developers.google.com/calendar/api
 
 ## 1.6 Deskripsi Umum Dokumen (Ikhtisar)
 BAB 1 membahas pendahuluan, yang berisi tujuan, lingkup masalah, definisi, istilah, serta singkatan, aturan penomoran, referensi, dan deskripsi umum dokumen. BAB 2 membahas deskripsi perangkat lunak yang mencakup deskripsi umum sistem dan P/L, pengguna dan kebutuhan pengguna P/L, batasan P/L, dan lingkungan operasi P/L. BAB 3 membahas deskripsi kebutuhan P/L, yaitu kebutuhan fungsional dan kebutuhan non-fungsional. BAB 4 membahas pemodelan use case, yaitu identifikasi aktor, use case, use case diagram, dan skenario use case. BAB 5 membahas pemodelan kelas yang berisi identifikasi kelas, diagram kelas per use case, diagram kelas keseluruhan. BAB 6 membahas traceability, yang menunjukkan keterkaitan antara kelas, use case, dan kebutuhan fungsional.
@@ -103,7 +108,6 @@ Alur interaksi sistem dirancang melalui tahapan fungsional berikut:
 ### Harapan Penerapan Solusi
 Pemisahan hak akses ini dirancang agar pelajar merasa aman saat berinteraksi dengan sistem. Selama ini, keengganan pelajar untuk mencatat kondisi emosionalnya secara rutin sering kali dipicu oleh rasa cemas bahwa tulisan pribadinya akan dihakimi atau diawasi berlebihan oleh orang tua. Dengan kepastian bahwa catatan jurnal bersifat privat dan orang tua/wali hanya menerima visualisasi grafik tren, pelajar diharapkan tidak ragu untuk mengisi data secara jujur dan konsisten. Data yang valid inilah yang menjadi dasar bagi sistem untuk mendeteksi indikasi penurunan kondisi psikologis secara tepat. Namun, Mahasehat tetap tidak diposisikan sebagai pengganti diagnosis klinis dari psikolog atau psikiater. Perangkat lunak ini murni berfungsi sebagai sarana deteksi awal sekaligus jembatan rujukan, sehingga pelajar yang mulai mengalami tekanan mental berat dapat menyadari kondisinya lebih dini dan segera terhubung dengan penanganan profesional.
 
-Lengkapi dengan gambaran proses bisnis dalam bentuk *Activity Diagram* (boleh disalin dan diperbarui dari 3.3 *Model Proses Bisnis* pada dokumen *Topic Brainstorming*).
 <p align="center">
 <img alt="Contoh Activity Diagram" src="./M1/assets/diagram/diagram-act-1.avif" width="70%">
 </p>
@@ -115,7 +119,6 @@ Lengkapi dengan gambaran proses bisnis dalam bentuk *Activity Diagram* (boleh di
 Mahasehat merupakan sistem pemantauan kesehatan mental berbasis web responsif yang dirancang untuk kalangan pelajar. Mahasehat berfungsi sebagai platform pencatatan mandiri kondisi psikologis pelajar serta dasbor pemantauan bagi orang tua/wali. Sistem ini berinteraksi dengan Layanan Mail Server untuk mengirimkan *daily check-in reminder* kepada mahasiswa serta mengirimkan email peringatan darurat kepada orang tua/wali jika sistem mendeteksi penurunan kondisi mental pelajar yang melewati ambang batas tertentu. Selain itu, sistem juga menggunakan Layanan Mail Server untuk manajemen akun. Sistem juga memanfaatkan Google Maps Platform untuk menangkap lokasi pengguna menggunakan Geolocation API dan kemudian menggunakannya untuk memberikan rekomendasi fasilitas kesehatan terdekat secara akurat. Sementara itu, sistem terhubung dengan Google Calendar API untuk mengelola penjadwalan konsultasi secara *real-time*.
 
 ## 2.3 Pengguna dan Kebutuhan Pengguna Perangkat Lunak
-Tuliskan seluruh jenis pengguna (*role*/aktor) yang terlibat dalam perangkat lunak (P/L), beserta kebutuhannya secara umum. Bagian ini dapat disalin dari 1.2 *Deskripsi Pengguna Perangkat Lunak* (dokumen Requirement Gathering) atau 3.1 *Identifikasi Aktor* (dokumen Use Case), pastikan sudah konsisten dengan aktor final yang dipakai di BAB 4.
 
 | Pengguna | Kebutuhan |
 | :--- | :--- |
@@ -160,12 +163,6 @@ Tabel 2.5. Spesifikasi Lingkungan Operasi Perangkat Lunak
 | *Operating System for Server* | Ubuntu Server 22.04 LTS or Linux Cloud Environment |
 | *Protokol Keamanan* | HTTPS dengan sertifikat SSL/TLS & enkripsi AES-256 |
 
-references:
-- https://nodejs.org/docs/latest-v20.x/api/
-- https://expressjs.com/
-- https://www.postgresql.org/docs/15/
-- https://developers.google.com/maps/documentation/geolocation/
-- https://developers.google.com/calendar/api
 ---
 
 # BAB 3: Deskripsi Kebutuhan Perangkat Lunak
@@ -200,6 +197,7 @@ Tabel 3.1. Kebutuhan Fungsional
 | *KF22* | *R31* | *Ketika pengguna mengakses log in, Perangkat Lunak harus menampilkan formulir untuk login.* |
 | *KF23* | *R31* | *Ketika pengguna mengirimkan formulir login, Perangkat Lunak harus memvalidasi data masukan pengguna dan mengarahkan antarmuka ke dashboard utama sesuai dengan role mereka.* |
 | *KF24* | *R32* | *Ketika pengguna memilih menu keluar akun, Perangkat Lunak harus mengakhiri sesi penggunaan akun tersebut dan mengalihkan antarmuka ke halaman login.* |
+
 ## 3.2 Kebutuhan Non-Fungsional (KNF)
 
 Tabel 3.2. Kebutuhan Non-Fungsional
@@ -218,7 +216,6 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | *KNF10* | *R26, R28* | *_Safety_* | *Apabila sistem mendeteksi kondisi yang memenuhi ambang batas darurat berdasarkan hasil pemantauan, maka Perangkat Lunak harus menampilkan pop-up tombol rujukan darurat resmi tanpa menghalangi pengguna untuk menutup tampilan atau mencari bantuan profesional.* |
 
 <br>
-
 
 ---
 
@@ -259,7 +256,6 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 </p>
 
 ## 4.4 Skenario Use Case
-Salin ulang skenario **setiap** use case (skenario normal dan alternatif) dari BAB 3.4 dokumen *Use Case & Scenario Use Case*, sesuaikan dengan daftar UC final pada 4.2. Jika use case melibatkan lebih dari satu aktor manusia yang benar-benar berinteraksi langsung (misalnya *Kasir* yang memverifikasi transaksi setelah *Pelanggan* membayar), tambahkan kolom aksi tersendiri untuk aktor tersebut di samping kolom "Reaksi Perangkat Lunak". Sistem eksternal otomatis seperti *payment gateway* **bukan aktor**, sehingga interaksinya cukup dituliskan sebagai bagian dari "Reaksi Perangkat Lunak", bukan kolom aktor terpisah.
 
 ### 4.4.1 Skenario UC01
 
@@ -507,7 +503,6 @@ Salin ulang skenario **setiap** use case (skenario normal dan alternatif) dari B
 | 1 | *Pengguna memilih menu keluar akun (log out) pada menu pengaturan/profil* | *Sistem menampilkan pop up konfirmasi keluar akun* |
 | 2 | *Pengguna menekan tombol batal* | *Sistem menutup konfirmasi dan mempertahankan sesi login pengguna, kembali pada halaman pengaturan/profil* |
 
-
 ---
 
 # BAB 5: Pemodelan Kelas
@@ -530,7 +525,7 @@ Salin ulang skenario **setiap** use case (skenario normal dan alternatif) dari B
 | *C12* | *KonfirmasiRegistrasiPage* | *Merepresentasikan antarmuka formulir registrasi akun bagi orang tua/wali (Boundary Class).* | *UC02* |
 | *C13* | *CheckInPage* | *Merepresentasikan antarmuka formulir pengisian daily check-in bagi pelajar (Boundary Class).* | *UC03* |
 | *C14* | *CheckInController* | *Mengatur proses penerimaan masukan, validasi format masukan, dan penyimpanan data check-in (Controller Class).* | *UC03* |
-| *C15* | *NotificationPengingatController* | *Mengatur penjadwalan dan pengiriman notifikasi pengingat harian ke peramban pengguna (Controller Class).* | *UC03* |
+| *C15* | *NotifikasiPengingatController* | *Mengatur penjadwalan dan pengiriman notifikasi pengingat harian ke peramban pengguna (Controller Class).* | *UC03* |
 | *C16* | *ReportPage* | *Merepresentasikan antarmuka visualisasi grafik statistik, tren mingguan/bulanan, dan rangkuman kondisi (Boundary Class).* | *UC04* |
 | *C17* | *ReportController* | *Mengatur kalkulasi data statistik, pembuatan grafik, pembatasan filter privasi wali, serta evaluasi ambang batas (Controller Class).* | *UC04* |
 | *C18* | *CariTenagaKesehatanPage* | *Merepresentasikan antarmuka pencarian tenaga kesehatan yang menampilkan daftar tenaga kesehatan, lokasi fasilitas kesehatan, estimasi biaya konsultasi, dan informasi jarak (Boundary Class).* | *UC05* |
@@ -631,7 +626,7 @@ Salin ulang skenario **setiap** use case (skenario normal dan alternatif) dari B
 | *C06* | *CheckIn* | *Menyimpan data hasil _daily check-in_ harian (skala _mood_, durasi tidur, pola makan, pemicu stres, dan catatan refleksi) (_Entity Class_)* |
 | *C13* | *CheckInPage* | *Antarmuka formulir pengisian _daily check-in_ bagi pelajar (_Boundary Class_).* |
 | *C14* | *CheckInController* | *Mengatur proses penerimaan masukan, validasi format, dan penyimpanan data _check-in_ (_Controller Class_).* |
-| *C15* | *NotificationPengingatController* | *Mengatur penjadwalan dan pengiriman notifikasi pengingat harian ke peramban pengguna (_Controller Class_).* |
+| *C15* | *NotifikasiPengingatController* | *Mengatur penjadwalan dan pengiriman notifikasi pengingat harian ke peramban pengguna (_Controller Class_).* |
 
 #### Diagram Kelas
 
@@ -649,7 +644,7 @@ Salin ulang skenario **setiap** use case (skenario normal dan alternatif) dari B
 | *C06* | *CheckIn* | *idCheckIn, tanggalCheckIn, skalaMood, jamTidur, jamBangun, polaMakan, pemicuStres, catatanRefleksi* | *createCheckIn(), getCheckInData(), validateData()* |
 | *C13* | *CheckInPage* | *moodInput, sleepDurationInput, dietInput, triggerInput, reflectionInput* | *showPage(), getInput(), showError(), showSuccessMessage()* |
 | *C13* | *CheckInController* | *currentCheckIn* | *submitCheckIn(), validateCheckInFormat(), encryptJournal()* |
-| *C15* | *NotificationPengingatController* | *reminderSchedule, status* | *sendDailyReminder(), checkPendingCheckIn()* |
+| *C15* | *NotifikasiPengingatController* | *reminderSchedule, status* | *sendDailyReminder(), checkPendingCheckIn()* |
 
 ### 5.5.4 Use Case UC04
 
@@ -906,7 +901,7 @@ Salin ulang skenario **setiap** use case (skenario normal dan alternatif) dari B
 | *C12* | *KonfirmasiRegistrasiPage* | *dataRegistrasi, statusKonfirmasi* | *displayDataRegistrasi(), confirmRegistrasi()* |
 | *C13* | *CheckInPage* | *moodInput, sleepDurationInput, dietInput, triggerInput, reflectionInput* | *showPage(), getInput(), showError(), showSuccessMessage()* |
 | *C14* | *CheckInController* | *currentCheckIn* | *submitCheckIn(), validateCheckInFormat(), encryptJournal()* |
-| *C15* | *NotificationPengingatController* | *reminderSchedule, status* | *sendDailyReminder(), checkPendingCheckIn()* |
+| *C15* | *NotifikasiPengingatController* | *reminderSchedule, status* | *sendDailyReminder(), checkPendingCheckIn()* |
 | *C16* | *ReportPage* | *selectedPeriod, displayedChart, displayedSummary* | *showPage(), displayChart(), filterViewByRole()* |
 | *C17* | *ReportController* | *currentReport* | *calculateStatistics(), buildTrendChart(), applyPrivacyRestriction()* |
 | *C17* | *CariTenagaKesehatanPage* | *-* | *showPage(), requestLocationPermission(), displayResults()* |
@@ -961,6 +956,10 @@ Salin ulang skenario **setiap** use case (skenario normal dan alternatif) dari B
 
 ---
 
-
 # Referensi
-- Diagram UML: [https://www.drawio.com/](https://www.drawio.com/), [https://staruml.io/](https://staruml.io/)
+- Diagram UML: [https://www.drawio.com/](https://www.drawio.com/)
+- https://nodejs.org/docs/latest-v20.x/api/
+- https://expressjs.com/
+- https://www.postgresql.org/docs/15/
+- https://developers.google.com/maps/documentation/geolocation/
+- https://developers.google.com/calendar/api
