@@ -108,11 +108,38 @@ Alur interaksi sistem dirancang melalui tahapan fungsional berikut:
 ### Harapan Penerapan Solusi
 Pemisahan hak akses ini dirancang agar pelajar merasa aman saat berinteraksi dengan sistem. Selama ini, keengganan pelajar untuk mencatat kondisi emosionalnya secara rutin sering kali dipicu oleh rasa cemas bahwa tulisan pribadinya akan dihakimi atau diawasi berlebihan oleh orang tua. Dengan kepastian bahwa catatan jurnal bersifat privat dan orang tua/wali hanya menerima visualisasi grafik tren, pelajar diharapkan tidak ragu untuk mengisi data secara jujur dan konsisten. Data yang valid inilah yang menjadi dasar bagi sistem untuk mendeteksi indikasi penurunan kondisi psikologis secara tepat. Namun, Mahasehat tetap tidak diposisikan sebagai pengganti diagnosis klinis dari psikolog atau psikiater. Perangkat lunak ini murni berfungsi sebagai sarana deteksi awal sekaligus jembatan rujukan, sehingga pelajar yang mulai mengalami tekanan mental berat dapat menyadari kondisinya lebih dini dan segera terhubung dengan penanganan profesional.
 
+Model proses bisnis dibuat untuk menggambarkan bagaimana pengguna berinteraksi dengan sistem dalam menjalankan fungsi-fungsi utama aplikasi. Berdasarkan aktivitas yang sudah diidentifikasi pada bagian sebelumnya, proses bisnis sistem dibagi menjadi beberapa alur berdasarkan konteks aktivitas yang berbeda, yaitu:
+1. Alur pendaftaran dan penautan akun wali
+2. Alur pencatatan kondisi harian (_Daily Check-in_)
+3. Alur pemantauan kondisi dan penanganan darurat
+4. Alur pencarian dan reservasi konsultasi profesional
+
+### 3.4.1 Alur Pendaftaran dan Penautan Akun Wali
+Alur ini menggambarkan proses awal ketika mahasiswa membuat akun dan menghubungkan akun dengan orang tua/wali. Mahasiswa mengisi informasi yang diperlukan, kemudian sistem melakukan proses verifikasi dan membuat akun. Setelah itu, mahasiswa dapat menautkan akun wali agar wali dapat menerima informasi dan memantau kondisi.
+![Diagram Activity 1](assets/diagram/diagram-act-1.png)
 <p align="center">
-<img alt="Contoh Activity Diagram" src="./M1/assets/diagram/diagram-act-1.avif" width="70%">
+  <i>Gambar 1. Alur Pendaftaran dan Penautan Akun Wali</i>
 </p>
+
+### 3.4.2 Alur Pencatatan Kondisi Harian (_Daily Check-in_)
+Alur ini menggambarkan proses mahasiswa dalam melakukan pencatatan kondisi sehari-hari. Mahasiswa mendapatkan pengingat dari sistem apabila belum melakukan check-in, kemudian mengisi informasi mengenai mood, aktivitas fisik, pola makan, dan pola tidur. Data yang telah diisi akan disimpan oleh sistem dan digunakan untuk melihat perkembangan kondisi mahasiswa dari waktu ke waktu.
+![Diagram Activity 2](assets/diagram/diagram-act-2.png)
 <p align="center">
-<i>Gambar 1. Contoh Activity Diagram Proses Bisnis</i>
+  <i>Gambar 2. Alur Pencatatan Kondisi Harian (_Daily Check-in_)</i>
+</p>
+
+### 3.4.3 Alur Pemantauan Kondisi dan Penanganan Darurat
+Alur ini menggambarkan proses sistem dalam mengolah data _daily check-in_ untuk mengetahui perkembangan kondisi mahasiswa. Sistem akan mengolah data menjadi laporan dan statistik yang dapat dilihat oleh mahasiswa dan wali sesuai dengan hak aksesnya. Apabila sistem menemukan pola kondisi yang perlu diperhatikan, seperti penurunan kondisi secara terus-menerus atau mahasiswa tidak melakukan check-in selama beberapa hari, sistem dapat mengirimkan notifikasi kepada wali.
+![Diagram Activity 3](assets/diagram/diagram-act-3.png)
+<p align="center">
+  <i>Gambar 3. Alur Pemantauan Kondisi dan Penanganan Darurat</i>
+</p>
+
+### 3.4.4 Alur Pencarian dan Reservasi Konsultasi Profesional
+Alur ini menggambarkan proses mahasiswa ketika membutuhkan bantuan dari tenaga profesional. Mahasiswa dapat melihat rekomendasi psikolog atau psikiater berdasarkan kondisi dan preferensinya, seperti lokasi dan biaya. Setelah memilih tenaga profesional yang sesuai, mahasiswa dapat memilih jadwal konsultasi dan mengajukan reservasi. Tenaga profesional kemudian dapat melihat pengajuan tersebut dan melakukan konfirmasi jadwal.
+![Diagram Activity 4](assets/diagram/diagram-act-4.png)
+<p align="center">
+  <i>Gambar 4. Alur Pencarian dan Reservasi Konsultasi Profesional</i>
 </p>
 
 ## 2.2 Deskripsi Umum Perangkat Lunak
@@ -512,7 +539,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | ID Kelas | Nama Kelas | Deskripsi Kelas | ID Use Case |
 | :--- | :--- | :--- | :--- |
 | *C01* | *Pengguna* | *Kelas abstrak yang menyimpan data akun (identitas diri, email, password) yang dimiliki oleh ketiga aktor (Entity Class).* | *UC01, UC09, UC10* |
-| *C02* | *Pelajar* | *Merepresentasikan pengguna pelajar yang melakukan registrasi, check-in harian, melihat statistik kondisi kesehatannya, serta menentukan jadwal konsultasi dengan tenaga kesehatan (Entity Class).* | *UC01, UC02, UC03, UC04, UC05, UC06, UC08, UC09, UC10* |
+| *C02* | *Pelajar* | *Merepresentasikan pengguna pelajar yang melakukan registrasi, check-in harian, melihat statistik kondisi kesehatannya, serta menentukan jadwal konsultasi dengan tenaga kesehatan (Entity Class).* | *UC01, UC03, UC04, UC05, UC06, UC08, UC09, UC10* |
 | *C03* | *OrangTuaWali* | *Merepresentasikan pengguna orang tua/wali yang mengonfirmasi registrasi akun pelajar di bawah umur, memantau laporan kondisi pelajar, serta menerima dan menindaklanjuti notifikasi darurat (Entity Class).* | *UC02, UC04, UC08, UC09, UC10* |
 | *C04* | *TenagaKesehatan* | *Merepresentasikan pengguna psikolog/psikiater yang dapat dipilih pelajar dari daftar rekomendasi, serta meninjau pengajuan jadwal konsultasi yang masuk (Entity Class).* | *UC05, UC07, UC09, UC10* |
 | *C05* | *RiwayatKesehatan* | *Menyimpan data riwayat kesehatan mental dan kontak orang tua/wali yang diisi pelajar saat proses registrasi akun (Entity Class).* | *UC01* |
@@ -590,10 +617,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | :--- | :--- | :--- |
 | *C12* | *KonfirmasiRegistrasiPage* | *Antarmuka konfirmasi registrasi akun bagi pengguna (Boundary Class)* |
 | *C11* | *AuthController* | *Mengatur proses konfirmasi dan perubahan status registrasi akun (Control Class)* |
-| *C02* | *Pelajar* | *Menyimpan data pelajar yang akun registrasinya akan dikonfirmasi (Entity Class)* |
 | *C03* | *OrangTuaWali* | *Menyimpan data orang tua/wali yang melakukan konfirmasi registrasi (Entity Class)* |
-| *C04* | *TenagaKesehatan* | *Menyimpan data tenaga kesehatan yang melakukan konfirmasi registrasi (Entity Class)* |
-| *C01* | *Pengguna* | *Menyimpan data umum akun dan status registrasi pengguna (Entity Class)* |
 
 #### Diagram Kelas
 
@@ -609,9 +633,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | :--- | :--- | :--- | :--- |
 | *C12* | *KonfirmasiRegistrasiPage* | *dataRegistrasi, statusKonfirmasi* | *displayDataRegistrasi(), confirmRegistrasi()* |
 | *C11* | *AuthController* | *-* | *validateConfirmation(), confirmAccount()* |
-| *C02* | *Pelajar* | *-* | *-* |
 | *C03* | *OrangTuaWali* | *-* | *-* |
-| *C04* | *TenagaKesehatan* | *-* | *-* | 
 | *C01* | *Pengguna* | *-* | *-* |
 
 ### 5.5.3 Use Case UC03
@@ -925,7 +947,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | ID Kelas | ID Use Case | ID KF |
 | :--- | :--- | :--- |
 | *C01* | *UC01, UC09, UC10* | *KF01, KF22, KF23, KF24* |
-| *C02* | *UC01, UC02, UC03, UC04, UC05, UC06, UC08, UC09, UC10* | *KF01, KF02, KF03, KF04, KF05, KF07, KF11, KF12, KF13, KF14, KF18, KF19, KF20, KF21, KF22, KF23, KF24* |
+| *C02* | *UC01, UC03, UC04, UC05, UC06, UC08, UC09, UC10* | *KF01, KF02, KF03, KF04, KF05, KF07, KF11, KF12, KF13, KF14, KF18, KF19, KF20, KF21, KF22, KF23, KF24* |
 | *C03* | *UC02, UC04, UC08, UC09, UC10* | *KF02, KF06, KF08, KF09, KF10, KF17, KF18, KF19, KF20, KF21, KF22, KF23, KF24* |
 | *C04* | *UC05, UC07, UC09, UC10* | *KF11, KF12, KF15, KF16, KF22, KF23, KF24* |
 | *C05* | *UC01* | *KF01* |
