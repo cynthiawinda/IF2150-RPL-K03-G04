@@ -25,6 +25,8 @@
 * [Milestone 1](#milestone-1)
 * [Milestone 2](#milestone-2)
 * [Milestone 3](#milestone-3)
+* [Milestone 4](#milestone-4)
+* [Milestone 5](#milestone-5)
 
 ---
 
@@ -52,6 +54,12 @@
 | Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
 | :--- | :--- | :--- | :--- |
 | ChatGPT | Mengidentifikasi perbedaan jenis-jenis kelas dan penggunaannya | boundary itu frontend? entity itu database? control itu backend? | Boundary adalah interaksi antara aktor dan sistem. Control adalah pengatur alur use case. Entity adalah representasi objek dalam sistem |
+| | | | | |
+
+### Milestone 5
+| Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
+| :--- | :--- | :--- | :--- |
+| | | | | |
 | | | | | |
 
 ---
