@@ -129,4 +129,16 @@
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| *-* | *-* | *-* | *-* | *-* | *-* |
+| *27-09-2026* | *Cynthia Winda Wijaya* | *Menyalin bagian yang diperlukan dari milestone sebelumnya dan memperbaiki traceability* | *1* | *Done* | *-* |
+| *27-09-2026* | *Christabelcyne Costan* | *Menambah draft 2.5* | *1* | *Done* | *-* |
+| *27-09-2026* | *Cynthia Winda Wijaya* | *Menulis bagian 1.6 dan menambah daftar perubahan* | *1,5* | *Done* | *-* |
+| *27-09-2026* | *Christabelcyne Costan* | *Menambah file activity diagram* | *0,5* | *Done* | *-* |
+| *27-09-2026* | *Sophia Imelda Rogate Marpaung* | *Menambah draft subbab 1.3 dan 1.4* | *1,5* | *Done* | *-* |
+| *27-09-2026* | *Rendy Salastra Putra* | *Menambah draft subbab 1.3 dan 1.4* | *2* | *Done* | *-* |
+| *27-09-2026* | *Cynthia Winda Wijaya* | *Mengupload diagram kelas dari M4* | *0,5* | *Done* | *-* |
+| *27-09-2026* | *Haikal Muhammad Royyan* | *Menambah batasan perangkat lunak* | *2* | *Done* | *-* |
+| *28-09-2026* | *Sophia Imelda Rogate Marpaung* | *Menambah revisi dan minor revisi lainnya* | *1,5* | *Done* | *-* |
+| *28-09-2026* | *Cynthia Winda Wijaya* | *Menambah activity diagram dari M1 dan menghapus aktor yang tidak perlu di UC02* | *0,5* | *Done* | *-* |
+| *30-09-2026* | *Sophia Imelda Rogate Marpaung* | *Memperbaru deskripsi umum sistem, menambah R31 dan R32 di KNF 11 dan KNF12, memperbaiki penomoran kelas di tabel diagram keseluruhan, memperbaiki penggunaan aktor di skenario UC01, dan revisi lain* | *2* | *Done* | *-* |
+| *30-09-2026* | *Rendy Salastra Putra* | *Menambah informasi pada lingkup masalah, mengubah gambar UC01 dan UC02, menambah template milestone di logbook* | *2* | *Done* | *-* |
+| *30-09-2026* | *Cynthia Winda Wijaya* | *Merevisi diagram kelas keseluruhan* | *1* | *Done* | *-* |
