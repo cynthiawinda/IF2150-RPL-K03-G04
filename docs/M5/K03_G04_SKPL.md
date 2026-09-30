@@ -31,9 +31,9 @@ Dipersiapkan oleh:
 | Revisi | Deskripsi |
 | :--- | :--- |
 | *A* | *Menyesuaikan tabel traceablity yang sebelumnya tidak sesuai dengan identifikasi kelas.* |
-| *B* | *Menambahkan R31 dan R32 di tabel KNF, yaitu KNF11 dan KNF12. Menghapus ID Kebutuhan yang tidak didukung P/L tetapi ada di tabel KNF. |
-| *C* |  |
-| ... |  |
+| *B* | *Menambahkan R31 dan R32 di tabel KNF, yaitu KNF11 dan KNF12. Menghapus ID Kebutuhan yang tidak didukung P/L tetapi ada di tabel KNF.* |
+| *C* | *Memperbaiki penggunaan aktor di skenario UC01, deskripsi kelas pada tabel identifikasi kelas use case UC01. Mengubah inputDataPelajar() menjadi getDataPelajar() dan inputDataWali() menjadi getDataWali().* |
+| *D* | *Menghapus metode/operasi cancelPengajuan() karena tidak ada skenario untuk tenaga kesehatan membatalkan pengajuan konsultasi.* |
 
 <br>
 
@@ -56,11 +56,9 @@ Tabel 1.3. Definisi Istilah dan Singkatan
 | *KF* | *Singkatan dari Kebutuhan Fungsional, yaitu layanan yang harus disediakan dan respon atas masukan, kadang termasuk yang tidak boleh dilakukan.* |
 | *KNF* | *Singkatan dari Kebutuhan Non-Fungsional, yaitu batasan atas layanan yang harus disediakan, seberapa baik, dalam kondisi apa, dengan jaminan apa.* |
 | *UC* | *Singkatan dari Use Case, yaitu pemodelan cara aktor berinteraksi dengan sistem.* |
-| *EARS* | *Singkatan dari Easy Approach to Requirements Syntax, yaitu pola penulisan kebutuhan agar konsisten dan mudah diuji.* |
 | *Aktor* | *Merepresentasikan entitas di luar batas sistem yang berinteraksi dengan sistem.* |
 | *Skenario* | *Merepresentasikan satu penelusuran konkret melalui sebuah use case, menyatakan apa saja yang terjadi pada sistem.* |
 | *Kelas* | *Merepresentasikan suatu jenis objek yang memiliki atribut dan metode/operasi untuk menjalankan tanggung jawabnya.* |
-| *...* | *...* |
 
 ## 1.4 Aturan Penomoran
 
@@ -73,7 +71,6 @@ Tabel 1.4. Aturan Penomoran
 | *Aktor* | *AXX* | *Mewakili singkatan kata "Aktor", diikuti dua digit unik untuk membedakan tiap aktor.* |
 | *Use Case* | *UCXX* | *Mewakili singkatan kata "Use Case", diikuti dua digit unik untuk membedakan tiap UC.* |
 | *Kelas* | *CXX* | *Mewakili singkatan kata "Class", diikuti dua digit unik untuk membedakan tiap kelas.* |
-| *...* | *...* | *...* |
 
 ## 1.5 Referensi
 - Diagram UML: [https://www.drawio.com/](https://www.drawio.com/)
@@ -91,7 +88,7 @@ BAB 1 membahas pendahuluan, yang berisi tujuan, lingkup masalah, definisi, istil
 # BAB 2: Deskripsi Perangkat Lunak
 
 ## 2.1 Deskripsi Umum Sistem
-Mahasehat merupakan sistem pemantauan kesehatan mental berbasis web responsif yang dirancang untuk kalangan pelajar dan mahasiswa. Sistem ini dikembangkan untuk menjawab permasalahan nyata di lingkungan pendidikan, di mana banyak pelajar cenderung memendam stres akademik maupun masalah pribadi seorang diri. Di sisi lain, orang tua/wali sering terlambat menyadari penurunan kondisi psikologis anak karena minimnya komunikasi atau keterbatasan jarak, khususnya bagi mahasiswa rantau. Mahasehat memadukan pencatatan mandiri oleh pelajar, dasbor pemantauan bagi orang tua/wali, serta alur rujukan bantuan profesional ke dalam satu sistem yang tetap mengutamakan kerahasiaan data pribadi pengguna.
+Mahasehat merupakan sistem pemantauan kesehatan mental berbasis web responsif yang dirancang untuk kalangan pelajar, termasuk siswa dan mahasiswa. Sistem ini dikembangkan untuk menjawab permasalahan nyata di lingkungan pendidikan, di mana banyak pelajar cenderung memendam stres akademik maupun masalah pribadi seorang diri. Di sisi lain, orang tua/wali sering terlambat menyadari penurunan kondisi psikologis anak karena minimnya komunikasi atau keterbatasan jarak, khususnya bagi mahasiswa rantau. Mahasehat memadukan pencatatan mandiri oleh pelajar, dasbor pemantauan bagi orang tua/wali, serta alur rujukan bantuan profesional ke dalam satu sistem yang tetap mengutamakan kerahasiaan data pribadi pengguna.
 
 ### Ekspektasi Pengguna terhadap Sistem
 Kebutuhan tiap kelompok pengguna terhadap sistem dirangkum sebagai berikut:
@@ -115,7 +112,7 @@ Model proses bisnis dibuat untuk menggambarkan bagaimana pengguna berinteraksi d
 3. Alur pemantauan kondisi dan penanganan darurat
 4. Alur pencarian dan reservasi konsultasi profesional
 
-### 3.4.1 Alur Pendaftaran dan Penautan Akun Wali
+### 2.1.1 Alur Pendaftaran dan Penautan Akun Wali
 Alur ini menggambarkan proses awal ketika pelajar membuat akun dan menghubungkan akun dengan orang tua/wali. Pelajar mengisi informasi yang diperlukan, kemudian sistem melakukan proses verifikasi dan membuat akun. Setelah itu, pelajar dapat menautkan akun wali agar wali dapat menerima informasi dan memantau kondisi.
 <p align="center">
   <img alt="Diagram Activity 1" src="./assets/diagram/diagram-act-1.png">
@@ -124,7 +121,7 @@ Alur ini menggambarkan proses awal ketika pelajar membuat akun dan menghubungkan
   <i>Gambar 1. Alur Pendaftaran dan Penautan Akun Wali</i>
 </p>
 
-### 3.4.2 Alur Pencatatan Kondisi Harian (_Daily Check-in_)
+### 2.1.2 Alur Pencatatan Kondisi Harian (_Daily Check-in_)
 Alur ini menggambarkan proses pelajar dalam melakukan pencatatan kondisi sehari-hari. Pelajar mendapatkan pengingat dari sistem apabila belum melakukan check-in, kemudian mengisi informasi mengenai mood, aktivitas fisik, pola makan, dan pola tidur. Data yang telah diisi akan disimpan oleh sistem dan digunakan untuk melihat perkembangan kondisi pelajar dari waktu ke waktu.
 <p align="center">
   <img alt="Diagram Activity 2" src="./assets/diagram/diagram-act-2.png">
@@ -133,7 +130,7 @@ Alur ini menggambarkan proses pelajar dalam melakukan pencatatan kondisi sehari-
   <i>Gambar 2. Alur Pencatatan Kondisi Harian (Daily Check-in)</i>
 </p>
 
-### 3.4.3 Alur Pemantauan Kondisi dan Penanganan Darurat
+### 2.1.3 Alur Pemantauan Kondisi dan Penanganan Darurat
 Alur ini menggambarkan proses sistem dalam mengolah data _daily check-in_ untuk mengetahui perkembangan kondisi pelajar. Sistem akan mengolah data menjadi laporan dan statistik yang dapat dilihat oleh pelajar dan wali sesuai dengan hak aksesnya. Apabila sistem menemukan pola kondisi yang perlu diperhatikan, seperti penurunan kondisi secara terus-menerus atau pelajar tidak melakukan check-in selama beberapa hari, sistem dapat mengirimkan notifikasi kepada wali.
 <p align="center">
   <img alt="Diagram Activity 3" src="./assets/diagram/diagram-act-3.png">
@@ -142,7 +139,7 @@ Alur ini menggambarkan proses sistem dalam mengolah data _daily check-in_ untuk 
   <i>Gambar 3. Alur Pemantauan Kondisi dan Penanganan Darurat</i>
 </p>
 
-### 3.4.4 Alur Pencarian dan Reservasi Konsultasi Profesional
+### 2.1.4 Alur Pencarian dan Reservasi Konsultasi Profesional
 Alur ini menggambarkan proses pelajar ketika membutuhkan bantuan dari tenaga profesional. Pelajar dapat melihat rekomendasi psikolog atau psikiater berdasarkan kondisi dan preferensinya, seperti lokasi dan biaya. Setelah memilih tenaga profesional yang sesuai, pelajar dapat memilih jadwal konsultasi dan mengajukan reservasi. Tenaga profesional kemudian dapat melihat pengajuan tersebut dan melakukan konfirmasi jadwal.
 <p align="center">
   <img alt="Diagram Activity 4" src="./assets/diagram/diagram-act-4.png">
@@ -303,9 +300,9 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
-| 1 | *Pelajar memilih menu registrasi* | *Sistem menampilkan antarmuka formulir registrasi* |
-| 2 | *Pelajar memasukkan identitas diri, riwayat kesehatan mental, dan kontak orang tua/wali dan menekan tombol daftar* | *Sistem memeriksa kelengkapan data dan format masukan pengguna dan mengirimkan kode verifikasi (misalnya melalui e-mail) jika sudah valid* |
-| 4 | *Pelajar melakukan verifikasi* | *Sistem mengaktifkan akun baru dan menyimpan data ke database* |
+| 1 | *Pengguna memilih menu registrasi* | *Sistem menampilkan antarmuka formulir registrasi* |
+| 2 | *Pengguna memasukkan identitas diri, serta riwayat kesehatan mental dan kontak orang tua/wali khusus bagi pelajar, lalu menekan tombol daftar* | *Sistem memeriksa kelengkapan data dan format masukan pengguna dan mengirimkan kode verifikasi (misalnya melalui e-mail) jika sudah valid* |
+| 4 | *Pengguna melakukan verifikasi* | *Sistem mengaktifkan akun baru dan menyimpan data ke database* |
 
 <br>
 
@@ -313,9 +310,9 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
-| 1 | *Pelajar memilih menu registrasi* | *Sistem menampilkan antarmuka formulir registrasi* |
-| 2 | *Pelajar memasukkan identitas diri, riwayat kesehatan mental, dan kontak orang tua/wali dengan tidak lengkap ataupun kesalahan format dan menekan tombol daftar* | *Sistem mendeteksi data tidak valid, mengirim pesan kesalahan dan meminta masukan kembali* |
-| 3 | *Pelajar melengkapi data atau memasukkan data kembali dengan format yang benar dan menekan tombol daftar* | *Sistem kembali ke langkah 2 skenario normal* |
+| 1 | *Pengguna memilih menu registrasi* | *Sistem menampilkan antarmuka formulir registrasi* |
+| 2 | *Pengguna memasukkan identitas diri, serta riwayat kesehatan mental dan kontak orang tua/wali khusus bagi pelajar, dengan tidak lengkap ataupun kesalahan format dan menekan tombol daftar* | *Sistem mendeteksi data tidak valid, mengirim pesan kesalahan dan meminta masukan kembali* |
+| 3 | *Pengguna melengkapi data atau memasukkan data kembali dengan format yang benar dan menekan tombol daftar* | *Sistem kembali ke langkah 2 skenario normal* |
 
 ### 4.4.2 Skenario UC02
 
@@ -376,7 +373,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | :--- | :--- | :--- |
 | 1 | *Pelajar/Wali mengetuk tombol untuk melihat kondisi kesehatan Pelajar* | *Sistem memeriksa ketersediaan data daily check-in dan menampilkan statistik kondisi berdasarkan data daily check-in yang telah dicatat* |
 | 2 | *Pelajar/Wali memilih periode statistik yang ingin dilihat* | *Sistem menampilkan statistik kondisi yang sesuai periode yang dipilih* |
-| 3 | *Pelajar/Wali memilih suatu pola kondisi atau catatan refleksi yang ingin dilihat* | *Sistem menampilkan visualisasi dan informasi mengenai data yang dipilih* |
+| 3 | *Pelajar/Wali memilih suatu pola kondisi yang ingin dilihat* | *Sistem menampilkan visualisasi dan informasi mengenai data yang dipilih* |
 | 4 | *Pelajar/Wali memilih untuk melihat laporan kondisi* | *Sistem menampilkan rangkuman kondisi kesehatan serta rekomendasi kesehatan berdasarkan data pada periode yang dipilih* |
 
 <br>
@@ -592,9 +589,9 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | *C11* | *AuthController* | *Mengatur proses registrasi dan validasi data akun (Control Class)* |
 | *C01* | *Pengguna* | *Menyimpan data akun pengguna seperti email, password, dan role (Entity Class)* |
 | *C02* | *Pelajar* | *Menyimpan data pelajar yang melakukan registrasi (Entity Class)* |
-| *C03* | *OrangTuaWali* | *Menyimpan data orang tua/wali yang terhubung dengan akun pelajar (Entity Class)* |
-| *C04* | *TenagaKesehatan* | *Menyimpan data tenaga kesehatan yang terhubung dengan akun pelajar (Entity Class)* |
-| *C05* | *RiwayatKesehatan* | *Menyimpan data riwayat kesehatan yang diisi saat registrasi (Entity Class)* |
+| *C03* | *OrangTuaWali* | *Menyimpan data orang tua/wali yang melakukan registrasi (Entity Class)* |
+| *C04* | *TenagaKesehatan* | *Menyimpan data tenaga kesehatan yang melakukan registrasi (Entity Class)* |
+| *C05* | *RiwayatKesehatan* | *Menyimpan data riwayat kesehatan pelajar yang diisi saat registrasi (Entity Class)* |
 
 #### Diagram Kelas
 
@@ -608,9 +605,9 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
-| *C10* | *RegistrasiPage* | *inputDataPelajar, inputDataWali* | *displayFormRegistrasi(), inputDataPelajar(), inputDataWali(), submitRegistrasi()* |
+| *C10* | *RegistrasiPage* | *inputDataPelajar, inputDataWali* | *displayFormRegistrasi(), getDataPelajar(), getDataWali(), submitRegistrasi()* |
 | *C11* | *AuthController* | *-* | *validateData(), registerAccount()* |
-| *C01* | *Pengguna* | *idPengguna, email, password* | *-* |
+| *C01* | *Pengguna* | *idPengguna, email, password, role* | *-* |
 | *C02* | *Pelajar* | *nama, tanggalLahir, nomorTelepon* | *-* |
 | *C03* | *OrangTuaWali* | *idWali, nama, email, nomorTelepon* | *-* |
 | *C04* | *TenagaKesehatan* | *nama, email, nomorTelepon, jenisTenagaKesehatan, lokasi* | *-* |
@@ -643,9 +640,8 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | *C12* | *KonfirmasiRegistrasiPage* | *dataRegistrasi, statusKonfirmasi* | *displayDataRegistrasi(), confirmRegistrasi()* |
 | *C11* | *AuthController* | *-* | *validateConfirmation(), confirmAccount()* |
 | *C03* | *OrangTuaWali* | *-* | *-* |
-| *C01* | *Pengguna* | *-* | *-* |
 
-### 5.5.3 Use Case UC03
+### 5.2.3 Use Case UC03
 
 **Nama Use Case:** *Melakukan Daily Check-in*
 
@@ -674,10 +670,10 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | *C02* | *Pelajar* | *idPelajar, nama* | *getCheckInHistory(), setCheckIn()* |
 | *C06* | *CheckIn* | *idCheckIn, tanggalCheckIn, skalaMood, jamTidur, jamBangun, polaMakan, pemicuStres, catatanRefleksi* | *createCheckIn(), getCheckInData(), validateData()* |
 | *C13* | *CheckInPage* | *moodInput, sleepDurationInput, dietInput, triggerInput, reflectionInput* | *showPage(), getInput(), showError(), showSuccessMessage()* |
-| *C13* | *CheckInController* | *currentCheckIn* | *submitCheckIn(), validateCheckInFormat(), encryptJournal()* |
+| *C14* | *CheckInController* | *currentCheckIn* | *submitCheckIn(), validateCheckInFormat(), encryptJournal()* |
 | *C15* | *NotifikasiPengingatController* | *reminderSchedule, status* | *sendDailyReminder(), checkPendingCheckIn()* |
 
-### 5.5.4 Use Case UC04
+### 5.2.4 Use Case UC04
 
 **Nama Use Case:** *Melihat Statistik dan Laporan Kondisi*
 
@@ -711,7 +707,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | *C16* | *ReportPage* | *selectedPeriod, displayedChart, displayedSummary* | *showPage(), displayChart(), filterViewByRole()* |
 | *C17* | *ReportController* | *currentReport* | *calculateStatistics(), buildTrendChart(), applyPrivacyRestriction()* |
 
-### 5.5.5 Use Case UC05
+### 5.2.5 Use Case UC05
 
 **Nama Use Case:** *Menentukan Tenaga Kesehatan*
 
@@ -745,7 +741,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | *C19* | *ProfilTenagaKesehatanPage* | *tenagaKesehatanDipilih* | *displayProfile()* |
 | *C20* | *TenagaKesehatanController* | *-* | *loadTenagaKesehatan(), processLocationPermission(), calculateDistances(), selectTenagaKesehatan()* |
 
-### 5.5.6 Use Case UC06
+### 5.2.6 Use Case UC06
 
 **Nama Use Case:** *Mengajukan Jadwal Konsultasi*
 
@@ -779,7 +775,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | *C21* | *PengajuanKonsultasiPage* | *jadwalDipilih, dataPengajuan* | *displayForm(), displaySelectedSchedule(), showUnavailableWarning(), getFormData()* |
 | *C22* | *JadwalKonsultasiController* | *-* | *loadAvailableSchedules(), checkAvailability(), selectSchedule(), submitRequest()* |
 
-### 5.5.7 Use Case UC07
+### 5.2.7 Use Case UC07
 
 **Nama Use Case:** *Mengelola Pengajuan Konsultasi*
 
@@ -787,11 +783,11 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 
 | ID Kelas | Nama Kelas | Deskripsi Kelas |
 | :--- | :--- | :--- |
-| *C21* | *PengajuanKonsultasiPage* | *Antarmuka bagi tenaga kesehatan untuk melihat dan mengelola pengajuan konsultasi (Boundary)* |
-| *C23* | *KonsultasiController* | *Mengatur proses pengelolaan pengajuan konsultasi, termasuk persetujuan dan perubahan jadwal (Control)* |
-| *C09* | *JadwalKonsultasi* | *Menyimpan data pengajuan jadwal konsultasi beserta statusnya (Entity)* |
-| *C02* | *Pelajar* | *Menyimpan data pelajar yang mengajukan konsultasi (Entity)* |
-| *C04* | *TenagaKesehatan* | *Menyimpan data tenaga kesehatan yang menerima dan meninjau pengajuan konsultasi (Entity)* |
+| *C21* | *PengajuanKonsultasiPage* | *Antarmuka bagi tenaga kesehatan untuk melihat dan mengelola pengajuan konsultasi (Boundary Class)* |
+| *C23* | *KonsultasiController* | *Mengatur proses pengelolaan pengajuan konsultasi, termasuk persetujuan dan perubahan jadwal (Controller Class)* |
+| *C09* | *JadwalKonsultasi* | *Menyimpan data pengajuan jadwal konsultasi beserta statusnya (Entity Class)* |
+| *C02* | *Pelajar* | *Menyimpan data pelajar yang mengajukan konsultasi (Entity Class)* |
+| *C04* | *TenagaKesehatan* | *Menyimpan data tenaga kesehatan yang menerima dan meninjau pengajuan konsultasi (Entity Class)* |
 
 #### Diagram Kelas
 
@@ -807,12 +803,12 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
 | *C21* | *PengajuanKonsultasiPage* | *selectedTenagaKesehatan, filteredDate, displayedTenagaKesehatan, displayedSchedule* | *displayTenagaKesehatan(), selectTenagaKesehatan(), filterJenisTenagaKesehatan(), filterDate(), displayAvailableSchedule()* | 
-| *C23* | *KonsultasiController* | *-* | *submitPengajuan(), cancelPengajuan(), approvePengajuan(), reschedule()* |
+| *C23* | *KonsultasiController* | *-* | *submitPengajuan(), approvePengajuan(), reschedule()* |
 | *C09* | *JadwalKonsultasi* | *idJadwal, tanggal, waktu, status* | *getDate(), getTime(), getStatus(), updateStatus(), updateSchedule()* |
 | *C02* | *Pelajar* | *idPelajar, nama* | *-* |
 | *C04* | *TenagaKesehatan* | *idTenagaKesehatan, nama, jenisTenagaKesehatan, lokasi* | *-* | 
 
-### 5.5.8 Use Case UC08
+### 5.2.8 Use Case UC08
 
 **Nama Use Case:** *Menerima dan Menindaklanjuti Notifikasi Darurat*
 
@@ -842,7 +838,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | *C07* | *LaporanKesehatan* | *periode, ringkasanKondisi, indikatorRisiko, jumlahHariTidakCheckIn* | *evaluateThreshold(), detectEmergency()* |
 | *C24* | *NotifikasiDaruratController* | *-* | *sendEmergencyNotification(), loadEmergencyDetail(), confirmReceived(), markFollowUp()* |
 
-### 5.5.9 Use Case UC09
+### 5.2.9 Use Case UC09
 
 **Nama Use Case:** *Masuk Akun Pengguna*
 
@@ -876,7 +872,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | *C27* | *PasswordController* | *-* | *sendResetLink(), resetPassword()* |
 | *C28* | *DashboardPage* | *currentUser* | *displayDashboard(), displayUserInfo()* |
 
-### 5.5.10 Use Case UC10
+### 5.2.10 Use Case UC10
 
 **Nama Use Case:** *Keluar Akun Pengguna*
 
@@ -926,28 +922,27 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | *C06* | *CheckIn* | *idCheckIn, tanggalCheckIn, skalaMood, jamTidur, jamBangun, polaMakan, pemicuStres, catatanRefleksi* | *createCheckIn(), getCheckInData(), validateData()* |
 | *C07* | *LaporanKesehatan* | *periode, ringkasanKondisi, indikatorRisiko, jumlahHariTidakCheckIn* | *evaluateThreshold(), detectEmergency()* |
 | *C08* | *FasilitasKesehatan* | *idFasilitas, namaFasilitas, lokasi, estimasiBiaya* | *getLokasi(), getEstimasiBiaya()* |
-| *C09* | *JadwalKonsultasi* | *idJadwal, tanggal, waktu, statusKetersediaan, statusPengajuan* | *, getDate(), getTime(), getStatus(), updateAvailability(), updateStatus()* |
-| *C10* | *RegistrationPage* | *inputDataPelajar, inputDataWali* | *displayFormRegistrasi(), inputDataPelajar(), inputDataWali(), submitRegistrasi()* |
-| *C11* | *AuthController* | *currentUser* | *validateData(), registerAccount(), login(), Logout(), validateConfirmation(), confirmAccount()* |
+| *C09* | *JadwalKonsultasi* | *idJadwal, tanggal, waktu, statusKetersediaan, statusPengajuan* | *getDate(), getTime(), getStatus(), updateAvailability(), updateStatus()* |
+| *C10* | *RegistrationPage* | *inputDataPelajar, inputDataWali* | *displayFormRegistrasi(), getDataPelajar(), getDataWali(), submitRegistrasi()* |
+| *C11* | *AuthController* | *currentUser* | *validateData(), registerAccount(), login(), logout(), validateConfirmation(), confirmAccount()* |
 | *C12* | *KonfirmasiRegistrasiPage* | *dataRegistrasi, statusKonfirmasi* | *displayDataRegistrasi(), confirmRegistrasi()* |
 | *C13* | *CheckInPage* | *moodInput, sleepDurationInput, dietInput, triggerInput, reflectionInput* | *showPage(), getInput(), showError(), showSuccessMessage()* |
 | *C14* | *CheckInController* | *currentCheckIn* | *submitCheckIn(), validateCheckInFormat(), encryptJournal()* |
 | *C15* | *NotifikasiPengingatController* | *reminderSchedule, status* | *sendDailyReminder(), checkPendingCheckIn()* |
 | *C16* | *ReportPage* | *selectedPeriod, displayedChart, displayedSummary* | *showPage(), displayChart(), filterViewByRole()* |
 | *C17* | *ReportController* | *currentReport* | *calculateStatistics(), buildTrendChart(), applyPrivacyRestriction()* |
-| *C17* | *CariTenagaKesehatanPage* | *-* | *showPage(), requestLocationPermission(), displayResults()* |
-| *C18* | *ProfilTenagaKesehatanPage* | *tenagaKesehatanDipilih* | *displayProfile(), displayAvailableSchedules()* |
-| *C19* | *TenagaKesehatanController* | *-* | *loadTenagaKesehatan(), processLocationPermission(), calculateDistances(), selectTenagaKesehatan()* |
-| *C20* | *PengajuanKonsultasiPage* | *selectedTenagaKesehatan, filteredDate, displayedTenagaKesehatan, displayedSchedule, jadwalDipilih, dataPengajuan* | *displayForm(), displaySelectedSchedule(), showUnavailableWarning(), getFormData(), displayTenagaKesehatan(), filterDate(), displayAvailableSchedule(), selectTenagaKesehatan(), filterJenisTenagaKesehatan()* |
-| *C21* | *JadwalKonsultasiController* | *-* | *loadAvailableSchedules(), checkAvailability(), selectSchedule(), submitRequest()* |
-| *C22* | *KonsultasiController* | *-* | *submitPengajuan(), cancelPengajuan(), approvePengajuan(), reschedule()* |
-| *C23* | *NotifikasiDaruratController* | *-* | *sendEmergencyNotification(), loadEmergencyDetail(), confirmReceived(), markFollowUp()* |
-| *C24* | *LoginPage* | *usernameOrEmailInput, passwordInput* | *showPage(), getInput(), showError()* |
-| *C25* | *ResetPasswordPage* | *emailInput, newPasswordInput, confirmPasswordInput* | *showPage(), getInput(), showError()* |
-| *C26* | *PasswordController* | *-* | *sendResetLink(), resetPassword()* |
-| *C27* | *DashboardPage* | *currentUser* | *displayDashboard(), displayUserInfo()* |
-| *C28* | *SettingPage* | *currentUser* | *showPage(), selectLogout()* |
-| *C29* | *NotifikasiDaruratPopup* | *notifikasiAktif* | *showPopup(), displayDetail(), displayStatus()* |
+| *C18* | *CariTenagaKesehatanPage* | *-* | *showPage(), requestLocationPermission(), displayResults()* |
+| *C19* | *ProfilTenagaKesehatanPage* | *tenagaKesehatanDipilih* | *displayProfile(), displayAvailableSchedules()* |
+| *C20* | *TenagaKesehatanController* | *-* | *loadTenagaKesehatan(), processLocationPermission(), calculateDistances(), selectTenagaKesehatan()* |
+| *C21* | *PengajuanKonsultasiPage* | *selectedTenagaKesehatan, filteredDate, displayedTenagaKesehatan, displayedSchedule, jadwalDipilih, dataPengajuan* | *displayForm(), displaySelectedSchedule(), showUnavailableWarning(), getFormData(), displayTenagaKesehatan(), filterDate(), displayAvailableSchedule(), selectTenagaKesehatan(), filterJenisTenagaKesehatan()* |
+| *C22* | *JadwalKonsultasiController* | *-* | *loadAvailableSchedules(), checkAvailability(), selectSchedule(), submitRequest()* |
+| *C23* | *KonsultasiController* | *-* | *submitPengajuan(), approvePengajuan(), reschedule()* |
+| *C24* | *NotifikasiDaruratController* | *-* | *sendEmergencyNotification(), loadEmergencyDetail(), confirmReceived(), markFollowUp()* |
+| *C25* | *LoginPage* | *usernameOrEmailInput, passwordInput* | *showPage(), getInput(), showError()* |
+| *C26* | *ResetPasswordPage* | *emailInput, newPasswordInput, confirmPasswordInput* | *showPage(), getInput(), showError()* |
+| *C27* | *PasswordController* | *-* | *sendResetLink(), resetPassword()* |
+| *C28* | *DashboardPage* | *currentUser* | *displayDashboard(), displayUserInfo()* |
+| *C29* | *SettingPage* | *currentUser* | *showPage(), selectLogout()* |
 
 ---
 
@@ -956,7 +951,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | ID Kelas | ID Use Case | ID KF |
 | :--- | :--- | :--- |
 | *C01* | *UC01, UC09, UC10* | *KF01, KF22, KF23, KF24* |
-| *C02* | *UC01, UC03, UC04, UC05, UC06, UC08, UC09, UC10* | *KF01, KF02, KF03, KF04, KF05, KF07, KF11, KF12, KF13, KF14, KF18, KF19, KF20, KF21, KF22, KF23, KF24* |
+| *C02* | *UC01, UC03, UC04, UC05, UC06, UC08, UC09, UC10* | *KF01, KF03, KF04, KF05, KF07, KF11, KF12, KF13, KF14, KF18, KF19, KF20, KF21, KF22, KF23, KF24* |
 | *C03* | *UC02, UC04, UC08, UC09, UC10* | *KF02, KF06, KF08, KF09, KF10, KF17, KF18, KF19, KF20, KF21, KF22, KF23, KF24* |
 | *C04* | *UC05, UC07, UC09, UC10* | *KF11, KF12, KF15, KF16, KF22, KF23, KF24* |
 | *C05* | *UC01* | *KF01* |
