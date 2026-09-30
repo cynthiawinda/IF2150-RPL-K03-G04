@@ -22,14 +22,11 @@
 ---
 
 ### Daftar Isi
-- [Logbook Pekerjaan](#logbook-pekerjaan)
-  - [Tugas Besar IF2150 - Rekayasa Perangkat Lunak](#tugas-besar-if2150---rekayasa-perangkat-lunak)
-    - [Daftar Isi](#daftar-isi)
-    - [Milestone 1](#milestone-1)
-    - [Milestone 2](#milestone-2)
-    - [Milestone 3](#milestone-3)
-    - [Milestone 4](#milestone-4)
-    - [Milestone 5](#milestone-5)
+* [Milestone 1](#milestone-1)
+* [Milestone 2](#milestone-2)
+* [Milestone 3](#milestone-3)
+* [Milestone 4](#milestone-4)
+* [Milestone 5](#milestone-5)
 
 ---
 
@@ -142,3 +139,7 @@
 | *30-09-2026* | *Sophia Imelda Rogate Marpaung* | *Memperbaru deskripsi umum sistem, menambah R31 dan R32 di KNF 11 dan KNF12, memperbaiki penomoran kelas di tabel diagram keseluruhan, memperbaiki penggunaan aktor di skenario UC01, dan revisi lain* | *2* | *Done* | *-* |
 | *30-09-2026* | *Rendy Salastra Putra* | *Menambah informasi pada lingkup masalah, mengubah gambar UC01 dan UC02, menambah template milestone di logbook* | *2* | *Done* | *-* |
 | *30-09-2026* | *Cynthia Winda Wijaya* | *Merevisi diagram kelas keseluruhan* | *1* | *Done* | *-* |
+| *30-09-2026* | *Sophia Imelda Rogate Marpaung* | *Melengkapi subbab 1.3 dan 1.4, menambah referensi UU* | *0,5* | *Done* | *-* |
+| *30-09-2026* | *Christabelcyne Costan* | *Menambah diagram UC03* | *1* | *Done* | *-* |
+| *30-09-2026* | *Haikal Muhammad Royyan* | *Menambah diagram UC08* | *1* | *Done* | *-* |
+
