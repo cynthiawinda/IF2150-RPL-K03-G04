@@ -35,6 +35,7 @@ Dipersiapkan oleh:
 | *C* | *Memperbaiki penggunaan aktor di skenario UC01, deskripsi kelas pada tabel identifikasi kelas use case UC01. Mengubah inputDataPelajar() menjadi getDataPelajar() dan inputDataWali() menjadi getDataWali().* |
 | *D* | *Menghapus metode/operasi cancelPengajuan() karena tidak ada skenario untuk tenaga kesehatan membatalkan pengajuan konsultasi.* |
 | *E* | *Merubah diagram kelas pada UC02 beserta aktor yang berperan* |
+| *F* | *Menghapus NotifikasiDarurat (Pop Up) dan NotifikasiDarurat pada diagram UC08* |
 
 <br>
 
