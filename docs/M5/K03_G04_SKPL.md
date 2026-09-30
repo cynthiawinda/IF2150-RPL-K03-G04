@@ -31,7 +31,7 @@ Dipersiapkan oleh:
 | Revisi | Deskripsi |
 | :--- | :--- |
 | *A* | *Menyesuaikan tabel traceablity yang sebelumnya tidak sesuai dengan identifikasi kelas.* |
-| *B* |  |
+| *B* | *Menambahkan R31 dan R32 di tabel KNF, yaitu KNF11 dan KNF12. Menghapus ID Kebutuhan yang tidak didukung P/L tetapi ada di tabel KNF. |
 | *C* |  |
 | ... |  |
 
@@ -91,7 +91,7 @@ BAB 1 membahas pendahuluan, yang berisi tujuan, lingkup masalah, definisi, istil
 # BAB 2: Deskripsi Perangkat Lunak
 
 ## 2.1 Deskripsi Umum Sistem
-Mahasehat merupakan sistem pemantauan kesehatan mental berbasis web responsif yang dirancang untuk kalangan pelajar dan mahasiswa. Sistem ini dikembangkan untuk menjawab permasalahan nyata di lingkungan pendidikan, di mana banyak pelajar cenderung memendam stres akademik maupun masalah pribadi seorang diri. Di sisi lain, orang tua/wali kerap terlambat menyadari penurunan kondisi psikologis anak karena minimnya komunikasi atau keterbatasan jarak bagi mahasiswa rantau. Mahasehat memadukan pencatatan mandiri oleh pelajar, dasbor pemantauan bagi orang tua/wali, serta alur rujukan bantuan profesional ke dalam satu sistem yang tetap mengutamakan kerahasiaan data pribadi pengguna.
+Mahasehat merupakan sistem pemantauan kesehatan mental berbasis web responsif yang dirancang untuk kalangan pelajar dan mahasiswa. Sistem ini dikembangkan untuk menjawab permasalahan nyata di lingkungan pendidikan, di mana banyak pelajar cenderung memendam stres akademik maupun masalah pribadi seorang diri. Di sisi lain, orang tua/wali sering terlambat menyadari penurunan kondisi psikologis anak karena minimnya komunikasi atau keterbatasan jarak, khususnya bagi mahasiswa rantau. Mahasehat memadukan pencatatan mandiri oleh pelajar, dasbor pemantauan bagi orang tua/wali, serta alur rujukan bantuan profesional ke dalam satu sistem yang tetap mengutamakan kerahasiaan data pribadi pengguna.
 
 ### Ekspektasi Pengguna terhadap Sistem
 Kebutuhan tiap kelompok pengguna terhadap sistem dirangkum sebagai berikut:
@@ -100,14 +100,15 @@ Kebutuhan tiap kelompok pengguna terhadap sistem dirangkum sebagai berikut:
 3. **Tenaga Kesehatan (Psikolog/Psikiater):** Mengharapkan alur pendaftaran konsultasi awal yang terdata dengan rapi. Riwayat tren tidur dan catatan suasana hati yang dibagikan atas izin pengguna juga diharapkan dapat membantu proses asesmen awal saat konsultasi berlangsung.
 
 ### Alur Kerja Sistem yang Diinginkan
-Alur interaksi sistem dirancang melalui tahapan fungsional berikut:
-1. **Pencatatan Mandiri Berkala:** Pelajar menerima notifikasi pengingat harian dari peramban untuk memasukkan skala suasana hati (1–5), perkiraan durasi tidur, faktor pemicu stres (seperti beban tugas, perkuliahan, atau masalah relasi), serta tulisan refleksi diri opsional pada kolom jurnal.
+Berikut adalah alur kerja utama sistem yang mengandung pembahasan fitur, fungsi utama, dan cakupan sistem.
+1. **Pencatatan Mandiri Berkala:** Pelajar menerima notifikasi pengingat harian dari sistem untuk memasukkan skala suasana hati (1–5), perkiraan durasi tidur, pola makan, faktor pemicu stres (seperti beban tugas, perkuliahan, atau masalah relasi), serta tulisan refleksi diri opsional pada kolom jurnal/catatan pribadi.
 2. **Pengolahan Data dan Dasbor Terpisah:** Data numerik yang dihimpun diolah menjadi grafik tren mingguan atau bulanan. Pelajar dapat melihat korelasi antara pola istirahat dengan perubahan suasana hatinya. Sedangkan akun orang tua/wali yang terhubung hanya bisa melihat grafik ringkasan, tanpa bisa membaca isi jurnal pelajar.
-3. **Peringatan Otomatis dan Rujukan Bantuan:** Apabila tren suasana hati terus menurun, sistem akan memunculkan kuesioner evaluasi kejenuhan (burnout) kepada pelajar. Jika hasilnya mengindikasikan perlunya bantuan lebih lanjut, sistem langsung menampilkan rekomendasi klinik atau psikolog terdekat lengkap dengan perkiraan tarif dan formulir janji temu di akun pelajar. Di saat yang sama, sistem mengirimkan notifikasi perhatian ke dasbor orang tua/wali agar dapat memantau situasi. Tombol darurat menuju saluran bantuan resmi juga disediakan jika terjadi kondisi kritis.
+3. **Peringatan Otomatis dan Rujukan Bantuan:** Jika hasil tren kondisi kesehatan mengindikasikan perlu bantuan lebih lanjut, sistem akan menampilkan rekomendasi klinik atau tenaga kesehatan terdekat lengkap dengan perkiraan biaya dan formulir jadwal konsultasi di akun pelajar. Di saat yang sama, sistem mengirimkan notifikasi perhatian ke dasbor orang tua/wali agar dapat memantau situasi. Notifikasi darurat ini juga menyertakan status yang harus dikonfirmasi dan ditindaklanjuti oleh orang tua/wali.
 
 ### Harapan Penerapan Solusi
 Pemisahan hak akses ini dirancang agar pelajar merasa aman saat berinteraksi dengan sistem. Selama ini, keengganan pelajar untuk mencatat kondisi emosionalnya secara rutin sering kali dipicu oleh rasa cemas bahwa tulisan pribadinya akan dihakimi atau diawasi berlebihan oleh orang tua. Dengan kepastian bahwa catatan jurnal bersifat privat dan orang tua/wali hanya menerima visualisasi grafik tren, pelajar diharapkan tidak ragu untuk mengisi data secara jujur dan konsisten. Data yang valid inilah yang menjadi dasar bagi sistem untuk mendeteksi indikasi penurunan kondisi psikologis secara tepat. Namun, Mahasehat tetap tidak diposisikan sebagai pengganti diagnosis klinis dari psikolog atau psikiater. Perangkat lunak ini murni berfungsi sebagai sarana deteksi awal sekaligus jembatan rujukan, sehingga pelajar yang mulai mengalami tekanan mental berat dapat menyadari kondisinya lebih dini dan segera terhubung dengan penanganan profesional.
 
+### Model Proses Bisnis
 Model proses bisnis dibuat untuk menggambarkan bagaimana pengguna berinteraksi dengan sistem dalam menjalankan fungsi-fungsi utama aplikasi. Berdasarkan aktivitas yang sudah diidentifikasi pada bagian sebelumnya, proses bisnis sistem dibagi menjadi beberapa alur berdasarkan konteks aktivitas yang berbeda, yaitu:
 1. Alur pendaftaran dan penautan akun wali
 2. Alur pencatatan kondisi harian (_Daily Check-in_)
@@ -115,35 +116,43 @@ Model proses bisnis dibuat untuk menggambarkan bagaimana pengguna berinteraksi d
 4. Alur pencarian dan reservasi konsultasi profesional
 
 ### 3.4.1 Alur Pendaftaran dan Penautan Akun Wali
-Alur ini menggambarkan proses awal ketika mahasiswa membuat akun dan menghubungkan akun dengan orang tua/wali. Mahasiswa mengisi informasi yang diperlukan, kemudian sistem melakukan proses verifikasi dan membuat akun. Setelah itu, mahasiswa dapat menautkan akun wali agar wali dapat menerima informasi dan memantau kondisi.
-![Diagram Activity 1](assets/diagram/diagram-act-1.png)
+Alur ini menggambarkan proses awal ketika pelajar membuat akun dan menghubungkan akun dengan orang tua/wali. Pelajar mengisi informasi yang diperlukan, kemudian sistem melakukan proses verifikasi dan membuat akun. Setelah itu, pelajar dapat menautkan akun wali agar wali dapat menerima informasi dan memantau kondisi.
+<p align="center">
+  <img alt="Diagram Activity 1" src="./assets/diagram/diagram-act-1.png">
+</p>
 <p align="center">
   <i>Gambar 1. Alur Pendaftaran dan Penautan Akun Wali</i>
 </p>
 
 ### 3.4.2 Alur Pencatatan Kondisi Harian (_Daily Check-in_)
-Alur ini menggambarkan proses mahasiswa dalam melakukan pencatatan kondisi sehari-hari. Mahasiswa mendapatkan pengingat dari sistem apabila belum melakukan check-in, kemudian mengisi informasi mengenai mood, aktivitas fisik, pola makan, dan pola tidur. Data yang telah diisi akan disimpan oleh sistem dan digunakan untuk melihat perkembangan kondisi mahasiswa dari waktu ke waktu.
-![Diagram Activity 2](assets/diagram/diagram-act-2.png)
+Alur ini menggambarkan proses pelajar dalam melakukan pencatatan kondisi sehari-hari. Pelajar mendapatkan pengingat dari sistem apabila belum melakukan check-in, kemudian mengisi informasi mengenai mood, aktivitas fisik, pola makan, dan pola tidur. Data yang telah diisi akan disimpan oleh sistem dan digunakan untuk melihat perkembangan kondisi pelajar dari waktu ke waktu.
 <p align="center">
-  <i>Gambar 2. Alur Pencatatan Kondisi Harian (_Daily Check-in_)</i>
+  <img alt="Diagram Activity 2" src="./assets/diagram/diagram-act-2.png">
+</p>
+<p align="center">
+  <i>Gambar 2. Alur Pencatatan Kondisi Harian (Daily Check-in)</i>
 </p>
 
 ### 3.4.3 Alur Pemantauan Kondisi dan Penanganan Darurat
-Alur ini menggambarkan proses sistem dalam mengolah data _daily check-in_ untuk mengetahui perkembangan kondisi mahasiswa. Sistem akan mengolah data menjadi laporan dan statistik yang dapat dilihat oleh mahasiswa dan wali sesuai dengan hak aksesnya. Apabila sistem menemukan pola kondisi yang perlu diperhatikan, seperti penurunan kondisi secara terus-menerus atau mahasiswa tidak melakukan check-in selama beberapa hari, sistem dapat mengirimkan notifikasi kepada wali.
-![Diagram Activity 3](assets/diagram/diagram-act-3.png)
+Alur ini menggambarkan proses sistem dalam mengolah data _daily check-in_ untuk mengetahui perkembangan kondisi pelajar. Sistem akan mengolah data menjadi laporan dan statistik yang dapat dilihat oleh pelajar dan wali sesuai dengan hak aksesnya. Apabila sistem menemukan pola kondisi yang perlu diperhatikan, seperti penurunan kondisi secara terus-menerus atau pelajar tidak melakukan check-in selama beberapa hari, sistem dapat mengirimkan notifikasi kepada wali.
+<p align="center">
+  <img alt="Diagram Activity 3" src="./assets/diagram/diagram-act-3.png">
+</p>
 <p align="center">
   <i>Gambar 3. Alur Pemantauan Kondisi dan Penanganan Darurat</i>
 </p>
 
 ### 3.4.4 Alur Pencarian dan Reservasi Konsultasi Profesional
-Alur ini menggambarkan proses mahasiswa ketika membutuhkan bantuan dari tenaga profesional. Mahasiswa dapat melihat rekomendasi psikolog atau psikiater berdasarkan kondisi dan preferensinya, seperti lokasi dan biaya. Setelah memilih tenaga profesional yang sesuai, mahasiswa dapat memilih jadwal konsultasi dan mengajukan reservasi. Tenaga profesional kemudian dapat melihat pengajuan tersebut dan melakukan konfirmasi jadwal.
-![Diagram Activity 4](assets/diagram/diagram-act-4.png)
+Alur ini menggambarkan proses pelajar ketika membutuhkan bantuan dari tenaga profesional. Pelajar dapat melihat rekomendasi psikolog atau psikiater berdasarkan kondisi dan preferensinya, seperti lokasi dan biaya. Setelah memilih tenaga profesional yang sesuai, pelajar dapat memilih jadwal konsultasi dan mengajukan reservasi. Tenaga profesional kemudian dapat melihat pengajuan tersebut dan melakukan konfirmasi jadwal.
+<p align="center">
+  <img alt="Diagram Activity 4" src="./assets/diagram/diagram-act-4.png">
+</p>
 <p align="center">
   <i>Gambar 4. Alur Pencarian dan Reservasi Konsultasi Profesional</i>
 </p>
 
 ## 2.2 Deskripsi Umum Perangkat Lunak
-Mahasehat merupakan sistem pemantauan kesehatan mental berbasis web responsif yang dirancang untuk kalangan pelajar. Mahasehat berfungsi sebagai platform pencatatan mandiri kondisi psikologis pelajar serta dasbor pemantauan bagi orang tua/wali. Sistem ini berinteraksi dengan Layanan Mail Server untuk mengirimkan *daily check-in reminder* kepada mahasiswa serta mengirimkan email peringatan darurat kepada orang tua/wali jika sistem mendeteksi penurunan kondisi mental pelajar yang melewati ambang batas tertentu. Selain itu, sistem juga menggunakan Layanan Mail Server untuk manajemen akun. Sistem juga memanfaatkan Google Maps Platform untuk menangkap lokasi pengguna menggunakan Geolocation API dan kemudian menggunakannya untuk memberikan rekomendasi fasilitas kesehatan terdekat secara akurat. Sementara itu, sistem terhubung dengan Google Calendar API untuk mengelola penjadwalan konsultasi secara *real-time*.
+Mahasehat merupakan sistem pemantauan kesehatan mental berbasis web responsif yang dirancang untuk kalangan pelajar. Mahasehat berfungsi sebagai platform pencatatan mandiri kondisi psikologis pelajar serta dasbor pemantauan bagi orang tua/wali. Sistem ini berinteraksi dengan Layanan Mail Server untuk mengirimkan *daily check-in reminder* kepada pelajar serta mengirimkan email peringatan darurat kepada orang tua/wali jika sistem mendeteksi penurunan kondisi mental pelajar yang melewati ambang batas tertentu. Selain itu, sistem juga menggunakan Layanan Mail Server untuk manajemen akun. Sistem juga memanfaatkan Google Maps Platform untuk menangkap lokasi pengguna menggunakan Geolocation API dan kemudian menggunakannya untuk memberikan rekomendasi fasilitas kesehatan terdekat secara akurat. Sementara itu, sistem terhubung dengan Google Calendar API untuk mengelola penjadwalan konsultasi secara *real-time*.
 
 ## 2.3 Pengguna dan Kebutuhan Pengguna Perangkat Lunak
 
@@ -231,8 +240,8 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 
 | ID KNF | ID Kebutuhan | Parameter | Deskripsi Kebutuhan |
 | :--- | :--- | :--- | :--- |
-| *KNF01* | *R07, R10* | *_Security_* | *Perangkat Lunak harus mengenkripsi seluruh riwayat data kesehatan harian (_check-in_) dan catatan kesehatan pengguna di basis data menggunakan algoritma AES-256 untuk mencegah akses tanpa wewenang (_unauthorized access_).* |
-| *KNF02* | *R13, R14* | *_Security_* | *Apabila sistem membagikan data ringkasan kepada akun orang tua/wali, maka Perangkat Lunak harus membatasi akses akun orang tua/wali hanya pada data yang telah ditentukan dan tidak memberikan akses terhadap teks jurnal pribadi pengguna.* |
+| *KNF01* | *R10* | *_Security_* | *Perangkat Lunak harus mengenkripsi seluruh riwayat data kesehatan harian (_check-in_) dan catatan kesehatan pengguna di basis data menggunakan algoritma AES-256 untuk mencegah akses tanpa wewenang (_unauthorized access_).* |
+| *KNF02* | *R13* | *_Security_* | *Apabila sistem membagikan data ringkasan kepada akun orang tua/wali, maka Perangkat Lunak harus membatasi akses akun orang tua/wali hanya pada data yang telah ditentukan dan tidak memberikan akses terhadap teks jurnal pribadi pengguna.* |
 | *KNF03* | *R16, R18* | *_Response Time_* | *Saat pengguna meminta rekomendasi tenaga kesehatan berdasarkan lokasi, Perangkat Lunak harus menampilkan hasil rekomendasi dalam waktu maksimal 2.000 ms.* |
 | *KNF04* | *R12* | *_Response Time_* | *Saat pengguna mengakses halaman grafik perkembangan kesehatan, Perangkat Lunak harus menghasilkan dan menampilkan grafik statistik dalam waktu maksimal 1.500 ms.* |
 | *KNF05* | *R05, R28* | *_Availability_* | *Perangkat Lunak harus beroperasi dan dapat diakses dengan tingkat ketersediaan minimal 99,5% selama 24 jam sehari dan 7 hari seminggu, dengan downtime maksimal 3,6 jam per bulan.* |
@@ -241,6 +250,8 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | *KNF08* | *R01, R16* | *_Portability_* | *Perangkat Lunak harus dapat diakses dan berjalan secara responsif melalui peramban web Google Chrome versi 100+, Safari versi 15+, dan Firefox versi 100+ pada perangkat Android versi 8.0+, iOS versi 14+, dan Windows 10/11.* |
 | *KNF09* | *R10* | *_Memory_* | *Saat Perangkat Lunak dijalankan pada peramban perangkat pengguna, Perangkat Lunak harus membatasi penggunaan memori lokal (_client-side memory usage_) maksimal sebesar 150 MB.* |
 | *KNF10* | *R26, R28* | *_Safety_* | *Apabila sistem mendeteksi kondisi yang memenuhi ambang batas darurat berdasarkan hasil pemantauan, maka Perangkat Lunak harus menampilkan pop-up tombol rujukan darurat resmi tanpa menghalangi pengguna untuk menutup tampilan atau mencari bantuan profesional.* |
+| *KNF11* | *R31* | *_Ergonomy_* | *Saat pengguna mengakses halaman login, Perangkat Lunak harus menampilkan formulir login yang sederhana dan mudah digunakan untuk memasukkan data autentikasi.* |
+| *KNF12* | *R31, R32* | *_Security_* | *Saat pengguna login, Perangkat Lunak harus memvalidasi data autentikasi dan membatasi akses ke dashboard utama sesuai dengan role pengguna. Saat pengguna logout, Perangkat Lunak harus mengakhiri sesi penggunaan akun tersebut untuk mencegah akses tanpa wewenang (unauthorized access).* |
 
 <br>
 
@@ -276,17 +287,15 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 ## 4.3 Use Case Diagram
 
 <p align="center">
-<img alt="Contoh Use Case Diagram" src="./assets/diagram/uc-diagram.png" width="70%">
+<img alt="Use Case Diagram" src="./assets/diagram/uc-diagram.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 2. Use Case Diagram Mahasehat</i>
+<i>Gambar 5. Use Case Diagram Mahasehat</i>
 </p>
 
 ## 4.4 Skenario Use Case
 
 ### 4.4.1 Skenario UC01
-
-**Nama Use Case:** *Memesan Produk*
 
 **Nama Use Case:** *Melakukan Registrasi Akun*
 
@@ -593,7 +602,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 <img alt="Class Diagram UC01" src="./assets/diagram/uc01-diagram.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 2. Diagram Kelas Use Case UC01</i>
+<i>Gambar 6. Diagram Kelas Use Case UC01</i>
 </p>
 <br>
 
@@ -625,7 +634,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 <img alt="Class Diagram UC02" src="./assets/diagram/uc02-diagram.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 3. Diagram Kelas Use Case UC02</i>
+<i>Gambar 7. Diagram Kelas Use Case UC02</i>
 </p>
 <br>
 
@@ -656,7 +665,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 <img alt="Class Diagram UC03" src="./assets/diagram/uc03-diagram.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 4. Diagram Kelas Use Case UC03</i>
+<i>Gambar 8. Diagram Kelas Use Case UC03</i>
 </p>
 <br>
 
@@ -689,7 +698,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 <img alt="Class Diagram UC04" src="./assets/diagram/uc04-diagram.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 5. Diagram Kelas Use Case UC04</i>
+<i>Gambar 9. Diagram Kelas Use Case UC04</i>
 </p>
 <br>
 
@@ -723,7 +732,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 <img alt="Class Diagram UC05" src="./assets/diagram/uc05-diagram.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 6. Diagram Kelas Use Case UC05</i>
+<i>Gambar 10. Diagram Kelas Use Case UC05</i>
 </p>
 <br>
 
@@ -757,7 +766,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 <img alt="Class Diagram UC06" src="./assets/diagram/uc06-diagram.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 7. Diagram Kelas Use Case UC06</i>
+<i>Gambar 11. Diagram Kelas Use Case UC06</i>
 </p>
 <br>
 
@@ -790,7 +799,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 <img alt="Class Diagram UC07" src="./assets/diagram/uc07-diagram.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 8. Diagram Kelas Use Case UC07</i>
+<i>Gambar 12. Diagram Kelas Use Case UC07</i>
 </p>
 <br>
 
@@ -822,7 +831,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 <img alt="Class Diagram UC08" src="./assets/diagram/uc08-diagram.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 9. Diagram Kelas Use Case UC08</i>
+<i>Gambar 13. Diagram Kelas Use Case UC08</i>
 </p>
 <br>
 
@@ -854,7 +863,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 <img alt="Class Diagram UC09" src="./assets/diagram/uc09-diagram.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 10. Diagram Kelas Use Case UC09</i>
+<i>Gambar 14. Diagram Kelas Use Case UC09</i>
 </p>
 <br>
 
@@ -886,7 +895,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 <img alt="Class Diagram UC10" src="./assets/diagram/uc10-diagram.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 11. Diagram Kelas Use Case UC10</i>
+<i>Gambar 15. Diagram Kelas Use Case UC10</i>
 </p>
 <br>
 
@@ -904,7 +913,7 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 <img alt="Class Diagram Keseluruhan" src="./assets/diagram/diagram-kelas-keseluruhan.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 4. Contoh Diagram Kelas Keseluruhan</i>
+<i>Gambar 16. Contoh Diagram Kelas Keseluruhan</i>
 </p>
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
