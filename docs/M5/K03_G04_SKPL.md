@@ -34,6 +34,7 @@ Dipersiapkan oleh:
 | *B* | *Menambahkan R31 dan R32 di tabel KNF, yaitu KNF11 dan KNF12. Menghapus ID Kebutuhan yang tidak didukung P/L tetapi ada di tabel KNF.* |
 | *C* | *Memperbaiki penggunaan aktor di skenario UC01, deskripsi kelas pada tabel identifikasi kelas use case UC01. Mengubah inputDataPelajar() menjadi getDataPelajar() dan inputDataWali() menjadi getDataWali().* |
 | *D* | *Menghapus metode/operasi cancelPengajuan() karena tidak ada skenario untuk tenaga kesehatan membatalkan pengajuan konsultasi.* |
+| *E* | *Merubah diagram kelas pada UC02 beserta aktor yang berperan* |
 
 <br>
 
@@ -621,14 +622,15 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 
 | ID Kelas | Nama Kelas | Deskripsi Kelas |
 | :--- | :--- | :--- |
-| *C12* | *KonfirmasiRegistrasiPage* | *Antarmuka konfirmasi registrasi akun bagi pengguna (Boundary Class)* |
-| *C11* | *AuthController* | *Mengatur proses konfirmasi dan perubahan status registrasi akun (Control Class)* |
+| *C12* | *KonfirmasiRegistrasiPage* | *Antarmuka konfirmasi registrasi akun bagi orang tua/wali (Boundary Class)* |
+| *C11* | *AuthController* | *Mengatur proses konfirmasi dan perubahan status registrasi akun pelajar (Control Class)* |
 | *C03* | *OrangTuaWali* | *Menyimpan data orang tua/wali yang melakukan konfirmasi registrasi (Entity Class)* |
+| *C02* | *Pelajar* | *Menyimpan data Pelajar yang akun registrasinya akan dikonfirmasi (Entity Class)* |
 
 #### Diagram Kelas
 
 <p align="center">
-<img alt="Class Diagram UC02" src="./assets/diagram/uc02-diagram.png" width="70%">
+<img alt="Class Diagram UC02" src="./assets/diagram/uc02-diagram.png" width="30%">
 </p>
 <p align="center">
 <i>Gambar 7. Diagram Kelas Use Case UC02</i>
@@ -639,7 +641,8 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | :--- | :--- | :--- | :--- |
 | *C12* | *KonfirmasiRegistrasiPage* | *dataRegistrasi, statusKonfirmasi* | *displayDataRegistrasi(), confirmRegistrasi()* |
 | *C11* | *AuthController* | *-* | *validateConfirmation(), confirmAccount()* |
-| *C03* | *OrangTuaWali* | *-* | *-* |
+| *C03* | *OrangTuaWali* | *idWali* | *-* |
+| *C02* | *Pelajar* | *-* | *-* |
 
 ### 5.2.3 Use Case UC03
 
