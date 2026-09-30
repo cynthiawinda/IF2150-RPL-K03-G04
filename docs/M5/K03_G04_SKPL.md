@@ -62,6 +62,10 @@ Tabel 1.3. Definisi Istilah dan Singkatan
 | *Aktor* | *Merepresentasikan entitas di luar batas sistem yang berinteraksi dengan sistem.* |
 | *Skenario* | *Merepresentasikan satu penelusuran konkret melalui sebuah use case, menyatakan apa saja yang terjadi pada sistem.* |
 | *Kelas* | *Merepresentasikan suatu jenis objek yang memiliki atribut dan metode/operasi untuk menjalankan tanggung jawabnya.* |
+| *Entity Class* | *Kelas yang merepresentasikan data inti atau objek dunia nyata yang sifatnya bertahan lama dalam sistem.* |
+| *Boundary Class* | *Kelas yang mengatur komunikasi antara pengguna (aktor) atau sistem luar dengan sistem utama.* |
+| *Controller Class* | *Kelas yang mengatur alur kerja dan aturan bisnis (menghubungkan Boundary dan Entity).* |
+| *Kebutuhan* | *Merepresentasikan persyaratan atau ketentuan wajib yang harus dipenuhi untuk mencapai suatu tujuan dalam pembuatan sistem atau Perangkat Lunak.* |
 
 ## 1.4 Aturan Penomoran
 
@@ -74,6 +78,7 @@ Tabel 1.4. Aturan Penomoran
 | *Aktor* | *AXX* | *Mewakili singkatan kata "Aktor", diikuti dua digit unik untuk membedakan tiap aktor.* |
 | *Use Case* | *UCXX* | *Mewakili singkatan kata "Use Case", diikuti dua digit unik untuk membedakan tiap UC.* |
 | *Kelas* | *CXX* | *Mewakili singkatan kata "Class", diikuti dua digit unik untuk membedakan tiap kelas.* |
+| *Kebutuhan* | *RXX* | *Mewakili singkatan kata "Requirement", diikuti dua digit unik untuk membedakan tiap kebutuhan.* |
 
 ## 1.5 Referensi
 - Diagram UML: [https://www.drawio.com/](https://www.drawio.com/)
@@ -82,6 +87,7 @@ Tabel 1.4. Aturan Penomoran
 - https://www.postgresql.org/docs/15/
 - https://developers.google.com/maps/documentation/geolocation/
 - https://developers.google.com/calendar/api
+- Undang-Undang Republik Indonesia Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi: https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
 
 ## 1.6 Deskripsi Umum Dokumen (Ikhtisar)
 BAB 1 membahas pendahuluan, yang berisi tujuan, lingkup masalah, definisi, istilah, serta singkatan, aturan penomoran, referensi, dan deskripsi umum dokumen. BAB 2 membahas deskripsi perangkat lunak yang mencakup deskripsi umum sistem dan P/L, pengguna dan kebutuhan pengguna P/L, batasan P/L, dan lingkungan operasi P/L. BAB 3 membahas deskripsi kebutuhan P/L, yaitu kebutuhan fungsional dan kebutuhan non-fungsional. BAB 4 membahas pemodelan use case, yaitu identifikasi aktor, use case, use case diagram, dan skenario use case. BAB 5 membahas pemodelan kelas yang berisi identifikasi kelas, diagram kelas per use case, diagram kelas keseluruhan. BAB 6 membahas traceability, yang menunjukkan keterkaitan antara kelas, use case, dan kebutuhan fungsional.
@@ -994,3 +1000,4 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 - https://www.postgresql.org/docs/15/
 - https://developers.google.com/maps/documentation/geolocation/
 - https://developers.google.com/calendar/api
+- Undang-Undang Republik Indonesia Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi: https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022
