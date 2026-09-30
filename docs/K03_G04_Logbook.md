@@ -22,10 +22,14 @@
 ---
 
 ### Daftar Isi
-* [Milestone 1](#milestone-1)
-* [Milestone 2](#milestone-2)
-* [Milestone 3](#milestone-3)
-* [Milestone 4](#milestone-4)
+- [Logbook Pekerjaan](#logbook-pekerjaan)
+  - [Tugas Besar IF2150 - Rekayasa Perangkat Lunak](#tugas-besar-if2150---rekayasa-perangkat-lunak)
+    - [Daftar Isi](#daftar-isi)
+    - [Milestone 1](#milestone-1)
+    - [Milestone 2](#milestone-2)
+    - [Milestone 3](#milestone-3)
+    - [Milestone 4](#milestone-4)
+    - [Milestone 5](#milestone-5)
 
 ---
 
@@ -119,3 +123,10 @@
 | *23-09-2026* | *Rendy Salastra Putra* | *Melengkapi UC01, UC02, dan UC07* | *2* | *Done* | *-* |
 | *23-09-2026* | *Cynthia Winda Wijaya* | *Menambah C13-C33 dan use case  yang berhubungan dengan kelas C33* | *2* | *Done* | *-* |
 | *23-09-2026* | *Cynthia Winda Wijaya* | *Menambah diagram kelas keseluruhan dan traceability* | *2* | *Done* | *-* |
+
+### Milestone 5
+**Periode:** 23/09/2026 - 30/09/2026
+
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| *-* | *-* | *-* | *-* | *-* | *-* |
