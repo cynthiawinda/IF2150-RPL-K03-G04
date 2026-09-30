@@ -44,7 +44,9 @@ Dipersiapkan oleh:
 Dokumen Spesifikasi Kebutuhan Perangkat Lunak (SKPL) ini dibuat untuk menjelaskan kebutuhan, fungsi, dan batasan dari perangkat lunak yang akan dikembangkan. Dokumen ini menjadi acuan bagi tim pengembang dalam proses perancangan dan implementasi sistem, serta bagi pihak terkait untuk memahami fitur dan kebutuhan perangkat lunak yang telah ditentukan.
 
 ## 1.2 Lingkup Masalah
-Mahasehat merupakan aplikasi terpadu untuk membantu pelajar dalam memantau kondisi kesehatan sehari-hari dan memperoleh akses layanan kesehatan mental. Aplikasi ini menyediakan fitur pencatatan kondisi seperti suasana hati, aktivitas fisik, pola makan, tidur, serta refleksi harian. Berdasarkan data tersebut aplikasi ini menyajikan perkembangan kondisi pelajar dalam bentuk statistik dan laporan. Selain itu, aplikasi ini menyediakan informasi dan akses untuk mencari tenaga kesehatan, melihat jadwal yang tersedia, serta mengajukan konsultasi. Aplikasi ini melibatkan orang tua/wali dalam pemantauan dan pengendalian kondisi pelajar.
+Mahasehat merupakan aplikasi berbasis web yang membantu pelajar dalam memantau dan memahami kondisi kesehatan mental sehari-hari serta memperoleh akses terhadap layanan kesehatan mental. Aplikasi ini menyediakan fitur pencatatan suasana hati, pola tidur, aktivitas fisik, pola makan, tingkat stres, dan refleksi harian. Data tersebut digunakan dan disajikan dalam bentuk statistik dan laporan untuk melihat perkembangan kondisi pelajar sehingga pelajar dapat mengenali pola atau perubahan pada kondisi kesehatan mentalnya.
+
+Selain pemantauan mandiri, Mahasehat menyediakan akses terhadap layanan kesehatan mental melalui tenaga kesehatan. Pelajar dapat mencari tenaga kesehatan sesuai kebutuhan, melihat jadwal yang tersedia, serta mengajukan konsultasi. Selain itu, orang tua/wali dilibatkan dalam pemantauan kondisi pelajar melalui informasi dan notifikasi tertentu, sementara tenaga kesehatan dapat mengakses informasi kesehatan yang relevan untuk mendukung proses konsultasi.
 
 ## 1.3 Definisi, Istilah, dan Singkatan
 
