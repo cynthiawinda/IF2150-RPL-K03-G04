@@ -28,20 +28,19 @@ Dipersiapkan oleh:
 | *13525141* | *Christabelcyne Costan* |
 
 ---
-
-<br>
 <br>
 
 # BAB 1: Style/Pattern Arsitektur Acuan
 
 Arsitektur acuan yang dipilih untuk pengembangan perangkat lunak Mahasehat adalah **MVC (_Model-View-Controller_)**. Pola ini memisahkan logika aplikasi ke dalam tiga komponen utama yang saling terhubung, yaitu _Model_, _View_, dan _Controller_.
-1. _Model (<<entity>>)_
+1. _Model (`<<entity>>`)_
 Bertanggung jawab dalam merepresentasikan dan mengelola data serta logika yang berkaitan dengan entitas pada sistem. Model menangani data yang digunakan dalam proses bisnis dan menyediakan akses terhadap data tanpa bergantung pada bagaimana data tersebut ditampilkan kepada pengguna.
-2. _View (<<boundary>>)_
+2. _View (`<<boundary>>`)_
 Bertanggung jawab dalam menyajikan antarmuka pengguna (_User Interface_) berbasis web responsif kepada aktor, yaitu Pelajar, Orang Tua/Wali, dan Tenaga Kesehatan. View menerima masukan dari pengguna, meneruskannya kepada _Controller_, serta menampilkan hasil pemrosesan dalam bentuk formulir, grafik, informasi, maupun notifikasi.
-3. _Controller (<<control>>)_
+3. _Controller (`<<control>>`)_
 Bertanggung jawab sebagai perantara antara _View_ dan _Model_. _Controller_ menerima request atau aksi dari pengguna melalui _View_, mengatur alur pemrosesan, melakukan validasi yang diperlukan, memanggil _Model_ untuk mengakses atau mengolah data, serta mengembalikan hasil pemrosesan kepada _View_.
 
+<br><br>
 Pemilihan pola MVC didasarkan pada karakteristik sistem Mahasehat, terutama keberagaman aktor, pemisahan hak akses, pengolahan data kesehatan, serta kebutuhan keamanan dan responsivitas sistem yang telah didefinisikan pada SKPL:
 1. Pemisahan antarmuka dan hak akses pengguna
 Mahasehat memiliki tiga jenis aktor, yaitu Pelajar, Orang Tua/Wali, dan Tenaga Kesehatan, yang memiliki kebutuhan serta hak akses berbeda. MVC memungkinkan antarmuka pengguna dipisahkan dari proses pengolahan data sehingga setiap kebutuhan pengguna dapat ditangani melalui _View_ dan _Controller_ yang sesuai. Contohnya pada UC04 (Melihat Statistik dan Laporan Kondisi), Pelajar dapat melihat laporan kondisi personal, sedangkan Orang Tua/Wali hanya memperoleh data ringkasan sesuai hak aksesnya. Pemisahan ini didukung oleh ReportPage sebagai View dan ReportController sebagai Controller yang mengatur kalkulasi statistik serta pembatasan akses data berdasarkan peran pengguna. Hal ini juga selaras dengan KNF02 yang mengharuskan data yang diberikan kepada Orang Tua/Wali tidak mencakup teks jurnal pribadi Pelajar.
@@ -52,12 +51,14 @@ Mahasehat menangani data kesehatan dan catatan _daily check-in_ yang bersifat se
 4. Mendukung aplikasi _web_ responsif
 Mahasehat dirancang sebagai aplikasi web responsif yang digunakan oleh pengguna melalui peramban pada berbagai perangkat. Pemisahan View dari proses bisnis memungkinkan antarmuka dikembangkan secara responsif tanpa mengubah logika pengolahan data pada _Controller_ dan _Model_. Hal ini sesuai dengan KNF07 dan KNF08 yang menekankan kemudahan dan kecepatan proses _daily check-in_ serta kompatibilitas pada berbagai peramban dan perangkat.
 
+<br><br>
 <p align="center">
-<img alt="Contoh Arsitektur MVC" src="./assets/diagram/arsitektur-mvc.png" width="70%">
+<img alt="Arsitektur MVC" src="./assets/diagram/arsitektur-mvc.png" width="70%">
 </p>
 <p align="center">
 <i>Gambar 1. Arsitektur MVC</i>
 </p>
+<br><br>
 
 Tabel 1.1. Spesifikasi Lingkungan Operasi Perangkat Lunak
 | Komponen | Spesifikasi |
@@ -70,6 +71,7 @@ Tabel 1.1. Spesifikasi Lingkungan Operasi Perangkat Lunak
 | *External APIs & Services* | SMTP or Mail Service (Nodemailer/SendGrid) |
 | *Operating System for Server* | Ubuntu Server 22.04 LTS or Linux Cloud Environment |
 | *Protokol Keamanan* | HTTPS dengan sertifikat SSL/TLS & enkripsi AES-256 |
+
 Kaitan teknologi dengan pola MVC yang dipilih:
 1. Node.js dan Express.js sebagai lingkungan _Controller_
 Node.js dan Express.js digunakan sebagai lingkungan _server-side_ untuk menjalankan logika aplikasi. Pada implementasi MVC, _route handler_ dan komponen _Controller_ yang dibangun menggunakan Express.js menangani _request_ dari _View_, mengatur alur pemrosesan, serta menghubungkan _View_ dengan _Model_.
