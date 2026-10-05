@@ -33,13 +33,53 @@ Dipersiapkan oleh:
 <br>
 
 # BAB 1: Style/Pattern Arsitektur Acuan
-Arsitektur acuan yang dipilih untuk pengembangan perangkat lunak Mahasehat adalah MVC (Model-View-Controller). Pola ini memisahkan logika aplikasi ke dalam tiga komponen utama yang saling terhubung:
-1. Model (⁠<<entity>>⁠)
-Bertanggung jawab mengelola struktur data dasar, logika bisnis internal, aturan validasi data, serta representasi entitas pada basis data. Model menyimpan state aplikasi dan menyediakan interface data tanpa memedulikan bagaimana data tersebut ditampilkan ke antarmuka pengguna.
-3. View (⁠<<boundary>>⁠)
-Bertanggung jawab menyajikan data dan antarmuka pengguna (User Interface) berbasis web responsif kepada aktor (Pelajar, Orang Tua/Wali, dan Tenaga Kesehatan). View menerima masukan interaksi pengguna dan meneruskannya ke Controller, serta menampilkan respons grafik statistik, formulir, atau notifikasi.
-5. Controller (⁠<<control>>⁠)
-Bertanggung jawab sebagai perantara antara View dan Model. Controller menerima request atau aksi dari View, melakukan validasi alur bisnis, memanggil metode pengolahan pada Model, serta menentukan respons View yang akan ditampilkan kembali ke pengguna.
+
+Arsitektur acuan yang dipilih untuk pengembangan perangkat lunak Mahasehat adalah **MVC (_Model-View-Controller_)**. Pola ini memisahkan logika aplikasi ke dalam tiga komponen utama yang saling terhubung, yaitu _Model_, _View_, dan _Controller_.
+1. _Model (<<entity>>)_
+Bertanggung jawab dalam merepresentasikan dan mengelola data serta logika yang berkaitan dengan entitas pada sistem. Model menangani data yang digunakan dalam proses bisnis dan menyediakan akses terhadap data tanpa bergantung pada bagaimana data tersebut ditampilkan kepada pengguna.
+2. _View (<<boundary>>)_
+Bertanggung jawab dalam menyajikan antarmuka pengguna (_User Interface_) berbasis web responsif kepada aktor, yaitu Pelajar, Orang Tua/Wali, dan Tenaga Kesehatan. View menerima masukan dari pengguna, meneruskannya kepada _Controller_, serta menampilkan hasil pemrosesan dalam bentuk formulir, grafik, informasi, maupun notifikasi.
+3. _Controller (<<control>>)_
+Bertanggung jawab sebagai perantara antara _View_ dan _Model_. _Controller_ menerima request atau aksi dari pengguna melalui _View_, mengatur alur pemrosesan, melakukan validasi yang diperlukan, memanggil _Model_ untuk mengakses atau mengolah data, serta mengembalikan hasil pemrosesan kepada _View_.
+
+Pemilihan pola MVC didasarkan pada karakteristik sistem Mahasehat, terutama keberagaman aktor, pemisahan hak akses, pengolahan data kesehatan, serta kebutuhan keamanan dan responsivitas sistem yang telah didefinisikan pada SKPL:
+1. Pemisahan antarmuka dan hak akses pengguna
+Mahasehat memiliki tiga jenis aktor, yaitu Pelajar, Orang Tua/Wali, dan Tenaga Kesehatan, yang memiliki kebutuhan serta hak akses berbeda. MVC memungkinkan antarmuka pengguna dipisahkan dari proses pengolahan data sehingga setiap kebutuhan pengguna dapat ditangani melalui _View_ dan _Controller_ yang sesuai. Contohnya pada UC04 (Melihat Statistik dan Laporan Kondisi), Pelajar dapat melihat laporan kondisi personal, sedangkan Orang Tua/Wali hanya memperoleh data ringkasan sesuai hak aksesnya. Pemisahan ini didukung oleh ReportPage sebagai View dan ReportController sebagai Controller yang mengatur kalkulasi statistik serta pembatasan akses data berdasarkan peran pengguna. Hal ini juga selaras dengan KNF02 yang mengharuskan data yang diberikan kepada Orang Tua/Wali tidak mencakup teks jurnal pribadi Pelajar.
+2. Pemisahan pengolahan data dan antarmuka
+Mahasehat mengolah berbagai data dari _daily check-in_, seperti skala mood dan pola tidur, menjadi grafik tren, rangkuman kondisi, serta indikator risiko. Pemisahan antara _Model_, _View_, dan _Controller_ memungkinkan proses pengolahan data tersebut dilakukan tanpa mencampurkannya dengan kode antarmuka pengguna. Sebagai contoh, LaporanKesehatan berperan dalam merepresentasikan hasil pengolahan laporan, sedangkan ReportController mengatur kalkulasi statistik, pembuatan grafik, serta evaluasi ambang batas. Sementara itu, ReportPage bertanggung jawab menampilkan hasil tersebut kepada pengguna.
+3. Mendukung keamanan dan kebutuhan non-fungsional
+Mahasehat menangani data kesehatan dan catatan _daily check-in_ yang bersifat sensitif. Pemisahan tanggung jawab dalam MVC memudahkan pengelolaan akses dan pemrosesan data secara terstruktur sehingga logika keamanan tidak perlu ditempatkan langsung pada antarmuka pengguna. Hal ini mendukung KNF01 mengenai enkripsi data kesehatan dan check-in menggunakan AES-256 serta KNF02 mengenai pembatasan akses data berdasarkan hak pengguna.
+4. Mendukung aplikasi _web_ responsif
+Mahasehat dirancang sebagai aplikasi web responsif yang digunakan oleh pengguna melalui peramban pada berbagai perangkat. Pemisahan View dari proses bisnis memungkinkan antarmuka dikembangkan secara responsif tanpa mengubah logika pengolahan data pada _Controller_ dan _Model_. Hal ini sesuai dengan KNF07 dan KNF08 yang menekankan kemudahan dan kecepatan proses _daily check-in_ serta kompatibilitas pada berbagai peramban dan perangkat.
+
+<p align="center">
+<img alt="Contoh Arsitektur MVC" src="./assets/diagram/arsitektur-mvc.png" width="70%">
+</p>
+<p align="center">
+<i>Gambar 1. Arsitektur MVC</i>
+</p>
+
+Tabel 1.1. Spesifikasi Lingkungan Operasi Perangkat Lunak
+| Komponen | Spesifikasi |
+| :--- | :--- |
+| *Server Application* | Node.js v20.x LTS or Express.js |
+| *Database Management System (DBMS)* | PostgreSQL 15+ |
+| *Client Side (Perangkat Pengguna)* | Web browser modern |
+| *External APIs & Services* | Geolocation API & Google Maps Platform |
+| *External APIs & Services* | Google Calendar API |
+| *External APIs & Services* | SMTP or Mail Service (Nodemailer/SendGrid) |
+| *Operating System for Server* | Ubuntu Server 22.04 LTS or Linux Cloud Environment |
+| *Protokol Keamanan* | HTTPS dengan sertifikat SSL/TLS & enkripsi AES-256 |
+Kaitan teknologi dengan pola MVC yang dipilih:
+1. Node.js dan Express.js sebagai lingkungan _Controller_
+Node.js dan Express.js digunakan sebagai lingkungan _server-side_ untuk menjalankan logika aplikasi. Pada implementasi MVC, _route handler_ dan komponen _Controller_ yang dibangun menggunakan Express.js menangani _request_ dari _View_, mengatur alur pemrosesan, serta menghubungkan _View_ dengan _Model_.
+2. PostgreSQL sebagai penyimpanan data _Model_
+PostgreSQL digunakan sebagai DBMS untuk menyimpan data yang direpresentasikan oleh _Model_, seperti data pengguna, _daily check-in_, laporan kesehatan, fasilitas kesehatan, dan jadwal konsultasi. Dengan demikian, _Model_ menjadi bagian yang mengelola representasi dan akses terhadap data sistem.
+3. Web UI sebagai _View_
+Antarmuka berbasis _web_ responsif pada peramban pengguna berperan sebagai _View_ dalam pola MVC. Komponen seperti CheckInPage, ReportPage, dan PengajuanKonsultasiPage menyediakan antarmuka untuk menerima masukan pengguna serta menampilkan hasil pemrosesan sistem.
+4. External APIs & Services sebagai integrasi yang diakses melalui _Controller_
+Layanan eksternal seperti Geolocation API, Google Maps Platform, Google Calendar API, dan Mail Service digunakan untuk mendukung fungsi pencarian tenaga kesehatan, penjadwalan konsultasi, serta pengiriman notifikasi. Integrasi tersebut ditangani melalui alur pemrosesan pada _Controller_ sehingga detail layanan eksternal tidak perlu ditangani langsung oleh _View_.
+
 
 Pada bagian ini, tentukan *architectural style* atau *pattern* yang menjadi acuan untuk aplikasi yang Anda kembangkan. Misalnya *layered architecture*, *client-server*, *repository*, *pipe and filter architecture*, atau MVC (*Model-View-Controller*).
 
