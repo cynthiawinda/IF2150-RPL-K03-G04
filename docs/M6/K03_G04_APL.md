@@ -33,6 +33,13 @@ Dipersiapkan oleh:
 <br>
 
 # BAB 1: Style/Pattern Arsitektur Acuan
+Arsitektur acuan yang dipilih untuk pengembangan perangkat lunak Mahasehat adalah MVC (Model-View-Controller). Pola ini memisahkan logika aplikasi ke dalam tiga komponen utama yang saling terhubung:
+1. Model (⁠<<entity>>⁠)
+Bertanggung jawab mengelola struktur data dasar, logika bisnis internal, aturan validasi data, serta representasi entitas pada basis data. Model menyimpan state aplikasi dan menyediakan interface data tanpa memedulikan bagaimana data tersebut ditampilkan ke antarmuka pengguna.
+3. View (⁠<<boundary>>⁠)
+Bertanggung jawab menyajikan data dan antarmuka pengguna (User Interface) berbasis web responsif kepada aktor (Pelajar, Orang Tua/Wali, dan Tenaga Kesehatan). View menerima masukan interaksi pengguna dan meneruskannya ke Controller, serta menampilkan respons grafik statistik, formulir, atau notifikasi.
+5. Controller (⁠<<control>>⁠)
+Bertanggung jawab sebagai perantara antara View dan Model. Controller menerima request atau aksi dari View, melakukan validasi alur bisnis, memanggil metode pengolahan pada Model, serta menentukan respons View yang akan ditampilkan kembali ke pengguna.
 
 Pada bagian ini, tentukan *architectural style* atau *pattern* yang menjadi acuan untuk aplikasi yang Anda kembangkan. Misalnya *layered architecture*, *client-server*, *repository*, *pipe and filter architecture*, atau MVC (*Model-View-Controller*).
 
