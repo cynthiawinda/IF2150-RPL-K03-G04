@@ -4,9 +4,9 @@
 
 | Informasi | Keterangan |
 | --- | --- |
-| **Hari** | *\Jumat* |
-| **Tanggal** | *\02/10/2026\* |
-| **Kelas** | *\K-03* |
+| **Hari** | *Jumat* |
+| **Tanggal** | *02/10/2026* |
+| **Kelas** | *K-03* |
 | **Nomor Kelompok** | *4*  |
 | **Nama Kelompok** | *pakespinwheel*  |
 | **Nama Perangkat Lunak** | *Mahasehat: Mental Health Monitoring App for Students*  |
