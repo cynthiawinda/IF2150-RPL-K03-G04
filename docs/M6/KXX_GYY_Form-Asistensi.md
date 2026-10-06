@@ -4,35 +4,32 @@
 
 | Informasi | Keterangan |
 | --- | --- |
-| **Hari** | *\[Hari\]* |
-| **Tanggal** | *\[DD/MM/YYYY\]* |
-| **Kelas** | *\[Kelas\]* |
-| **Nomor Kelompok** | *\[Nomor Kelompok\]*  |
-| **Nama Kelompok** | *\[Nama Kelompok\]*  |
-| **Nama Perangkat Lunak** | *\[Nama P/L\]*  |
-| **Dokumen** | *\[Nama Dokumen yang diasistensikan\]*  |
+| **Hari** | *\Jumat* |
+| **Tanggal** | *\02/10/2026\* |
+| **Kelas** | *\K-03* |
+| **Nomor Kelompok** | *4*  |
+| **Nama Kelompok** | *pakespinwheel*  |
+| **Nama Perangkat Lunak** | *Mahasehat: Mental Health Monitoring App for Students*  |
+| **Dokumen** | *K03_G04_APL*  |
 
 ### Anggota Kelompok
 
-| NIM | Nama |
-| --- | --- |
-| *\[NIM 1\]* | *\[Nama Anggota 1\]* |
-| *\[NIM 2\]* | *\[Nama Anggota 2\]* |
-| *\[NIM 3\]* | *\[Nama Anggota 3\]* |
-| *\[NIM 4\]* | *\[Nama Anggota 4\]* |
-| *\[NIM 5\]* | *\[Nama Anggota 5\]* |
+| NIM       | Nama               |
+| --------- | ------------------ |
+| *13525021* | *Haikal Muhammad Royyan* |
+| *13525066* | *Cynthia Winda Wijaya* |
+| *13525081* | *Rendy Salastra Putra* |
+| *13525090* | *Sophia Imelda Rogate Marpaung* |
+| *13525141* | *Christabelcyne Costan* |
 
 ### Catatan
 
 | Catatan |
 | --- |
-| 1. *\[Berikan catatan hasil asistensi\]*  |
-| 2. ... |
-| 3. ... |
-| 4. ... |
+| 1. *Terdapat beberapa style/pattern arsitektur acuan, seperti MVC (Model-View-Controller), Layered Architecture, Client-Server Architecture, Repository Architecture, dan Pipe and Filter Architecture*  |
+| 2. *Dalam mengisi tabel bab 2, kolom jenis mengikuti pattern yang dipilih pada bab 1*|
+| 3. *Terdapat beberapa view yang dapat dipilih, yaitu Logical view, Process View, Physical View, dan Development View* |
 
-**Notes for this section:**  
-*Catatan dapat dituliskan dalam bentuk paragraf atau poin-poin, disesuaikan saja.* 
 
 ## Dokumentasi
 
