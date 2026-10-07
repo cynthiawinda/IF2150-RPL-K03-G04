@@ -30,7 +30,7 @@
     - [Milestone 3](#milestone-3)
     - [Milestone 4](#milestone-4)
     - [Milestone 5](#milestone-5)
-    - [Milestone 5](#milestone-5-1)
+    - [Milestone 6](#milestone-6)
 
 ---
 
@@ -147,7 +147,7 @@
 | *30-09-2026* | *Christabelcyne Costan* | *Menambah diagram UC03* | *1* | *Done* | *-* |
 | *30-09-2026* | *Haikal Muhammad Royyan* | *Menambah diagram UC08* | *1* | *Done* | *-* |
 
-### Milestone 5
+### Milestone 6
 **Periode:** 30/09/2026 - 07/10/2026
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
