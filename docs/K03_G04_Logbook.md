@@ -156,5 +156,5 @@
 | *05-10-2026* | *Christabelcyne Costan* | *Menulis dan melengkapi bab 1* | *2* | *Done* | *-* |
 | *06-10-2026* | *Cynthia Winda Wijaya* | *Isi tabel bab 2* | *2* | *Done* | *-* |
 | *06-10-2026* | *Sophia Imelda Rogate Marpaung* | *Melengkapi bab 2* | *1* | *Done* | *-* |
-| *07-10-2026* | *Haikal Muhammad Royyan* | *Melengkapi bagian physical view* | *3* | *Done* | ** |
+| *07-10-2026* | *Haikal Muhammad Royyan* | *Melengkapi bagian physical view* | *3* | *Done* | *-* |
 | *07-10-2026* | *Rendy Salastra Putra* | *Melengkapi bagian logical view* | *3* | *Done* | *Bingung apa beberapa komponen harus digabung biar garis hubung ga clutter dan tabrakan* |
