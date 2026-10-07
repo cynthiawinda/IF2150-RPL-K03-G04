@@ -22,11 +22,15 @@
 ---
 
 ### Daftar Isi
-* [Milestone 1](#milestone-1)
-* [Milestone 2](#milestone-2)
-* [Milestone 3](#milestone-3)
-* [Milestone 4](#milestone-4)
-* [Milestone 5](#milestone-5)
+- [Logbook Pekerjaan](#logbook-pekerjaan)
+  - [Tugas Besar IF2150 - Rekayasa Perangkat Lunak](#tugas-besar-if2150---rekayasa-perangkat-lunak)
+    - [Daftar Isi](#daftar-isi)
+    - [Milestone 1](#milestone-1)
+    - [Milestone 2](#milestone-2)
+    - [Milestone 3](#milestone-3)
+    - [Milestone 4](#milestone-4)
+    - [Milestone 5](#milestone-5)
+    - [Milestone 5](#milestone-5-1)
 
 ---
 
@@ -143,3 +147,9 @@
 | *30-09-2026* | *Christabelcyne Costan* | *Menambah diagram UC03* | *1* | *Done* | *-* |
 | *30-09-2026* | *Haikal Muhammad Royyan* | *Menambah diagram UC08* | *1* | *Done* | *-* |
 
+### Milestone 5
+**Periode:** 30/09/2026 - 07/10/2026
+
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| *07-10-2026* | *Rendy Salastra Putra* | *Melengkapi bagian logical view* | *3* | *Done* | *Bingung apa beberapa komponen harus digabung biar garis hubung ga clutter dan tabrakan* |
