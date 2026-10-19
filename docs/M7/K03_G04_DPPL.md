@@ -756,55 +756,63 @@ Pada diagram, pastikan:
 
 ### 3.9.1 Identifikasi Kelas
 
-Identifikasi kelas yang terkait dengan use case tersebut. Kelas di tahap perancangan dapat berbeda dengan dengan kelas di tahap analisis. Dapat menggunakan tabel di bawah:
-
-Tabel 3.1. Identifikasi Kelas Use Case [UC01]
+Tabel 3.1. Identifikasi Kelas Use Case [UC09]
 
 | No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
 |:--- | :--- | :--- |
-| 1 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL]* |
-| 2 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL]* |
-| ... | *...* | *...* |
+| 1 | *Pengguna* | *Pengguna* |
+| 2 | *LoginPage* | *LoginPage* |
+| 3 | *AuthController* | *AuthController* |
+| 4 | *ResetPasswordPage* | *ResetPasswordPage* |
+| 5 | *PasswordController* | *PasswordController* |
+| 6 | *DashboardPage* | *DashboardPage* |
 
 ### 3.9.2 Sequence Diagram
-
-Buat *sequence diagram* untuk **setiap skenario use case**, mencakup skenario normal dan alternatif pada subbab 4.4 SKPL. Diagram melibatkan kelas-kelas yang telah diidentifikasi pada SKPL. 
 
 - **Skenario Normal**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Sequence Diagram [UC09]" src="./assets/diagram/SD_UC09_normal.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC01]</i>
+<i>Gambar X. Sequence Diagram [UC09]</i>
 </p>
 
-- **Skenario Alternatif [Nomor]: [Nama Skenario]**
+- **Skenario Alternatif 1: Kredensial Tidak Valid**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Sequence Diagram [UC09] - [Kredensial Tidak Valid]" src="./assets/diagram/SD_UC09_alt1.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC01] - [Nama skenario alternatif]</i>
+<i>Gambar X. Sequence Diagram [UC09] - [Kredensial Tidak Valid]</i>
+</p>
+
+- **Skenario Alternatif 2: Akun Belum Terverifikasi**
+
+<p align="center">
+<img alt="Sequence Diagram [UC09] - [Akun Belum Terverifikasi]" src="./assets/diagram/SD_UC09_alt2.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC09] - [Akun Belum Terverifikasi]</i>
+</p>
+
+- **Skenario Alternatif 1: Lupa Password**
+
+<p align="center">
+<img alt="Sequence Diagram [UC09] - [Lupa Password]" src="./assets/diagram/SD_UC09_alt3.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar X. Sequence Diagram [UC09] - [Lupa Password]</i>
 </p>
 
 ### 3.9.3 Diagram Kelas
 
-Buatlah diagram kelas untuk use case ini yang terdiri atas kelas-kelas dari 3.1.1. **Setiap kelas pada diagram wajib menampilkan atribut dan metode/operasi langsung di dalam kotak kelasnya**, sehingga tidak perlu membuat tabel daftar atribut dan metode per kelas pada subbab ini. Daftar lengkap atribut dan metode seluruh kelas disajikan pada Tabel 4.1 (Bab 4).
-
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh_class-diagram2.jpg" width="35%">
+<img alt="Diagram Kelas [Masuk Akun Pengguna]" src="./assets/diagram/CD_UC09.jpg" width="35%">
 </p>
 <p align="center">
-<i>Gambar X. Diagram Kelas [Nama Uce Case]</i>
+<i>Gambar X. Diagram Kelas [Masuk Akun Pengguna]</i>
 </p>
-
-Pada diagram, pastikan:
-- Atribut dituliskan beserta visibilitas dan tipe datanya, misalnya `- email: String`.
-- Operasi dituliskan beserta visibilitas, parameter, dan tipe kembaliannya, misalnya `+ login(email: String, password: String): Boolean`.
-- Relasi antarkelas (asosiasi, agregasi, komposisi, generalisasi, dan dependensi) digambarkan lengkap dengan multiplisitas.
-- Semua operasi yang dipanggil pada sequence diagram 3.1.2 (skenario normal dan alternatif) ada pada kelas yang bersangkutan.
-- Kelas yang sama dengan kelas di use case lain memakai nama, atribut, dan metode yang konsisten.
 
 ## 3.10 Use Case Keluar Akun Pengguna
 
@@ -813,56 +821,43 @@ Pada diagram, pastikan:
 
 ### 3.10.1 Identifikasi Kelas
 
-Identifikasi kelas yang terkait dengan use case tersebut. Kelas di tahap perancangan dapat berbeda dengan dengan kelas di tahap analisis. Dapat menggunakan tabel di bawah:
-
-Tabel 3.1. Identifikasi Kelas Use Case [UC01]
+Tabel 3.1. Identifikasi Kelas Use Case [UC10]
 
 | No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
 |:--- | :--- | :--- |
-| 1 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL]* |
-| 2 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL]* |
-| ... | *...* | *...* |
+| 1 | *Pengguna* | *Pengguna* |
+| 2 | *SettingPage* | *SettingPage* |
+| 3 | *AuthController* | *AuthController* |
+| 4 | *LoginPage* | *LoginPage* |
 
 ### 3.10.2 Sequence Diagram
-
-Buat *sequence diagram* untuk **setiap skenario use case**, mencakup skenario normal dan alternatif pada subbab 4.4 SKPL. Diagram melibatkan kelas-kelas yang telah diidentifikasi pada SKPL. 
 
 - **Skenario Normal**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Sequence Diagram [UC10]" src="./assets/diagram/SD_UC10_normal.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC01]</i>
+<i>Gambar X. Sequence Diagram [UC10]</i>
 </p>
 
-- **Skenario Alternatif [Nomor]: [Nama Skenario]**
+- **Skenario Alternatif 1: Membatalkan Keluar Akun**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Sequence Diagram [UC10] - [Membatalkan Keluar Akun]" src="./assets/diagram/SD_UC10_alt1.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar X. Sequence Diagram [UC01] - [Nama skenario alternatif]</i>
+<i>Gambar X. Sequence Diagram [UC10] - [Membatalkan Keluar Akun]</i>
 </p>
 
 ### 3.10.3 Diagram Kelas
 
-Buatlah diagram kelas untuk use case ini yang terdiri atas kelas-kelas dari 3.1.1. **Setiap kelas pada diagram wajib menampilkan atribut dan metode/operasi langsung di dalam kotak kelasnya**, sehingga tidak perlu membuat tabel daftar atribut dan metode per kelas pada subbab ini. Daftar lengkap atribut dan metode seluruh kelas disajikan pada Tabel 4.1 (Bab 4).
-
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh_class-diagram2.jpg" width="35%">
+<img alt="Diagram Kelas [Keluar Akun Pengguna]" src="./assets/diagram/CD_UC10.png" width="35%">
 </p>
 <p align="center">
-<i>Gambar X. Diagram Kelas [Nama Uce Case]</i>
+<i>Gambar X. Diagram Kelas [Keluar Akun Pengguna]</i>
 </p>
-
-Pada diagram, pastikan:
-- Atribut dituliskan beserta visibilitas dan tipe datanya, misalnya `- email: String`.
-- Operasi dituliskan beserta visibilitas, parameter, dan tipe kembaliannya, misalnya `+ login(email: String, password: String): Boolean`.
-- Relasi antarkelas (asosiasi, agregasi, komposisi, generalisasi, dan dependensi) digambarkan lengkap dengan multiplisitas.
-- Semua operasi yang dipanggil pada sequence diagram 3.1.2 (skenario normal dan alternatif) ada pada kelas yang bersangkutan.
-- Kelas yang sama dengan kelas di use case lain memakai nama, atribut, dan metode yang konsisten.
-<br>
 
 ---
 
