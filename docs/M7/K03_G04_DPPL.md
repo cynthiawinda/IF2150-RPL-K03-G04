@@ -32,7 +32,7 @@ Dipersiapkan oleh:
 
 | Revisi | Deskripsi |
 | :--- | :--- |
-| *A* | *Deskripsikan perubahan yang dilakukan dari dokumen sebelumnya pada dokumen ini. Jika tidak terdapat perubahan, harap kosongkan tabel.* |
+| *A* | *Melakukan penyesuaikan alur sistem dengan menambah dan/atau mengurangi beberapa atribut dan metode/operasi pada kelas-kelas di UC09 dan UC10.* |
 | *B* |  |
 | *C* |  |
 | ... |  |
