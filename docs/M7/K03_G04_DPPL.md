@@ -808,7 +808,7 @@ Tabel 3.1. Identifikasi Kelas Use Case [UC09]
 ### 3.9.3 Diagram Kelas
 
 <p align="center">
-<img alt="Diagram Kelas [Masuk Akun Pengguna]" src="./assets/diagram/CD_UC09.jpg" width="35%">
+<img alt="Diagram Kelas [Masuk Akun Pengguna]" src="./assets/diagram/CD_UC09.png" width="35%">
 </p>
 <p align="center">
 <i>Gambar X. Diagram Kelas [Masuk Akun Pengguna]</i>
