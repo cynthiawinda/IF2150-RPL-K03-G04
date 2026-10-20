@@ -33,9 +33,7 @@ Dipersiapkan oleh:
 | Revisi | Deskripsi |
 | :--- | :--- |
 | *A* | *Melakukan penyesuaikan alur sistem dengan mengganti nama beberapa metode/operasi pada kelas-kelas di UC09 dan UC10 agar lebih deskriptif.* |
-| *Melengkapi diagram kelas keseluruhan karena ada kelas yang double dan ada kelas yang belum termasuk.* |  |
-| *C* |  |
-| ... |  |
+| *B* | *Melengkapi diagram kelas keseluruhan karena ada kelas yang double dan ada kelas yang belum termasuk.* |
 
 ---
 
