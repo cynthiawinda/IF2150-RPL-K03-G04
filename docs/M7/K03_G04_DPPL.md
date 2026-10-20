@@ -504,55 +504,49 @@ Pada diagram, pastikan:
 
 ### 3.5.1 Identifikasi Kelas
 
-Identifikasi kelas yang terkait dengan use case tersebut. Kelas di tahap perancangan dapat berbeda dengan dengan kelas di tahap analisis. Dapat menggunakan tabel di bawah:
-
-Tabel 3.5. Identifikasi Kelas Use Case [UC01]
+Tabel 3.5. Identifikasi Kelas Use Case [UC05]
 
 | No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
 |:--- | :--- | :--- |
-| 1 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL]* |
-| 2 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL]* |
-| ... | *...* | *...* |
+| 1 | *CariTenagaKesehatanPage* | *CariTenagaKesehatanPage* |
+| 2 | *ProfilTenagaKesehatanPage* | *ProfilTenagaKesehatanPage* |
+| 3 | *TenagaKesehatanController* | *TenagaKesehatanController* |
+| 4 | *Pelajar* | *Pelajar* |
+| 5 | *TenagaKesehatan* | *TenagaKesehatan* |
+| 6 | *FasilitasKesehatan* | *FasilitasKesehatan* |
 
 ### 3.5.2 Sequence Diagram
-
-Buat *sequence diagram* untuk **setiap skenario use case**, mencakup skenario normal dan alternatif pada subbab 4.4 SKPL. Diagram melibatkan kelas-kelas yang telah diidentifikasi pada SKPL. 
 
 - **Skenario Normal**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Sequence Diagram [UC05]" src="./assets/diagram/SD_UC05_normal.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar 3.5.1. Sequence Diagram [UC01]</i>
+<i>Gambar 3.5.1. Sequence Diagram [UC05]</i>
 </p>
 
-- **Skenario Alternatif [Nomor]: [Nama Skenario]**
+Pelajar membuka halaman pencarian, lalu `TenagaKesehatanController` memuat daftar `TenagaKesehatan` dan `FasilitasKesehatan`, kemudian mengambil profil, lokasi, dan estimasi biaya konsultasi untuk disusun menjadi daftar ringkasan. Setelah pelajar memberikan izin akses lokasi, lokasi perangkat dicatat pada `Pelajar`, lalu controller mengambil lokasi setiap fasilitas kesehatan dan menghitung jaraknya melalui `calculateDistances()`. Ketika pelajar memilih salah satu tenaga kesehatan, controller mengambil profilnya dan menampilkannya melalui `ProfilTenagaKesehatanPage`.
+
+- **Skenario Alternatif 1: Akses Lokasi Tidak Diberikan**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Sequence Diagram [UC05] - [Akses Lokasi Tidak Diberikan]" src="./assets/diagram/SD_UC05_alt1.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar 3.5.X. Sequence Diagram [UC01] - [Nama skenario alternatif]</i>
+<i>Gambar 3.5.2. Sequence Diagram [UC05] - [Akses Lokasi Tidak Diberikan]</i>
 </p>
+
+Langkah 1 dan langkah 3 sama dengan skenario normal sehingga dirujuk dengan fragmen `ref`. Ketika pelajar menolak izin akses lokasi, `processLocationPermission(false, null)` masuk ke cabang `[izinLokasi = false]`: lokasi tidak disimpan dan jarak tidak dihitung, sehingga halaman tetap menampilkan daftar tenaga kesehatan tanpa informasi jarak.
 
 ### 3.5.3 Diagram Kelas
 
-Buatlah diagram kelas untuk use case ini yang terdiri atas kelas-kelas dari 3.1.1. **Setiap kelas pada diagram wajib menampilkan atribut dan metode/operasi langsung di dalam kotak kelasnya**, sehingga tidak perlu membuat tabel daftar atribut dan metode per kelas pada subbab ini. Daftar lengkap atribut dan metode seluruh kelas disajikan pada Tabel 4.1 (Bab 4).
-
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh_class-diagram2.jpg" width="35%">
+<img alt="Diagram Kelas [Menentukan Tenaga Kesehatan]" src="./assets/diagram/CD_UC05.png" width="80%">
 </p>
 <p align="center">
-<i>Gambar 3.5.X. Diagram Kelas [Nama Uce Case]</i>
+<i>Gambar 3.5.3. Diagram Kelas [Menentukan Tenaga Kesehatan]</i>
 </p>
-
-Pada diagram, pastikan:
-- Atribut dituliskan beserta visibilitas dan tipe datanya, misalnya `- email: String`.
-- Operasi dituliskan beserta visibilitas, parameter, dan tipe kembaliannya, misalnya `+ login(email: String, password: String): Boolean`.
-- Relasi antarkelas (asosiasi, agregasi, komposisi, generalisasi, dan dependensi) digambarkan lengkap dengan multiplisitas.
-- Semua operasi yang dipanggil pada sequence diagram 3.1.2 (skenario normal dan alternatif) ada pada kelas yang bersangkutan.
-- Kelas yang sama dengan kelas di use case lain memakai nama, atribut, dan metode yang konsisten.
 
 ## 3.6 Use Case Mengajukan Jadwal Konsultasi
 
@@ -561,55 +555,49 @@ Pada diagram, pastikan:
 
 ### 3.6.1 Identifikasi Kelas
 
-Identifikasi kelas yang terkait dengan use case tersebut. Kelas di tahap perancangan dapat berbeda dengan dengan kelas di tahap analisis. Dapat menggunakan tabel di bawah:
-
-Tabel 3.6. Identifikasi Kelas Use Case [UC01]
+Tabel 3.6. Identifikasi Kelas Use Case [UC06]
 
 | No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
 |:--- | :--- | :--- |
-| 1 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL]* |
-| 2 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL]* |
-| ... | *...* | *...* |
+| 1 | *ProfilTenagaKesehatanPage* | *ProfilTenagaKesehatanPage* |
+| 2 | *PengajuanKonsultasiPage* | *PengajuanKonsultasiPage* |
+| 3 | *JadwalKonsultasiController* | *JadwalKonsultasiController* |
+| 4 | *Pelajar* | *Pelajar* |
+| 5 | *TenagaKesehatan* | *TenagaKesehatan* |
+| 6 | *JadwalKonsultasi* | *JadwalKonsultasi* |
 
 ### 3.6.2 Sequence Diagram
-
-Buat *sequence diagram* untuk **setiap skenario use case**, mencakup skenario normal dan alternatif pada subbab 4.4 SKPL. Diagram melibatkan kelas-kelas yang telah diidentifikasi pada SKPL. 
 
 - **Skenario Normal**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Sequence Diagram [UC06]" src="./assets/diagram/SD_UC06_normal.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar 3.6.1. Sequence Diagram [UC01]</i>
+<i>Gambar 3.6.1. Sequence Diagram [UC06]</i>
 </p>
 
-- **Skenario Alternatif [Nomor]: [Nama Skenario]**
+`ProfilTenagaKesehatanPage` meminta jadwal yang tersedia kepada `JadwalKonsultasiController`, dan `TenagaKesehatan` menyusun daftar jadwalnya dengan menanyakan ketersediaan setiap `JadwalKonsultasi`. Controller kemudian menampilkan formulir pengajuan pada `PengajuanKonsultasiPage`, sedangkan profil dan jadwal yang tersedia ditampilkan pada halaman profil. Jadwal yang dipilih pelajar diperiksa kembali sebelum ditampilkan pada formulir, dan selama formulir dibuka ketersediaan jadwal diperbarui berulang (fragmen `loop`). Saat pengajuan dikirim, `Pelajar` yang mengajukan konsultasi: `JadwalKonsultasi` memeriksa ketersediaannya sendiri, lalu mengubah status ketersediaan dan status pengajuannya menjadi "Diajukan" agar dapat ditinjau tenaga kesehatan.
+
+- **Skenario Alternatif 1: Jadwal Konsultasi Tidak Lagi Tersedia**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Sequence Diagram [UC06] - [Jadwal Konsultasi Tidak Lagi Tersedia]" src="./assets/diagram/SD_UC06_alt1.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar 3.6.X. Sequence Diagram [UC01] - [Nama skenario alternatif]</i>
+<i>Gambar 3.6.2. Sequence Diagram [UC06] - [Jadwal Konsultasi Tidak Lagi Tersedia]</i>
 </p>
+
+Ketika `isAvailable()` mengembalikan `false`, cabang `[jadwal tidak tersedia]` menampilkan pemberitahuan dan memuat ulang pilihan jadwal lain. Pelajar kemudian memilih jadwal baru yang diperiksa ulang hingga tersedia. Langkah awal serta pengisian dan pengiriman formulir sama dengan skenario normal sehingga dirujuk dengan fragmen `ref`.
 
 ### 3.6.3 Diagram Kelas
 
-Buatlah diagram kelas untuk use case ini yang terdiri atas kelas-kelas dari 3.1.1. **Setiap kelas pada diagram wajib menampilkan atribut dan metode/operasi langsung di dalam kotak kelasnya**, sehingga tidak perlu membuat tabel daftar atribut dan metode per kelas pada subbab ini. Daftar lengkap atribut dan metode seluruh kelas disajikan pada Tabel 4.1 (Bab 4).
-
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh_class-diagram2.jpg" width="35%">
+<img alt="Diagram Kelas [Mengajukan Jadwal Konsultasi]" src="./assets/diagram/CD_UC06.png" width="80%">
 </p>
 <p align="center">
-<i>Gambar 3.6.X. Diagram Kelas [Nama Uce Case]</i>
+<i>Gambar 3.6.3. Diagram Kelas [Mengajukan Jadwal Konsultasi]</i>
 </p>
-
-Pada diagram, pastikan:
-- Atribut dituliskan beserta visibilitas dan tipe datanya, misalnya `- email: String`.
-- Operasi dituliskan beserta visibilitas, parameter, dan tipe kembaliannya, misalnya `+ login(email: String, password: String): Boolean`.
-- Relasi antarkelas (asosiasi, agregasi, komposisi, generalisasi, dan dependensi) digambarkan lengkap dengan multiplisitas.
-- Semua operasi yang dipanggil pada sequence diagram 3.1.2 (skenario normal dan alternatif) ada pada kelas yang bersangkutan.
-- Kelas yang sama dengan kelas di use case lain memakai nama, atribut, dan metode yang konsisten.
 
 ## 3.7 Use Case Mengelola Pengajuan Konsultasi
 
