@@ -32,23 +32,12 @@ Dipersiapkan oleh:
 
 | Revisi | Deskripsi |
 | :--- | :--- |
-| *A* | *Melakukan penyesuaikan alur sistem dengan menambah dan/atau mengurangi beberapa atribut dan metode/operasi pada kelas-kelas di UC09 dan UC10.* |
-| *B* |  |
+| *A* | *Melakukan penyesuaikan alur sistem dengan mengganti nama beberapa metode/operasi pada kelas-kelas di UC09 dan UC10 agar lebih deskriptif.* |
+| *Melengkapi diagram kelas keseluruhan karena ada kelas yang double dan ada kelas yang belum termasuk.* |  |
 | *C* |  |
 | ... |  |
 
 ---
-
-<br>
-
-> **Petunjuk pengerjaan:** *[Silahkan hapus bagian ini setelah selesai mengerjakan]*
->
-> Dokumen ini melanjutkan **Spesifikasi Kebutuhan Perangkat Lunak (SKPL)** dan **Arsitektur Perangkat Lunak (APL)**. Gunakan nama, ID, kebutuhan, dan use case yang konsisten dengan kedua dokumen tersebut. Contoh pola ID baru di bawah dapat disesuaikan dengan kesepakatan kelompok, ID yang sudah ada tetap dipertahankan.
-
-<br>
-
----
-
 
 # BAB 1: Pendahuluan
 
@@ -805,7 +794,7 @@ Tabel 3.10. Identifikasi Kelas Use Case [UC10]
 ## 4.1 Diagram Kelas
 
 <p align="center">
-<img alt="Diagram Kelas Keseluruhan" src="./assets/diagram/diagram-kelas-keseluruhan.jpg" width="35%">
+<img alt="Diagram Kelas Keseluruhan" src="./assets/diagram/diagram-kelas-keseluruhan.png" width="50%">
 </p>
 <p align="center">
 <i>Gambar 4.1. Diagram Kelas Perancangan Keseluruhan Mahasehat</i>
@@ -815,7 +804,7 @@ Tabel 4.1. Daftar Kelas Perancangan Keseluruhan
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
-| *C01* | *Pengguna* | *idPengguna, username, email, password, role, statusAkun* | *getUsername(), getEmail(), getPassword(), setPassword(), getRole(), getStatusAkun()* |
+| *C01* | *Pengguna* | *idPengguna, username, email, password, role, statusAkun* | *findByUsernameorEmail(), findByEmail(), verifyPassword(), setPassword(), getRole(), getStatusAkun()* |
 | *C02* | *Pelajar* | *idPelajar, nama, lokasiSaatIni, statusDarurat, tanggalLahir, nomorTelepon* | *getCheckInHistory(), setCheckIn(), getLokasiSaatIni(), updateEmergencyStatus()* |
 | *C03* | *OrangTuaWali* | *idWali, nama, email, nomorTelepon* | *-* |
 | *C04* | *TenagaKesehatan* | *idTenagaKesehatan, nama, email, nomorTelepon, jenisTenagaKesehatan, lokasi* | *getProfil()* |
@@ -825,7 +814,7 @@ Tabel 4.1. Daftar Kelas Perancangan Keseluruhan
 | *C08* | *FasilitasKesehatan* | *idFasilitas, namaFasilitas, lokasi, estimasiBiaya* | *getLokasi(), getEstimasiBiaya()* |
 | *C09* | *JadwalKonsultasi* | *idJadwal, tanggal, waktu, statusKetersediaan, statusPengajuan* | *getDate(), getTime(), getStatus(), updateAvailability(), updateStatus()* |
 | *C10* | *RegistrationPage* | *inputDataPelajar, inputDataWali* | *displayFormRegistrasi(), getDataPelajar(), getDataWali(), submitRegistrasi()* |
-| *C11* | *AuthController* | *currentUser* | *validateData(), registerAccount(), login(), logout(), validateConfirmation(), confirmAccount()* |
+| *C11* | *AuthController* | *currentUser* | *validateData(), registerAccount(), login(), logout(), validateConfirmation(), confirmAccount(), validateCredentials(), checkAccountStatus(), startSession(), endSession()* |
 | *C12* | *KonfirmasiRegistrasiPage* | *dataRegistrasi, statusKonfirmasi* | *displayDataRegistrasi(), confirmRegistrasi()* |
 | *C13* | *CheckInPage* | *moodInput, sleepDurationInput, dietInput, triggerInput, reflectionInput* | *showPage(), getInput(), showError(), showSuccessMessage()* |
 | *C14* | *CheckInController* | *currentCheckIn* | *submitCheckIn(), validateCheckInFormat(), encryptJournal()* |
@@ -839,11 +828,11 @@ Tabel 4.1. Daftar Kelas Perancangan Keseluruhan
 | *C22* | *JadwalKonsultasiController* | *-* | *loadAvailableSchedules(), checkAvailability(), selectSchedule(), submitRequest()* |
 | *C23* | *KonsultasiController* | *-* | *submitPengajuan(), approvePengajuan(), reschedule()* |
 | *C24* | *NotifikasiDaruratController* | *-* | *sendEmergencyNotification(), loadEmergencyDetail(), confirmReceived(), markFollowUp()* |
-| *C25* | *LoginPage* | *usernameOrEmailInput, passwordInput* | *showPage(), getInput(), showError()* |
-| *C26* | *ResetPasswordPage* | *emailInput, newPasswordInput, confirmPasswordInput* | *showPage(), getInput(), showError()* |
-| *C27* | *PasswordController* | *-* | *sendResetLink(), resetPassword()* |
+| *C25* | *LoginPage* | *usernameOrEmailInput, passwordInput* | *showPage(), getInput(), showError(), selectForgotPassword()* |
+| *C26* | *ResetPasswordPage* | *emailInput, newPasswordInput, confirmPasswordInput* | *getInput(), showError(), showEmailForm(), showNewPasswordForm(), showMessage()* |
+| *C27* | *PasswordController* | *-* | *sendResetLink(), resetPassword(), generateResetLink(), validateNewPassword()* |
 | *C28* | *DashboardPage* | *currentUser* | *displayDashboard(), displayUserInfo()* |
-| *C29* | *SettingPage* | *currentUser* | *showPage(), selectLogout()* |
+| *C29* | *SettingPage* | *currentUser* | *showPage(), selectLogout(), showLogoutConfirmation(), confirmLogout(), cancelLogout()* |
 
 
 <br>
