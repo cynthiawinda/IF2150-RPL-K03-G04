@@ -300,55 +300,42 @@ Tabel 3.5. Jalur komunikasi antar-*node*
 
 ### 3.1.1 Identifikasi Kelas
 
-Identifikasi kelas yang terkait dengan use case tersebut. Kelas di tahap perancangan dapat berbeda dengan dengan kelas di tahap analisis. Dapat menggunakan tabel di bawah:
-
 Tabel 3.1. Identifikasi Kelas Use Case [UC01]
 
 | No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
 |:--- | :--- | :--- |
-| 1 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL]* |
-| 2 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL]* |
-| ... | *...* | *...* |
+| 1 | *RegistrasiPage* | *RegistrasiPage* |
+| 2 | *AuthController* | *AuthController* |
+| 3 | *Pengguna* | *Pengguna* |
 
 ### 3.1.2 Sequence Diagram
-
-Buat *sequence diagram* untuk **setiap skenario use case**, mencakup skenario normal dan alternatif pada subbab 4.4 SKPL. Diagram melibatkan kelas-kelas yang telah diidentifikasi pada SKPL. 
 
 - **Skenario Normal**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Sequence Diagram [UC01]" src="./assets/diagram/SD_UC01_normal.png" width="50%">
 </p>
 <p align="center">
 <i>Gambar 3.1.1. Sequence Diagram [UC01]</i>
 </p>
 
-- **Skenario Alternatif [Nomor]: [Nama Skenario]**
+- **Skenario Alternatif 1: Masukan Pengguna Tidak Valid**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Sequence Diagram [UC01] - [Masukan Pengguna Tidak Valid]" src="./assets/diagram/SD_UC01_alt.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar 3.1.2. Sequence Diagram [UC01] - [Nama skenario alternatif]</i>
+<i>Gambar 3.1.2. Sequence Diagram [UC01] - [Masukan Pengguna Tidak Valid]</i>
 </p>
 
 ### 3.1.3 Diagram Kelas
 
-Buatlah diagram kelas untuk use case ini yang terdiri atas kelas-kelas dari 3.1.1. **Setiap kelas pada diagram wajib menampilkan atribut dan metode/operasi langsung di dalam kotak kelasnya**, sehingga tidak perlu membuat tabel daftar atribut dan metode per kelas pada subbab ini. Daftar lengkap atribut dan metode seluruh kelas disajikan pada Tabel 4.1 (Bab 4).
-
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh_class-diagram2.jpg" width="35%">
+<img alt="Diagram kelas UC01" src="./assets/diagram/CD_UC01.png" width="35%">
 </p>
 <p align="center">
-<i>Gambar 3.1.3. Diagram Kelas [Nama Uce Case]</i>
+<i>Gambar 3.1.3. Diagram Kelas [Melakukan Registrasi Akun]</i>
 </p>
-
-Pada diagram, pastikan:
-- Atribut dituliskan beserta visibilitas dan tipe datanya, misalnya `- email: String`.
-- Operasi dituliskan beserta visibilitas, parameter, dan tipe kembaliannya, misalnya `+ login(email: String, password: String): Boolean`.
-- Relasi antarkelas (asosiasi, agregasi, komposisi, generalisasi, dan dependensi) digambarkan lengkap dengan multiplisitas.
-- Semua operasi yang dipanggil pada sequence diagram 3.1.2 (skenario normal dan alternatif) ada pada kelas yang bersangkutan.
-- Kelas yang sama dengan kelas di use case lain memakai nama, atribut, dan metode yang konsisten.
 
 ## 3.2 Use Case Mengonfirmasi Registrasi Akun
 
@@ -357,55 +344,44 @@ Pada diagram, pastikan:
 
 ### 3.2.1 Identifikasi Kelas
 
-Identifikasi kelas yang terkait dengan use case tersebut. Kelas di tahap perancangan dapat berbeda dengan dengan kelas di tahap analisis. Dapat menggunakan tabel di bawah:
-
 Tabel 3.2. Identifikasi Kelas Use Case [UC02]
 
 | No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
 |:--- | :--- | :--- |
-| 1 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL]* |
-| 2 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL]* |
-| ... | *...* | *...* |
+| 1 | *KonfirmasiRegistrasiPage* | *KonfirmasiRegistrasiPage* |
+| 2 | *AuthController* | *AuthController* |
+| 3 | *OrangTuaWali* | *OrangTuaWali* |
+| 4 | *Pelajar* | *Pelajar* |
 
 ### 3.2.2 Sequence Diagram
-
-Buat *sequence diagram* untuk **setiap skenario use case**, mencakup skenario normal dan alternatif pada subbab 4.4 SKPL. Diagram melibatkan kelas-kelas yang telah diidentifikasi pada SKPL. 
 
 - **Skenario Normal**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Sequence Diagram [UC02]" src="./assets/diagram/SD_UC02_normal.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar 3.2.1. Sequence Diagram [UC01]</i>
+<i>Gambar 3.2.1. Sequence Diagram [UC02]</i>
 </p>
 
-- **Skenario Alternatif [Nomor]: [Nama Skenario]**
+- **Skenario Alternatif 1: Orang Tua/Wali Tidak Mengonfirmasi Registrasi Akun**
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-sequence_diagram.png" width="50%">
+<img alt="Sequence Diagram [UC01] - [Orang Tua/Wali Tidak Mengonfirmasi Registrasi Akun]" src="./assets/diagram/SD_UC02_alt.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar 3.2.X. Sequence Diagram [UC01] - [Nama skenario alternatif]</i>
+<i>Gambar 3.2.2. Sequence Diagram [UC02] - [Orang Tua/Wali Tidak Mengonfirmasi Registrasi Akun]</i>
 </p>
 
 ### 3.2.3 Diagram Kelas
 
-Buatlah diagram kelas untuk use case ini yang terdiri atas kelas-kelas dari 3.1.1. **Setiap kelas pada diagram wajib menampilkan atribut dan metode/operasi langsung di dalam kotak kelasnya**, sehingga tidak perlu membuat tabel daftar atribut dan metode per kelas pada subbab ini. Daftar lengkap atribut dan metode seluruh kelas disajikan pada Tabel 4.1 (Bab 4).
-
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh_class-diagram2.jpg" width="35%">
+<img alt="Diagram Kelas UC02" src="./assets/diagram/CD_UC02.png" width="35%">
 </p>
 <p align="center">
-<i>Gambar 3.2.X. Diagram Kelas [Nama Uce Case]</i>
+<i>Gambar 3.2.3. Diagram Kelas [Mengonfirmasi Registrasi Akun]</i>
 </p>
 
-Pada diagram, pastikan:
-- Atribut dituliskan beserta visibilitas dan tipe datanya, misalnya `- email: String`.
-- Operasi dituliskan beserta visibilitas, parameter, dan tipe kembaliannya, misalnya `+ login(email: String, password: String): Boolean`.
-- Relasi antarkelas (asosiasi, agregasi, komposisi, generalisasi, dan dependensi) digambarkan lengkap dengan multiplisitas.
-- Semua operasi yang dipanggil pada sequence diagram 3.1.2 (skenario normal dan alternatif) ada pada kelas yang bersangkutan.
-- Kelas yang sama dengan kelas di use case lain memakai nama, atribut, dan metode yang konsisten.
 
 ## 3.3 Use Case Melakukan Daily Check-in
 
@@ -840,23 +816,47 @@ Tabel 3.10. Identifikasi Kelas Use Case [UC10]
 
 ## 4.1 Diagram Kelas
 
-**Bagian ini diisi dengan diagram kelas keseluruhan.**
-
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-class_diargam.png" width="35%">
+<img alt="Diagram Kelas Keseluruhan" src="./assets/diagram/diagram-kelas-keseluruhan.jpg" width="35%">
 </p>
 <p align="center">
-<i>Gambar 4.1. Diagram Kelas Perancangan Keseluruhan [Nama P/L]</i>
+<i>Gambar 4.1. Diagram Kelas Perancangan Keseluruhan Mahasehat</i>
 </p>
 
 Tabel 4.1. Daftar Kelas Perancangan Keseluruhan
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
-| *[C01]* | *[Nama kelas]* | *[Daftar atribut]* | *[Daftar metode/operasi]* |
-| *[C02]* | *[Nama kelas]* | *[Daftar atribut]* | *[Daftar metode/operasi]* |
-| *[C03]* | *[Nama kelas]* | *[Daftar atribut]* | *[Daftar metode/operasi]* |
-| *...* | *...* | *...* | *...* |
+| *C01* | *Pengguna* | *idPengguna, username, email, password, role, statusAkun* | *getUsername(), getEmail(), getPassword(), setPassword(), getRole(), getStatusAkun()* |
+| *C02* | *Pelajar* | *idPelajar, nama, lokasiSaatIni, statusDarurat, tanggalLahir, nomorTelepon* | *getCheckInHistory(), setCheckIn(), getLokasiSaatIni(), updateEmergencyStatus()* |
+| *C03* | *OrangTuaWali* | *idWali, nama, email, nomorTelepon* | *-* |
+| *C04* | *TenagaKesehatan* | *idTenagaKesehatan, nama, email, nomorTelepon, jenisTenagaKesehatan, lokasi* | *getProfil()* |
+| *C05* | *RiwayatKesehatan* | *riwayatKesehatan* | *-* |
+| *C06* | *CheckIn* | *idCheckIn, tanggalCheckIn, skalaMood, jamTidur, jamBangun, polaMakan, pemicuStres, catatanRefleksi* | *createCheckIn(), getCheckInData(), validateData()* |
+| *C07* | *LaporanKesehatan* | *periode, ringkasanKondisi, indikatorRisiko, jumlahHariTidakCheckIn* | *evaluateThreshold(), detectEmergency()* |
+| *C08* | *FasilitasKesehatan* | *idFasilitas, namaFasilitas, lokasi, estimasiBiaya* | *getLokasi(), getEstimasiBiaya()* |
+| *C09* | *JadwalKonsultasi* | *idJadwal, tanggal, waktu, statusKetersediaan, statusPengajuan* | *getDate(), getTime(), getStatus(), updateAvailability(), updateStatus()* |
+| *C10* | *RegistrationPage* | *inputDataPelajar, inputDataWali* | *displayFormRegistrasi(), getDataPelajar(), getDataWali(), submitRegistrasi()* |
+| *C11* | *AuthController* | *currentUser* | *validateData(), registerAccount(), login(), logout(), validateConfirmation(), confirmAccount()* |
+| *C12* | *KonfirmasiRegistrasiPage* | *dataRegistrasi, statusKonfirmasi* | *displayDataRegistrasi(), confirmRegistrasi()* |
+| *C13* | *CheckInPage* | *moodInput, sleepDurationInput, dietInput, triggerInput, reflectionInput* | *showPage(), getInput(), showError(), showSuccessMessage()* |
+| *C14* | *CheckInController* | *currentCheckIn* | *submitCheckIn(), validateCheckInFormat(), encryptJournal()* |
+| *C15* | *NotifikasiPengingatController* | *reminderSchedule, status* | *sendDailyReminder(), checkPendingCheckIn()* |
+| *C16* | *ReportPage* | *selectedPeriod, displayedChart, displayedSummary* | *showPage(), displayChart(), filterViewByRole()* |
+| *C17* | *ReportController* | *currentReport* | *calculateStatistics(), buildTrendChart(), applyPrivacyRestriction()* |
+| *C18* | *CariTenagaKesehatanPage* | *-* | *showPage(), requestLocationPermission(), displayResults()* |
+| *C19* | *ProfilTenagaKesehatanPage* | *tenagaKesehatanDipilih* | *displayProfile(), displayAvailableSchedules()* |
+| *C20* | *TenagaKesehatanController* | *-* | *loadTenagaKesehatan(), processLocationPermission(), calculateDistances(), selectTenagaKesehatan()* |
+| *C21* | *PengajuanKonsultasiPage* | *selectedTenagaKesehatan, filteredDate, displayedTenagaKesehatan, displayedSchedule, jadwalDipilih, dataPengajuan* | *displayForm(), displaySelectedSchedule(), showUnavailableWarning(), getFormData(), displayTenagaKesehatan(), filterDate(), displayAvailableSchedule(), selectTenagaKesehatan(), filterJenisTenagaKesehatan()* |
+| *C22* | *JadwalKonsultasiController* | *-* | *loadAvailableSchedules(), checkAvailability(), selectSchedule(), submitRequest()* |
+| *C23* | *KonsultasiController* | *-* | *submitPengajuan(), approvePengajuan(), reschedule()* |
+| *C24* | *NotifikasiDaruratController* | *-* | *sendEmergencyNotification(), loadEmergencyDetail(), confirmReceived(), markFollowUp()* |
+| *C25* | *LoginPage* | *usernameOrEmailInput, passwordInput* | *showPage(), getInput(), showError()* |
+| *C26* | *ResetPasswordPage* | *emailInput, newPasswordInput, confirmPasswordInput* | *showPage(), getInput(), showError()* |
+| *C27* | *PasswordController* | *-* | *sendResetLink(), resetPassword()* |
+| *C28* | *DashboardPage* | *currentUser* | *displayDashboard(), displayUserInfo()* |
+| *C29* | *SettingPage* | *currentUser* | *showPage(), selectLogout()* |
+
 
 <br>
 
@@ -864,12 +864,36 @@ Tabel 4.1. Daftar Kelas Perancangan Keseluruhan
 
 # BAB 5: Matriks Kerunutan
 
-Petakan kelas perancangan dengan use case yang terkait. Gunakan **BAB 6 Traceability pada dokumen SKPL** sebagai acuan keterkaitan kelas analisis dan use case, lalu sesuaikan dengan realisasi use case dan kelas perancangan pada BAB 3–BAB 5 DPPL.
-
 Tabel 7.1. Matriks Kerunutan Kelas terhadap Use Case
 
 | Kelas | Use Case Terkait |
 | :--- | :--- |
-| *[ID kelas - Nama kelas]* | *[ID UC - Nama use case]* |
-| *[ID kelas - Nama kelas]* | *[ID UC - Nama use case]* |
-| *...* | *...* |
+| *[C01 - Pengguna]* | *[UC01 - Melakukan Registrasi Akun, UC09 - Masuk Akun Pengguna, UC10 - Keluar Akun Pengguna]* |
+| *[C02 - Pelajar]* | *[UC01 - Melakukan Registrasi Akun, UC03 - Melakukan Daily Check-In, UC04 - Melihat Statistik dan Laporan Kondisi, UC05 - Menentukan Tenaga Kesehatan, UC06 - Mengajukan Jadwal Konsultasi, UC08 - Menerima dan Menindaklanjuti Notifikasi Darurat, UC09 - Masuk Akun Pengguna, UC10 - Keluar Akun Pengguna]* |
+| *[C03 - OrangTuaWali]* | *[UC02 - Mengonfirmasi Registrasi Akun, UC04 - Melihat Statistik dan Laporan Kondisi, UC08 - Menerima dan Menindaklanjuti Notifikasi Darurat, UC09 - Masuk Akun Pengguna, UC10 - Keluar Akun Penggua]* |
+| *[C04 - TenagarKesehatan]* | *[UC05 - Menentukan Tenaga Kesehatan, UC07 - Mengelola Pengajuan Konsultasi, UC09 - Masuk Akun Pengguna, UC10 - Keluar Akun Pengguna]* |
+| *[C05 - RiwayatKesehatan]* | *[UC01 - Melakukan Registrasi Akun]* |
+| *[C06 - CheckIn]* | *[UC03 - Melakukan Daily Check-In, UC04 - Melihat Statistik dan Laporan Kondisi]* |
+| *[C07 - LaporanKesehatan]* | *[UC04 - Melihat Statistik dan Laporan Kondisi, UC08 - Menerima dan Menindaklanjuti Notifikasi Darurat]* |
+| *[C08 - FasilitasKesehatan]* | *[UC05 - Menentukan Tenaga Kesehatan]* |
+| *[C09 - JadwalKonsultasi]* | *[UC06 - Mengajukan Jadwal Konsultasi, UC07 - Mengelola Pengajuan Konsultasi]* |
+| *[C10 - RegistrationPage]* | *[UC01 - Melakukan Registrasi Akun]* |
+| *[C11 - AuthController]* | *[UC01 - Melakukan Registrasi Akun, UC09 - Masuk Akun Pengguna, UC10 - Keluar Akun Pengguna]* |
+| *[C12 - KonfirmasiRegistrasiPage]* | *[UC02 - Mengonfirmasi Registrasi Akun]* |
+| *[C13 - CheckInPage]* | *[UC03 - Melakukan Daily Check-In]* |
+| *[C14 - CheckInController]* | *[UC03 - Melakukan Daily Check-In]* |
+| *[C15 - NotifikasiPengingatController]* | *[UC03 - Melakukan Daily Check-In]* |
+| *[C16 - ReportPage]* | *[UC04 - Melihat Statistik dan Laporan Kondisi]* |
+| *[C17 - ReportController]* | *[UC04 - Melihat Statistik dan Laporan Kondisi]* |
+| *[C18 - CariTenagaKesehatanPage]* | *[UC05 - Menentukan Tenaga Kesehatan]* |
+| *[C19 - ProfilTenagaKesehatanPage]* | *[UC05 - Menentukan Tenaga Kesehatan, UC06 - Mengajukan Jadwal Konsultasi]* |
+| *[C20 - TenagaKesehatanController]* | *[UC05 - Menentukan Tenaga Kesehatan]* |
+| *[C21 - PengajuanKonsultasiPage]* | *[UC06 - Mengajukan Jadwal Konsultasi, UC07 - Mengelola Pengajuan Konsultasi]* |
+| *[C22 - JadwalKonsultasiController]* | *[UC06 - Mengajukan Jadwal Konsultasi]* |
+| *[C23 - KonsultasiController]* | *[UC07 - Mengelola Pengajuan Konsultasi]* |
+| *[C24 - NotifikasiDaruratController]* | *[UC08 - Menerima dan Menindaklanjuti Notifikasi Darurat]* |
+| *[C25 - LoginPage]* | *[UC09 - Masuk Akun Pengguna, UC10 - Keluar Akun Pengguna]* |
+| *[C26 - ResetPasswordPage]* | *[UC09 - Masuk Akun Pengguna]* |
+| *[C27 - PasswordController]* | *[UC09 - Masuk Akun Pengguna]* |
+| *[C28 - DashboardPage]* | *[UC09 - Masuk Akun Pnegguna]* |
+| *[C29 - SettingPage]* | *[UC10 - Keluar Akun Pengguna]* |
