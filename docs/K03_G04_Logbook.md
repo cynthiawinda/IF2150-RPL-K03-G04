@@ -22,15 +22,13 @@
 ---
 
 ### Daftar Isi
-- [Logbook Pekerjaan](#logbook-pekerjaan)
-  - [Tugas Besar IF2150 - Rekayasa Perangkat Lunak](#tugas-besar-if2150---rekayasa-perangkat-lunak)
-    - [Daftar Isi](#daftar-isi)
-    - [Milestone 1](#milestone-1)
-    - [Milestone 2](#milestone-2)
-    - [Milestone 3](#milestone-3)
-    - [Milestone 4](#milestone-4)
-    - [Milestone 5](#milestone-5)
-    - [Milestone 6](#milestone-6)
+* [Milestone 1](#milestone-1)
+* [Milestone 2](#milestone-2)
+* [Milestone 3](#milestone-3)
+* [Milestone 4](#milestone-4)
+* [Milestone 5](#milestone-5)
+* [Milestone 6](#milestone-6)
+* [Milestone 7](#milestone-7)
 
 ---
 
@@ -158,3 +156,20 @@
 | *06-10-2026* | *Sophia Imelda Rogate Marpaung* | *Melengkapi bab 2* | *1* | *Done* | *-* |
 | *07-10-2026* | *Haikal Muhammad Royyan* | *Melengkapi bagian physical view* | *3* | *Done* | *-* |
 | *07-10-2026* | *Rendy Salastra Putra* | *Melengkapi bagian logical view* | *3* | *Done* | *Bingung apa beberapa komponen harus digabung biar garis hubung ga clutter dan tabrakan* |
+
+### Milestone 7
+**Periode:** 07/09/2026 - 21/10/2026
+
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| *09-10-2026* | *Cynthia Winda Wijaya* | *Melengkapi bagian dari milestone sebelumnya* | *1* | *Done* | *-* |
+| *18-10-2026* | *Cynthia Winda Wijaya* | *Melengkapi bab 1* | *1* | *Done* | *-* |
+| *19-10-2026* | *Sophia Imelda Rogate Marpaung* | *Menambah diagram kelas UC09 dan UC10* | *1* | *Done* | *-* |
+| *19-10-2026* | *Sophia Imelda Rogate Marpaung* | *Menambah diagram sekuens UC09 dan UC10* | *2* | *Done* | *-* |
+| *19-10-2026* | *Christabelcyne Costan* | *Menulis draft UC07 dan UC08, memperbaiki penomoran dan penamaan* | *1* | *Done* | *-* |
+| *19-10-2026* | *Christabelcyne Costan* | *Menambah diagram kelas UC07 dan UC08* | *1* | *Done* | *-* |
+| *19-10-2026* | *Christabelcyne Costan* | *Menambah diagram sekuens UC07 dan UC08* | *2* | *Done* | *-* |
+| *20-10-2026* | *Cynthia Winda Wijaya* | *Menambah diagram kelas dan sekuens UC01 dan UC02, menulis traceability* | *3* | *Done* | *-* |
+| *20-10-2026* | *Haikal Muhammad Royyan* | *enambah diagram kelas dan sekuens UC05 dan UC06* | *3* | *Done* | *-* |
+| *20-10-2026* | *Sophia Imelda Rogate Marpaung* | *Merevisi diagram dan daftar kelas perancangan keseluruhan* | *1* | *Done* | *-* |
+| *20-10-2026* | *Sophia Imelda Rogate Marpaung* | *Membuat logo perangkat lunak* | *1* | *Done* | *-* |
