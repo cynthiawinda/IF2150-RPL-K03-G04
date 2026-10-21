@@ -8,7 +8,8 @@ DESKRIPSI PERANCANGAN PERANGKAT LUNAK (DPPL)
 <br>
 
 ## *Mahasehat: Mental Health Monitoring App for Students*
-### *[Logo Perangkat Lunak]*
+
+<img alt="Logo Perangkat Lunak" src="./assets/diagram/logo-mahasehat.png" width="35%">
 
 ### Untuk: *Stefani Angeline Oroh*
 
@@ -79,7 +80,7 @@ Tabel 1.4. Aturan Penomoran
 | *Kebutuhan* | *RXX* | *Mewakili singkatan kata "Requirement", diikuti dua digit unik untuk membedakan tiap kebutuhan.* |
 
 ## 1.5 Referensi
-Cantumkan dokumentasi P/L yang dirujuk oleh dokumen ini, **minimal dokumen SKPL dan APL**. Tambahkan buku, panduan, atau dokumentasi lain apabila digunakan.
+
 - Diagram UML: [https://www.drawio.com/](https://www.drawio.com/)
 - https://nodejs.org/docs/latest-v20.x/api/
 - https://expressjs.com/
