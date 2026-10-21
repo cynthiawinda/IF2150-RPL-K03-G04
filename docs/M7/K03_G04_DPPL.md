@@ -35,6 +35,7 @@ Dipersiapkan oleh:
 | :--- | :--- |
 | *A* | *Melakukan penyesuaikan alur sistem dengan mengganti nama beberapa metode/operasi pada kelas-kelas di UC09 dan UC10 agar lebih deskriptif.* |
 | *B* | *Melengkapi diagram kelas keseluruhan karena ada kelas yang double dan ada kelas yang belum termasuk.* |
+| *C* | *Merevisi hubungan antarkelas pada logical view.* |
 
 ---
 
@@ -103,7 +104,20 @@ BAB 1 membahas pendahuluan, yang berisi tujuan, lingkup masalah, definisi, istil
 
 ## 2.1 Rancangan Lingkungan Implementasi
 
-Sebutkan *operating system*, DBMS, *development tools*, *filing system*, dan bahasa pemrograman yang digunakan.
+Perangkat lunak Mahasehat dirancang dan diimplementasikan berbasis web (*web-based*) menggunakan model *client-server*.
+
+Tabel 2.1. Rancangan Lingkungan Implementasi
+
+| Komponen Lingkungan | Perangkat / Teknologi |
+| :--- | :--- |
+| *OS (Server)* | Ubuntu Server 22.04 LTS |
+| *OS (Client)* | Multiplatform (Android, iOS, Windows, macOS) |
+| *Backend* | JavaScript / TypeScript (Node.js, Express.js) |
+| *Frontend* | HTML5, CSS3, JavaScript |
+| *DBMS* | PostgreSQL 15+ |
+| *Filing System* | ext4 & JWT |
+| *Dev Tools* | VS Code, Git, GitHub, Postman, pgAdmin 4, PlantUML |
+| *External APIs* | Google Maps API, Google Calendar API, Nodemailer (SMTP) |
 
 ## 2.2 Style/Pattern Arsitektur Acuan
 

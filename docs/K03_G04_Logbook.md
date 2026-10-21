@@ -22,13 +22,16 @@
 ---
 
 ### Daftar Isi
-* [Milestone 1](#milestone-1)
-* [Milestone 2](#milestone-2)
-* [Milestone 3](#milestone-3)
-* [Milestone 4](#milestone-4)
-* [Milestone 5](#milestone-5)
-* [Milestone 6](#milestone-6)
-* [Milestone 7](#milestone-7)
+- [Logbook Pekerjaan](#logbook-pekerjaan)
+  - [Tugas Besar IF2150 - Rekayasa Perangkat Lunak](#tugas-besar-if2150---rekayasa-perangkat-lunak)
+    - [Daftar Isi](#daftar-isi)
+    - [Milestone 1](#milestone-1)
+    - [Milestone 2](#milestone-2)
+    - [Milestone 3](#milestone-3)
+    - [Milestone 4](#milestone-4)
+    - [Milestone 5](#milestone-5)
+    - [Milestone 6](#milestone-6)
+    - [Milestone 7](#milestone-7)
 
 ---
 
@@ -173,3 +176,6 @@
 | *20-10-2026* | *Haikal Muhammad Royyan* | *enambah diagram kelas dan sekuens UC05 dan UC06* | *3* | *Done* | *-* |
 | *20-10-2026* | *Sophia Imelda Rogate Marpaung* | *Merevisi diagram dan daftar kelas perancangan keseluruhan* | *1* | *Done* | *-* |
 | *20-10-2026* | *Sophia Imelda Rogate Marpaung* | *Membuat logo perangkat lunak* | *1* | *Done* | *-* |
+| *21-10-2026* | *Rendy Salastra Putra* | *Membuat sequence diagram untuk UC03 dan UC04* | *2* | *Done* | *-* |
+| *21-10-2026* | *Rendy Salastra Putra* | *Membuat class diagram untuk UC03 dan UC04* | *1* | *Done* | *-* |
+| *21-10-2026* | *Rendy Salastra Putra* | *Mengintegrasi gambar dengan dokumen utama, merevisi logical view, dan melengkapi subbab 2.1* | *1* | *Done* | *-* |
