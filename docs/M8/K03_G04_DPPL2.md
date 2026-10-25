@@ -81,6 +81,8 @@ Tabel 1.3. Definisi Istilah dan Singkatan
 
 Tabel 1.4. Aturan Penomoran
 
+| Hal/Bagian | Penomoran | Keterangan |
+| :--- | :--- | :--- |
 | *Kebutuhan Fungsional* | *KFXX* | *Mewakili singkatan kata "Kebutuhan Fungsional", diikuti dua digit unik untuk membedakan tiap KF.* |
 | *Kebutuhan Non-Fungsional* | *KNFXX* | *Mewakili singkatan kata "Kebutuhan Non-Fungsional", diikuti dua digit unik untuk membedakan tiap KNF.* |
 | *Aktor* | *AXX* | *Mewakili singkatan kata "Aktor", diikuti dua digit unik untuk membedakan tiap aktor.* |
