@@ -907,6 +907,209 @@ Tabel 5.1.1. Query Operasi [Nama Operasi]
 
 *[Ulangi pola 5.1: nama dan ID kelas, tabel operasi, tabel atribut, serta subbab algoritma/query untuk operasi penting jika diperlukan.]*
 
+## 5.11 Kelas AuthController
+**Nama Kelas:** *AuthController*  
+**ID Kelas:** *C11*
+
+Tabel 5.11.1. Operasi Kelas AuthController
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *validateData(data: String): Boolean* | *Public* | *Memvalidasi kelengkapan dan format data registrasi.* |
+| *registerAccount(data: String): Boolean* | *Public* | *Menyimpan data akun baru ke basis data.* |
+| *validateCredentials(usernameOrEmail: String, pass: String): Boolean* | *Private* | *Memvalidasi kredensial pengguna saat login.* |
+| *checkAccountStatus(): Boolean* | *Private* | *Memeriksa status akun sebelum login berhasil.* |
+| *login(usernameOrEmail: String, pass: String): Boolean* | *Public* | *Memvalidasi kredensial dan status akun, lalu memulai sesi pengguna.* |
+| *logout(): Void* | *Public* | *Mengakhiri sesi login pengguna.* |
+| *startSession(): Void* | *Private* | *Memulai sesi setelah autentikasi berhasil.* |
+| *confirmAccount(token: String): Boolean* | *Public* | *Memvalidasi token dan mengonfirmasi registrasi akun pelajar oleh wali.* |
+
+Tabel 5.11.2. Atribut Kelas AuthController
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *currentUser* | *Private* | *Pengguna* |
+| *sessionToken* | *Private* | *String* |
+
+### 5.11.1 Algoritma/Query
+
+**Nama Kelas:** *AuthController*  
+**Nama Operasi:** *registerAccount(data: String)*  
+**ID Algoritma:** *Algo-011*
+
+```text
+Function registerAccount(data)
+    if not validateData(data) then
+        return False
+    end if
+
+    encryptedPassword <- ENCRYPT_AES256(data.password)
+    newUser <- new Pengguna(
+        data.username,
+        data.email,
+        encryptedPassword,
+        data.role,
+        'PENDING'
+    )
+    DB.save(newUser)
+    sendConfirmationEmail(data.emailWali)
+    return True
+end Function
+```
+
+Tabel 5.11.3. Query Operasi registerAccount
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-011* | *INSERT INTO users (username, email, password, role, status) VALUES (@username, @email, @hashedPassword, @role, 'PENDING');* | *Menyimpan data pengguna baru ke basis data.* |
+
+## 5.12 Kelas KonfirmasiRegistrasiPage
+
+**Nama Kelas:** *KonfirmasiRegistrasiPage*
+**ID Kelas:** *C12*
+
+Tabel 5.12.1. Operasi Kelas KonfirmasiRegistrasiPage
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| --- | --- | --- |
+| *displayDataRegistrasi(): Void* | *Public* | *Menampilkan detail data registrasi pelajar kepada wali.* |
+| *confirmRegistrasi(status: Boolean): Void* | *Public* | *Mengirimkan keputusan konfirmasi wali ke sistem.* |
+
+Tabel 5.12.2. Atribut Kelas KonfirmasiRegistrasiPage
+| Nama Atribut | Visibility (private, public) | Tipe |
+| --- | --- | --- |
+| *dataRegistrasi* | *Private* | *Object* |
+| *statusKonfirmasi* | *Private* | *Boolean* |
+
+
+## 5.13 Kelas CheckInPage
+**Nama Kelas:** *CheckInPage*
+**ID Kelas:** *C13*
+
+Tabel 5.13.1. Operasi Kelas CheckInPage
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| --- | --- | --- |
+| *showPage(): Void* | *Public* | *Menampilkan formulir daily check-in.* |
+| *getInput(): Object* | *Public* | *Mengambil masukan indikator harian dan catatan jurnal.* |
+| *showError(msg: String): Void* | *Public* | *Menampilkan pesan validasi masukan tidak sesuai.* |
+| *showSuccessMessage(): Void* | *Public* | *Menampilkan pemberitahuan check-in berhasil disubmit.* |
+
+Tabel 5.13.2. Atribut Kelas CheckInPage
+| Nama Atribut | Visibility (private, public) | Tipe |
+| --- | --- | --- |
+| *moodInput* | *Private* | *Integer* |
+| *sleepDurationInput* | *Private* | *Float* |
+| *dietInput* | *Private* | *String* |
+| *triggerInput* | *Private* | *String* |
+| *reflectionInput* | *Private* | *Text* |
+
+
+## 5.14 Kelas CheckInController
+**Nama Kelas:** *CheckInController*
+**ID Kelas:** *C14*
+
+Tabel 5.14.1. Operasi Kelas CheckInController
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| --- | --- | --- |
+| *submitCheckIn(data: Object): Boolean* | *Public* | *Mengolah data masukan check-in dan menyimpannya.* |
+| *validateCheckInFormat(data: Object): Boolean* | *Private* | *Memeriksa nilai mood (1-5) dan durasi tidur.* |
+| *encryptJournal(reflectionText: String): String* | *Private* | *Mengenkripsi catatan jurnal pribadi menggunakan AES-256.* |
+
+Tabel 5.14.2. Atribut Kelas CheckInController
+| Nama Atribut | Visibility (private, public) | Tipe |
+| --- | --- | --- |
+| *currentCheckIn* | *Private* | *CheckIn* |
+
+### 5.14.1 Algoritma/Query
+**Nama Kelas:** *CheckInController*
+**Nama Operasi:** *submitCheckIn(data: Object)*
+**ID Algoritma:** *Algo-014*
+
+```text
+Function submitCheckIn(data)
+    if not validateCheckInFormat(data) then
+        return False
+    end if
+    encryptedJournal <- encryptJournal(data.reflectionInput)
+    newEntry <- new CheckIn(data.idPelajar, getCurrentDate(), data.moodInput, data.sleepDurationInput, data.dietInput, data.triggerInput, encryptedJournal)
+    DB.save(newEntry)
+    return True
+end Function
+
+```
+
+Tabel 5.14.3. Query Operasi submitCheckIn
+| No Query | Query | Keterangan |
+| --- | --- | --- |
+| *Q-014* | *INSERT INTO check_in (id_pelajar, tanggal, skala_mood, jam_tidur, pola_makan, pemicu_stres, catatan_refleksi) VALUES (@idPelajar, CURRENT_DATE, @mood, @jamTidur, @polaMakan, @pemicuStres, @encryptedJournal);* | *Menyimpan rekaman check-in harian ke basis data.* |
+
+## 5.15 Kelas NotifikasiPengingatController
+**Nama Kelas:** *NotifikasiPengingatController*
+**ID Kelas:** *C15*
+
+Tabel 5.15.1. Operasi Kelas NotifikasiPengingatController
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| --- | --- | --- |
+| *sendDailyReminder(idPelajar: String): Void* | *Public* | *Mengirim notifikasi pengingat ke peramban & e-mail.* |
+| *checkPendingCheckIn(): List* | *Public* | *Memeriksa daftar pelajar yang belum check-in hari ini.* |
+
+Tabel 5.15.2. Atribut Kelas NotifikasiPengingatController
+| Nama Atribut | Visibility (private, public) | Tipe |
+| --- | --- | --- |
+| *reminderSchedule* | *Private* | *Time* |
+| *status* | *Private* | *String* |
+
+## 5.16 Kelas ReportPage
+**Nama Kelas:** *ReportPage*
+**ID Kelas:** *C16*
+
+Tabel 5.16.1. Operasi Kelas ReportPage
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| --- | --- | --- |
+| *showPage(): Void* | *Public* | *Menampilkan dasbor laporan dan tren statistik.* |
+| *displayChart(chartData: Object): Void* | *Public* | *Visualisasi grafik mood, pola tidur, dan tren stres.* |
+| *filterViewByRole(userRole: String): Void* | *Public* | *Menyembunyikan teks jurnal jika diakses oleh OrangTuaWali.* |
+
+Tabel 5.16.2. Atribut Kelas ReportPage
+| Nama Atribut | Visibility (private, public) | Tipe |
+| --- | --- | --- |
+| *selectedPeriod* | *Private* | *String* |
+| *displayedChart* | *Private* | *Object* |
+| *displayedSummary* | *Private* | *String* |
+
+## 5.17 Kelas ReportController
+**Nama Kelas:** *ReportController*
+**ID Kelas:** *C17*
+
+Tabel 5.17.1. Operasi Kelas ReportController
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| --- | --- | --- |
+| *calculateStatistics(idPelajar: String, period: String): Object* | *Public* | *Menghitung rata-rata mood, durasi tidur, dan tren.* |
+| *buildTrendChart(data: Object): Object* | *Public* | *Menyusun struktur data grafik untuk tampilan web.* |
+| *applyPrivacyRestriction(userRole: String, rawData: Object): Object* | *Private* | *Memfilter jurnal pribadi sesuai KNF02.* |
+
+Tabel 5.17.2. Atribut Kelas ReportController
+| Nama Atribut | Visibility (private, public) | Tipe |
+| --- | --- | --- |
+| *currentReport* | *Private* | *LaporanKesehatan* |
+
+### 5.17.1 Algoritma/Query
+**Nama Kelas:** *ReportController*
+**Nama Operasi:** *calculateStatistics(idPelajar: String, period: String)*
+**ID Algoritma:** *Algo-017*
+
+```text
+Function calculateStatistics(idPelajar, period)
+    rawData <- DB.getCheckInByPeriod(idPelajar, period)
+    avgMood <- SUM(rawData.skalaMood) / COUNT(rawData)
+    avgSleep <- SUM(rawData.jamTidur) / COUNT(rawData)
+    trendChart <- buildTrendChart(rawData)
+    return { avgMood, avgSleep, trendChart }
+end Function
+
+```
+
+Tabel 5.17.3. Query Operasi calculateStatistics
+| No Query | Query | Keterangan |
+| --- | --- | --- |
+| *Q-017* | *SELECT tanggal, skala_mood, jam_tidur, pemicu_stres FROM check_in WHERE id_pelajar = @idPelajar AND tanggal >= @startDate ORDER BY tanggal ASC;* | *Mengambil sekumpulan data check-in berdasarkan rentang periode.* |
+
 <br>
 
 ---
