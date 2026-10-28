@@ -31,7 +31,7 @@ Dipersiapkan oleh:
 
 | Revisi | Deskripsi |
 | :--- | :--- |
-| *A* | *Deskripsikan perubahan yang dilakukan dari dokumen sebelumnya pada dokumen ini. Jika tidak terdapat perubahan, harap kosongkan tabel.* |
+| *A* | *Menyesuaikan beberapa atribut dan metode/aplikasi pada daftar kelas perancangan keseluruhan dengan diagram sekuens.* |
 | *B* |  |
 | *C* |  |
 | ... |  |
@@ -89,8 +89,8 @@ Tabel 1.4. Aturan Penomoran
 | *Use Case* | *UCXX* | *Mewakili singkatan kata "Use Case", diikuti dua digit unik untuk membedakan tiap UC.* |
 | *Kelas* | *CXX* | *Mewakili singkatan kata "Class", diikuti dua digit unik untuk membedakan tiap kelas.* |
 | *Kebutuhan* | *RXX* | *Mewakili singkatan kata "Requirement", diikuti dua digit unik untuk membedakan tiap kebutuhan.* |
-| *Algoritma* | *Algo-XXX* | *Mewakili singkatan kata "Algoritma", diikuti tiga digit unik untuk membedakan tiap algoritma.* |
-| *Query* | *Q-XXX* | *Mewakili singkatan kata "Query", diikuti tiga digit unik untuk membedakan tiap query.* |
+| *Algoritma* | *Algo-CXX-XX* | *Mewakili singkatan kata "Algoritma", diikuti ID kelas dan dua digit unik untuk membedakan tiap algoritma.* |
+| *Query* | *Q-CXX-XX* | *Mewakili singkatan kata "Query", diikuti ID kelas dan dua digit unik untuk membedakan tiap query.* |
 | *Antarmuka* | *I-XX* | *Mewakili singkatan kata "Interface", diikuti dua digit unik untuk membedakan tiap layar antarmuka.* |
 
 ## 1.5 Referensi
@@ -832,15 +832,15 @@ Tabel 4.1. Daftar Kelas Perancangan Keseluruhan
 | *C18* | *CariTenagaKesehatanPage* | *-* | *showPage(), requestLocationPermission(), displayResults()* |
 | *C19* | *ProfilTenagaKesehatanPage* | *tenagaKesehatanDipilih* | *displayProfile(), displayAvailableSchedules()* |
 | *C20* | *TenagaKesehatanController* | *-* | *loadTenagaKesehatan(), processLocationPermission(), calculateDistances(), selectTenagaKesehatan()* |
-| *C21* | *PengajuanKonsultasiPage* | *selectedTenagaKesehatan, filteredDate, displayedTenagaKesehatan, displayedSchedule, jadwalDipilih, dataPengajuan* | *displayForm(), displaySelectedSchedule(), showUnavailableWarning(), getFormData(), displayTenagaKesehatan(), filterDate(), displayAvailableSchedule(), selectTenagaKesehatan(), filterJenisTenagaKesehatan()* |
-| *C22* | *JadwalKonsultasiController* | *-* | *loadAvailableSchedules(), checkAvailability(), selectSchedule(), submitRequest()* |
-| *C23* | *KonsultasiController* | *-* | *submitPengajuan(), approvePengajuan(), reschedule()* |
+| *C21* | *PengajuanKonsultasiPage* | *selectedTenagaKesehatan, filteredDate, displayedSchedule, jadwalDipilih, dataPengajuan* | *displayForm(), displaySelectedSchedule(), showUnavailableWarning(), getFormData(), filterDate(), displayAvailableSchedule(), chooseSchedule(), fillForm(), submitForm(), showSuccessMessage()* |
+| *C22* | *JadwalKonsultasiController* | *tenagaKesehatanDipilih, daftarJadwal, pelajarAktif* | *loadAvailableSchedules(), checkAvailability(), selectSchedule(), submitRequest(), refreshAvailability()* |
+| *C23* | *KonsultasiController* | *-* | *approvePengajuan(), reschedule()* |
 | *C24* | *NotifikasiDaruratController* | *-* | *sendEmergencyNotification(), loadEmergencyDetail(), confirmReceived(), markFollowUp()* |
 | *C25* | *LoginPage* | *usernameOrEmailInput, passwordInput* | *showPage(), getInput(), showError(), selectForgotPassword()* |
 | *C26* | *ResetPasswordPage* | *emailInput, newPasswordInput, confirmPasswordInput* | *getInput(), showError(), showEmailForm(), showNewPasswordForm(), showMessage()* |
 | *C27* | *PasswordController* | *-* | *sendResetLink(), resetPassword(), generateResetLink(), validateNewPassword()* |
-| *C28* | *DashboardPage* | *currentUser* | *displayDashboard(), displayUserInfo()* |
-| *C29* | *SettingPage* | *currentUser* | *showPage(), selectLogout(), showLogoutConfirmation(), confirmLogout(), cancelLogout()* |
+| *C28* | *DashboardPage* | *currentUser, role* | *displayDashboard(), displayUserInfo()* |
+| *C29* | *SettingPage* | *-* | *showPage(), selectLogout(), showLogoutConfirmation(), confirmLogout(), cancelLogout()* |
 
 ---
 
@@ -1109,6 +1109,1064 @@ Tabel 5.17.3. Query Operasi calculateStatistics
 | No Query | Query | Keterangan |
 | --- | --- | --- |
 | *Q-017* | *SELECT tanggal, skala_mood, jam_tidur, pemicu_stres FROM check_in WHERE id_pelajar = @idPelajar AND tanggal >= @startDate ORDER BY tanggal ASC;* | *Mengambil sekumpulan data check-in berdasarkan rentang periode.* |
+
+## 5.21 Kelas PengajuanKonsultasiPage
+
+**Nama Kelas:** *PengajuanKonsultasiPage*  
+**ID Kelas:** *C21*
+
+Tabel 5.21.1. Operasi Kelas PengajuanKonsultasiPage
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *displayForm(idTenagaKesehatan: String, daftarJadwal: List<JadwalKonsultasi>): void* | *public* | *Menampilkan formulir pengajuan konsultasi beserta daftar jadwal tenaga kesehatan yang dipilih. Dipanggil oleh JadwalKonsultasiController setelah daftar jadwal berhasil dimuat.* |
+| *displaySelectedSchedule(idJadwal: String): void* | *public* | *Menampilkan jadwal yang dipilih pelajar pada formulir pengajuan. Dipanggil setelah jadwal terbukti tersedia.* |
+| *showUnavailableWarning(): void* | *public* | *Menampilkan peringatan bahwa jadwal yang dipilih tidak tersedia dan meminta pelajar memilih jadwal lain. Dipanggil jika pemeriksaan ketersediaan mengembalikan false.* |
+| *getFormData(): String* | *public* | *Mengambil data yang diisi pelajar pada formulir pengajuan (jadwal dan keluhan) untuk dikirim ke JadwalKonsultasiController. Dipanggil saat pelajar menekan tombol kirim.* |
+| *filterDate(tanggalBaru: Date): void* | *public* | *Menyaring jadwal berdasarkan tanggal yang dipilih tenaga kesehatan, lalu menampilkan slot waktu yang tersedia. Dipanggil pada proses reschedule jadwal konsultasi.* |
+| *displayAvailableSchedule(daftarJadwal: List<JadwalKonsultasi>): void* | *public* | *Menampilkan daftar jadwal konsultasi yang tersedia. Dipanggil saat tenaga kesehatan membuka menu pengajuan konsultasi (UC07), saat ketersediaan jadwal diperbarui selama formulir dibuka, dan saat jadwal yang dipilih pelajar tidak tersedia (UC06).* |
+| *chooseSchedule(idJadwal: String): void* | *public* | *Menerima aksi pelajar yang memilih jadwal konsultasi, lalu meneruskannya ke JadwalKonsultasiController untuk diperiksa ketersediaannya. Dipanggil juga saat pelajar memilih jadwal pengganti.* |
+| *fillForm(keluhan: String): void* | *public* | *Menerima keluhan yang diisi pelajar pada formulir pengajuan.* |
+| *submitForm(): void* | *public* | *Menerima aksi pelajar yang menekan tombol kirim, lalu mengambil data formulir dan mengirimkannya ke JadwalKonsultasiController.* |
+| *showSuccessMessage(): void* | *public* | *Menampilkan pesan bahwa pengajuan tersimpan dan menunggu ditinjau tenaga kesehatan. Dipanggil setelah pengajuan berhasil dikirim.* |
+
+Tabel 5.21.2. Atribut Kelas PengajuanKonsultasiPage
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *selectedTenagaKesehatan* | *private* | *TenagaKesehatan* |
+| *filteredDate* | *private* | *Date* |
+| *displayedSchedule* | *private* | *List<JadwalKonsultasi>* |
+| *jadwalDipilih* | *private* | *JadwalKonsultasi* |
+| *dataPengajuan* | *private* | *String* |
+
+### 5.21.1 Algoritma/Query
+
+**Nama Kelas:** *PengajuanKonsultasiPage*  
+**Nama Operasi:** *displayForm(idTenagaKesehatan, daftarJadwal)*  
+**ID Algoritma:** *Algo-C21-01*
+
+```text
+Procedure displayForm(idTenagaKesehatan, daftarJadwal)
+    selectedTenagaKesehatan.id ← idTenagaKesehatan
+    displayedSchedule ← daftarJadwal
+    UI.showConsultationForm(idTenagaKesehatan, displayedSchedule)
+```
+
+Tabel 5.21.1.1. Query Operasi displayForm(idTenagaKesehatan, daftarJadwal)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.21.2 Algoritma/Query
+
+**Nama Kelas:** *PengajuanKonsultasiPage*  
+**Nama Operasi:** *displaySelectedSchedule(idJadwal)*  
+**ID Algoritma:** *Algo-C21-02*
+
+```text
+Procedure displaySelectedSchedule(idJadwal)
+    jadwalDipilih ← NULL
+    i ← 1
+    while (i ≤ length(displayedSchedule)) and (jadwalDipilih = NULL) do
+        if (displayedSchedule[i].idJadwal = idJadwal) then
+            jadwalDipilih ← displayedSchedule[i]
+        i ← i + 1
+    if (jadwalDipilih ≠ NULL) then
+        UI.showSelectedSchedule(jadwalDipilih)
+```
+
+Tabel 5.21.2.1. Query Operasi displaySelectedSchedule(idJadwal)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.21.3 Algoritma/Query
+
+**Nama Kelas:** *PengajuanKonsultasiPage*  
+**Nama Operasi:** *showUnavailableWarning()*  
+**ID Algoritma:** *Algo-C21-03*
+
+```text
+Procedure showUnavailableWarning()
+    UI.showWarning("Jadwal yang dipilih tidak tersedia, silakan pilih jadwal lain.")
+```
+
+Tabel 5.21.3.1. Query Operasi showUnavailableWarning()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.21.4 Algoritma/Query
+
+**Nama Kelas:** *PengajuanKonsultasiPage*  
+**Nama Operasi:** *getFormData()*  
+**ID Algoritma:** *Algo-C21-04*
+
+```text
+Function getFormData() → String
+    dataPengajuan ← UI.getFieldValue("keluhan")
+    → dataPengajuan
+```
+
+Tabel 5.21.4.1. Query Operasi getFormData()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.21.5 Algoritma/Query
+
+**Nama Kelas:** *PengajuanKonsultasiPage*  
+**Nama Operasi:** *filterDate(tanggalBaru)*  
+**ID Algoritma:** *Algo-C21-05*
+
+```text
+Procedure filterDate(tanggalBaru)
+    filteredDate ← tanggalBaru
+    CreateList(hasil)
+    i traversal [1..length(displayedSchedule)]
+        if (displayedSchedule[i].tanggal = filteredDate) then
+            InsertLast(hasil, displayedSchedule[i])
+    UI.showTimeSlots(hasil)
+```
+
+Tabel 5.21.5.1. Query Operasi filterDate(tanggalBaru)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.21.6 Algoritma/Query
+
+**Nama Kelas:** *PengajuanKonsultasiPage*  
+**Nama Operasi:** *displayAvailableSchedule(daftarJadwal)*  
+**ID Algoritma:** *Algo-C21-06*
+
+```text
+Procedure displayAvailableSchedule(daftarJadwal)
+    displayedSchedule ← daftarJadwal
+    UI.showScheduleList(displayedSchedule)
+```
+
+Tabel 5.21.6.1. Query Operasi displayAvailableSchedule(daftarJadwal)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.21.7 Algoritma/Query
+
+**Nama Kelas:** *PengajuanKonsultasiPage*  
+**Nama Operasi:** *chooseSchedule(idJadwal)*  
+**ID Algoritma:** *Algo-C21-07*
+
+```text
+Procedure chooseSchedule(idJadwal)
+    tersedia ← JadwalKonsultasiController.selectSchedule(idJadwal)
+    if (tersedia = true) then
+        displaySelectedSchedule(idJadwal)
+    else
+        showUnavailableWarning()
+        daftarJadwal ← JadwalKonsultasiController.refreshAvailability(selectedTenagaKesehatan.id)
+    displayAvailableSchedule(daftarJadwal)
+```
+
+Tabel 5.21.7.1. Query Operasi chooseSchedule(idJadwal)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.21.8 Algoritma/Query
+
+**Nama Kelas:** *PengajuanKonsultasiPage*  
+**Nama Operasi:** *fillForm(keluhan)*  
+**ID Algoritma:** *Algo-C21-08*
+
+```text
+Procedure fillForm(keluhan)
+    UI.setFieldValue("keluhan", keluhan)
+    while (UI.isFormOpen() = true) do
+        daftarJadwal ← JadwalKonsultasiController.refreshAvailability(selectedTenagaKesehatan.id)
+        displayAvailableSchedule(daftarJadwal)
+```
+
+Tabel 5.21.8.1. Query Operasi fillForm(keluhan)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.21.9 Algoritma/Query
+
+**Nama Kelas:** *PengajuanKonsultasiPage*  
+**Nama Operasi:** *submitForm()*  
+**ID Algoritma:** *Algo-C21-09*
+
+```text
+Procedure submitForm()
+    dataPengajuan ← getFormData()
+    berhasil ← JadwalKonsultasiController.submitRequest(jadwalDipilih.idJadwal, dataPengajuan)
+    if (berhasil = true) then
+        showSuccessMessage()
+    else
+        UI.showWarning("Pengajuan gagal dikirim, silakan coba lagi.")
+```
+
+Tabel 5.21.9.1. Query Operasi submitForm()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.21.10 Algoritma/Query
+
+**Nama Kelas:** *PengajuanKonsultasiPage*  
+**Nama Operasi:** *showSuccessMessage()*  
+**ID Algoritma:** *Algo-C21-09*
+
+```text
+Procedure showSuccessMessage()
+    UI.showMessage("Pengajuan tersimpan dan menunggu ditinjau tenaga kesehatan.")
+```
+
+Tabel 5.21.9.1. Query Operasi showSuccessMessage()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+## 5.22 Kelas JadwalKonsultasiController
+
+**Nama Kelas:** *JadwalKonsultasiController*  
+**ID Kelas:** *C22*
+
+Tabel 5.22.1. Operasi Kelas JadwalKonsultasiController
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *loadAvailableSchedules(idTenagaKesehatan: String): List<JadwalKonsultasi>* | *public* | *Mengambil daftar jadwal yang tersedia milik tenaga kesehatan berdasarkan ID tenaga kesehatan, lalu menampilkannya pada formulir pengajuan konsultasi. Dipanggil oleh ProfilTenagaKesehatanPage saat pelajar membuka profil tenaga kesehatan.* |
+| *checkAvailability(idJadwal: String): Boolean* | *private* | *Memeriksa apakah jadwal masih tersedia melalui JadwalKonsultasi. Hanya dipanggil secara internal oleh selectSchedule().* |
+| *selectSchedule(idJadwal: String): Boolean* | *public* | *Memproses jadwal yang dipilih pelajar dengan memeriksa ketersediaannya. Mengembalikan true jika jadwal tersedia dan false jika tidak tersedia. Dipanggil oleh PengajuanKonsultasiPage saat pelajar memilih jadwal.* |
+| *submitRequest(idJadwal: String, keluhan: String): Boolean* | *public* | *Mengirim pengajuan konsultasi pelajar dengan jadwal dan keluhan yang diisi, lalu meneruskannya ke Pelajar untuk direservasi. Mengembalikan true jika pengajuan berhasil disimpan. Dipanggil oleh PengajuanKonsultasiPage saat pelajar menekan tombol kirim.* |
+| *refreshAvailability(idTenagaKesehatan: String): List<JadwalKonsultasi>* | *public* | *Memperbarui daftar jadwal tersedia milik tenaga kesehatan. Dipanggil oleh PengajuanKonsultasiPage selama formulir pengajuan dibuka, atau saat jadwal yang dipilih ternyata tidak tersedia.* |
+
+Tabel 5.22.2. Atribut Kelas JadwalKonsultasiController
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+| *tenagaKesehatanDipilih* | *private* | *TenagaKesehatan* |
+| *daftarJadwal* | *private* | *List<JadwalKonsultasi>* |
+| *pelajarAktif* | *private* | *Pelajar* |
+
+### 5.22.1 Algoritma/Query
+
+**Nama Kelas:** *JadwalKonsultasiController*  
+**Nama Operasi:** *loadAvailableSchedules(idTenagaKesehatan)*  
+**ID Algoritma:** *Algo-C22-01*
+
+```text
+Function loadAvailableSchedules(idTenagaKesehatan) → List
+    tenagaKesehatanDipilih ← TenagaKesehatan.findById(idTenagaKesehatan)
+    daftarJadwal ← tenagaKesehatanDipilih.getJadwalTersedia()
+    PengajuanKonsultasiPage.displayForm(idTenagaKesehatan, daftarJadwal)
+    → daftarJadwal
+```
+
+Tabel 5.22.1.1. Query Operasi loadAvailableSchedules(idTenagaKesehatan)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.22.2 Algoritma/Query
+
+**Nama Kelas:** *JadwalKonsultasiController*  
+**Nama Operasi:** *checkAvailability(idJadwal)*  
+**ID Algoritma:** *Algo-C22-02*
+
+```text
+Function checkAvailability(idJadwal: String) → Boolean
+    jadwal ← NULL
+    i ← 1
+    while (i ≤ length(daftarJadwal)) and (jadwal = NULL) do
+        if (daftarJadwal[i].idJadwal = idJadwal) then
+            jadwal ← daftarJadwal[i]
+        i ← i + 1
+    if (jadwal = NULL) then
+        hasil ← false
+    else
+        hasil ← jadwal.isAvailable()
+    → hasil
+```
+
+Tabel 5.22.2.1. Query Operasi checkAvailability(idJadwal)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.22.3 Algoritma/Query
+
+**Nama Kelas:** *JadwalKonsultasiController*  
+**Nama Operasi:** *selectSchedule(idJadwal)*  
+**ID Algoritma:** *Algo-C22-03*
+
+```text
+Function selectSchedule(idJadwal) → Boolean
+    hasil ← checkAvailability(idJadwal)
+    → hasil
+``` 
+
+Tabel 5.22.3.1. Query Operasi selectSchedule(idJadwal)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.22.4 Algoritma/Query
+
+**Nama Kelas:** *JadwalKonsultasiController*  
+**Nama Operasi:** *submitRequest(idJadwal, keluhan)*  
+**ID Algoritma:** *Algo-C22-04*
+
+```text
+Function submitRequest(idJadwal, keluhan) → Boolean
+    jadwal ← NULL
+    i ← 1
+    while (i ≤ length(daftarJadwal)) and (jadwal = NULL) do
+        if (daftarJadwal[i].idJadwal = idJadwal) then
+            jadwal ← daftarJadwal[i]
+        i ← i + 1
+    if (jadwal = NULL) then
+        hasil ← false
+    else
+        hasil ← pelajarAktif.ajukanKonsultasi(jadwal, keluhan)
+    → hasil
+```
+
+Tabel 5.22.4.1. Query Operasi submitRequest(idJadwal, keluhan)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.22.5 Algoritma/Query
+
+**Nama Kelas:** *JadwalKonsultasiController*  
+**Nama Operasi:** *refreshAvailability(idTenagaKesehatan)*  
+**ID Algoritma:** *Algo-C22-05*
+
+```text
+Function refreshAvailability(idTenagaKesehatan) → List
+    daftarJadwal ← tenagaKesehatanDipilih.getJadwalTersedia()
+    → daftarJadwal
+```
+
+Tabel 5.22.5.1. Query Operasi refreshAvailability(idTenagaKesehatan)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+## 5.23 Kelas KonsultasiController
+
+**Nama Kelas:** *KonsultasiController*  
+**ID Kelas:** *C23*
+
+Tabel 5.23.1. Operasi Kelas KonsultasiController
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *approvePengajuan(idJadwal: String): Boolean* | *public* | *Menyetujui pengajuan konsultasi berdasarkan ID jadwal, dengan mengubah status jadwal konsultasi menjadi “Disetujui”. Dipanggil oleh PengajuanKonsultasiPage saat tenaga kesehatan menekan tombol setuju pengajuan. Mengembalikan true jika status berhasil diperbarui.* |
+| *reschedule(idJadwal: String, tanggalBaru: Date, waktuBaru: Time): Boolean* | *public* | *Mengubah jadwal konsultasi berdasarkan ID jadwal ke tanggal dan waktu baru, lalu mengubah status jadwal menjadi “Rescheduled”. Dipanggil oleh PengajuanKonsultasiPage saat tenaga kesehatan memilih jadwal baru dan menekan tombol kirim reschedule. Mengembalikan true jika jadwal berhasil diperbarui.* |
+
+Tabel 5.23.2. Atribut Kelas KonsultasiController
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.23.1 Algoritma/Query
+
+**Nama Kelas:** *KonsultasiController*  
+**Nama Operasi:** *approvePengajuan(idJadwal)*  
+**ID Algoritma:** *Algo-C23-01*
+
+```text
+Function approvePengajuan(idJadwal) → Boolean
+    if (idJadwal = NULL) then
+        raise Error("ID jadwal harus diisi.")
+    hasil ← JadwalKonsultasi.updateStatus(idJadwal, "Disetujui")
+    → hasil
+```
+
+Tabel 5.23.1.1. Query Operasi approvePengajuan(idJadwal)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.23.2 Algoritma/Query
+
+**Nama Kelas:** *KonsultasiController*  
+**Nama Operasi:** *reschedule(idJadwal, tanggalBaru, waktuBaru)*  
+**ID Algoritma:** *Algo-C23-02*
+
+```text
+Function reschedule(idJadwal, tanggalBaru, waktuBaru) → Boolean
+    if (idJadwal = NULL) or (tanggalBaru = NULL) or (waktuBaru = NULL) then
+        raise Error("ID jadwal, tanggal baru, dan waktu baru harus diisi.")
+    hasil ← JadwalKonsultasi.updateSchedule(idJadwal, tanggalBaru, waktuBaru)
+    → hasil
+```
+
+Tabel 5.23.2.1. Query Operasi reschedule(idJadwal, tanggalBaru, waktuBaru)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+## 5.24 Kelas NotifikasiDaruratController
+
+**Nama Kelas:** *NotifikasiDaruratController*  
+**ID Kelas:** *C24*
+
+Tabel 5.24.1. Operasi Kelas NotifikasiDaruratController
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *sendEmergencyNotification(): void* | *public* | *Mengirim notifikasi darurat kepada orang tua/wali. Dipanggil saat orang tua/wali tidak merespons notifikasi darurat hingga batas waktu, setelah pengiriman ulang (reminder).* |
+| *loadEmergencyDetail(idWali: String): String* | *public* | *Mengambil detail notifikasi darurat untuk orang tua/wali tertentu, berupa ringkasan kondisi pelajar yang ditampilkan pada pop-up notifikasi darurat. Dipanggil saat orang tua/wali membuka notifikasi darurat.* |
+| *confirmReceived(idNotifikasi: String): Boolean* | *public* | *Mencatat status notifikasi sebagai “Diterima” beserta waktu konfirmasi. Dipanggil saat orang tua/wali menekan tombol “Konfirmasi Diterima”. Mengembalikan true jika status berhasil dicatat.* |
+| *markFollowUp(idNotifikasi: String): Boolean* | *public* | *Mencatat status tindak lanjut sebagai “Sudah Ditindaklanjuti” beserta waktu tindak lanjut, lalu memperbarui status darurat pelajar menjadi tidak darurat. Dipanggil saat orang tua/wali menekan tombol “Tandai Sudah Ditindaklanjuti”. Mengembalikan true jika berhasil.* |
+
+Tabel 5.24.2. Atribut Kelas NotifikasiDaruratController
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+### 5.24.1 Algoritma/Query
+
+**Nama Kelas:** *NotifikasiDaruratController*  
+**Nama Operasi:** *sendEmergencyNotification()*  
+**ID Algoritma:** *Algo-C24-01*
+
+```text
+Procedure sendEmergencyNotification()
+    NOTIFICATION_SERVICE.sendEmergencyToOrangTuaWali()
+```
+
+Tabel 5.24.1.1. Query Operasi sendEmergencyNotification()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.24.2 Algoritma/Query
+
+**Nama Kelas:** *NotifikasiDaruratController*  
+**Nama Operasi:** *loadEmergencyDetail(idWali)*  
+**ID Algoritma:** *Algo-C24-02*
+
+```text
+Function loadEmergencyDetail(idWali) → String
+    if (idWali = NULL) then
+        raise Error("ID wali harus diisi.")
+    isEmergency ← LaporanKesehatan.detectEmergency()
+    if (isEmergency = true) then
+        hasil ← LaporanKesehatan.ringkasanKondisi
+    else
+        hasil ← ""
+    → hasil
+```
+
+Tabel 5.24.2.1. Query Operasi loadEmergencyDetail(idWali)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.24.3 Algoritma/Query
+
+**Nama Kelas:** *NotifikasiDaruratController*  
+**Nama Operasi:** *confirmReceived(idNotifikasi)*  
+**ID Algoritma:** *Algo-C24-03*
+
+```text
+Function confirmReceived(idNotifikasi) → Boolean
+    if (idNotifikasi = NULL) then
+        raise Error("ID notifikasi harus diisi.")
+    DB_SERVICE.updateStatusDiterima(idNotifikasi)
+    → true
+```
+
+Tabel 5.24.3.1. Query Operasi confirmReceived(idNotifikasi)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C24-01* | *UPDATE notifikasi_darurat
+SET status = ‘Diterima’,
+waktu_konfirmasi = NOW()
+WHERE id = @idNotifikasi;* | *Mencatat status notifikasi sebagai “Diterima” beserta waktu konfirmasi. Digunakan oleh confirmReceived() saat orang tua/wali menekan tombol “Konfirmasi Diterima”.* |
+
+
+### 5.24.4 Algoritma/Query
+
+**Nama Kelas:** *NotifikasiDaruratController*  
+**Nama Operasi:** *markFollowUp(idNotifikasi)*  
+**ID Algoritma:** *Algo-C24-04*
+
+```text
+Function markFollowUp(idNotifikasi) → Boolean
+    if (idNotifikasi = NULL) then
+        raise Error("ID notifikasi harus diisi.")
+    DB_SERVICE.updateStatusTindakLanjut(idNotifikasi)
+    Pelajar.updateEmergencyStatus(false)
+    → true
+``` 
+
+Tabel 5.24.4.1. Query Operasi markFollowUp(idNotifikasi)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C24-02* | *UPDATE notifikasi_darurat
+SET status_tindak_lanjut = ‘Sudah Ditindaklanjuti’,
+waktu_tindak_lanjut = NOW()
+WHERE id = @idNotifikasi;* | *Mencatat status tindak lanjut sebagai “Sudah Ditindaklanjuti” beserta waktu tindak lanjut. Digunakan oleh markFollowUp() saat orang tua/wali menekan tombol “Tandai Sudah Ditindaklanjuti”.* |
+| *Q-C24-03* | *UPDATE pelajar
+SET status_darurat = @status
+WHERE id = (SELECT id_pelajar FROM notifikasi_darurat WHERE id = @idNotifikasi);* | *Mengubah status darurat pelajar menjadi tidak darurat. Digunakan oleh markFollowUp() setelah tindak lanjut dicatat.* |
+
+
+## 5.25 Kelas LoginPage
+
+**Nama Kelas:** *LoginPage*  
+**ID Kelas:** *C25*
+
+Tabel 5.25.1. Operasi Kelas LoginPage
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *showPage(): void* | *public* | *Menampilkan halaman masuk akun beserta kolom username/e-mail, password, dan tombol “Lupa Password”. Dipanggil saat pengguna memilih menu masuk akun dan saat pengguna kembali dari proses reset password.* |
+| *getInput(): String[]* | *public* | *Mengambil username/e-mail dan password yang diisi pengguna setelah menekan tombol masuk. Hasilnya dipakai untuk memanggil login() di AuthController.* |
+| *showError(message: String): void* | *public* | *Menampilkan pesan kesalahan kepada pengguna. Dipanggil jika kredensial tidak valid (pengguna diminta input ulang) atau jika akun belum aktif karena menunggu konfirmasi orang tua/wali (akses masuk ditolak).* |
+| *selectForgotPassword(): void* | *public* | *Menerima aksi pengguna yang menekan tombol “Lupa Password”, lalu memicu penampilan halaman input e-mail pada ResetPasswordPage.* |
+
+Tabel 5.25.2. Atribut Kelas LoginPage
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *usernameOrEmailInput* | *private* | *String* |
+| *passwordInput* | *private* | *String* |
+
+### 5.25.1 Algoritma/Query
+
+**Nama Kelas:** *LoginPage*  
+**Nama Operasi:** *showPage()*  
+**ID Algoritma:** *Algo-C25-01*
+
+```text
+Procedure showPage()
+    UI.showLoginPage()
+```
+
+Tabel 5.25.1.1. Query Operasi showPage()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.25.2 Algoritma/Query
+
+**Nama Kelas:** *LoginPage*  
+**Nama Operasi:** *getInput()*  
+**ID Algoritma:** *Algo-C25-02*
+
+```text
+Function getInput() → String[]
+    usernameOrEmailInput ← UI.getFieldValue("usernameOrEmail")
+    passwordInput ← UI.getFieldValue("password")
+    → [usernameOrEmailInput, passwordInput]
+``` 
+
+Tabel 5.25.2.1. Query Operasi getInput()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.25.3 Algoritma/Query
+
+**Nama Kelas:** *LoginPage*  
+**Nama Operasi:** *showError(message)*  
+**ID Algoritma:** *Algo-C25-03*
+
+```text
+Procedure showError(message)
+    UI.showError(message)
+``` 
+
+Tabel 5.25.3.1. Query Operasi showError(message)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.25.4 Algoritma/Query
+
+**Nama Kelas:** *LoginPage*  
+**Nama Operasi:** *selectForgotPassword()*  
+**ID Algoritma:** *Algo-C25-04*
+
+```text
+Procedure selectForgotPassword()
+    ResetPasswordPage.showEmailForm()
+```
+
+Tabel 5.25.4.1. Query Operasi selectForgotPassword()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+## 5.26 Kelas ResetPasswordPage
+
+**Nama Kelas:** *ResetPasswordPage*  
+**ID Kelas:** *C26*
+
+Tabel 5.26.1. Operasi Kelas ResetPasswordPage
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *getInput(): String[]* | *public* | *Mengambil data yang diisi pengguna pada formulir, yaitu e-mail atau password baru beserta konfirmasinya. Dipanggil setelah pengguna menekan tombol kirim atau simpan.* |
+| *showError(message: String): void* | *public* | *Menampilkan pesan kesalahan dan meminta pengguna menginput ulang e-mail. Dipanggil jika e-mail tidak terdaftar.* |
+| *showEmailForm(): void* | *public* | *Menampilkan halaman input e-mail untuk reset password. Dipanggil oleh LoginPage setelah pengguna menekan tombol “Lupa Password”.* |
+| *showNewPasswordForm(): void* | *public* | *Menampilkan halaman input password baru dan konfirmasi password. Dipanggil saat pengguna membuka tautan reset password dari e-mail.* |
+| *showMessage(message: String): void* | *public* | *Menampilkan pesan informasi kepada pengguna, yaitu pesan tautan reset telah dikirim atau pesan password berhasil diubah.* |
+
+Tabel 5.26.2. Atribut Kelas ResetPasswordPage
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *emailInput* | *private* | *String* |
+| *newPasswordInput* | *private* | *String* |
+| *confirmPasswordInput* | *private* | *String* |
+
+### 5.26.1 Algoritma/Query
+
+**Nama Kelas:** *ResetPasswordPage*  
+**Nama Operasi:** *getInput()*  
+**ID Algoritma:** *Algo-C26-01*
+
+```text
+Function getInput() → String[]
+    emailInput ← UI.getFieldValue("email")
+    newPasswordInput ← UI.getFieldValue("newPassword")
+    confirmPasswordInput ← UI.getFieldValue("confirmPassword")
+    → [emailInput, newPasswordInput, confirmPasswordInput]
+```
+
+Tabel 5.26.1.1. Query Operasi getInput()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.26.2 Algoritma/Query
+
+**Nama Kelas:** *ResetPasswordPage*  
+**Nama Operasi:** *showError(message)*  
+**ID Algoritma:** *Algo-C26-02*
+
+```text
+Procedure showError(message)
+    UI.showError(message)
+```
+
+Tabel 5.26.1.1. Query Operasi showError(message)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.26.3 Algoritma/Query
+
+**Nama Kelas:** *ResetPasswordPage*  
+**Nama Operasi:** *showEmailForm()*  
+**ID Algoritma:** *Algo-C26-03*
+
+```text
+Procedure showEmailForm()
+    UI.showEmailForm()
+``` 
+
+Tabel 5.26.1.1. Query Operasi showEmailForm()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.26.4 Algoritma/Query
+
+**Nama Kelas:** *ResetPasswordPage*  
+**Nama Operasi:** *showNewPasswordForm()*  
+**ID Algoritma:** *Algo-C26-04*
+
+```text
+Procedure showNewPasswordForm()
+    UI.showNewPasswordForm()
+```
+
+Tabel 5.26.1.1. Query Operasi showNewPasswordForm()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.26.5 Algoritma/Query
+
+**Nama Kelas:** *ResetPasswordPage*  
+**Nama Operasi:** *showMessage(message)*  
+**ID Algoritma:** *Algo-C26-05*
+
+```text
+Procedure showMessage(message)
+    UI.showMessage(message)
+```
+
+Tabel 5.26.1.1. Query Operasi showMessage(message)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+## 5.27 Kelas PasswordController
+
+**Nama Kelas:** *PasswordController*  
+**ID Kelas:** *C27*
+
+Tabel 5.27.1. Operasi Kelas PasswordController
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *sendResetLink(email: String): Boolean* | *public* | *Memeriksa apakah e-mail terdaftar, lalu mengirim tautan reset password ke e-mail tersebut. Mengembalikan true jika tautan terkirim dan false jika e-mail tidak terdaftar. Dipanggil oleh ResetPasswordPage setelah pengguna mengirim e-mail.* |
+| *resetPassword(newPassword: String, confirmPassword: String): Boolean* | *public* | *Memperbarui password pengguna dengan password baru. Mengembalikan true jika password berhasil diperbarui. Dipanggil oleh ResetPasswordPage setelah pengguna menyimpan password baru.* |
+| *generateResetLink(email: String): String* | *private* | *Membuat tautan reset password untuk e-mail yang terdaftar. Hanya dipanggil secara internal oleh sendResetLink().* |
+| *validateNewPassword(newPassword: String, confirmPassword: String): Boolean* | *private* | *Memeriksa apakah password baru sesuai ketentuan keamanan dan sama dengan konfirmasi password. Hanya dipanggil secara internal oleh resetPassword() sebelum password disimpan.* |
+
+Tabel 5.27.2. Atribut Kelas PasswordController
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+### 5.27.1 Algoritma/Query
+
+**Nama Kelas:** *PasswordController*  
+**Nama Operasi:** *sendResetLink(email)*  
+**ID Algoritma:** *Algo-C27-01*
+
+```text
+Function sendResetLink(email) → Boolean
+    if (email = NULL) then
+        raise Error("E-mail harus diisi.")
+    pengguna ← Pengguna.findByEmail(email)
+    if (pengguna = NULL) then
+        hasil ← false
+    else
+        resetLink ← generateResetLink(email)
+        EMAIL_SERVICE.sendResetLinkEmail(email, resetLink)
+    hasil ← true
+    → hasil
+```
+
+Tabel 5.27.1.1. Query Operasi sendResetLink(email)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C27-01* | *findPenggunaByEmail:
+SELECT * FROM pengguna
+WHERE email = @email;* | *Mencari data pengguna berdasarkan e-mail. Digunakan oleh sendResetLink() untuk memeriksa apakah e-mail terdaftar sebelum tautan reset dikirim.* |
+
+
+### 5.27.2 Algoritma/Query
+
+**Nama Kelas:** *PasswordController*  
+**Nama Operasi:** *resetPassword(newPassword, confirmPassword)*  
+**ID Algoritma:** *Algo-C27-02*
+
+```text
+Function resetPassword(newPassword, confirmPassword) → Boolean
+    if (newPassword = NULL) or (confirmPassword = NULL) then
+        raise Error("Password baru dan konfirmasi harus diisi.")
+    if (validateNewPassword(newPassword, confirmPassword) = false) then
+        hasil ← false
+    else
+        pengguna ← SECURITY.getUserFromResetToken()
+        hasil ← pengguna.setPassword(newPassword)
+    → hasil
+```
+
+Tabel 5.27.2.1. Query Operasi esetPassword(newPassword, confirmPassword)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-001* | *updatePasswordPengguna:
+UPDATE pengguna
+SET password = @hashedPassword
+WHERE id = @idPengguna;* | *Memperbarui password pengguna dengan password baru. Digunakan oleh resetPassword() setelah password baru lolos validasi ketentuan keamanan.* |
+
+
+### 5.27.3 Algoritma/Query
+
+**Nama Kelas:** *PasswordController*  
+**Nama Operasi:** *generateResetLink(email)*  
+**ID Algoritma:** *Algo-C27-03*
+
+```text
+Function generateResetLink(email) → String
+    token ← SECURITY.createResetToken(email)
+    resetLink ← APP_URL + "/reset-password?token=" + token
+    → resetLink
+```
+
+Tabel 5.27.3.1. Query Operasi generateResetLink(email)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.27.4 Algoritma/Query
+
+**Nama Kelas:** *PasswordController*  
+**Nama Operasi:** *validateNewPassword(newPassword, confirmPassword)*  
+**ID Algoritma:** *Algo-C27-04*
+
+```text
+Function validateNewPassword(newPassword, confirmPassword) → Boolean
+    if (newPassword ≠ confirmPassword) then
+        hasil ← false
+    else if (newPassword.length < 8) then
+        hasil ← false
+    else
+        hasil ← true
+    → hasil
+```
+
+Tabel 5.27.4.1. Query Operasi validateNewPassword(newPassword, confirmPassword)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+## 5.28 Kelas DashboardPage
+
+**Nama Kelas:** *DashboardPage*  
+**ID Kelas:** *C28*
+
+Tabel 5.28.1. Operasi Kelas DashboardPage
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *displayDashboard(currentUser: Pengguna, role: String): void* | *public* | *Menampilkan dashboard sesuai peran pengguna. Dipanggil oleh AuthController setelah sesi login berhasil dimulai, dengan data pengguna dan perannya sebagai parameter.* |
+| *displayUserInfo(): void* | *private* | *Menampilkan informasi pengguna yang sedang login pada dashboard. Hanya dipanggil secara internal oleh displayDashboard().* |
+
+Tabel 5.28.2. Atribut Kelas DashboardPage
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *currentUser* | *private* | *Pengguna* |
+| *role* | *private* | *String* |
+
+### 5.28.1 Algoritma/Query
+
+**Nama Kelas:** *DashboardPage*  
+**Nama Operasi:** *displayDashboard(currentUser, role)*  
+**ID Algoritma:** *Algo-C28-01*
+
+```text
+Procedure displayDashboard(currentUser, role)
+    if (currentUser = NULL) or (role = NULL) then
+        raise Error("Data pengguna dan peran harus diisi.")
+    this.currentUser ← currentUser
+    this.role ← role
+    UI.showDashboard(role)
+    displayUserInfo()
+```
+
+Tabel 5.28.1.1. Query Operasi displayDashboard(currentUser, role)
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.28.2 Algoritma/Query
+
+**Nama Kelas:** *DashboardPage*  
+**Nama Operasi:** *displayUserInfo()*  
+**ID Algoritma:** *Algo-C28-02*
+
+```text
+Procedure displayUserInfo()
+	UI.showUserInfo(currentUser)
+```
+
+Tabel 5.28.2.1. Query Operasi displayUserInfo()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+## 5.29 Kelas SettingPage
+
+**Nama Kelas:** *SettingPage*  
+**ID Kelas:** *C29*
+
+Tabel 5.29.1. Operasi Kelas SettingPage
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *showPage(): void* | *public* | *Menampilkan halaman pengaturan/profil kepada pengguna. Dipanggil saat pengguna memilih menu pengaturan/profil dan saat pengguna kembali ke halaman ini setelah membatalkan keluar akun.* |
+| *selectLogout(): void* | *public* | *Menerima aksi pengguna yang menekan tombol keluar akun (logout), lalu memicu penampilan konfirmasi keluar akun.* |
+| *showLogoutConfirmation(): void* | *private* | *Menampilkan pop up konfirmasi keluar akun kepada pengguna. Hanya dipanggil secara internal oleh selectLogout().* |
+| *confirmLogout(): void* | *public* | *Memproses aksi pengguna yang menekan tombol konfirmasi keluar, lalu meneruskan permintaan logout ke AuthController.* |
+| *cancelLogout(): void* | *public* | *Memproses aksi pengguna yang menekan tombol batal, menutup pop up konfirmasi, dan mempertahankan sesi login pengguna.* |
+
+Tabel 5.29.2. Atribut Kelas SettingPage
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+### 5.29.1 Algoritma/Query
+
+**Nama Kelas:** *SettingPage*  
+**Nama Operasi:** *showPage()*  
+**ID Algoritma:** *Algo-C29-01*
+
+```text
+Procedure showPage()
+	UI.showSettingPage()
+```
+
+Tabel 5.29.1.1. Query Operasi showPage()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.29.2 Algoritma/Query
+
+**Nama Kelas:** *SettingPage*  
+**Nama Operasi:** *selectLogout()*  
+**ID Algoritma:** *Algo-C29-02*
+
+```text
+Procedure selectLogout()
+	showLogoutConfirmation()
+```
+
+Tabel 5.29.2.1. Query Operasi selectLogout()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.29.3 Algoritma/Query
+
+**Nama Kelas:** *SettingPage*  
+**Nama Operasi:** *showLogoutConfirmation()*  
+**ID Algoritma:** *Algo-C29-03*
+
+```text
+Procedure showLogoutConfirmation()
+	UI.showPopup(“Apakah Anda yakin ingin keluar akun?”)
+```
+
+Tabel 5.29.3.1. Query Operasi showLogoutConfirmation()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.29.4 Algoritma/Query
+
+**Nama Kelas:** *SettingPage*  
+**Nama Operasi:** *confirmLogout(): void*  
+**ID Algoritma:** *Algo-C29-04*
+
+```text
+Procedure confirmLogout()
+    AuthController.logout()
+```
+
+Tabel 5.29.4.1. Query Operasi confirmLogout()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
+
+
+### 5.29.5 Algoritma/Query
+
+**Nama Kelas:** *SettingPage*  
+**Nama Operasi:** *cancelLogout()*  
+**ID Algoritma:** *Algo-C29-05*
+
+```text
+Procedure cancelLogout()
+	UI.closePopup()
+	showPage()
+```
+
+Tabel 5.29.5.1. Query Operasi cancelLogout()
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *-* | *-* | *-* |
 
 <br>
 
