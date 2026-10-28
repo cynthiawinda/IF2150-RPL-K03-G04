@@ -1881,6 +1881,7 @@ end Procedure
 ```
 ## 5.11 Kelas AuthController
 **Nama Kelas:** AuthController
+
 **ID Kelas:** C11
 
 Tabel 5.11.1 Operasi Kelas AuthController
@@ -1906,7 +1907,9 @@ Tabel 5.11.2 Atribut Kelas AuthController
 ### 5.11.1 Algoritma/Query
 
 **Nama Kelas:** AuthController
+
 **Nama Operasi:** validateData(data)
+
 **ID Algoritma:** Algo-C11-01
 
 ```text
@@ -1926,7 +1929,9 @@ Tabel 5.11.1.1 Query Operasi validateData(data)
 | *-* | *-* | *Validasi dilakukan terhadap data masukan tanpa mengakses basis data.* |
 
 **Nama Kelas:** AuthController
+
 **Nama Operasi:** registerAccount(data)
+
 **ID Algoritma:** Algo-C11-02
 
 ```text
@@ -1946,8 +1951,11 @@ Tabel 5.11.1.2 Query Operasi registerAccount(data)
 | No Query | Query | Keterangan |
 |---|---|---|
 | *Q-C11-01* | *INSERT INTO tbl_pengguna (username, email, password, role, status_akun) VALUES (@username, @email, @encryptedPassword, @role, 'PENDING');* | *Menyimpan data pendaftaran akun baru ke basis data.* |
+
 **Nama Kelas:** AuthController
+
 **Nama Operasi:** login(usernameOrEmail, pass)
+
 **ID Algoritma:** Algo-C11-03
 
 ```text
@@ -1975,7 +1983,9 @@ Tabel 5.11.1.3 Query Operasi login(usernameOrEmail, pass)
 | *-* | *-* | *Operasi mengatur alur autentikasi dan memanggil operasi lain yang menangani akses basis data.* |
 
 **Nama Kelas:** AuthController
+
 **Nama Operasi:** logout()
+
 **ID Algoritma:** Algo-C11-04
 
 ```text
@@ -1990,7 +2000,9 @@ Tabel 5.11.1.4 Query Operasi logout()
 | *-* | *-* | Mengakhiri sesi aplikasi tanpa menjalankan query SQL secara langsung. |
 
 **Nama Kelas:** AuthController
+
 **Nama Operasi:** validateConfirmation(token)
+
 **ID Algoritma:** Algo-C11-05
 
 ```text
@@ -2008,7 +2020,9 @@ Tabel 5.11.1.5 Query Operasi validateConfirmation(token)
 | *Q-C11-02* | *SELECT token_konfirmasi FROM tbl_pengguna WHERE token_konfirmasi = @token AND status_akun = 'PENDING';* | *Memeriksa token konfirmasi untuk akun yang belum aktif.* |
 
 **Nama Kelas:** AuthController
+
 **Nama Operasi:** confirmAccount(token)
+
 **ID Algoritma:** Algo-C11-06
 
 ```text
@@ -2027,7 +2041,9 @@ Tabel 5.11.1.6 Query Operasi confirmAccount(token)
 | *Q-C11-03* | *UPDATE tbl_pengguna SET status_akun = 'AKTIF' WHERE token_konfirmasi = @token AND status_akun = 'PENDING';* | *Mengaktifkan akun setelah token dinyatakan valid.* |
 
 **Nama Kelas:** AuthController
+
 **Nama Operasi:** validateCredentials(usernameOrEmail, pass)
+
 **ID Algoritma:** Algo-C11-07
 
 ```text
@@ -2046,7 +2062,9 @@ Tabel 5.11.1.7 Query Operasi validateCredentials(usernameOrEmail, pass)
 | *Q-C11-04* | *SELECT * FROM tbl_pengguna WHERE username = @usernameOrEmail OR email = @usernameOrEmail;* | *Mengambil data pengguna untuk memeriksa kredensial.* |
 
 **Nama Kelas:** AuthController
+
 **Nama Operasi:** checkAccountStatus(usernameOrEmail)
+
 **ID Algoritma:** Algo-C11-08
 
 ```text
@@ -2082,7 +2100,9 @@ Tabel 5.11.1.9 Query Operasi startSession(pengguna)
 | *-* | *-* | *Menyimpan informasi sesi melalui pengelola sesi aplikasi.* |
 
 **Nama Kelas:** AuthController
+
 **Nama Operasi:** endSession()
+
 **ID Algoritma:** Algo-C11-10
 
 ```text
@@ -2099,6 +2119,7 @@ Tabel 5.11.1.10 Query Operasi endSession()
 ## 5.12 Kelas KonfirmasiRegistrasiPage
 
 **Nama Kelas:** KonfirmasiRegistrasiPage
+
 **ID Kelas:** C12
 
 Tabel 5.12.1 Operasi Kelas KonfirmasiRegistrasiPage
@@ -2115,7 +2136,9 @@ Tabel 5.12.2 Atribut Kelas KonfirmasiRegistrasiPage
 
 ### 5.12.1 Algoritma/Query
 **Nama Kelas:** KonfirmasiRegistrasiPage
+
 **Nama Operasi:** displayDataRegistrasi()
+
 **ID Algoritma:** Algo-C12-01
 
 ```text
@@ -2130,7 +2153,9 @@ Tabel 5.12.1.1 Query Operasi displayDataRegistrasi()
 | *-* | *-* | *Menampilkan data registrasi yang telah tersedia pada halaman.* |
 
 **Nama Kelas:** KonfirmasiRegistrasiPage
+
 **Nama Operasi:** confirmRegistrasi()
+
 **ID Algoritma:** Algo-C12-02
 
 ```text
@@ -2149,7 +2174,9 @@ Tabel 5.12.1.2 Query Operasi confirmRegistrasi()
 | *-* | *-* | Akses basis data ditangani oleh AuthController. |
 
 ## 5.13 Kelas CheckInPage
+
 **Nama Kelas:** CheckInPage
+
 **ID Kelas:** C13
 
 Tabel 5.13.1 Operasi Kelas CheckInPage
@@ -2174,7 +2201,9 @@ Tabel 5.13.2 Atribut Kelas CheckInPage
 ### 5.13.1 Algoritma/Query
 
 **Nama Kelas:** CheckInPage
+
 **Nama Operasi:** showPage()
+
 **ID Algoritma:** Algo-C13-01
 
 ```text
@@ -2189,7 +2218,9 @@ Tabel 5.13.1.1 Query Operasi showPage()
 | *-* | *-* | Menampilkan formulir check-in. |
 
 **Nama Kelas:** CheckInPage
+
 **Nama Operasi:** getInput()
+
 **ID Algoritma:** Algo-C13-02
 
 ```text
@@ -2269,7 +2300,9 @@ Tabel 5.14.2 Atribut Kelas CheckInController
 ### 5.14.1 Algoritma/Query
 
 **Nama Kelas:** CheckInController
+
 **Nama Operasi:** submitCheckIn(data)
+
 **ID Algoritma:** Algo-C14-01
 
 ```text
@@ -2369,7 +2402,9 @@ Tabel 5.15.2 Atribut Kelas NotifikasiPengingatController
 
 ### 5.15.1 Algoritma/Query
 **Nama Kelas:** NotifikasiPengingatController
+
 **Nama Operasi:** sendDailyReminder(idPelajar)
+
 **ID Algoritma:** Algo-C15-01
 
 ```text
@@ -2385,7 +2420,9 @@ Tabel 5.15.1.1 Query Operasi sendDailyReminder(idPelajar)
 | *-* | *-* | *Mengirim notifikasi melalui layanan eksternal tanpa menjalankan query SQL secara langsung.* |
 
 **Nama Kelas:** NotifikasiPengingatController
+
 **Nama Operasi:** checkPendingCheckIn()
+
 **ID Algoritma:** Algo-C15-02
 
 ```text
@@ -2400,7 +2437,9 @@ Tabel 5.15.1.2 Query Operasi checkPendingCheckIn()
 | *Q-C15-01* | *SELECT p.id_pelajar FROM tbl_pelajar p WHERE NOT EXISTS (SELECT 1 FROM tbl_check_in c WHERE c.id_pelajar = p.id_pelajar AND c.tanggal = CURRENT_DATE);* | *Mengambil ID pelajar yang belum melakukan daily check-in pada hari berjalan.* |
 
 ## 5.16 Kelas ReportPage
+
 **Nama Kelas:** ReportPage
+
 **ID Kelas:** C16
 
 Tabel 5.16.1 Operasi Kelas ReportPage
@@ -2419,7 +2458,9 @@ Tabel 5.16.2 Atribut Kelas ReportPage
 
 ### 5.16.1 Algoritma/Query
 **Nama Kelas:** ReportPage
+
 **Nama Operasi:** showPage()
+
 **ID Algoritma:** Algo-C16-01
 
 ```text
@@ -2433,7 +2474,9 @@ Tabel 5.16.1.1 Query Operasi showPage()
 | *-* | *-* | *Menampilkan halaman laporan.* |
 
 **Nama Kelas:** ReportPage
+
 **Nama Operasi:** displayChart(chartData)
+
 **ID Algoritma:** Algo-C16-02
 
 ```text
@@ -2448,7 +2491,9 @@ Tabel 5.16.1.2 Query Operasi displayChart(chartData)
 | *-* | *-* | *Menampilkan grafik dari data yang telah disiapkan controller.* |
 
 **Nama Kelas:** ReportPage
+
 **Nama Operasi:** filterViewByRole(userRole)
+
 **ID Algoritma:** Algo-C16-03
 
 ```text
@@ -2467,6 +2512,7 @@ Tabel 5.16.1.3 Query Operasi filterViewByRole(userRole)
 ## 5.17 Kelas ReportController
 
 **Nama Kelas:** ReportController
+
 **ID Kelas:** C17
 
 Tabel 5.17.1 Operasi Kelas ReportController
@@ -2485,7 +2531,9 @@ Tabel 5.17.2 Atribut Kelas ReportController
 
 ### 5.17.1 Algoritma/Query
 **Nama Kelas:** ReportController
+
 **Nama Operasi:** calculateStatistics(idPelajar, period)
+
 **ID Algoritma:** Algo-C17-01
 
 ```text
@@ -2515,7 +2563,9 @@ Tabel 5.17.1.1 Query Operasi calculateStatistics(idPelajar, period)
 | *Q-C17-01* | *SELECT tanggal, skala_mood, jam_tidur, pola_makan, pemicu_stres, catatan_refleksi FROM tbl_check_in WHERE id_pelajar = @idPelajar AND tanggal >= @startDate ORDER BY tanggal ASC;* | *Mengambil riwayat check-in pelajar dalam periode tertentu. Data terenkripsi perlu didekripsi melalui proses yang berwenang sebelum diolah atau ditampilkan.* |
 
 **Nama Kelas:** ReportController
+
 **Nama Operasi:** buildTrendChart(rawData)
+
 **ID Algoritma:** Algo-C17-02
 
 ```text
@@ -2532,7 +2582,9 @@ Tabel 5.17.1.2 Query Operasi buildTrendChart(rawData)
 | *-* | *-* | *Menyusun grafik dari data yang sudah tersedia di memori.* |
 
 **Nama Kelas:** ReportController
+
 **Nama Operasi:** applyPrivacyRestriction(userRole, rawData)
+
 **ID Algoritma:** Algo-C17-03
 
 ```text
@@ -2549,6 +2601,7 @@ Tabel 5.17.1.3 Query Operasi applyPrivacyRestriction(userRole, rawData)
 
 ## 5.18 Kelas CariTenagaKesehatanPage
 **Nama Kelas:** CariTenagaKesehatanPage
+
 **ID Kelas:** C18
 
 Tabel 5.18.1 Operasi Kelas CariTenagaKesehatanPage
@@ -2566,7 +2619,9 @@ Tabel 5.18.2 Atribut Kelas CariTenagaKesehatanPage
 
 ### 5.18.1 Algoritma/Query
 **Nama Kelas:** CariTenagaKesehatanPage
+
 **Nama Operasi:** showPage()
+
 **ID Algoritma:** Algo-C18-01
 
 ```text
@@ -2582,7 +2637,9 @@ Tabel 5.18.1.1 Query Operasi showPage()
 | *-* | *-* | *Query basis data dicatat pada operasi controller yang mengambil data.* |
 
 **Nama Kelas:** CariTenagaKesehatanPage
+
 **Nama Operasi:** requestLocationPermission()
+
 **ID Algoritma:** Algo-C18-02
 
 ```text
@@ -2605,7 +2662,9 @@ Tabel 5.18.1.2 Query Operasi requestLocationPermission()
 | *-* | *-* | *Meminta izin lokasi dan meneruskan hasilnya ke controller tanpa query SQL.* |
 
 **Nama Kelas:** CariTenagaKesehatanPage
+
 **Nama Operasi:** displayResults(listTenagaKesehatan)
+
 **ID Algoritma:** Algo-C18-03
 
 ```text
@@ -2620,6 +2679,7 @@ Tabel 5.18.1.3 Query Operasi displayResults(listTenagaKesehatan)
 
 ## 5.19 Kelas ProfilTenagaKesehatanPage
 **Nama Kelas:** ProfilTenagaKesehatanPage
+
 **ID Kelas:** C19
 
 Tabel 5.19.1 Operasi Kelas ProfilTenagaKesehatanPage
@@ -2636,7 +2696,9 @@ Tabel 5.19.2 Atribut Kelas ProfilTenagaKesehatanPage
 ### 5.19.1 Algoritma/Query
 
 **Nama Kelas:** ProfilTenagaKesehatanPage
+
 **Nama Operasi:** displayProfile(dataDokter)
+
 **ID Algoritma:** Algo-C19-01
 
 ```text
@@ -2653,7 +2715,9 @@ Tabel 5.19.1.1 Query Operasi displayProfile(dataDokter)
 | *-* | *-* | Pengambilan jadwal ditangani oleh JadwalKonsultasiController. |
 
 **Nama Kelas:** ProfilTenagaKesehatanPage
+
 **Nama Operasi:** displayAvailableSchedules(schedules)
+
 **ID Algoritma:** Algo-C19-02
 
 ```text
@@ -2668,6 +2732,7 @@ Tabel 5.19.1.2 Query Operasi displayAvailableSchedules(schedules)
 
 ## 5.20 Kelas TenagaKesehatanController
 **Nama Kelas:** TenagaKesehatanController
+
 **ID Kelas:** C20
 
 Tabel 5.20.1 Operasi Kelas TenagaKesehatanController
@@ -2685,7 +2750,9 @@ Tabel 5.20.2 Atribut Kelas TenagaKesehatanController
 
 ### 5.20.1 Algoritma/Query
 **Nama Kelas:** TenagaKesehatanController
+
 **Nama Operasi:** loadTenagaKesehatan()
+
 **ID Algoritma:** Algo-C20-01
 
 ```text
@@ -2700,7 +2767,9 @@ Tabel 5.20.1.1 Query Operasi loadTenagaKesehatan()
 | *Q-C20-01* | *SELECT tk.id_tenaga_kesehatan, tk.nama, tk.jenis_tenaga_kesehatan, fk.nama_fasilitas, fk.lokasi, fk.estimasi_biaya FROM tbl_tenaga_kesehatan tk JOIN tbl_fasilitas_kesehatan fk ON tk.id_fasilitas = fk.id_fasilitas;* | *Mengambil daftar tenaga kesehatan beserta fasilitas kesehatan terkait.* |
 
 **Nama Kelas:** TenagaKesehatanController
+
 **Nama Operasi:** processLocationPermission(granted, loc)
+
 **ID Algoritma:** Algo-C20-02
 
 ```text
@@ -2718,7 +2787,9 @@ Tabel 5.20.1.2 Query Operasi processLocationPermission(granted, loc)
 | *-* | *-* | *Menangani koordinat lokasi tanpa query SQL secara langsung.* |
 
 **Nama Kelas:** TenagaKesehatanController
+
 **Nama Operasi:** calculateDistances(userLoc, faskesLoc)
+
 **ID Algoritma:** Algo-C20-03
 
 ```text
@@ -2736,7 +2807,9 @@ Tabel 5.20.1.3 Query Operasi calculateDistances(userLoc, faskesLoc)
 | *-* | *-* | *Menggunakan layanan peta eksternal, bukan query SQL.* |
 
 **Nama Kelas:** TenagaKesehatanController
+
 **Nama Operasi:** selectTenagaKesehatan(idTenagaKesehatan)
+
 **ID Algoritma:** Algo-C20-04
 
 ```text
@@ -2753,6 +2826,7 @@ Tabel 5.20.1.4 Query Operasi selectTenagaKesehatan(idTenagaKesehatan)
 ## 5.21 Kelas PengajuanKonsultasiPage
 
 **Nama Kelas:** *PengajuanKonsultasiPage*  
+
 **ID Kelas:** *C21*
 
 Tabel 5.21.1. Operasi Kelas PengajuanKonsultasiPage
@@ -2782,8 +2856,10 @@ Tabel 5.21.2. Atribut Kelas PengajuanKonsultasiPage
 
 ### 5.21.1 Algoritma/Query
 
-**Nama Kelas:** *PengajuanKonsultasiPage*  
-**Nama Operasi:** *displayForm(idTenagaKesehatan, daftarJadwal)*  
+**Nama Kelas:** *PengajuanKonsultasiPage*
+
+**Nama Operasi:** *displayForm(idTenagaKesehatan, daftarJadwal)*
+
 **ID Algoritma:** *Algo-C21-01*
 
 ```text
