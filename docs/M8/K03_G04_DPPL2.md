@@ -1654,7 +1654,6 @@ Tabel 5.24.4.1. Query Operasi markFollowUp(idNotifikasi)
 | No Query | Query | Keterangan |
 | :--- | :--- | :--- |
 | *Q-C24-02* | *UPDATE notifikasi_darurat<br>SET status_tindak_lanjut = 'Sudah Ditindaklanjuti',<br>waktu_tindak_lanjut = NOW()<br>WHERE id = @idNotifikasi;* | *Mencatat status tindak lanjut sebagai “Sudah Ditindaklanjuti” beserta waktu tindak lanjut. Digunakan oleh markFollowUp() saat orang tua/wali menekan tombol “Tandai Sudah Ditindaklanjuti”.* |
-| *Q-C24-03* | *UPDATE pelajar<br>SET status_darurat = @status<br>WHERE id = (SELECT id_pelajar FROM notifikasi_darurat WHERE id = @idNotifikasi);* | *Mengubah status darurat pelajar menjadi tidak darurat. Digunakan oleh markFollowUp() setelah tindak lanjut dicatat.* |
 
 
 ## 5.25 Kelas LoginPage
@@ -1904,7 +1903,7 @@ Function sendResetLink(email) → Boolean
     else
         resetLink ← generateResetLink(email)
         EMAIL_SERVICE.sendResetLinkEmail(email, resetLink)
-    hasil ← true
+        hasil ← true
     → hasil
 ```
 
@@ -1912,7 +1911,7 @@ Tabel 5.27.1.1. Query Operasi sendResetLink(email)
 
 | No Query | Query | Keterangan |
 | :--- | :--- | :--- |
-| *Q-C27-01* | *findPenggunaByEmail:<br>SELECT \* FROM pengguna<br>WHERE email = @email;* | *Mencari data pengguna berdasarkan e-mail. Digunakan oleh sendResetLink() untuk memeriksa apakah e-mail terdaftar sebelum tautan reset dikirim.* |
+| *-* | *-* | *-* |
 
 
 ### 5.27.2 Algoritma/Query
@@ -1933,11 +1932,11 @@ Function resetPassword(newPassword, confirmPassword) → Boolean
     → hasil
 ```
 
-Tabel 5.27.2.1. Query Operasi esetPassword(newPassword, confirmPassword)
+Tabel 5.27.2.1. Query Operasi resetPassword(newPassword, confirmPassword)
 
 | No Query | Query | Keterangan |
 | :--- | :--- | :--- |
-| *Q-001* | *updatePasswordPengguna:<br>UPDATE pengguna<br>SET password = @hashedPassword<br>WHERE id = @idPengguna;* | *Memperbarui password pengguna dengan password baru. Digunakan oleh resetPassword() setelah password baru lolos validasi ketentuan keamanan.* |
+| *-* | *-* | *-* |
 
 
 ### 5.27.3 Algoritma/Query
