@@ -1352,7 +1352,7 @@ Tabel 5.5.1. Operasi Kelas RiwayatKesehatan
 
 | Nama Operasi | Visibility (private, public) | Keterangan |
 | :--- | :--- | :--- |
-| - | - | Kelas ini tidak memiliki operasi selain pembentukan objek pada UC01. |
+| *-* | - | Kelas ini tidak memiliki operasi selain pembentukan objek pada UC01. |
 
 Tabel 5.5.2. Atribut Kelas RiwayatKesehatan
 
@@ -1879,209 +1879,879 @@ Procedure submitRegistrasi()
     end if
 end Procedure
 ```
-
 ## 5.11 Kelas AuthController
-**Nama Kelas:** *AuthController*  
-**ID Kelas:** *C11*
+**Nama Kelas:** AuthController
+**ID Kelas:** C11
 
-Tabel 5.11.1. Operasi Kelas AuthController
-| Nama Operasi | Visibility (private, public) | Keterangan |
-| :--- | :--- | :--- |
-| *validateData(data: String): Boolean* | *Public* | *Memvalidasi kelengkapan dan format data registrasi.* |
-| *registerAccount(data: String): Boolean* | *Public* | *Menyimpan data akun baru ke basis data.* |
-| *validateCredentials(usernameOrEmail: String, pass: String): Boolean* | *Private* | *Memvalidasi kredensial pengguna saat login.* |
-| *checkAccountStatus(): Boolean* | *Private* | *Memeriksa status akun sebelum login berhasil.* |
-| *login(usernameOrEmail: String, pass: String): Boolean* | *Public* | *Memvalidasi kredensial dan status akun, lalu memulai sesi pengguna.* |
-| *logout(): Void* | *Public* | *Mengakhiri sesi login pengguna.* |
-| *startSession(): Void* | *Private* | *Memulai sesi setelah autentikasi berhasil.* |
-| *confirmAccount(token: String): Boolean* | *Public* | *Memvalidasi token dan mengonfirmasi registrasi akun pelajar oleh wali.* |
+Tabel 5.11.1 Operasi Kelas AuthController
 
-Tabel 5.11.2. Atribut Kelas AuthController
-| Nama Atribut | Visibility (private, public) | Tipe |
-| :--- | :--- | :--- |
-| *currentUser* | *Private* | *Pengguna* |
-| *sessionToken* | *Private* | *String* |
+| Nama Operasi | Visibility | Keterangan |
+|---|---|---|
+| validateData(data: Object): Boolean | public | Memvalidasi kelengkapan dan format data registrasi. |
+| registerAccount(data: Object): Boolean | public | Menyimpan akun baru dan mengirimkan konfirmasi registrasi. |
+| login(usernameOrEmail: String, pass: String): Boolean | public | Melakukan autentikasi kredensial pengguna. |
+| logout(): void | public | Mengakhiri sesi login pengguna. |
+| validateConfirmation(token: String): Boolean | public | Memeriksa keabsahan token konfirmasi registrasi. |
+| confirmAccount(token: String): Boolean | public | Mengonfirmasi registrasi akun pelajar oleh orang tua/wali. |
+| validateCredentials(usernameOrEmail: String, pass: String): Boolean | private | Memeriksa kesesuaian kredensial pengguna. |
+| checkAccountStatus(usernameOrEmail: String): String | private | Memeriksa status akun pengguna. |
+| startSession(pengguna: Pengguna): void | private | Membuat sesi login baru. |
+| endSession(): void | private | Mengakhiri sesi login yang berjalan. |
+
+Tabel 5.11.2 Atribut Kelas AuthController
+| Nama Atribut | Visibility | Tipe |
+|---|---|---|
+| currentUser | private | Pengguna |
 
 ### 5.11.1 Algoritma/Query
 
-**Nama Kelas:** *AuthController*  
-**Nama Operasi:** *registerAccount(data: String)*  
-**ID Algoritma:** *Algo-011*
+**Nama Kelas:** AuthController
+**Nama Operasi:** validateData(data)
+**ID Algoritma:** Algo-C11-01
 
 ```text
-Function registerAccount(data)
-    if not validateData(data) then
-        return False
-    end if
-
-    encryptedPassword <- ENCRYPT_AES256(data.password)
-    newUser <- new Pengguna(
-        data.username,
-        data.email,
-        encryptedPassword,
-        data.role,
-        'PENDING'
-    )
-    DB.save(newUser)
-    sendConfirmationEmail(data.emailWali)
-    return True
-end Function
+Function validateData(data) → Boolean
+    if (data.username = NULL) or (data.email = NULL) or (data.password = NULL) then
+        hasil ← false
+    else if (data.password.length < 8) then
+        hasil ← false
+    else
+        hasil ← true
+    → hasil
 ```
 
-Tabel 5.11.3. Query Operasi registerAccount
+Tabel 5.11.1.1 Query Operasi validateData(data)
 | No Query | Query | Keterangan |
-| :--- | :--- | :--- |
-| *Q-011* | *INSERT INTO users (username, email, password, role, status) VALUES (@username, @email, @hashedPassword, @role, 'PENDING');* | *Menyimpan data pengguna baru ke basis data.* |
+|---|---|---|
+| *-* | *-* | Validasi dilakukan terhadap data masukan tanpa mengakses basis data. |
+
+**Nama Kelas:** AuthController
+**Nama Operasi:** registerAccount(data)
+**ID Algoritma:** Algo-C11-02
+
+```text
+Function registerAccount(data) → Boolean
+    if (validateData(data) = false) then
+        hasil ← false
+    else
+        encryptedPassword ← ENCRYPT_AES256(data.password)
+        newUser ← new Pengguna(data.username, data.email, encryptedPassword, data.role, "PENDING")
+        DB_SERVICE.saveUser(newUser)
+        EMAIL_SERVICE.sendConfirmation(data.emailWali)
+        hasil ← true
+    → hasil
+```
+
+Tabel 5.11.1.2 Query Operasi registerAccount(data)
+| No Query | Query | Keterangan |
+|---|---|---|
+| Q-C11-01 | INSERT INTO tbl_pengguna (username, email, password, role, status_akun) VALUES (@username, @email, @encryptedPassword, @role, 'PENDING'); | Menyimpan data pendaftaran akun baru ke basis data. |
+**Nama Kelas:** AuthController
+**Nama Operasi:** login(usernameOrEmail, pass)
+**ID Algoritma:** Algo-C11-03
+
+```text
+Function login(usernameOrEmail, pass) → Boolean
+    if (validateCredentials(usernameOrEmail, pass) = false) then
+        LoginPage.showError("Kredensial tidak valid.")
+        hasil ← false
+    else
+        status ← checkAccountStatus(usernameOrEmail)
+        if (status = "PENDING") then
+            LoginPage.showError("Akun belum dikonfirmasi oleh orang tua/wali.")
+            hasil ← false
+        else
+            pengguna ← Pengguna.findByUsernameOrEmail(usernameOrEmail)
+            startSession(pengguna)
+            DashboardPage.displayDashboard(currentUser, pengguna.getRole())
+            hasil ← true
+    → hasil
+```
+
+Tabel 5.11.1.3 Query Operasi login(usernameOrEmail, pass)
+
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | Operasi mengatur alur autentikasi dan memanggil operasi lain yang menangani akses basis data. |
+
+**Nama Kelas:** AuthController
+
+**Nama Operasi:** logout()
+
+**ID Algoritma:** Algo-C11-04
+
+```text
+Procedure logout()
+    endSession()
+    LoginPage.showPage()
+```
+
+Tabel 5.11.1.4 Query Operasi logout()
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | Mengakhiri sesi aplikasi tanpa menjalankan query SQL secara langsung. |
+
+**Nama Kelas:** AuthController
+**Nama Operasi:** validateConfirmation(token)
+**ID Algoritma:** Algo-C11-05
+
+```text
+Function validateConfirmation(token) → Boolean
+    if (token = NULL) or (token = "") then
+        hasil ← false
+    else
+        hasil ← DB_SERVICE.checkConfirmationToken(token)
+    → hasil
+```
+
+Tabel 5.11.1.5 Query Operasi validateConfirmation(token)
+| No Query | Query | Keterangan |
+|---|---|---|
+| Q-C11-02 | SELECT token_konfirmasi FROM tbl_pengguna WHERE token_konfirmasi = @token AND status_akun = 'PENDING'; | Memeriksa token konfirmasi untuk akun yang belum aktif. |
+
+**Nama Kelas:** AuthController
+**Nama Operasi:** confirmAccount(token)
+**ID Algoritma:** Algo-C11-06
+
+```text
+Function confirmAccount(token) → Boolean
+    if (validateConfirmation(token) = false) then
+        hasil ← false
+    else
+        DB_SERVICE.activateAccountByToken(token)
+        hasil ← true
+    → hasil
+```
+
+Tabel 5.11.1.6 Query Operasi confirmAccount(token)
+| No Query | Query | Keterangan |
+|---|---|---|
+| Q-C11-03 | UPDATE tbl_pengguna SET status_akun = 'AKTIF' WHERE token_konfirmasi = @token AND status_akun = 'PENDING'; | Mengaktifkan akun setelah token dinyatakan valid. |
+
+**Nama Kelas:** AuthController
+**Nama Operasi:** validateCredentials(usernameOrEmail, pass)
+**ID Algoritma:** Algo-C11-07
+
+```text
+Function validateCredentials(usernameOrEmail, pass) → Boolean
+    pengguna ← Pengguna.findByUsernameOrEmail(usernameOrEmail)
+    if (pengguna = NULL) then
+        hasil ← false
+    else
+        hasil ← pengguna.verifyPassword(pass)
+    → hasil
+```
+
+Tabel 5.11.1.7 Query Operasi validateCredentials(usernameOrEmail, pass)
+| No Query | Query | Keterangan |
+|---|---|---|
+| Q-C11-04 | SELECT * FROM tbl_pengguna WHERE username = @usernameOrEmail OR email = @usernameOrEmail; | Mengambil data pengguna untuk memeriksa kredensial. |
+
+**Nama Kelas:** AuthController
+**Nama Operasi:** checkAccountStatus(usernameOrEmail)
+**ID Algoritma:** Algo-C11-08
+
+```text
+Function checkAccountStatus(usernameOrEmail) → String
+    pengguna ← Pengguna.findByUsernameOrEmail(usernameOrEmail)
+    if (pengguna = NULL) then
+        hasil ← ""
+    else
+        hasil ← pengguna.getStatusAkun()
+    → hasil
+```
+
+Tabel 5.11.1.8 Query Operasi checkAccountStatus(usernameOrEmail)
+| No Query | Query | Keterangan |
+|---|---|---|
+| Q-C11-05 | SELECT status_akun FROM tbl_pengguna WHERE username = @usernameOrEmail OR email = @usernameOrEmail; | Mengambil status akun berdasarkan username atau email. |
+
+**Nama Kelas:** AuthController
+
+**Nama Operasi:** startSession(pengguna)
+
+**ID Algoritma:** Algo-C11-09
+
+```text
+Procedure startSession(pengguna)
+    currentUser ← pengguna
+    SESSION.set("USER_SESSION", currentUser)
+```
+
+Tabel 5.11.1.9 Query Operasi startSession(pengguna)
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | Menyimpan informasi sesi melalui pengelola sesi aplikasi. |
+
+**Nama Kelas:** AuthController
+**Nama Operasi:** endSession()
+**ID Algoritma:** Algo-C11-10
+
+```text
+Procedure endSession()
+    currentUser ← NULL
+    SESSION.destroy()
+```
+
+Tabel 5.11.1.10 Query Operasi endSession()
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | Menghapus sesi aplikasi tanpa menjalankan query SQL secara langsung. |
 
 ## 5.12 Kelas KonfirmasiRegistrasiPage
 
-**Nama Kelas:** *KonfirmasiRegistrasiPage*
-**ID Kelas:** *C12*
+**Nama Kelas:** KonfirmasiRegistrasiPage
+**ID Kelas:** C12
 
-Tabel 5.12.1. Operasi Kelas KonfirmasiRegistrasiPage
-| Nama Operasi | Visibility (private, public) | Keterangan |
-| --- | --- | --- |
-| *displayDataRegistrasi(): Void* | *Public* | *Menampilkan detail data registrasi pelajar kepada wali.* |
-| *confirmRegistrasi(status: Boolean): Void* | *Public* | *Mengirimkan keputusan konfirmasi wali ke sistem.* |
+Tabel 5.12.1 Operasi Kelas KonfirmasiRegistrasiPage
+| Nama Operasi | Visibility | Keterangan |
+|---|---|---|
+| displayDataRegistrasi(): void | public | Menampilkan detail registrasi pelajar kepada orang tua/wali. |
+| confirmRegistrasi(): void | public | Meneruskan konfirmasi orang tua/wali ke AuthController. |
 
-Tabel 5.12.2. Atribut Kelas KonfirmasiRegistrasiPage
-| Nama Atribut | Visibility (private, public) | Tipe |
-| --- | --- | --- |
-| *dataRegistrasi* | *Private* | *Object* |
-| *statusKonfirmasi* | *Private* | *Boolean* |
+Tabel 5.12.2 Atribut Kelas KonfirmasiRegistrasiPage
+| Nama Atribut | Visibility | Tipe |
+|---|---|---|
+| dataRegistrasi | private | Object |
+| statusKonfirmasi | private | Boolean |
 
+### 5.12.1 Algoritma/Query
+**Nama Kelas:** KonfirmasiRegistrasiPage
+**Nama Operasi:** displayDataRegistrasi()
+**ID Algoritma:** Algo-C12-01
+
+```text
+Procedure displayDataRegistrasi()
+    UI.showRegistrationDetails(dataRegistrasi)
+```
+
+Tabel 5.12.1.1 Query Operasi displayDataRegistrasi()
+
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | Menampilkan data registrasi yang telah tersedia pada halaman. |
+
+**Nama Kelas:** KonfirmasiRegistrasiPage
+**Nama Operasi:** confirmRegistrasi()
+**ID Algoritma:** Algo-C12-02
+
+```text
+Procedure confirmRegistrasi()
+    token ← UI.getQueryParams("token")
+    statusKonfirmasi ← AuthController.confirmAccount(token)
+    if (statusKonfirmasi = true) then
+        UI.showMessage("Konfirmasi registrasi berhasil.")
+    else
+        UI.showError("Konfirmasi registrasi gagal atau token kedaluwarsa.")
+```
+
+Tabel 5.12.1.2 Query Operasi confirmRegistrasi()
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | Akses basis data ditangani oleh AuthController. |
 
 ## 5.13 Kelas CheckInPage
-**Nama Kelas:** *CheckInPage*
-**ID Kelas:** *C13*
+**Nama Kelas:** CheckInPage
+**ID Kelas:** C13
 
-Tabel 5.13.1. Operasi Kelas CheckInPage
-| Nama Operasi | Visibility (private, public) | Keterangan |
-| --- | --- | --- |
-| *showPage(): Void* | *Public* | *Menampilkan formulir daily check-in.* |
-| *getInput(): Object* | *Public* | *Mengambil masukan indikator harian dan catatan jurnal.* |
-| *showError(msg: String): Void* | *Public* | *Menampilkan pesan validasi masukan tidak sesuai.* |
-| *showSuccessMessage(): Void* | *Public* | *Menampilkan pemberitahuan check-in berhasil disubmit.* |
+Tabel 5.13.1 Operasi Kelas CheckInPage
 
-Tabel 5.13.2. Atribut Kelas CheckInPage
-| Nama Atribut | Visibility (private, public) | Tipe |
-| --- | --- | --- |
-| *moodInput* | *Private* | *Integer* |
-| *sleepDurationInput* | *Private* | *Float* |
-| *dietInput* | *Private* | *String* |
-| *triggerInput* | *Private* | *String* |
-| *reflectionInput* | *Private* | *Text* |
+| Nama Operasi | Visibility | Keterangan |
+|---|---|---|
+| showPage(): void | public | Menampilkan formulir daily check-in. |
+| getInput(): Object | public | Mengambil indikator harian dan catatan refleksi dari formulir. |
+| showError(message: String): void | public | Menampilkan pesan kesalahan jika masukan tidak valid. |
+| showSuccessMessage(): void | public | Menampilkan pesan sukses setelah check-in disimpan. |
 
+Tabel 5.13.2 Atribut Kelas CheckInPage
+
+| Nama Atribut | Visibility | Tipe |
+|---|---|---|
+| moodInput | private | Integer |
+| sleepDurationInput | private | Float |
+| dietInput | private | String |
+| triggerInput | private | String |
+| reflectionInput | private | String |
+
+### 5.13.1 Algoritma/Query
+
+**Nama Kelas:** CheckInPage
+**Nama Operasi:** showPage()
+**ID Algoritma:** Algo-C13-01
+
+```text
+Procedure showPage()
+    UI.showCheckInForm()
+```
+
+Tabel 5.13.1.1 Query Operasi showPage()
+
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | Menampilkan formulir check-in. |
+
+**Nama Kelas:** CheckInPage
+**Nama Operasi:** getInput()
+**ID Algoritma:** Algo-C13-02
+
+```text
+Function getInput() → Object
+    moodInput ← UI.getFieldValue("mood")
+    sleepDurationInput ← UI.getFieldValue("sleepDuration")
+    dietInput ← UI.getFieldValue("diet")
+    triggerInput ← UI.getFieldValue("trigger")
+    reflectionInput ← UI.getFieldValue("reflection")
+    → {
+        moodInput: moodInput,
+        sleepDurationInput: sleepDurationInput,
+        dietInput: dietInput,
+        triggerInput: triggerInput,
+        reflectionInput: reflectionInput
+      }
+```
+
+Tabel 5.13.1.2 Query Operasi getInput()
+
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | Mengambil nilai formulir tanpa mengakses basis data. |
+
+**Nama Kelas:** CheckInPage
+
+**Nama Operasi:** showError(message)
+
+**ID Algoritma:** Algo-C13-03
+
+```text
+Procedure showError(message)
+    UI.showError(message)
+```
+
+Tabel 5.13.1.3 Query Operasi showError(message)
+
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | Menampilkan pesan kesalahan pada antarmuka. |
+
+**Nama Kelas:** CheckInPage
+
+**Nama Operasi:** showSuccessMessage()
+
+**ID Algoritma:** Algo-C13-04
+
+```text
+Procedure showSuccessMessage()
+    UI.showMessage("Daily check-in berhasil disimpan!")
+```
+
+Tabel 5.13.1.4 Query Operasi showSuccessMessage()
+
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | Menampilkan pesan keberhasilan pada antarmuka. |
 
 ## 5.14 Kelas CheckInController
-**Nama Kelas:** *CheckInController*
-**ID Kelas:** *C14*
 
-Tabel 5.14.1. Operasi Kelas CheckInController
-| Nama Operasi | Visibility (private, public) | Keterangan |
-| --- | --- | --- |
-| *submitCheckIn(data: Object): Boolean* | *Public* | *Mengolah data masukan check-in dan menyimpannya.* |
-| *validateCheckInFormat(data: Object): Boolean* | *Private* | *Memeriksa nilai mood (1-5) dan durasi tidur.* |
-| *encryptJournal(reflectionText: String): String* | *Private* | *Mengenkripsi catatan jurnal pribadi menggunakan AES-256.* |
+**Nama Kelas:** CheckInController
 
-Tabel 5.14.2. Atribut Kelas CheckInController
-| Nama Atribut | Visibility (private, public) | Tipe |
-| --- | --- | --- |
-| *currentCheckIn* | *Private* | *CheckIn* |
+**ID Kelas:** C14
+
+Tabel 5.14.1 Operasi Kelas CheckInController
+| Nama Operasi | Visibility | Keterangan |
+|---|---|---|
+| submitCheckIn(data: Object): Boolean | public | Memvalidasi, mengenkripsi, dan menyimpan data check-in. |
+| validateCheckInFormat(data: Object): Boolean | private | Memeriksa rentang nilai mood dan durasi tidur. |
+| encryptJournal(reflectionText: String): String | private | Mengenkripsi catatan refleksi menggunakan AES-256. |
+
+ Tabel 5.14.2 Atribut Kelas CheckInController
+
+| Nama Atribut | Visibility | Tipe |
+|---|---|---|
+| currentCheckIn | private | CheckIn |
 
 ### 5.14.1 Algoritma/Query
-**Nama Kelas:** *CheckInController*
-**Nama Operasi:** *submitCheckIn(data: Object)*
-**ID Algoritma:** *Algo-014*
+
+**Nama Kelas:** CheckInController
+**Nama Operasi:** submitCheckIn(data)
+**ID Algoritma:** Algo-C14-01
 
 ```text
-Function submitCheckIn(data)
-    if not validateCheckInFormat(data) then
-        return False
-    end if
-    encryptedJournal <- encryptJournal(data.reflectionInput)
-    newEntry <- new CheckIn(data.idPelajar, getCurrentDate(), data.moodInput, data.sleepDurationInput, data.dietInput, data.triggerInput, encryptedJournal)
-    DB.save(newEntry)
-    return True
-end Function
-
+Function submitCheckIn(data) → Boolean
+    if (validateCheckInFormat(data) = false) then
+        CheckInPage.showError("Format masukan check-in tidak valid.")
+        hasil ← false
+    else
+        encryptedMood ← ENCRYPT_AES256(data.moodInput)
+        encryptedSleep ← ENCRYPT_AES256(data.sleepDurationInput)
+        encryptedDiet ← ENCRYPT_AES256(data.dietInput)
+        encryptedTrigger ← ENCRYPT_AES256(data.triggerInput)
+        encryptedJournal ← encryptJournal(data.reflectionInput)
+        currentCheckIn ← new CheckIn(
+            data.idPelajar,
+            CURRENT_DATE(),
+            encryptedMood,
+            encryptedSleep,
+            encryptedDiet,
+            encryptedTrigger,
+            encryptedJournal
+        )
+        DB_SERVICE.saveCheckIn(currentCheckIn)
+        CheckInPage.showSuccessMessage()
+        hasil ← true
+    → hasil
 ```
 
-Tabel 5.14.3. Query Operasi submitCheckIn
+Tabel 5.14.1.1 Query Operasi submitCheckIn(data)
+
 | No Query | Query | Keterangan |
-| --- | --- | --- |
-| *Q-014* | *INSERT INTO check_in (id_pelajar, tanggal, skala_mood, jam_tidur, pola_makan, pemicu_stres, catatan_refleksi) VALUES (@idPelajar, CURRENT_DATE, @mood, @jamTidur, @polaMakan, @pemicuStres, @encryptedJournal);* | *Menyimpan rekaman check-in harian ke basis data.* |
+|---|---|---|
+| Q-C14-01 | INSERT INTO tbl_check_in (id_pelajar, tanggal, skala_mood, jam_tidur, pola_makan, pemicu_stres, catatan_refleksi) VALUES (@idPelajar, CURRENT_DATE, @encryptedMood, @encryptedSleep, @encryptedDiet, @encryptedTrigger, @encryptedJournal); | Menyimpan data daily check-in ke basis data dalam bentuk terenkripsi. |
+
+**Nama Kelas:** CheckInController
+
+**Nama Operasi:** validateCheckInFormat(data)
+
+**ID Algoritma:** Algo-C14-02
+
+```text
+Function validateCheckInFormat(data) → Boolean
+    if (data.moodInput < 1) or (data.moodInput > 5) then
+        hasil ← false
+    else if (data.sleepDurationInput < 0) or (data.sleepDurationInput > 24) then
+        hasil ← false
+    else
+        hasil ← true
+    → hasil
+```
+
+Tabel 5.14.1.2 Query Operasi validateCheckInFormat(data)
+
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | Memvalidasi nilai masukan tanpa mengakses basis data. |
+
+**Nama Kelas:** CheckInController
+
+**Nama Operasi:** encryptJournal(reflectionText)
+
+**ID Algoritma:** Algo-C14-03
+
+```text
+Function encryptJournal(reflectionText) → String
+    if (reflectionText = NULL) or (reflectionText = "") then
+        hasil ← ""
+    else
+        hasil ← ENCRYPT_AES256(reflectionText)
+    → hasil
+```
+
+Tabel 5.14.1.3 Query Operasi encryptJournal(reflectionText)
+
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | Mengenkripsi catatan di memori tanpa menjalankan query SQL. |
 
 ## 5.15 Kelas NotifikasiPengingatController
-**Nama Kelas:** *NotifikasiPengingatController*
-**ID Kelas:** *C15*
 
-Tabel 5.15.1. Operasi Kelas NotifikasiPengingatController
-| Nama Operasi | Visibility (private, public) | Keterangan |
-| --- | --- | --- |
-| *sendDailyReminder(idPelajar: String): Void* | *Public* | *Mengirim notifikasi pengingat ke peramban & e-mail.* |
-| *checkPendingCheckIn(): List* | *Public* | *Memeriksa daftar pelajar yang belum check-in hari ini.* |
+**Nama Kelas:** NotifikasiPengingatController
 
-Tabel 5.15.2. Atribut Kelas NotifikasiPengingatController
-| Nama Atribut | Visibility (private, public) | Tipe |
-| --- | --- | --- |
-| *reminderSchedule* | *Private* | *Time* |
-| *status* | *Private* | *String* |
+**ID Kelas:** C15
 
-## 5.16 Kelas ReportPage
-**Nama Kelas:** *ReportPage*
-**ID Kelas:** *C16*
+Tabel 5.15.1 Operasi Kelas NotifikasiPengingatController
 
-Tabel 5.16.1. Operasi Kelas ReportPage
-| Nama Operasi | Visibility (private, public) | Keterangan |
-| --- | --- | --- |
-| *showPage(): Void* | *Public* | *Menampilkan dasbor laporan dan tren statistik.* |
-| *displayChart(chartData: Object): Void* | *Public* | *Visualisasi grafik mood, pola tidur, dan tren stres.* |
-| *filterViewByRole(userRole: String): Void* | *Public* | *Menyembunyikan teks jurnal jika diakses oleh OrangTuaWali.* |
+| Nama Operasi | Visibility | Keterangan |
+|---|---|---|
+| sendDailyReminder(idPelajar: String): void | public | Mengirim pengingat daily check-in melalui peramban dan email. |
+| checkPendingCheckIn(): List<String> | public | Mengambil daftar ID pelajar yang belum melakukan check-in hari ini. |
 
-Tabel 5.16.2. Atribut Kelas ReportPage
-| Nama Atribut | Visibility (private, public) | Tipe |
-| --- | --- | --- |
-| *selectedPeriod* | *Private* | *String* |
-| *displayedChart* | *Private* | *Object* |
-| *displayedSummary* | *Private* | *String* |
+Tabel 5.15.2 Atribut Kelas NotifikasiPengingatController
+| Nama Atribut | Visibility | Tipe |
+|---|---|---|
+| reminderSchedule | private | Time |
+| status | private | String |
 
-## 5.17 Kelas ReportController
-**Nama Kelas:** *ReportController*
-**ID Kelas:** *C17*
-
-Tabel 5.17.1. Operasi Kelas ReportController
-| Nama Operasi | Visibility (private, public) | Keterangan |
-| --- | --- | --- |
-| *calculateStatistics(idPelajar: String, period: String): Object* | *Public* | *Menghitung rata-rata mood, durasi tidur, dan tren.* |
-| *buildTrendChart(data: Object): Object* | *Public* | *Menyusun struktur data grafik untuk tampilan web.* |
-| *applyPrivacyRestriction(userRole: String, rawData: Object): Object* | *Private* | *Memfilter jurnal pribadi sesuai KNF02.* |
-
-Tabel 5.17.2. Atribut Kelas ReportController
-| Nama Atribut | Visibility (private, public) | Tipe |
-| --- | --- | --- |
-| *currentReport* | *Private* | *LaporanKesehatan* |
-
-### 5.17.1 Algoritma/Query
-**Nama Kelas:** *ReportController*
-**Nama Operasi:** *calculateStatistics(idPelajar: String, period: String)*
-**ID Algoritma:** *Algo-017*
+### 5.15.1 Algoritma/Query
+**Nama Kelas:** NotifikasiPengingatController
+**Nama Operasi:** sendDailyReminder(idPelajar)
+**ID Algoritma:** Algo-C15-01
 
 ```text
-Function calculateStatistics(idPelajar, period)
-    rawData <- DB.getCheckInByPeriod(idPelajar, period)
-    avgMood <- SUM(rawData.skalaMood) / COUNT(rawData)
-    avgSleep <- SUM(rawData.jamTidur) / COUNT(rawData)
-    trendChart <- buildTrendChart(rawData)
-    return { avgMood, avgSleep, trendChart }
-end Function
-
+Procedure sendDailyReminder(idPelajar)
+    if (idPelajar ≠ NULL) then
+        NOTIFICATION_SERVICE.pushWebNotification(idPelajar, "Waktunya Daily Check-in!")
+        EMAIL_SERVICE.sendReminderEmail(idPelajar)
 ```
 
-Tabel 5.17.3. Query Operasi calculateStatistics
+Tabel 5.15.1.1 Query Operasi sendDailyReminder(idPelajar)
 | No Query | Query | Keterangan |
-| --- | --- | --- |
-| *Q-017* | *SELECT tanggal, skala_mood, jam_tidur, pemicu_stres FROM check_in WHERE id_pelajar = @idPelajar AND tanggal >= @startDate ORDER BY tanggal ASC;* | *Mengambil sekumpulan data check-in berdasarkan rentang periode.* |
+|---|---|---|
+| *-* | *-* | Mengirim notifikasi melalui layanan eksternal tanpa menjalankan query SQL secara langsung. |
+
+**Nama Kelas:** NotifikasiPengingatController
+**Nama Operasi:** checkPendingCheckIn()
+**ID Algoritma:** Algo-C15-02
+
+```text
+Function checkPendingCheckIn() → List<String>
+    daftarPelajar ← DB_SERVICE.getUncheckedStudentsToday()
+    → daftarPelajar
+```
+
+Tabel 5.15.1.2 Query Operasi checkPendingCheckIn()
+| No Query | Query | Keterangan |
+|---|---|---|
+| Q-C15-01 | SELECT p.id_pelajar FROM tbl_pelajar p WHERE NOT EXISTS (SELECT 1 FROM tbl_check_in c WHERE c.id_pelajar = p.id_pelajar AND c.tanggal = CURRENT_DATE); | Mengambil ID pelajar yang belum melakukan daily check-in pada hari berjalan. |
+
+## 5.16 Kelas ReportPage
+**Nama Kelas:** ReportPage
+**ID Kelas:** C16
+
+Tabel 5.16.1 Operasi Kelas ReportPage
+| Nama Operasi | Visibility | Keterangan |
+|---|---|---|
+| *showPage(): void* | *public* | *Menampilkan antarmuka laporan dan statistik.* |
+| *displayChart(chartData: Object): void* | *public* | *Menampilkan grafik tren kondisi kesehatan.* |
+| *filterViewByRole(userRole: String): void* | *public* | *Menyesuaikan tampilan berdasarkan peran pengguna.* |
+
+Tabel 5.16.2 Atribut Kelas ReportPage
+| Nama Atribut | Visibility | Tipe |
+|---|---|---|
+| *selectedPeriod* | *private* | *String* |
+| *displayedChart* | *private* | *Object* |
+| *displayedSummary* | *private* | *String* |
+
+### 5.16.1 Algoritma/Query
+**Nama Kelas:** ReportPage
+**Nama Operasi:** showPage()
+**ID Algoritma:** Algo-C16-01
+
+```text
+Procedure showPage()
+    UI.showReportDashboard()
+```
+
+Tabel 5.16.1.1 Query Operasi showPage()
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | *Menampilkan halaman laporan.* |
+
+**Nama Kelas:** ReportPage
+**Nama Operasi:** displayChart(chartData)
+**ID Algoritma:** Algo-C16-02
+
+```text
+Procedure displayChart(chartData)
+    displayedChart ← chartData
+    UI.renderChart(displayedChart)
+```
+
+Tabel 5.16.1.2 Query Operasi displayChart(chartData)
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | *Menampilkan grafik dari data yang telah disiapkan controller.* |
+
+**Nama Kelas:** ReportPage
+**Nama Operasi:** filterViewByRole(userRole)
+**ID Algoritma:** Algo-C16-03
+
+```text
+Procedure filterViewByRole(userRole)
+    if (userRole = "OrangTuaWali") then
+        UI.hideElement("catatanRefleksiJurnal")
+    else
+        UI.showElement("catatanRefleksiJurnal")
+```
+
+Tabel 5.16.1.3 Query Operasi filterViewByRole(userRole)
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | *Menyesuaikan tampilan tanpa query SQL. Pembatasan data tetap harus diterapkan pada controller/backend.* |
+
+## 5.17 Kelas ReportController
+
+**Nama Kelas:** ReportController
+**ID Kelas:** C17
+
+Tabel 5.17.1 Operasi Kelas ReportController
+
+| Nama Operasi | Visibility | Keterangan |
+|---|---|---|
+| *calculateStatistics(idPelajar: String, period: String): Object* | *public* | *Mengambil dan mengolah riwayat check-in untuk menghasilkan statistik kesehatan.* |
+| *buildTrendChart(rawData: Object): Object* | *private* | *Menyusun data grafik tren mingguan atau bulanan.* |
+| *applyPrivacyRestriction(userRole: String, rawData: Object): Object* | *private* | *Membatasi tampilan jurnal pribadi sesuai KNF02.* |
+
+Tabel 5.17.2 Atribut Kelas ReportController
+
+| Nama Atribut | Visibility | Tipe |
+|---|---|---|
+| *currentReport* | *private* | *LaporanKesehatan* |
+
+### 5.17.1 Algoritma/Query
+**Nama Kelas:** ReportController
+**Nama Operasi:** calculateStatistics(idPelajar, period)
+**ID Algoritma:** Algo-C17-01
+
+```text
+Function calculateStatistics(idPelajar, period) → Object
+    startDate ← calculateStartDate(period)
+    rawData ← DB_SERVICE.fetchCheckInByPeriod(idPelajar, startDate)
+
+    if (rawData = NULL) or (rawData.isEmpty()) then
+        hasil ← NULL
+    else
+        decryptedData ← decryptHealthData(rawData)
+        restrictedData ← applyPrivacyRestriction(SESSION.getRole(), decryptedData)
+        statistics ← calculateAverages(restrictedData)
+        chartObj ← buildTrendChart(restrictedData)
+
+        hasil ← {
+            statistics: statistics,
+            chart: chartObj,
+            data: restrictedData
+        }
+    → hasil
+```
+
+Tabel 5.17.1.1 Query Operasi calculateStatistics(idPelajar, period)
+| No Query | Query | Keterangan |
+|---|---|---|
+| *Q-C17-01* | *SELECT tanggal, skala_mood, jam_tidur, pola_makan, pemicu_stres, catatan_refleksi FROM tbl_check_in WHERE id_pelajar = @idPelajar AND tanggal >= @startDate ORDER BY tanggal ASC;* | *Mengambil riwayat check-in pelajar dalam periode tertentu. Data terenkripsi perlu didekripsi melalui proses yang berwenang sebelum diolah atau ditampilkan.* |
+
+**Nama Kelas:** ReportController
+**Nama Operasi:** buildTrendChart(rawData)
+**ID Algoritma:** Algo-C17-02
+
+```text
+Function buildTrendChart(rawData) → Object
+    chartConfig ← CHART_ENGINE.createConfig()
+    chartConfig.addSeries("Mood", rawData.skalaMood)
+    chartConfig.addSeries("JamTidur", rawData.jamTidur)
+    → chartConfig
+```
+
+Tabel 5.17.1.2 Query Operasi buildTrendChart(rawData)
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | *Menyusun grafik dari data yang sudah tersedia di memori.* |
+
+**Nama Kelas:** ReportController
+**Nama Operasi:** applyPrivacyRestriction(userRole, rawData)
+**ID Algoritma:** Algo-C17-03
+
+```text
+Function applyPrivacyRestriction(userRole, rawData) → Object
+    if (userRole = "OrangTuaWali") then
+        rawData.catatanRefleksi ← NULL
+    → rawData
+```
+
+Tabel 5.17.1.3 Query Operasi applyPrivacyRestriction(userRole, rawData)
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | *Memodifikasi objek data yang sudah tersedia tanpa query SQL.* |
+
+## 5.18 Kelas CariTenagaKesehatanPage
+**Nama Kelas:** CariTenagaKesehatanPage
+**ID Kelas:** C18
+
+Tabel 5.18.1 Operasi Kelas CariTenagaKesehatanPage
+| Nama Operasi | Visibility | Keterangan |
+|---|---|---|
+| *showPage(): void* | *public* | *Menampilkan halaman pencarian tenaga kesehatan.* |
+| *requestLocationPermission(): Boolean* | *public* | *Meminta izin akses lokasi dari pengguna.* |
+| *displayResults(listTenagaKesehatan: List<TenagaKesehatan>): void* | *public* | *Menampilkan daftar ringkas tenaga kesehatan.* |
+
+Tabel 5.18.2 Atribut Kelas CariTenagaKesehatanPage
+| Nama Atribut | Visibility | Tipe |
+|---|---|---|
+| *searchQuery* | *private* | *String* |
+| *userLocation* | *private* | *Object* |
+
+### 5.18.1 Algoritma/Query
+**Nama Kelas:** CariTenagaKesehatanPage
+**Nama Operasi:** showPage()
+**ID Algoritma:** Algo-C18-01
+
+```text
+Procedure showPage()
+    UI.showSearchDoctorPage()
+    listTenagaKesehatan ← TenagaKesehatanController.loadTenagaKesehatan()
+    displayResults(listTenagaKesehatan)
+```
+
+Tabel 5.18.1.1 Query Operasi showPage()
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | *Query basis data dicatat pada operasi controller yang mengambil data.* |
+
+**Nama Kelas:** CariTenagaKesehatanPage
+**Nama Operasi:** requestLocationPermission()
+**ID Algoritma:** Algo-C18-02
+
+```text
+Function requestLocationPermission() → Boolean
+    permission ← UI.promptLocationAccess()
+
+    if (permission = true) then
+        userLocation ← UI.getCurrentCoordinates()
+        TenagaKesehatanController.processLocationPermission(true, userLocation)
+        hasil ← true
+    else
+        TenagaKesehatanController.processLocationPermission(false, NULL)
+        hasil ← false
+    → hasil
+```
+
+Tabel 5.18.1.2 Query Operasi requestLocationPermission()
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | *Meminta izin lokasi dan meneruskan hasilnya ke controller tanpa query SQL.* |
+
+**Nama Kelas:** CariTenagaKesehatanPage
+**Nama Operasi:** displayResults(listTenagaKesehatan)
+**ID Algoritma:** Algo-C18-03
+
+```text
+Procedure displayResults(listTenagaKesehatan)
+    UI.renderDoctorCards(listTenagaKesehatan)
+```
+
+Tabel 5.18.1.3 Query Operasi displayResults(listTenagaKesehatan)
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | *Menampilkan daftar tenaga kesehatan pada antarmuka.* |
+
+## 5.19 Kelas ProfilTenagaKesehatanPage
+**Nama Kelas:** ProfilTenagaKesehatanPage
+**ID Kelas:** C19
+
+Tabel 5.19.1 Operasi Kelas ProfilTenagaKesehatanPage
+| Nama Operasi | Visibility | Keterangan |
+|---|---|---|
+| *displayProfile(dataDokter: TenagaKesehatan): void* | *public* | *Menampilkan detail profil tenaga kesehatan dan fasilitas kesehatan.* |
+| *displayAvailableSchedules(schedules: List<JadwalKonsultasi>): void* | *public* | *Menampilkan slot jadwal konsultasi yang tersedia.* |
+
+Tabel 5.19.2 Atribut Kelas ProfilTenagaKesehatanPage
+| Nama Atribut | Visibility | Tipe |
+|---|---|---|
+| *tenagaKesehatanDipilih* | *private* | *TenagaKesehatan* |
+
+### 5.19.1 Algoritma/Query
+
+**Nama Kelas:** ProfilTenagaKesehatanPage
+**Nama Operasi:** displayProfile(dataDokter)
+**ID Algoritma:** Algo-C19-01
+
+```text
+Procedure displayProfile(dataDokter)
+    tenagaKesehatanDipilih ← dataDokter
+    UI.showDoctorProfile(tenagaKesehatanDipilih)
+    schedules ← JadwalKonsultasiController.loadAvailableSchedules(dataDokter.idTenagaKesehatan)
+    displayAvailableSchedules(schedules)
+```
+
+Tabel 5.19.1.1 Query Operasi displayProfile(dataDokter)
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | Pengambilan jadwal ditangani oleh JadwalKonsultasiController. |
+
+**Nama Kelas:** ProfilTenagaKesehatanPage
+**Nama Operasi:** displayAvailableSchedules(schedules)
+**ID Algoritma:** Algo-C19-02
+
+```text
+Procedure displayAvailableSchedules(schedules)
+    UI.showScheduleSlots(schedules)
+```
+
+Tabel 5.19.1.2 Query Operasi displayAvailableSchedules(schedules)
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | *Menampilkan jadwal yang telah tersedia tanpa query SQL.* |
+
+## 5.20 Kelas TenagaKesehatanController
+**Nama Kelas:** TenagaKesehatanController
+**ID Kelas:** C20
+
+Tabel 5.20.1 Operasi Kelas TenagaKesehatanController
+| Nama Operasi | Visibility | Keterangan |
+|---|---|---|
+| *loadTenagaKesehatan(): List<TenagaKesehatan>* | *public* | *Mengambil daftar tenaga kesehatan beserta fasilitas kesehatannya.* |
+| *processLocationPermission(granted: Boolean, loc: Object): void* | *public* | *Menyimpan koordinat lokasi pengguna di memori jika izin diberikan.* |
+| *calculateDistances(userLoc: Object, faskesLoc: Object): Float* | *public* | *Menghitung jarak pengguna ke fasilitas kesehatan melalui layanan peta.* |
+| *selectTenagaKesehatan(idTenagaKesehatan: String): TenagaKesehatan* | *public* | *Mengambil detail profil tenaga kesehatan berdasarkan ID.* |
+
+Tabel 5.20.2 Atribut Kelas TenagaKesehatanController
+| Nama Atribut | Visibility | Tipe |
+|---|---|---|
+| *currentLocation* | *private* | *Object* |
+
+### 5.20.1 Algoritma/Query
+**Nama Kelas:** TenagaKesehatanController
+**Nama Operasi:** loadTenagaKesehatan()
+**ID Algoritma:** Algo-C20-01
+
+```text
+Function loadTenagaKesehatan() → List<TenagaKesehatan>
+    listDokter ← DB_SERVICE.getAllTenagaKesehatanWithFaskes()
+    → listDokter
+```
+
+Tabel 5.20.1.1 Query Operasi loadTenagaKesehatan()
+| No Query | Query | Keterangan |
+|---|---|---|
+| *Q-C20-01* | *SELECT tk.id_tenaga_kesehatan, tk.nama, tk.jenis_tenaga_kesehatan, fk.nama_fasilitas, fk.lokasi, fk.estimasi_biaya FROM tbl_tenaga_kesehatan tk JOIN tbl_fasilitas_kesehatan fk ON tk.id_fasilitas = fk.id_fasilitas;* | *Mengambil daftar tenaga kesehatan beserta fasilitas kesehatan terkait.* |
+
+**Nama Kelas:** TenagaKesehatanController
+**Nama Operasi:** processLocationPermission(granted, loc)
+**ID Algoritma:** Algo-C20-02
+
+```text
+Procedure processLocationPermission(granted, loc)
+    if (granted = true) then
+        currentLocation ← loc
+        Pelajar.setLokasiSaatIni(loc)
+    else
+        currentLocation ← NULL
+```
+
+Tabel 5.20.1.2 Query Operasi processLocationPermission(granted, loc)
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | *Menangani koordinat lokasi tanpa query SQL secara langsung.* |
+
+**Nama Kelas:** TenagaKesehatanController
+**Nama Operasi:** calculateDistances(userLoc, faskesLoc)
+**ID Algoritma:** Algo-C20-03
+
+```text
+Function calculateDistances(userLoc, faskesLoc) → Float
+    if (userLoc = NULL) or (faskesLoc = NULL) then
+        jarak ← -1.0
+    else
+        jarak ← MAPS_SERVICE.getDistance(userLoc, faskesLoc)
+    → jarak
+```
+
+Tabel 5.20.1.3 Query Operasi calculateDistances(userLoc, faskesLoc)
+| No Query | Query | Keterangan |
+|---|---|---|
+| *-* | *-* | *Menggunakan layanan peta eksternal, bukan query SQL.* |
+
+**Nama Kelas:** TenagaKesehatanController
+**Nama Operasi:** selectTenagaKesehatan(idTenagaKesehatan)
+**ID Algoritma:** Algo-C20-04
+
+```text
+Function selectTenagaKesehatan(idTenagaKesehatan) → TenagaKesehatan
+    dokter ← DB_SERVICE.findTenagaKesehatanById(idTenagaKesehatan)
+    → dokter
+```
+
+Tabel 5.20.1.4 Query Operasi selectTenagaKesehatan(idTenagaKesehatan)
+| No Query | Query | Keterangan |
+|---|---|---|
+| *Q-C20-02* | *SELECT tk.*, fk.* FROM tbl_tenaga_kesehatan tk JOIN tbl_fasilitas_kesehatan fk ON tk.id_fasilitas = fk.id_fasilitas WHERE tk.id_tenaga_kesehatan = @idTenagaKesehatan;* | *Mengambil detail profil tenaga kesehatan dan fasilitasnya berdasarkan ID.* |
 
 ## 5.21 Kelas PengajuanKonsultasiPage
 
