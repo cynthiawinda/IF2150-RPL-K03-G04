@@ -2177,9 +2177,10 @@ Tabel 6.1. Spesifikasi Objek Antarmuka I-01
 | Id_Objek | Jenis | Konten | Keterangan |
 | :--- | :--- | :--- | :--- |
 | *Panel_Right* | *Side Panel/Container* | *Berisi semua elemen formulir registrasi* | *Wadah(container) utama di sisi kanan untuk menampung semua komponen interaktif formulir registrasi pelajar.* |
-| *Panel_Left* | *Side Panel/Container* | *Berisi logo MahaSehat dan teks sapaan* | *Wadah (container) visual di sisi kiri layar untuk branding dan teks penyambutan pengguna*. |
+| *Panel_Left* | *Side Panel/Container* | *Berisi logo MahaSehat dan teks sapaan* | *Wadah (container) visual di sisi kiri layar untuk branding dan teks penyambutan pengguna.* |
 | *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat di bagian atas panel kiri.* |
 | *Text_Greeting* | *Label/Text Header* | *Teks "Selamat Datang!"* | *Teks judul sapaan pembuka bagi pengguna yang membuka halaman registrasi.* |
+| *Title_Registrasi* | *Text* | *Teks "Daftarkan Akun Anda"* | *Judul halaman yang menandakan ini adalah halaman pendaftaran akun.* |
 | *Tab_Role_Pelajar* | *Button/Tab* | *Teks "Pelajar"* | *Menampilkan formulir pendaftaran khusus peran Pelajar (keadaan aktif).* |
 | *Label_Nama* | *Text* | *Teks "Nama"* | *Label untuk field input nama.* |
 | *Input_Nama* | *Input Text Field* | *Placeholder "Nama"* | *Tempat pengguna (pelajar) memasukkan nama mereka.* |
@@ -2218,9 +2219,10 @@ Tabel 6.2. Spesifikasi Objek Antarmuka I-02
 | Id_Objek | Jenis | Konten | Keterangan |
 | :--- | :--- | :--- | :--- |
 | *Panel_Right* | *Side Panel/Container* | *Berisi semua elemen formulir registrasi* | *Wadah(container) utama di sisi kanan untuk menampung semua komponen interaktif formulir registrasi orang tua/wali.* |
-| *Panel_Left* | *Side Panel/Container* | *Berisi logo MahaSehat dan teks sapaan* | *Wadah (container) visual di sisi kiri layar untuk branding dan teks penyambutan pengguna*. |
+| *Panel_Left* | *Side Panel/Container* | *Berisi logo MahaSehat dan teks sapaan* | *Wadah (container) visual di sisi kiri layar untuk branding dan teks penyambutan pengguna.* |
 | *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat di bagian atas panel kiri.* |
 | *Text_Greeting* | *Label/Text Header* | *Teks "Selamat Datang!"* | *Teks judul sapaan pembuka bagi pengguna yang membuka halaman registrasi.* |
+| *Title_Registrasi* | *Text* | *Teks "Daftarkan Akun Anda"* | *Judul halaman yang menandakan ini adalah halaman pendaftaran akun.* |
 | *Tab_Role_OrangTuawali* | *Button/Tab* | *Teks "Orang Tua/Wali"* | *Menampilkan formulir pendaftaran khusus peran Orang Tua/Wali (keadaan aktif).* |
 | *Label_Nama* | *Text* | *Teks "Nama"* | *Label untuk field input nama.* |
 | *Input_Nama* | *Input Text Field* | *Placeholder "Nama"* | *Tempat pengguna (orang tua/wali) memasukkan nama mereka.* |
@@ -2252,9 +2254,10 @@ Tabel 6.3. Spesifikasi Objek Antarmuka I-03
 | Id_Objek | Jenis | Konten | Keterangan |
 | :--- | :--- | :--- | :--- |
 | *Panel_Right* | *Side Panel/Container* | *Berisi semua elemen formulir registrasi* | *Wadah(container) utama di sisi kanan untuk menampung semua komponen interaktif formulir registrasi tenaga kesehatan.* |
-| *Panel_Left* | *Side Panel/Container* | *Berisi logo MahaSehat dan teks sapaan* | *Wadah (container) visual di sisi kiri layar untuk branding dan teks penyambutan pengguna*. |
+| *Panel_Left* | *Side Panel/Container* | *Berisi logo MahaSehat dan teks sapaan* | *Wadah (container) visual di sisi kiri layar untuk branding dan teks penyambutan pengguna.* |
 | *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat di bagian atas panel kiri.* |
 | *Text_Greeting* | *Label/Text Header* | *Teks "Selamat Datang!"* | *Teks judul sapaan pembuka bagi pengguna yang membuka halaman registrasi.* |
+| *Title_Registrasi* | *Text* | *Teks "Daftarkan Akun Anda"* | *Judul halaman yang menandakan ini adalah halaman pendaftaran akun.* |
 | *Tab_Role_TenagaKesehatan* | *Button/Tab* | *Teks "Tenaga Kesehatan"* | *Menampilkan formulir pendaftaran khusus peran Tenaga Kesehatan (keadaan aktif).* |
 | *Label_Nama* | *Text* | *Teks "Nama"* | *Label untuk field input nama.* |
 | *Input_Nama* | *Input Text Field* | *Placeholder "Nama"* | *Tempat pengguna (tenaga kesehatan) memasukkan nama mereka.* |
@@ -2272,6 +2275,180 @@ Tabel 6.3. Spesifikasi Objek Antarmuka I-03
 | *Input_KonfirmasiKataSandi* | *Input Text Field* | *Placeholder "Konfirmasi Kata Sandi"* | *Tempat pengguna (tenaga kesehatan) memasukkan ulang kata sandi mereka untuk memastikan kecocokan dengan input sebelumnya. Tipe input "password".* |
 | *Btn_Daftar* | *Button* | *"Daftar"* | *Jika diklik, akan memulai validasi data. Jika valid, akun tenaga kesehatan berhasil dibuat.* |
 | *Link_Masuk* | *Link Text* | *"Sudah memiliki akun? Masuk"* | *Mengarahkan pengguna yang sudah memiliki akun ke masuk akun.* |
+
+## 6.4 Rancangan Antarmuka I-04
+
+**Antarmuka:** *I-04*  
+**Nama Layar:** *RegistrationSuccessPelajarPage*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-04 - RegistrationSuccessPelajar" src="./assets/antarmuka/akun-berhasil-diajukan.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.4. Rancangan Antarmuka I-04 - RegistrationSuccessPelajarPage</i>
+</p>
+
+Tabel 6.4. Spesifikasi Objek Antarmuka I-04
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Card_Success* | *Box/Card* | *Berisi semua elemen status registrasi* | *Wadah(container) untuk semua elemen notifikasi sukses.* |
+| *Icon_Success* | *Icon* | *Ikon centang dalam lingkaran berwarna hijau* | *Ikon visual yang menandakan registrasi berhasil diajukan.* |
+| *Title_Success* | *Text* | *Teks "Pendaftaran Berhasil Dikirim!"* | *Judul yang menginformasikan bahwa pembuatan akun berhasil diajukan.* |
+| *Desc_Success* | *Text* | *Teks "Pendaftaran akun pelajar berhasil diajukan. Kami telah mengirimkan permintaan persetujuan kepada orang tua/wali Anda untuk mengaktifkan akun."* | *Penjelasan yang mengkonfirmasi pengajuan akun baru dan pengiriman konfirmasi persetujuan kepada orang tua/wali.* |
+| *Btn_Mengerti* | *Button* | *Teks "Mengerti"* | *Jika diklik, akan mengarahkan pengguna (pelajar) kembali ke halaman "RegistrationPagePelajar".* |
+
+## 6.5 Rancangan Antarmuka I-05
+
+**Antarmuka:** *I-05*  
+**Nama Layar:** *RegistrationSuccessPage*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-04 - RegistrationSuccess" src="./assets/antarmuka/akun-berhasil-dibuat.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.5. Rancangan Antarmuka I-05 - RegistrationSuccessPage</i>
+</p>
+
+Tabel 6.5. Spesifikasi Objek Antarmuka I-05
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Card_Success* | *Box/Card* | *Berisi semua elemen status registrasi* | *Wadah(container) untuk semua elemen notifikasi sukses.* |
+| *Icon_Success* | *Icon* | *Ikon centang dalam lingkaran berwarna hijau* | *Ikon visual yang menandakan registrasi berhasil diajukan.* |
+| *Title_Success* | *Text* | *Teks "Akun Berhasil Dibuat!"* | *Judul yang menginformasikan bahwa pembuatan akun berhasil.* |
+| *Desc_Success* | *Text* | *Teks "Akun Anda telah berhasil dibuat dan siap digunakan. Silakan masuk untuk mulai menjelajah."* | *Penjelasan yang mengkonfirmasi pembuatan akun dan menginstruksikan pengguna untuk masuk akun.* |
+| *Btn_Masuk* | *Button* | *Teks "Masuk"* | *Jika diklik, akan mengarahkan pengguna ke halaman "LoginPage".* |
+
+## 6.6 Rancangan Antarmuka I-06
+**Antarmuka:** *I-06*  
+**Nama Layar:** *KonfirmasiRegistrasiPage*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-06 - KonfirmasiRegistrasiPage" src="./assets/antarmuka/konfirmasi-registrasi-page.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.6. Rancangan Antarmuka I-06 - KonfirmasiRegistrasiPage</i>
+</p>
+
+Tabel 6.6. Spesifikasi Objek Antarmuka I-06
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Panel_Right* | *Side Panel/Container* | *Berisi semua elemen persetujuan orang tua/wali* | *Wadah(container) utama di sisi kanan untuk menampung rincian data pelajar dan tombol persetujuan.* |
+| *Panel_Left* | *Side Panel/Container* | *Berisi logo MahaSehat dan teks sapaan* | *Wadah (container) visual di sisi kiri layar untuk branding dan teks penyambutan pengguna.* |
+| *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat di bagian atas panel kiri.* |
+| *Text_Greeting* | *Label/Text Header* | *Teks "Selamat Datang!"* | *Teks judul sapaan pembuka bagi pengguna yang membuka halaman registrasi.* |
+| *Label_NamaPelajar* | *Text* | *Teks "Nama Pelajar"* | *Label judul untuk informasi nama pelajar.* |
+| *Text_ValNamaPelajar* | *Text Value* | *Teks dinamik nama pelajar* | *Menampilkan nama pelajar yang mengajukan pembuatan akun.* |
+| *Label_EmailPelajar* | *Text* | *Teks "Email Pelajar"* | *Label judul untuk informasi email pelajar.* |
+| *Text_ValEmailPelajar* | *Text Value* | *Teks dinamik email pelajar* | *Menampilkan email pelajar yang mengajukan pembuatan akun.* |
+| *Label_NomorTelpPelajar* | *Text* | *Teks "Nomor Telepon Pelajar"* | *Label judul untuk informasi nomor telepon pelajar.* |
+| *Text_ValueNomorTelpPelajar* | *Text Value* | *Teks dinamik nomor telepon pelajar* | *Menampilkan nomor telepon pelajar yang mengajukan pembuatan akun.* |
+| *Label_Catatan* | *Text* | *Teks "Catatan"* | *Label untuk teks catatan pemberitahuan batas akses.* |
+| *Text_Catatan* | *Text* | *Teks "Orang tua/wali dapat mengelola status persetujuan akun, tetapi catatan pribadi pelajar dijaga kerahasiaannya"* | *Teks penjelas batas akses orang tua/wali untuk menjaga privasi pelajar.* |
+| *Btn_Setuju* | *Button* | *"Setuju"* | *Jika diklik, akan mengubah status akun pelajar menjadi aktif dan siap digunakan.* |
+| *Btn_TidakSetuju* | *Button* | *"Tidak setuju"* | *Mengubah status pengajuan menjadi ditolak.* |
+
+## 6.7 Rancangan Antarmuka I-07
+**Antarmuka:** *I-07*  
+**Nama Layar:** *LoginPage*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-07 - LoginPage" src="./assets/antarmuka/login-page.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.7. Rancangan Antarmuka I-07 - LoginPage</i>
+</p>
+
+Tabel 6.7. Spesifikasi Objek Antarmuka I-07
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Panel_Right* | *Side Panel/Container* | *Berisi semua elemen formulir masuk akun* | *Wadah(container) utama di sisi kanan untuk menampung semua komponen interaktif formulir masuk akun.* |
+| *Panel_Left* | *Side Panel/Container* | *Berisi logo MahaSehat dan teks sapaan* | *Wadah (container) visual di sisi kiri layar untuk branding dan teks penyambutan pengguna.* |
+| *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat di bagian atas panel kiri.* |
+| *Text_Greeting* | *Label/Text Header* | *Teks "Selamat Datang!"* | *Teks judul sapaan pembuka bagi pengguna yang membuka halaman registrasi.* |
+| *Title_Login* | *Text* | *Teks "Masuk Akun"* | *Judul halaman yang menandakan ini adalah halaman masuk akun.* |
+| *Label_Email* | *Text* | *Teks "Email"* | *Label judul untuk field email pengguna.* |
+| *Input_Email* | *Input Text Field* | *Placeholder "Email"* | *Tempat pengguna memasukkan alamat email mereka.* |
+| *Label_KataSandi* | *Text* | *Teks "Kata Sandi"* | *Label untuk field input kata sandi.* |
+| *Input_KataSandi* | *Input Text Field* | *Placeholder "Kata Sandi"* | *Tempat pengguna memasukkan kata sandi akun mereka.* |
+| *Link_LupaPass* | *Link Text* | *"Lupa kata sandi?"* | *Jika diklik, akan mengarahkan pengguna ke halaman atau alur untuk mengganti kata sandi.* |
+| *Btn_Masuk* | *Button* | *"Masuk"* | *Jika diklik, akan memvalidasi email dan password pengguna. Jika valid, pengguna akan masuk ke "Dashboard".* |
+| *Link_Daftar* | *Button* | *"Belum memiliki akun? Daftar"* | *Mengarahkan pengguna yang belum memiliki akun ke halaman daftar akun.* |
+
+## 6.8 Rancangan Antarmuka I-08
+**Antarmuka:** *I-08*  
+**Nama Layar:** *ResetPasswordPage*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-08 - ResetPasswordPage1" src="./assets/antarmuka/reset-passowrd-page-1.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.8. Rancangan Antarmuka I-08 - ResetPasswordPage1</i>
+</p>
+
+Tabel 6.8. Spesifikasi Objek Antarmuka I-08
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Panel_Right* | *Side Panel/Container* | *Berisi semua elemen formulir "Lupa Kata Sandi"* | *Wadah(container) utama di sisi kanan untuk menampung semua komponen interaktif formulir lupa kata sandi.* |
+| *Panel_Left* | *Side Panel/Container* | *Berisi logo MahaSehat dan teks sapaan* | *Wadah (container) visual di sisi kiri layar untuk branding dan teks penyambutan pengguna.* |
+| *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat di bagian atas panel kiri.* |
+| *Text_Greeting* | *Label/Text Header* | *Teks "Pulihkan Akun"* | *Teks judul sapaan untuk pengguna yang lupa kata sandi.* |
+| *Title_LupaPass* | *Text* | *Teks "Lupa Kata Sandi?"* | *Judul halaman yang menandakan ini adalah halaman untuk mengganti kata sandi.* |
+| *Label_Email* | *Text* | *Teks "Email"* | *Label judul untuk field email pengguna.* |
+| *Input_Email* | *Input Text Field* | *Placeholder "Email"* | *Tempat pengguna memasukkan alamat email mereka.* |
+| *Btn_KirimLink* | *Button* | *"Kirim Tautan Atur Ulang"* | *Jika diklik, akan memvalidasi email dan jika valid akan mengirimkan tautan untuk mengatur ulang kata sandi.* |
+| *Link_Masuk* | *Button* | *"Kembali ke Masuk Akun"* | *Mengarahkan pengguna kembali ke halaman masuk akun.* |
+
+## 6.9 Rancangan Antarmuka I-09
+**Antarmuka:** *I-09*  
+**Nama Layar:** *ResetPasswordPage2*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-08 - ResetPasswordPage2" src="./assets/antarmuka/reset-password-page-2.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.9. Rancangan Antarmuka I-09 - ResetPasswordPage2</i>
+</p>
+
+Tabel 6.9. Spesifikasi Objek Antarmuka I-09
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Panel_Right* | *Side Panel/Container* | *Berisi semua elemen formulir atur ulang kata sandi* | *Wadah(container) utama di sisi kanan untuk menampung semua komponen interaktif formulir atur ulang kata sandi.* |
+| *Panel_Left* | *Side Panel/Container* | *Berisi logo MahaSehat dan teks sapaan* | *Wadah (container) visual di sisi kiri layar untuk branding dan teks penyambutan pengguna.* |
+| *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat di bagian atas panel kiri.* |
+| *Text_Greeting* | *Label/Text Header* | *Teks "Pulihkan Akun"* | *Teks judul sapaan untuk pengguna yang lupa kata sandi.* |
+| *Title_AturKataSandi* | *Text* | *Teks "Atur Kata Sandi Baru"* | *Judul halaman yang menandakan ini adalah halaman pengaturan kata sandi baru.* |
+| *Label_KataSandiBaru* | *Text* | *Teks "Kata Sandi Baru"* | *Label untuk field input kata sandi baru.* |
+| *Input_KataSandiBaru* | *Input Text Field* | *Placeholder "Kata Sandi Baru"* | *Tempat pengguna memasukkan kata sandi baru akun mereka.* |
+| *Label_KonfirmasiKataSandiBaru* | *Text* | *Teks "Konfirmasi Kata Sandi Baru"* | *Label untuk field input konfirmasi kata sandi baru.* |
+| *Input_KonfirmasiKataSandiBaru* | *Input Text Field* | *Placeholder "Konfirmasi Kata Sandi Baru"* | *Tempat pengguna memasukkan ulang kata sandi baru akun mereka.* |
+| *Btn_Simpan* | *Button* | *"Simpan Kata Sandi Baru"* | *Jika diklik, akan memvalidasi password baru pengguna. Jika valid, pengguna akan menerima pesan keberhasilan.* |
+
+## 6.10 Rancangan Antarmuka I-10
+**Antarmuka:** *I-10*  
+**Nama Layar:** *PasswordChangedMessage*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-10 - PasswordChangedMessage" src="./assets/antarmuka/kata-sandi-berhasil-diganti.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.10. Rancangan Antarmuka I-10 - PasswordChangedMessage</i>
+</p>
+
+Tabel 6.10. Spesifikasi Objek Antarmuka I-10
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Card_Success* | *Box/Card* | *Berisi semua elemen konfirmasi* | *Wadah(container) untuk semua elemen notifikasi sukses.* |
+| *Icon_Success* | *Icon* | *Ikon centang dalam lingkaran berwarna hijau* | *Ikon visual yang menandakan operasi berhasil.* |
+| *Title_Success* | *Text* | *Teks "Kata Sandi Berhasil Diubah!"* | *Judul yang menginformasikan bahwa kata sandi berhasil diperbarui.* |
+| *Desc_Success* | *Text* | *Teks "Kata Sandi Anda telah berhasil diperbarui. Silakan gunakan kata sandi baru Anda untuk masuk kembali ke aplikasi dan menikmati layanan kami."* | *Penjelasan yang mengkonfirmasi pembaruan dan menginstruksikan pengguna untuk masuk kembali.* |
+| *Btn_Masuk* | *Button* | *"Masuk"* | *Jika diklik, akan mengarahkan pengguna kembali ke halaman masuk akun.* |
 
 ## 6.Y Rancangan Antarmuka Keseluruhan
 
