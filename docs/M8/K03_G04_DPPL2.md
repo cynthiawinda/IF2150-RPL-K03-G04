@@ -4217,7 +4217,7 @@ Tabel 6.12. Spesifikasi Objek Antarmuka I-12
 
 ## 6.13 Rancangan Antarmuka I-13
 **Antarmuka:** *I-13*  
-**Nama Layar:** *ProfilTenagaKesehatanPage
+**Nama Layar:** *ProfilTenagaKesehatanPage*
 
 <p align="center">
 <img alt="Rancangan Antarmuka I-13 - ProfilTenagaKesehatan" src="./assets/antarmuka/profil-tenaga-kesehatan.png" width="50%">
@@ -4249,6 +4249,257 @@ Tabel 6.13. Spesifikasi Objek Antarmuka I-13
 | *Btn_JadwalkanKonsultasi* | *Button* | *"Jadwalkan Konsultasi"* | *Jika diklik akan mengarahkan pengguna ke halaman penjadwalan konsultasi.* |
 | *Btn_Kembali* | *Button* | *"Kembali"* | *Jika diklik akan mengarahkan pengguna kembali ke halaman pencarian tenaga kesehatan.* |
 
+## 6.14 Rancangan Antarmuka I-14
+**Antarmuka:** *I-14*  
+**Nama Layar:** *ReportPage*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-14 - ReportPage" src="./assets/antarmuka/laporan-kesehatan.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.14. Rancangan Antarmuka I-14 - ReportPage</i>
+</p>
+
+Tabel 6.14. Spesifikasi Objek Antarmuka I-14
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Sidebar* | *Box* | *Berisi logo, menu, setelan, dan keluar* | *Panel navigasi di sisi kiri halaman.* |
+| *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat di bagian atas panel navigasi.* |
+| *Nav_Dashboard* | *Link Menu* | *"Dashboard"* | *Link navigasi untuk berpindah ke halaman utama dasbor pengguna.* |
+| *Nav_LaporanKesehatan* | *Link Menu* | *"Laporan Kesehatan"* | *Link navigasi ke halaman laporan kesehatan yang sedang aktif.* |
+| *Nav_Konsultasi* | *Link Menu* | *"Konsultasi"* | *Link navigasi ke halaman pencarian dan jadwal konsultasi tenaga kesehatan.* |
+| *Nav_Setelan* | *Link Menu* | *"Setelan"* | *Link navigasi ke halaman pengaturan profil dan preferensi akun pengguna.* |
+| *Nav_Keluar* | *Link Menu* | *"Keluar"* | *Link navigasi untuk keluar dari sesi akun pengguna.* |
+| *Header_User* | *Container/Header Bar* | *Informasi profil pengguna (Nama: "Albert Einstein", Peran: "Pengguna", dan avatar)* | *Menampilkan identitas dan peran pengguna yang sedang masuk.* |
+| *Title_Laporan* | *Text* | *"Laporan Kesehatan"* | *Judul utama yang menandakan halaman ini adalah visualisasi laporan kesehatan pengguna.* |
+| *Filter_Periode* | *Container/Segmented Button* | *Pilihan rentang waktu: "7 Hari", "30 Hari", dan "3 Bulan"* | *Komponen penyaring untuk mengubah rentang waktu visualisasi grafik statistik dan tren kesehatan pengguna (opsi "7 Hari" dalam status aktif).* |
+| *Card_DataMood* | *Box/Card Container* | *Judul "Data Mood" dan grafik batang tren mood harian (Senin–Minggu skala 1-5: 4, 3, 2, 4, 5, 5, 4)* | *Wadah visualisasi tren suasana hati harian pengguna dalam rentang waktu yang dipilih.* |
+| *Card_DataTidur* | *Box/Card Container* | *Judul "Data Tidur" dan grafik batang durasi tidur harian (Senin–Minggu skala 1-5: 4, 3, 2, 4, 5, 5, 4)* | *Wadah visualisasi durasi dan keteraturan tidur harian dalam rentang waktu terpilih.* |
+| *Card_DataFrekuensiMakan* | *Box/Card Container* | *Judul "Data Frekuensi Makan" dan grafik batang frekuensi makan harian (Senin–Minggu skala 0-3: 3, 2, 1, 3, 3, 1, 1)* | *Wadah visualisasi frekuensi makan harian pengguna dalam rentang waktu terpilih.* |
+| *Card_DataJenisMakan* | *Box/Card Container* | *Judul "Data Jenis Makan" dan grafik perbandingan porsi makan ("Berat", "Sedang", "Ringan")* | *Wadah visualisasi proporsi porsi atau jenis makanan yang dikonsumsi pengguna.* |
+| *Card_FaktorPemicuStress* | *Box/Card Container* | *Judul "Faktor Pemicu Stress" beserta indikator batang horizontal: Akademik, Keluarga, Relasi, dan Lain-lain* | *Wadah visualisasi sebaran faktor pemicu stres yang dialami pengguna.* |
+| *Card_Catatan* | *Box/Card Container* | *Judul "Catatan", pemilih tanggal harian ("25", "26", "27", "28", "29", "30", "31"), dan kotak teks jurnal refleksi* | *Wadah untuk menampilkan catatan jurnal refleksi personal pengguna berdasarkan tanggal terpilih (disembunyikan untuk peran Orang Tua/Wali sesuai KNF02).* |
+| *Picker_TanggalCatatan* | *Button Group* | *Pilihan tanggal: "25", "26", "27", "28", "29", "30", "31"* | *Komponen untuk memilih tanggal spesifik dari catatan refleksi harian (tanggal "27" dalam status terpilih).* |
+| *Text_CatatanRefleksi* | *Text Box* | *"Pada hari minggu kuturut ayah ke kota naik delman istimewa"* | *Area teks yang menampilkan isi jurnal refleksi pribadi pelajar pada tanggal yang dipilih.* |
+
+## 6.15 Rancangan Antarmuka I-15
+**Antarmuka:** *I-15*  
+**Nama Layar:** *DashboardPageBelumCheckIn*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-15 - DashboardPageBelumCheckIn" src="./assets/antarmuka/dashboard-mahasiswa-belum-checkin.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.15. Rancangan Antarmuka I-15 - DashboardPageBelumCheckIn</i>
+</p>
+
+Tabel 6.15. Spesifikasi Objek Antarmuka I-15
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Sidebar* | *Box* | *Berisi logo, menu, setelan, dan keluar* | *Panel navigasi di sisi kiri halaman.* |
+| *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat.* |
+| *Nav_Dashboard* | *Link Menu* | *"Dashboard"* | *Link navigasi ke halaman dasbor utama yang sedang aktif.* |
+| *Nav_LaporanKesehatan* | *Link Menu* | *"Laporan Kesehatan"* | *Link navigasi ke halaman laporan statistik kesehatan.* |
+| *Nav_Konsultasi* | *Link Menu* | *"Konsultasi"* | *Link navigasi ke halaman pencarian dan jadwal konsultasi tenaga kesehatan.* |
+| *Nav_Setelan* | *Link Menu* | *"Setelan"* | *Link navigasi ke halaman pengaturan profil pengguna.* |
+| *Nav_Keluar* | *Link Menu* | *"Keluar"* | *Link navigasi untuk keluar dari sesi akun.* |
+| *Header_User* | *Container/Header Bar* | *Informasi profil pengguna (Nama: "Albert Einstein", Peran: "Pengguna", dan avatar)* | *Menampilkan identitas serta peran pengguna yang sedang aktif.* |
+| *Title_Dashboard* | *Text* | *"Dashboard"* | *Judul utama halaman dasbor pengguna.* |
+| *Subtitle_Dashboard* | *Text* | *"Pantau kesehatan mentalmu dan kenali pola keseharianmu untuk memahami dirimu lebih baik."* | *Deskripsi pengantar pada halaman dasbor.* |
+| *Banner_CheckInReminder* | *Box/Card Container* | *Judul "Check-In", pesan pengingat "Selamat Malam, Einstein. Hari ini kamu belum mengisi daily check-in. Yuk, luangkan 5 menitmu untuk merefleksikan kesehatan mentalmu hari ini.", dan ikon silang* | *Kartu interaktif pengingat bahwa pengguna belum mengisi daily check-in hari ini; jika diklik akan mengarahkan pengguna ke halaman check-in (CheckInPage).* |
+| *Icon_StatusBelumCheckIn* | *Icon* | *Ikon silang berwarna oranye* | *Indikator visual bahwa check-in harian belum diselesaikan pada hari ini.* |
+| *Card_StreakCheckIn* | *Box/Card* | *Judul "Streak Check-In", angka "5 Hari", dan teks keterangan* | *Menampilkan jumlah hari berturut-turut pengguna telah aktif melakukan daily check-in.* |
+| *Card_RerataMood* | *Box/Card* | *Judul "Rerata Mood", angka "3.2 / 5", dan teks keterangan* | *Menampilkan rata-rata skor suasana hati (mood) pengguna.* |
+| *Card_RerataTidur* | *Box/Card* | *Judul "Rerata Tidur", angka "8.2 Jam", dan teks keterangan* | *Menampilkan rata-rata durasi istirahat tidur harian pengguna.* |
+| *Card_PolaMakan* | *Box/Card* | *Judul "Pola Makan", angka "3.2 x / Hari", dan teks keterangan* | *Menampilkan rata-rata frekuensi makan harian pengguna.* |
+| *Card_IndeksKesehatanMental* | *Box/Card* | *Judul "Indeks Kesehatan Mental"* | *Wadah visualisasi ringkasan indeks skor kesehatan mental pengguna.* |
+| *Card_JadwalKonsultasi* | *Box/Card Container* | *Informasi janji temu (Avatar, Nama "Raissa Hadiman, M. Psi.", spesialisasi "Psikologi Klinis", tanggal "Rabu, 28 Oktober 2026", waktu "10:00 - 11:00 WIB", dan lokasi "Rumah Sakit ABC")* | *Kartu pengingat jadwal konsultasi mendatang bersama tenaga kesehatan terkait.* |
+
+## 6.16 Rancangan Antarmuka I-16
+**Antarmuka:** *I-16*  
+**Nama Layar:** *DashboardPageSudahCheckIn*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-16 - DashboardPageSudahCheckIn" src="./assets/antarmuka/dashboard-mahasiswa-sudah-checkin.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.16. Rancangan Antarmuka I-16 - DashboardPageSudahCheckIn</i>
+</p>
+
+Tabel 6.16. Spesifikasi Objek Antarmuka I-16
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Sidebar* | *Box* | *Berisi logo, menu, setelan, dan keluar* | *Panel navigasi di sisi kiri halaman.* |
+| *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat.* |
+| *Nav_Dashboard* | *Link Menu* | *"Dashboard"* | *Link navigasi ke halaman dasbor utama yang sedang aktif.* |
+| *Nav_LaporanKesehatan* | *Link Menu* | *"Laporan Kesehatan"* | *Link navigasi ke halaman laporan statistik kesehatan.* |
+| *Nav_Konsultasi* | *Link Menu* | *"Konsultasi"* | *Link navigasi ke halaman pencarian dan jadwal konsultasi tenaga kesehatan.* |
+| *Nav_Setelan* | *Link Menu* | *"Setelan"* | *Link navigasi ke halaman pengaturan profil pengguna.* |
+| *Nav_Keluar* | *Link Menu* | *"Keluar"* | *Link navigasi untuk keluar dari sesi akun.* |
+| *Header_User* | *Container/Header Bar* | *Informasi profil pengguna (Nama: "Albert Einstein", Peran: "Pengguna", dan avatar)* | *Menampilkan identitas serta peran pengguna yang sedang aktif.* |
+| *Title_Dashboard* | *Text* | *"Dashboard"* | *Judul utama halaman dasbor pengguna.* |
+| *Subtitle_Dashboard* | *Text* | *"Pantau kesehatan mentalmu dan kenali pola keseharianmu untuk memahami dirimu lebih baik."* | *Deskripsi pengantar pada halaman dasbor.* |
+| *Banner_CheckInSuccess* | *Box/Card Container* | *Judul "Check-In", pesan apresiasi "Terima kasih sudah meluangkan waktu untuk dirimu hari ini! Yuk, terus kenali pola dan perkembangan kondisi dirimu.", dan ikon centang* | *Kartu status yang mengonfirmasi bahwa pengguna telah berhasil menyelesaikan daily check-in untuk hari ini.* |
+| *Icon_StatusSudahCheckIn* | *Icon* | *Ikon centang dalam lingkaran berwarna oranye/emas* | *Indikator visual bahwa daily check-in hari ini sudah selesai.* |
+| *Card_StreakCheckIn* | *Box/Card* | *Judul "Streak Check-In", angka "5 Hari", dan teks keterangan* | *Menampilkan jumlah hari berturut-turut pengguna telah aktif melakukan daily check-in.* |
+| *Card_RerataMood* | *Box/Card* | *Judul "Rerata Mood", angka "3.2 / 5", dan teks keterangan* | *Menampilkan rata-rata skor suasana hati (mood) pengguna.* |
+| *Card_RerataTidur* | *Box/Card* | *Judul "Rerata Tidur", angka "8.2 Jam", dan teks keterangan* | *Menampilkan rata-rata durasi istirahat tidur harian pengguna.* |
+| *Card_PolaMakan* | *Box/Card* | *Judul "Pola Makan", angka "3.2 x / Hari", dan teks keterangan* | *Menampilkan rata-rata frekuensi makan harian pengguna.* |
+| *Card_IndeksKesehatanMental* | *Box/Card* | *Judul "Indeks Kesehatan Mental"* | *Wadah visualisasi ringkasan indeks skor kesehatan mental pengguna.* |
+| *Card_JadwalKonsultasi* | *Box/Card Container* | *Informasi janji temu (Avatar, Nama "Raissa Hadiman, M. Psi.", spesialisasi "Psikologi Klinis", tanggal "Rabu, 28 Oktober 2026", waktu "10:00 - 11:00 WIB", dan lokasi "Rumah Sakit ABC")* | *Kartu pengingat jadwal konsultasi mendatang bersama tenaga kesehatan terkait.* |
+
+## 6.17 Rancangan Antarmuka I-17
+**Antarmuka:** *I-17*  
+**Nama Layar:** *CheckInMoodPage*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-17 - CheckInMoodPage" src="./assets/antarmuka/checkin-mood.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.17. Rancangan Antarmuka I-17 - CheckInMoodPage</i>
+</p>
+
+Tabel 6.17. Spesifikasi Objek Antarmuka I-17
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Progress_CheckIn* | *Progress Bar* | *Indikator kemajuan pengisian (tahap 1)* | *Menampilkan progres alur pengisian formulir daily check-in.* |
+| *Title_Mood* | *Text* | *"Bagaimana Mood Kamu Hari Ini?"* | *Judul pertanyaan utama mengenai suasana hati pengguna.* |
+| *Subtitle_Mood* | *Text* | *"Pilih ekspresi yang paling mewakili suasana hatimu hari ini"* | *Petunjuk instruksi pengisian pilihan suasana hati.* |
+| *Group_MoodOption* | *Container/Interactive Group* | *5 ikon ekspresi emotikon (skala 1 hingga 5)* | *Kelompok pilihan emotikon interaktif yang mewakili rentang suasana hati dari sangat buruk hingga sangat baik.* |
+| *Icon_Mood_1* | *Interactive Icon* | *Ekspresi cemberut marah/sangat buruk (warna merah)* | *Pilihan nilai mood 1 (Sangat Buruk).* |
+| *Icon_Mood_2* | *Interactive Icon* | *Ekspresi sedih/buruk (warna oranye)* | *Pilihan nilai mood 2 (Buruk).* |
+| *Icon_Mood_3* | *Interactive Icon* | *Ekspresi datar/netral (warna kuning)* | *Pilihan nilai mood 3 (Netral).* |
+| *Icon_Mood_4* | *Interactive Icon* | *Ekspresi senyum/baik (warna hijau)* | *Pilihan nilai mood 4 (Baik).* |
+| *Icon_Mood_5* | *Interactive Icon* | *Ekspresi sangat gembira/sangat baik (warna biru muda)* | *Pilihan nilai mood 5 (Sangat Baik).* |
+| *Btn_Next* | *Button* | *"Next"* | *Jika diklik akan menyimpan pilihan mood dan mengarahkan pengguna ke tahap pengisian durasi tidur.* |
+
+## 6.18 Rancangan Antarmuka I-18
+**Antarmuka:** *I-18*  
+**Nama Layar:** *CheckInTidurPage*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-18 - CheckInTidurPage" src="./assets/antarmuka/checkin-tidur-0.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.18. Rancangan Antarmuka I-18 - CheckInTidurPage</i>
+</p>
+
+Tabel 6.18. Spesifikasi Objek Antarmuka I-18
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Progress_CheckIn* | *Progress Bar* | *Indikator kemajuan pengisian (tahap 2)* | *Menampilkan progres alur pengisian formulir daily check-in.* |
+| *Title_Tidur* | *Text* | *"Bagaimana Tidurmu Hari Ini?"* | *Judul pertanyaan untuk pencatatan pola waktu tidur.* |
+| *Subtitle_Tidur* | *Text* | *"Catat waktu istirahatmu"* | *Petunjuk instruksi pengisian waktu mulai tidur dan bangun tidur.* |
+| *Card_JamTidur* | *Box/Card Input* | *Label "Jam Tidur" dan tampilan waktu "00:00"* | *Kotak interaktif untuk mengatur jam mulai tidur pengguna; membuka jendela pemilih waktu jika diklik.* |
+| *Card_JamBangun* | *Box/Card Input* | *Label "Jam Bangun" dan tampilan waktu "00:00"* | *Kotak interaktif untuk mengatur jam bangun tidur pengguna; membuka jendela pemilih waktu jika diklik.* |
+| *Btn_Prev* | *Button* | *"Prev"* | *Jika diklik akan mengarahkan pengguna kembali ke tahap pemilihan mood.* |
+| *Btn_Next* | *Button* | *"Next"* | *Jika diklik akan memvalidasi isian waktu tidur dan mengarahkan pengguna ke tahap pengisian pola makan.* |
+
+## 6.19 Rancangan Antarmuka I-19
+**Antarmuka:** *I-19*  
+**Nama Layar:** *CheckInTidurModal*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-19 - CheckInTidurModal" src="./assets/antarmuka/checkin-tidur-1.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.19. Rancangan Antarmuka I-19 - CheckInTidurModal</i>
+</p>
+
+Tabel 6.19. Spesifikasi Objek Antarmuka I-19
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Modal_PilihWaktu* | *Pop-up/Modal Dialog* | *Berisi kontrol pemilih waktu jam dan menit beserta tombol aksi* | *Jendela dialog pop-up untuk menentukan waktu jam dan menit secara spesifik.* |
+| *Title_ModalWaktu* | *Text* | *"Pilih Waktu"* | *Judul pop-up pengaturan waktu.* |
+| *Input_Jam* | *Input Number/Box* | *Kotak angka "04" dengan label "Jam"* | *Komponen untuk mengatur nilai jam waktu istirahat pengguna.* |
+| *Separator_Waktu* | *Text* | *Simbol pemisah titik dua (":")* | *Pemisah antara nilai jam dan nilai menit.* |
+| *Input_Menit* | *Input Number/Box* | *Kotak angka "30" dengan label "Menit"* | *Komponen untuk mengatur nilai menit waktu istirahat pengguna.* |
+| *Btn_Cancel* | *Button* | *"Cancel"* | *Jika diklik akan membatalkan perubahan waktu dan menutup dialog pop-up.* |
+| *Btn_OK* | *Button* | *"OK"* | *Jika diklik akan menerapkan nilai waktu yang dipilih ke formulir jam tidur/bangun dan menutup pop-up.* |
+
+## 6.20 Rancangan Antarmuka I-20
+**Antarmuka:** *I-20*  
+**Nama Layar:** *CheckInMakanPage*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-20 - CheckInMakanPage" src="./assets/antarmuka/checkin-makan.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.20. Rancangan Antarmuka I-20 - CheckInMakanPage</i>
+</p>
+
+Tabel 6.20. Spesifikasi Objek Antarmuka I-20
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Progress_CheckIn* | *Progress Bar* | *Indikator kemajuan pengisian (tahap 3)* | *Menampilkan progres alur pengisian formulir daily check-in.* |
+| *Title_Makan* | *Text* | *"Bagaimana Makanmu Hari Ini?"* | *Judul utama formulir pencatatan pola dan frekuensi makan pengguna.* |
+| *Subtitle_Makan* | *Text* | *"Catat frekuensi dan pola makanmu"* | *Petunjuk instruksi pengisian frekuensi serta porsi makan.* |
+| *Label_FrekuensiMakan* | *Text* | *"Berapa kali kamu makan hari ini?"* | *Label pertanyaan untuk frekuensi makan harian pengguna.* |
+| *Group_FrekuensiMakan* | *Segmented Button / Pill Group* | *Pilihan tombol: "Belum", "1 Kali", "2 Kali", "3 Kali", "< 3 Kali"* | *Komponen pemilihan tunggal untuk menentukan berapa kali pengguna makan pada hari tersebut.* |
+| *Label_PorsiMakan* | *Text* | *"Apa yang kamu makan hari ini?"* | *Label pertanyaan untuk menentukan ukuran porsi makan pengguna.* |
+| *Row_MakanPertama* | *Box/Container Row* | *Label "Makan Pertama" dan tombol pilihan: "Kecil", "Sedang", "Besar"* | *Pilihan ukuran porsi makan untuk sesi makan pertama.* |
+| *Row_MakanKedua* | *Box/Container Row* | *Label "Makan Kedua" dan tombol pilihan: "Kecil", "Sedang", "Besar"* | *Pilihan ukuran porsi makan untuk sesi makan kedua.* |
+| *Row_MakanKetiga* | *Box/Container Row* | *Label "Makan Ketiga" dan tombol pilihan: "Kecil", "Sedang", "Besar"* | *Pilihan ukuran porsi makan untuk sesi makan ketiga.* |
+| *Btn_Prev* | *Button* | *"Prev"* | *Jika diklik akan mengarahkan pengguna kembali ke tahap pencatatan waktu tidur.* |
+| *Btn_Next* | *Button* | *"Next"* | *Jika diklik akan mengarahkan pengguna ke tahap pencatatan pemicu stres dan catatan refleksi.* |
+
+## 6.21 Rancangan Antarmuka I-21
+**Antarmuka:** *I-21*  
+**Nama Layar:** *CheckInCatatanPage*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-21 - CheckInCatatanPage" src="./assets/antarmuka/checkin-catatan.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.21. Rancangan Antarmuka I-21 - CheckInCatatanPage</i>
+</p>
+
+Tabel 6.21. Spesifikasi Objek Antarmuka I-21
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Progress_CheckIn* | *Progress Bar* | *Indikator kemajuan pengisian (tahap 4)* | *Menampilkan progres alur pengisian formulir daily check-in.* |
+| *Title_Catatan* | *Text* | *"Adakah Catatan Untuk Hari Ini?"* | *Judul utama formulir pengisian catatan refleksi dan faktor pemicu stres.* |
+| *Subtitle_Catatan* | *Text* | *"Identifikasi pemicu stressmu dan ceritakan apa yang kamu rasakan hari ini"* | *Petunjuk instruksi pengisian faktor stres dan ekspresi emosi personal.* |
+| *Label_PemicuStress* | *Text* | *"Apa faktor pemicu stressmu?"* | *Label pertanyaan untuk mengidentifikasi kategori pemicu stres yang dialami.* |
+| *Group_PemicuStress* | *Button Group* | *Pilihan tombol: "Tidak ada", "Akademik", "Keluarga", "Relasi", "Lain-lain"* | *Komponen pemilihan kategori pemicu stres pengguna.* |
+| *Label_CeritaRefleksi* | *Text* | *"Ceritakan apa yang kamu rasakan"* | *Label untuk area pengisian jurnal refleksi bebas.* |
+| *Input_CatatanRefleksi* | *Textarea / Multiline Input* | *Placeholder "Masukkan catatanmu" dan teks penghitung "0 / 300 kata"* | *Kolom masukan teks bebas untuk menuliskan cerita atau jurnal refleksi harian hingga 300 kata.* |
+| *Btn_Prev* | *Button* | *"Prev"* | *Jika diklik akan mengarahkan pengguna kembali ke tahap pencatatan pola makan.* |
+| *Btn_Next* | *Button* | *"Next"* | *Jika diklik akan mengarahkan pengguna ke layar tinjauan dan konfirmasi (periksa kembali).* |
+
+## 6.22 Rancangan Antarmuka I-22
+**Antarmuka:** *I-22*  
+**Nama Layar:** *CheckInPeriksaKembaliPage*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-22 - CheckInPeriksaKembaliPage" src="./assets/antarmuka/checkin-periksa.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.22. Rancangan Antarmuka I-22 - CheckInPeriksaKembaliPage</i>
+</p>
+
+Tabel 6.22. Spesifikasi Objek Antarmuka I-22
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Progress_CheckIn* | *Progress Bar* | *Indikator kemajuan pengisian penuh (100%)* | *Menampilkan bahwa seluruh bagian formulir telah selesai diisi.* |
+| *Title_Periksa* | *Text* | *"Periksa Kembali"* | *Judul utama layar konfirmasi dan peninjauan kembali isian check-in.* |
+| *Subtitle_Periksa* | *Text* | *"Pastikan seluruh catatanmu telah sesuai dengan apa yang kamu alami hari ini"* | *Petunjuk instruksi bagi pengguna untuk memeriksa akurasi data sebelum dikirimkan ke sistem.* |
+| *Row_SummaryMood* | *List Item / Container Row* | *Label "Mood" dan ringkasan nilai "Sangat Baik"* | *Menampilkan ringkasan hasil isian suasana hati pengguna.* |
+| *Row_SummaryTidur* | *List Item / Container Row* | *Label "Tidur" dan ringkasan waktu durasi "8:30"* | *Menampilkan kalkulasi durasi istirahat tidur berdasarkan jam tidur dan jam bangun.* |
+| *Row_SummaryMakan* | *List Item / Container Row* | *Label "Makan" dan ringkasan porsi "Berat/Sedang/Berat"* | *Menampilkan ringkasan isian pola porsi makan pengguna.* |
+| *Container_SummaryCatatan* | *Box/Container* | *Label "Catatan" dan cuplikan teks refleksi ("Lorem ipsum dolor sit amet...")* | *Menampilkan isi teks catatan jurnal refleksi yang telah dituliskan pengguna.* |
+| *Btn_Prev* | *Button* | *"Prev"* | *Jika diklik akan mengarahkan pengguna kembali ke halaman catatan untuk melakukan perbaikan data.* |
+| *Btn_Next* | *Button* | *"Next"* | *Jika diklik akan memproses pengiriman data check-in harian (submit) ke CheckInController dan menampilkan pesan keberhasilan.* |
+
 ## 6.Y Rancangan Antarmuka Keseluruhan
 
 Tuliskan daftar gambar seluruh antarmuka. Berikan ID unik untuk setiap tampilan dan gunakan ID yang sama pada subbab perancangan antarmuka masing-masing.
@@ -4270,6 +4521,15 @@ Tabel 6.Y. Rancangan Antarmuka Keseluruhan
 | *[I-11]* | <img src="./assets/antarmuka/izin-akses-lokasi.png" alt="Izin Akses Lokasi" width="400">  |
 | *[I-12]* | <img src="./assets/antarmuka/cari-tenaga-kesehatan.png" alt="Cari Tenaga Kesehatan" width="400">  |
 | *[I-13]* | <img src="./assets/antarmuka/profil-tenaga-kesehatan.png" alt="Profil Tenaga Kesehatan" width="400">  |
+| *[I-14]* | <img src="./assets/antarmuka/laporan-kesehatan.png" alt="Laporan Kesehatan" width="400"> |
+| *[I-15]* | <img src="./assets/antarmuka/dashboard-mahasiswa-belum-checkin.png" alt="Dashboard Mahasiswa Belum Check-In" width="400">  |
+| *[I-16]* | <img src="./assets/antarmuka/dashboard-mahasiswa-sudah-checkin.png" alt="Dashboard Mahasiswa Sudah Check-In" width="400">  |
+| *[I-17]* | <img src="./assets/antarmuka/checkin-mood.png" alt="CheckIn - Mood" width="400">  |
+| *[I-18]* | <img src="./assets/antarmuka/checkin-tidur-0.png" alt="CheckIn - Waktu Tidur" width="400">  |
+| *[I-19]* | <img src="./assets/antarmuka/checkin-tidur-1.png" alt="CheckIn - Modal Pilih Waktu" width="400">  |
+| *[I-20]* | <img src="./assets/antarmuka/checkin-makan.png" alt="CheckIn - Pola Makan" width="400">  |
+| *[I-21]* | <img src="./assets/antarmuka/checkin-catatan.png" alt="CheckIn - Catatan dan Pemicu Stres" width="400">  |
+| *[I-22]* | <img src="./assets/antarmuka/checkin-periksa.png" alt="CheckIn - Periksa Kembali" width="400">  |
 
 <br>
 
