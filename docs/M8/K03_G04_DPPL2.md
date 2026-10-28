@@ -2160,32 +2160,118 @@ Tabel 5.29.5.1. Query Operasi cancelLogout()
 
 # BAB 6: Perancangan Antarmuka
 
-## 6.1 Rancangan Antarmuka [ID Layar 1]
+## 6.1 Rancangan Antarmuka I-01
 
-Masukkan versi awal prototipe antarmuka, dimana untuk setiap antarmuka/layar, tuliskan spesifikasi rinci objek yang ditampilkan dan reaksi sistem terhadap interaksi pengguna.
-
-**Antarmuka:** *[ID layar]*  
-**Nama Layar:** *[Nama layar]*
+**Antarmuka:** *I-01*  
+**Nama Layar:** *RegistrationPagePelajar*
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-design.png" width="50%">
+<img alt="Rancangan Antarmuka I-01 - RegistrationPagePelajar" src="./assets/antarmuka/registration-page-pelajar.png" width="50%">
 </p>
 <p align="center">
-<i>Gambar 6.1. Rancangan Antarmuka [ID Layar] - [Nama Layar]</i>
+<i>Gambar 6.1. Rancangan Antarmuka I-01 - RegistrationPagePelajar</i>
 </p>
 
-Tabel 6.1. Spesifikasi Objek Antarmuka [ID Layar]
+Tabel 6.1. Spesifikasi Objek Antarmuka I-01
 
 | Id_Objek | Jenis | Konten | Keterangan |
 | :--- | :--- | :--- | :--- |
-| *[ID objek]* | *[Jenis objek, misalnya Button, RTF Box, dll]* | *[String yang tampil pada layar]* | *[Reaksi sistem, layar tujuan, tautan, atau ID algoritma yang dijalankan]* |
-| *[ID objek]* | *[Jenis objek]* | *[Konten yang ditampilkan]* | *[Reaksi sistem atau nama file terkait beserta deskripsi ringkasnya]* |
-| *...* | *...* | *...* | *...* |
+| *Panel_Right* | *Side Panel/Container* | *Berisi semua elemen formulir registrasi* | *Wadah(container) utama di sisi kanan untuk menampung semua komponen interaktif formulir registrasi pelajar.* |
+| *Panel_Left* | *Side Panel/Container* | *Berisi logo MahaSehat dan teks sapaan* | *Wadah (container) visual di sisi kiri layar untuk branding dan teks penyambutan pengguna*. |
+| *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat di bagian atas panel kiri.* |
+| *Text_Greeting* | *Label/Text Header* | *Teks "Selamat Datang!"* | *Teks judul sapaan pembuka bagi pengguna yang membuka halaman registrasi.* |
+| *Tab_Role_Pelajar* | *Button/Tab* | *Teks "Pelajar"* | *Menampilkan formulir pendaftaran khusus peran Pelajar (keadaan aktif).* |
+| *Label_Nama* | *Text* | *Teks "Nama"* | *Label untuk field input nama.* |
+| *Input_Nama* | *Input Text Field* | *Placeholder "Nama"* | *Tempat pengguna (pelajar) memasukkan nama mereka.* |
+| *Label_Email* | *Text* | *Teks "Email"* | *Label untuk field input email.* |
+| *Input_Email* | *Input Text Field* | *Placeholder "Email"* | *Tempat pengguna (pelajar) memasukkan alamat email mereka.* |
+| *Label_NomorTelp* | *Text* | *Teks "Nomor Telepon"* | *Label untuk field input nomor telepon.* |
+| *Input_NomorTelp* | *Input Text Field* | *Placeholder "Nomor Telepon"* | *Tempat pengguna (pelajar) memasukkan nomor telepon mereka.* |
+| *Group_TglLahir* | *Group/Container* | *Label "Tanggal Lahir" dan 3 input field (Bulan, Tanggal, Tahun)* | *Kelompok elemen untuk mengumpulkan data tanggal lahir pengguna (pelajar).* |
+| *Input_BulanLahir* | *Input Text Field* | *Placeholder "Bulan"* | *Tempat pengguna (pelajar) memasukkan bulan lahir mereka.* |
+| *Input_TanggalLahir* | *Input Text Field* | *Placeholder "Tanggal"* | *Tempat pengguna (pelajar) memasukkan tanggal lahir mereka.* |
+| *Input_TahunLahir* | *Input Text Field* | *Placeholder "Tahun"* | *Tempat pengguna (pelajar) memasukkan tahun lahir mereka.* |
+| *Label_NomorTelpOrangTuaWali* | *Text* | *Teks "Nomor Telepon Orang Tua/Wali"* | *Label untuk field input nomor telepon orang tua/wali pelajar.* |
+| *Input_NomorTelpOrangTuaWali* | *Input Text Field* | *Placeholder "Nomor Telepon Orang Tua/Wali"* | *Tempat pengguna (pelajar) memasukkan nomor telepon orang tua/wali mereka.* |
+| *Label_RiwayatKesehatan* | *Text* | *Teks "Riwayat Kesehatan"* | *Label untuk field input riwayat kesehatan.* |
+| *Input_RiwayatKesehatan* | *Input Text Field* | *Placeholder "Riwayat Kesehatan"* | *Tempat pengguna (pelajar) memasukkan riwayat kesehatan mereka.* |
+| *Label_KataSandi* | *Text* | *Teks "Kata Sandi"* | *Label untuk field kata sandi.* |
+| *Input_KataSandi* | *Input Text Field* | *Placeholder "Kata Sandi"* | *Tempat pengguna (pelajar) memasukkan kata sandi mereka. Tipe input "password".* |
+| *Label_KonfirmasiKataSandi* | *Text* | *Teks "Konfirmasi Kata Sandi"* | *Label untuk field konfirmasi kata sandi.* |
+| *Input_KonfirmasiKataSandi* | *Input Text Field* | *Placeholder "Konfirmasi Kata Sandi"* | *Tempat pengguna (pelajar) memasukkan ulang kata sandi mereka untuk memastikan kecocokan dengan input sebelumnya. Tipe input "password".* |
+| *Btn_Daftar* | *Button* | *"Daftar"* | *Jika diklik, akan memulai validasi data. Jika valid, akun pelajar berhasil diajukan dan konfirmasi persetujuan orang tua/wali akan dikirim bagi pelajar di bawah umur.* |
+| *Link_Masuk* | *Link Text* | *"Sudah memiliki akun? Masuk"* | *Mengarahkan pengguna yang sudah memiliki akun ke masuk akun.* |
 
+## 6.2 Rancangan Antarmuka I-02
+**Antarmuka:** *I-02*  
+**Nama Layar:** *RegistrationPageOrangTuaWali*
 
-## 6.X Rancangan Antarmuka [ID Layar X]
+<p align="center">
+<img alt="Rancangan Antarmuka I-02 - RegistrationPageOrangTuaWali" src="./assets/antarmuka/registration-page-orangtuawali.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.2. Rancangan Antarmuka I-02 - RegistrationPageOrangTuaWali</i>
+</p>
 
-*[Ulangi pola 6.1 untuk layar berikutnya sampai semua layar teridentifikasi]*
+Tabel 6.2. Spesifikasi Objek Antarmuka I-02
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Panel_Right* | *Side Panel/Container* | *Berisi semua elemen formulir registrasi* | *Wadah(container) utama di sisi kanan untuk menampung semua komponen interaktif formulir registrasi orang tua/wali.* |
+| *Panel_Left* | *Side Panel/Container* | *Berisi logo MahaSehat dan teks sapaan* | *Wadah (container) visual di sisi kiri layar untuk branding dan teks penyambutan pengguna*. |
+| *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat di bagian atas panel kiri.* |
+| *Text_Greeting* | *Label/Text Header* | *Teks "Selamat Datang!"* | *Teks judul sapaan pembuka bagi pengguna yang membuka halaman registrasi.* |
+| *Tab_Role_OrangTuawali* | *Button/Tab* | *Teks "Orang Tua/Wali"* | *Menampilkan formulir pendaftaran khusus peran Orang Tua/Wali (keadaan aktif).* |
+| *Label_Nama* | *Text* | *Teks "Nama"* | *Label untuk field input nama.* |
+| *Input_Nama* | *Input Text Field* | *Placeholder "Nama"* | *Tempat pengguna (orang tua/wali) memasukkan nama mereka.* |
+| *Label_Email* | *Text* | *Teks "Email"* | *Label untuk field input email.* |
+| *Input_Email* | *Input Text Field* | *Placeholder "Email"* | *Tempat pengguna (orang tua/wali) memasukkan alamat email mereka.* |
+| *Label_NomorTelp* | *Text* | *Teks "Nomor Telepon"* | *Label untuk field input nomor telepon.* |
+| *Input_NomorTelp* | *Input Text Field* | *Placeholder "Nomor Telepon"* | *Tempat pengguna (orang tua/wali) memasukkan nomor telepon mereka.* |
+| *Label_KataSandi* | *Text* | *Teks "Kata Sandi"* | *Label untuk field kata sandi.* |
+| *Input_KataSandi* | *Input Text Field* | *Placeholder "Kata Sandi"* | *Tempat pengguna (orang tua/wali) memasukkan kata sandi mereka. Tipe input "password".* |
+| *Label_KonfirmasiKataSandi* | *Text* | *Teks "Konfirmasi Kata Sandi"* | *Label untuk field konfirmasi kata sandi.* |
+| *Input_KonfirmasiKataSandi* | *Input Text Field* | *Placeholder "Konfirmasi Kata Sandi"* | *Tempat pengguna (orang tua/wali) memasukkan ulang kata sandi mereka untuk memastikan kecocokan dengan input sebelumnya. Tipe input "password".* |
+| *Btn_Daftar* | *Button* | *"Daftar"* | *Jika diklik, akan memulai validasi data. Jika valid, akun orang tua/wali berhasil dibuat.* |
+| *Link_Masuk* | *Link Text* | *"Sudah memiliki akun? Masuk"* | *Mengarahkan pengguna yang sudah memiliki akun ke masuk akun.* |
+
+## 6.3 Rancangan Antarmuka I-03
+
+**Antarmuka:** *I-03*  
+**Nama Layar:** *RegistrationPageTenagaKesehatan*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-03 - RegistrationPageTenagaKesehatan" src="./assets/antarmuka/registration-page-tenagakesehatan.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.3. Rancangan Antarmuka I-03 - RegistrationPageTenagaKesehatan</i>
+</p>
+
+Tabel 6.3. Spesifikasi Objek Antarmuka I-03
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Panel_Right* | *Side Panel/Container* | *Berisi semua elemen formulir registrasi* | *Wadah(container) utama di sisi kanan untuk menampung semua komponen interaktif formulir registrasi tenaga kesehatan.* |
+| *Panel_Left* | *Side Panel/Container* | *Berisi logo MahaSehat dan teks sapaan* | *Wadah (container) visual di sisi kiri layar untuk branding dan teks penyambutan pengguna*. |
+| *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat di bagian atas panel kiri.* |
+| *Text_Greeting* | *Label/Text Header* | *Teks "Selamat Datang!"* | *Teks judul sapaan pembuka bagi pengguna yang membuka halaman registrasi.* |
+| *Tab_Role_TenagaKesehatan* | *Button/Tab* | *Teks "Tenaga Kesehatan"* | *Menampilkan formulir pendaftaran khusus peran Tenaga Kesehatan (keadaan aktif).* |
+| *Label_Nama* | *Text* | *Teks "Nama"* | *Label untuk field input nama.* |
+| *Input_Nama* | *Input Text Field* | *Placeholder "Nama"* | *Tempat pengguna (tenaga kesehatan) memasukkan nama mereka.* |
+| *Label_Email* | *Text* | *Teks "Email"* | *Label untuk field input email.* |
+| *Input_Email* | *Input Text Field* | *Placeholder "Email"* | *Tempat pengguna (tenaga kesehatan) memasukkan alamat email mereka.* |
+| *Label_NomorTelp* | *Text* | *Teks "Nomor Telepon"* | *Label untuk field input nomor telepon.* |
+| *Input_NomorTelp* | *Input Text Field* | *Placeholder "Nomor Telepon"* | *Tempat pengguna (tenaga kesehatan) memasukkan nomor telepon mereka.* |
+| *Label_JenisTenagaKesehatan* | *Text* | *Teks "Jenis Tenaga Kesehatan"* | *Label untuk field input jenis tenaga kesehatan.* |
+| *Input_JenisTenagaKesehatan* | *Input Text Field* | *Placeholder "Jenis Tenaga Kesehatan"* | *Tempat pengguna (tenaga kesehatan) memasukkan jenis pekerjaan mereka.* |
+| *Label_Lokasi* | *Text* | *Teks "Lokasi"* | *Label untuk field input lokasi.* |
+| *Input_Lokasi* | *Input Text Field* | *Teks "Lokasi"* | *Tempat pengguna (tenaga kesehatan) memasukkan lokasi kerja mereka.* |
+| *Label_KataSandi* | *Text* | *Teks "Kata Sandi"* | *Label untuk field kata sandi.* |
+| *Input_KataSandi* | *Input Text Field* | *Placeholder "Kata Sandi"* | *Tempat pengguna (tenaga kesehatan) memasukkan kata sandi mereka. Tipe input "password".* |
+| *Label_KonfirmasiKataSandi* | *Text* | *Teks "Konfirmasi Kata Sandi"* | *Label untuk field konfirmasi kata sandi.* |
+| *Input_KonfirmasiKataSandi* | *Input Text Field* | *Placeholder "Konfirmasi Kata Sandi"* | *Tempat pengguna (tenaga kesehatan) memasukkan ulang kata sandi mereka untuk memastikan kecocokan dengan input sebelumnya. Tipe input "password".* |
+| *Btn_Daftar* | *Button* | *"Daftar"* | *Jika diklik, akan memulai validasi data. Jika valid, akun tenaga kesehatan berhasil dibuat.* |
+| *Link_Masuk* | *Link Text* | *"Sudah memiliki akun? Masuk"* | *Mengarahkan pengguna yang sudah memiliki akun ke masuk akun.* |
 
 ## 6.Y Rancangan Antarmuka Keseluruhan
 
