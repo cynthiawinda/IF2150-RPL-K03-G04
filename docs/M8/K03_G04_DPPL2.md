@@ -4166,6 +4166,89 @@ Tabel 6.10. Spesifikasi Objek Antarmuka I-10
 | *Desc_Success* | *Text* | *Teks "Kata Sandi Anda telah berhasil diperbarui. Silakan gunakan kata sandi baru Anda untuk masuk kembali ke aplikasi dan menikmati layanan kami."* | *Penjelasan yang mengkonfirmasi pembaruan dan menginstruksikan pengguna untuk masuk kembali.* |
 | *Btn_Masuk* | *Button* | *"Masuk"* | *Jika diklik, akan mengarahkan pengguna kembali ke halaman masuk akun.* |
 
+## 6.11 Rancangan Antarmuka I-11
+**Antarmuka:** *I-11*  
+**Nama Layar:** *IzinAksesLokasiPopUp*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-11 - IzinAksesLokasiPopUp" src="./assets/antarmuka/izin-akses-lokasi.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.11. Rancangan Antarmuka I-11 - IzinAksesLokasiPopUp</i>
+</p>
+
+Tabel 6.11. Spesifikasi Objek Antarmuka I-11
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Card_IzinAksesLokasi* | *Box/Card* | *Berisi semua elemen untuk meminta izin akses lokasi pengguna* | *Wadah (container) untuk semua elemen izin akses lokasi pengguna.* |
+| *Desc_IzinAksesLokasiPengguna* | *Text* | *Teks "Izinkan MahaSehat untuk mengakses lokasi Anda untuk menemukan tenaga kesehatan terdekat"* | *Penjelasan untuk meminta izin akses lokasi pengguna.* |
+| *Btn_Izinkan* | *Button* | *"Izinkan"* | *Jika diklik, akan mengarahkan pengguna ke halaman pencarian tenaga kesehatan beserta informasi jarak fasilitas kesehatan tempat tenaga kesehatan tersebut bekerja.* |
+| *Btn_JanganIzinkan* | *Button* | *"Jangan Izinkan"* | *Jika diklik, akan mengarahkan pengguna ke halaman pencarian tenaga kesehatan tanpa informasi jarak fasilitas kesehatan tempat tenaga kesehatan tersebut bekerja.* |
+
+## 6.12 Rancangan Antarmuka I-12
+**Antarmuka:** *I-12*  
+**Nama Layar:** *CariTenagaKesehatanPage*
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-12 - CariTenagaKesehatan" src="./assets/antarmuka/cari-tenaga-kesehatan.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.12. Rancangan Antarmuka I-12 - CariTenagaKesehatanPage</i>
+</p>
+
+Tabel 6.12. Spesifikasi Objek Antarmuka I-12
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Sidebar* | *Box* | *Berisi logo, menu, setelan, dan keluar* | *Panel navigasi di sisi kiri halaman.* |
+| *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat.* |
+| *Nav_Dashboard* | *Link Menu* | *"Dashboard"* | *Link navigasi ke halaman Dashboard, menandakan sedang aktif.* |
+| *Nav_LaporanKesehatan* | *Link Menu* | *"Laporan Kesehatan"* | *Link navigasi ke halaman laporan kesehatan.* |
+| *Nav_Konsultasi* | *Link Menu* | *"Konsultasi"* | *Link navigasi ke halaman konsultasi.* |
+| *Nav_Setelan* | *Link Menu* | *"Setelan"* | *Link navigasi ke halaman setelan.* |
+| *Nav_Keluar* | *Link Menu* | *"Keluar"* | *Link navigasi keluar.* |
+| *Header_User* | *Container/Header Bar* | *Informasi profil (Nama: "Albert Einstein", Peran: "Pengguna", dan ikon profil)* | *Menampilkan identitas pengguna yang sedang masuk.* |
+| *Title_Cari* | *Text* | *"Cari Tenaga Kesehatan di Dekat Anda"* | *Judul yang menginformasikan bahwa halaman ini untuk mencari tenaga kesehatan di dekat pengguna.* |
+| *Input_Lokasi* | *Search Field* | *Placeholder "Nama Lokasi" dengan ikon pencarian* | *Tempat pengguna mengetikkan atau mencari lokasi spesifik untuk menyaring tenaga kesehatan terdekat.* |
+| *Card_NakesItem* | *Box/Card Container* | *Informasi detail tenaga kesehatan (Foto profil, nama, spesialisasi, lokasi, jarak, tarif, dan keahlian)* | *Wadah (card) untuk menampilkan ringkasan profil setiap tenaga kesehatan.* |
+| *Btn_LihatDetail* | *Button* | *"Lihat Detail"* | *Jika diklik akan mengarahkan pengguna ke profil yang lebih lengkap dan jadwal praktik.* |
+| *Btn_JadwalkanKonsultasi* | *Button* | *"Jadwalkan Konsultasi"* | *Jika diklik akan mengarahkan pengguna untuk menjadwalkan sesi konsultasi dengan tenaga kesehatan terpilih.* |
+
+## 6.13 Rancangan Antarmuka I-13
+**Antarmuka:** *I-13*  
+**Nama Layar:** *ProfilTenagaKesehatanPage
+
+<p align="center">
+<img alt="Rancangan Antarmuka I-13 - ProfilTenagaKesehatan" src="./assets/antarmuka/profil-tenaga-kesehatan.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.13. Rancangan Antarmuka I-13 - ProfilTenagaKesehatanPage</i>
+</p>
+
+Tabel 6.13. Spesifikasi Objek Antarmuka I-13
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Sidebar* | *Box* | *Berisi logo, menu, setelan, dan keluar* | *Panel navigasi di sisi kiri halaman.* |
+| *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat.* |
+| *Nav_Dashboard* | *Link Menu* | *"Dashboard"* | *Link navigasi ke halaman Dashboard, menandakan sedang aktif.* |
+| *Nav_LaporanKesehatan* | *Link Menu* | *"Laporan Kesehatan"* | *Link navigasi ke halaman laporan kesehatan.* |
+| *Nav_Konsultasi* | *Link Menu* | *"Konsultasi"* | *Link navigasi ke halaman konsultasi.* |
+| *Nav_Setelan* | *Link Menu* | *"Setelan"* | *Link navigasi ke halaman setelan.* |
+| *Nav_Keluar* | *Link Menu* | *"Keluar"* | *Link navigasi keluar.* |
+| *Header_User* | *Container/Header Bar* | *Informasi profil (Nama: "Albert Einstein", Peran: "Pengguna", dan ikon profil)* | *Menampilkan identitas pengguna yang sedang masuk.* |
+| *Title_Profil* | *Text* | *"Profil Tenaga Kesehatan"* | *Judul yang menginformasikan bahwa halaman ini menunjukkan profil tenaga kesehatan.* |
+| *Image_ProfilNakes* | *Image* | *Foto profil tenaga kesehatan* | *Menampilkan foto resmi profesional tenaga kesehatan.* |
+| *Text_NamaNakes* | *Label/Text* | *Teks nama dan gelar profesional tenaga kesehatan* | *Identitas utama tenaga kesehatan.* |
+| *Text_Spesialisasi* | *Label/Text* | *Teks spesialisasi, afiliasi tempat praktik, dan latar belakang pendidikan* | *Informasi kredibilitas profesional.* |
+| *Text_DeskripsiNakes* | *Label/Paragraph* | *Ringkasan kasus yang pernah ditangani* | *Memberikan gambaran keahlian kepada pengguna sebelum memesan sesi.* |
+| *Card_JamReguler* | *Box/Container* | *Daftar jadwal operasional rutin (Senin-Jumat pukul 08.00-17.00)* | *Informasi jam kerja reguler tenaga kesehatan.* |
+| *Group_Ketersediaan* | *Interactive Container* | *Pilihan tanggal ketersediaan (Hari ini 28/10, Kamis 29/10, Jumat 30/10, dst.) beserta indikator sisa slot* | *Komponen pemilihan tanggal konsultasi yang tersedia.* |
+| *List_SlotJam* | *Label/Text Group* | *Teks rentang waktu spesifik (10.00-11.00, 11.00-12.00, dst.)* | *Menampilkan informasi jam slot yang tersedia pada tanggal yang dipilih (read-only).* |
+| *Btn_JadwalkanKonsultasi* | *Button* | *"Jadwalkan Konsultasi"* | *Jika diklik akan mengarahkan pengguna ke halaman penjadwalan konsultasi.* |
+| *Btn_Kembali* | *Button* | *"Kembali"* | *Jika diklik akan mengarahkan pengguna kembali ke halaman pencarian tenaga kesehatan.* |
+
 ## 6.Y Rancangan Antarmuka Keseluruhan
 
 Tuliskan daftar gambar seluruh antarmuka. Berikan ID unik untuk setiap tampilan dan gunakan ID yang sama pada subbab perancangan antarmuka masing-masing.
@@ -4174,9 +4257,19 @@ Tabel 6.Y. Rancangan Antarmuka Keseluruhan
 
 | No | Tampilan Antarmuka |
 | :--- | :--- |
-| *[I-01]* | <img src="./assets/diagram/contoh-design.png" alt="Contoh Desain" width="400"> |
-| *[I-02]* | *[Sisipkan gambar antarmuka I-02]* |
-| *[I-XX]* | *[Sisipkan gambar antarmuka berikutnya]* |
+| *[I-01]* | <img src="./assets/antarmuka/registration-page-pelajar.png" alt="Registration Page Pelajar" width="400"> |
+| *[I-02]* | <img src="./assets/antarmuka/registration-page-orangtuawali.png" alt="Registration Page Orang Tua/Wali" width="400">  |
+| *[I-03]* | <img src="./assets/antarmuka/registration-page-tenagakesehatan.png" alt="Registration Page Tenaga Kesehatan" width="400">  |
+| *[I-04]* | <img src="./assets/antarmuka/akun-berhasil-diajukan.png" alt="Akun Berhasil Diajukan" width="400">  |
+| *[I-05]* | <img src="./assets/antarmuka/akun-berhasil-dibuat.png" alt="Akun Berhasil Dibuat" width="400">  |
+| *[I-06]* | <img src="./assets/antarmuka/konfirmasi-registrasi-page.png" alt="Konfirmasi Registrasi Page" width="400">  |
+| *[I-07]* | <img src="./assets/antarmuka/login-page.png" alt="Login Page" width="400">  |
+| *[I-08]* | <img src="./assets/antarmuka/reset-password-page-1.png" alt="Reset Password Page" width="400">  |
+| *[I-09]* | <img src="./assets/antarmuka/reset-password-page-2.png" alt="Reset Password Page 2" width="400">  |
+| *[I-10]* | <img src="./assets/antarmuka/kata-sandi-berhasil-diganti.png" alt="Kata Sandi Berhasil Diganti" width="400">  |
+| *[I-11]* | <img src="./assets/antarmuka/izin-akses-lokasi.png" alt="Izin Akses Lokasi" width="400">  |
+| *[I-12]* | <img src="./assets/antarmuka/cari-tenaga-kesehatan.png" alt="Cari Tenaga Kesehatan" width="400">  |
+| *[I-13]* | <img src="./assets/antarmuka/profil-tenaga-kesehatan.png" alt="Profil Tenaga Kesehatan" width="400">  |
 
 <br>
 
