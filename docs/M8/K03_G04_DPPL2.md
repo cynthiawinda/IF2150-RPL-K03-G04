@@ -1887,21 +1887,21 @@ Tabel 5.11.1 Operasi Kelas AuthController
 
 | Nama Operasi | Visibility | Keterangan |
 |---|---|---|
-| validateData(data: Object): Boolean | public | Memvalidasi kelengkapan dan format data registrasi. |
-| registerAccount(data: Object): Boolean | public | Menyimpan akun baru dan mengirimkan konfirmasi registrasi. |
-| login(usernameOrEmail: String, pass: String): Boolean | public | Melakukan autentikasi kredensial pengguna. |
-| logout(): void | public | Mengakhiri sesi login pengguna. |
-| validateConfirmation(token: String): Boolean | public | Memeriksa keabsahan token konfirmasi registrasi. |
-| confirmAccount(token: String): Boolean | public | Mengonfirmasi registrasi akun pelajar oleh orang tua/wali. |
-| validateCredentials(usernameOrEmail: String, pass: String): Boolean | private | Memeriksa kesesuaian kredensial pengguna. |
-| checkAccountStatus(usernameOrEmail: String): String | private | Memeriksa status akun pengguna. |
-| startSession(pengguna: Pengguna): void | private | Membuat sesi login baru. |
-| endSession(): void | private | Mengakhiri sesi login yang berjalan. |
+| *validateData(data: Object): Boolean* | *public* | *Memvalidasi kelengkapan dan format data registrasi.* |
+| *registerAccount(data: Object): Boolean* | *public* | *Menyimpan akun baru dan mengirimkan konfirmasi registrasi.* |
+| *login(usernameOrEmail: String, pass: String): Boolean* | *public* | *Melakukan autentikasi kredensial pengguna.* |
+| *logout(): void* | *public* | *Mengakhiri sesi login pengguna.* |
+| *validateConfirmation(token: String): Boolean* | *public* | *Memeriksa keabsahan token konfirmasi registrasi.* |
+| *confirmAccount(token: String): Boolean* | *public* | *Mengonfirmasi registrasi akun pelajar oleh orang tua/wali.* |
+| *validateCredentials(usernameOrEmail: String, pass: String): Boolean* | *private* | *Memeriksa kesesuaian kredensial pengguna.* |
+| *checkAccountStatus(usernameOrEmail: String): String* | *private* | *Memeriksa status akun pengguna.* |
+| *startSession(pengguna: Pengguna): void* | *private* | *Membuat sesi login baru.* |
+| *endSession(): void* | *private* | *Mengakhiri sesi login yang berjalan.* |
 
 Tabel 5.11.2 Atribut Kelas AuthController
 | Nama Atribut | Visibility | Tipe |
 |---|---|---|
-| currentUser | private | Pengguna |
+| *currentUser* | *private* | *Pengguna* |
 
 ### 5.11.1 Algoritma/Query
 
@@ -1923,7 +1923,7 @@ Function validateData(data) → Boolean
 Tabel 5.11.1.1 Query Operasi validateData(data)
 | No Query | Query | Keterangan |
 |---|---|---|
-| *-* | *-* | Validasi dilakukan terhadap data masukan tanpa mengakses basis data. |
+| *-* | *-* | *Validasi dilakukan terhadap data masukan tanpa mengakses basis data.* |
 
 **Nama Kelas:** AuthController
 **Nama Operasi:** registerAccount(data)
@@ -1945,7 +1945,7 @@ Function registerAccount(data) → Boolean
 Tabel 5.11.1.2 Query Operasi registerAccount(data)
 | No Query | Query | Keterangan |
 |---|---|---|
-| Q-C11-01 | INSERT INTO tbl_pengguna (username, email, password, role, status_akun) VALUES (@username, @email, @encryptedPassword, @role, 'PENDING'); | Menyimpan data pendaftaran akun baru ke basis data. |
+| *Q-C11-01* | *INSERT INTO tbl_pengguna (username, email, password, role, status_akun) VALUES (@username, @email, @encryptedPassword, @role, 'PENDING');* | *Menyimpan data pendaftaran akun baru ke basis data.* |
 **Nama Kelas:** AuthController
 **Nama Operasi:** login(usernameOrEmail, pass)
 **ID Algoritma:** Algo-C11-03
@@ -1972,12 +1972,10 @@ Tabel 5.11.1.3 Query Operasi login(usernameOrEmail, pass)
 
 | No Query | Query | Keterangan |
 |---|---|---|
-| *-* | *-* | Operasi mengatur alur autentikasi dan memanggil operasi lain yang menangani akses basis data. |
+| *-* | *-* | *Operasi mengatur alur autentikasi dan memanggil operasi lain yang menangani akses basis data.* |
 
 **Nama Kelas:** AuthController
-
 **Nama Operasi:** logout()
-
 **ID Algoritma:** Algo-C11-04
 
 ```text
@@ -2007,7 +2005,7 @@ Function validateConfirmation(token) → Boolean
 Tabel 5.11.1.5 Query Operasi validateConfirmation(token)
 | No Query | Query | Keterangan |
 |---|---|---|
-| Q-C11-02 | SELECT token_konfirmasi FROM tbl_pengguna WHERE token_konfirmasi = @token AND status_akun = 'PENDING'; | Memeriksa token konfirmasi untuk akun yang belum aktif. |
+| *Q-C11-02* | *SELECT token_konfirmasi FROM tbl_pengguna WHERE token_konfirmasi = @token AND status_akun = 'PENDING';* | *Memeriksa token konfirmasi untuk akun yang belum aktif.* |
 
 **Nama Kelas:** AuthController
 **Nama Operasi:** confirmAccount(token)
@@ -2026,7 +2024,7 @@ Function confirmAccount(token) → Boolean
 Tabel 5.11.1.6 Query Operasi confirmAccount(token)
 | No Query | Query | Keterangan |
 |---|---|---|
-| Q-C11-03 | UPDATE tbl_pengguna SET status_akun = 'AKTIF' WHERE token_konfirmasi = @token AND status_akun = 'PENDING'; | Mengaktifkan akun setelah token dinyatakan valid. |
+| *Q-C11-03* | *UPDATE tbl_pengguna SET status_akun = 'AKTIF' WHERE token_konfirmasi = @token AND status_akun = 'PENDING';* | *Mengaktifkan akun setelah token dinyatakan valid.* |
 
 **Nama Kelas:** AuthController
 **Nama Operasi:** validateCredentials(usernameOrEmail, pass)
@@ -2045,7 +2043,7 @@ Function validateCredentials(usernameOrEmail, pass) → Boolean
 Tabel 5.11.1.7 Query Operasi validateCredentials(usernameOrEmail, pass)
 | No Query | Query | Keterangan |
 |---|---|---|
-| Q-C11-04 | SELECT * FROM tbl_pengguna WHERE username = @usernameOrEmail OR email = @usernameOrEmail; | Mengambil data pengguna untuk memeriksa kredensial. |
+| *Q-C11-04* | *SELECT * FROM tbl_pengguna WHERE username = @usernameOrEmail OR email = @usernameOrEmail;* | *Mengambil data pengguna untuk memeriksa kredensial.* |
 
 **Nama Kelas:** AuthController
 **Nama Operasi:** checkAccountStatus(usernameOrEmail)
@@ -2064,7 +2062,7 @@ Function checkAccountStatus(usernameOrEmail) → String
 Tabel 5.11.1.8 Query Operasi checkAccountStatus(usernameOrEmail)
 | No Query | Query | Keterangan |
 |---|---|---|
-| Q-C11-05 | SELECT status_akun FROM tbl_pengguna WHERE username = @usernameOrEmail OR email = @usernameOrEmail; | Mengambil status akun berdasarkan username atau email. |
+| *Q-C11-05* | *SELECT status_akun FROM tbl_pengguna WHERE username = @usernameOrEmail OR email = @usernameOrEmail;* | *Mengambil status akun berdasarkan username atau email.* |
 
 **Nama Kelas:** AuthController
 
@@ -2081,7 +2079,7 @@ Procedure startSession(pengguna)
 Tabel 5.11.1.9 Query Operasi startSession(pengguna)
 | No Query | Query | Keterangan |
 |---|---|---|
-| *-* | *-* | Menyimpan informasi sesi melalui pengelola sesi aplikasi. |
+| *-* | *-* | *Menyimpan informasi sesi melalui pengelola sesi aplikasi.* |
 
 **Nama Kelas:** AuthController
 **Nama Operasi:** endSession()
@@ -2096,7 +2094,7 @@ Procedure endSession()
 Tabel 5.11.1.10 Query Operasi endSession()
 | No Query | Query | Keterangan |
 |---|---|---|
-| *-* | *-* | Menghapus sesi aplikasi tanpa menjalankan query SQL secara langsung. |
+| *-* | *-* | *Menghapus sesi aplikasi tanpa menjalankan query SQL secara langsung.* |
 
 ## 5.12 Kelas KonfirmasiRegistrasiPage
 
@@ -2112,8 +2110,8 @@ Tabel 5.12.1 Operasi Kelas KonfirmasiRegistrasiPage
 Tabel 5.12.2 Atribut Kelas KonfirmasiRegistrasiPage
 | Nama Atribut | Visibility | Tipe |
 |---|---|---|
-| dataRegistrasi | private | Object |
-| statusKonfirmasi | private | Boolean |
+| *dataRegistrasi* | *private* | *Object* |
+| *statusKonfirmasi* | *private* | *Boolean* |
 
 ### 5.12.1 Algoritma/Query
 **Nama Kelas:** KonfirmasiRegistrasiPage
@@ -2129,7 +2127,7 @@ Tabel 5.12.1.1 Query Operasi displayDataRegistrasi()
 
 | No Query | Query | Keterangan |
 |---|---|---|
-| *-* | *-* | Menampilkan data registrasi yang telah tersedia pada halaman. |
+| *-* | *-* | *Menampilkan data registrasi yang telah tersedia pada halaman.* |
 
 **Nama Kelas:** KonfirmasiRegistrasiPage
 **Nama Operasi:** confirmRegistrasi()
@@ -2158,20 +2156,20 @@ Tabel 5.13.1 Operasi Kelas CheckInPage
 
 | Nama Operasi | Visibility | Keterangan |
 |---|---|---|
-| showPage(): void | public | Menampilkan formulir daily check-in. |
-| getInput(): Object | public | Mengambil indikator harian dan catatan refleksi dari formulir. |
-| showError(message: String): void | public | Menampilkan pesan kesalahan jika masukan tidak valid. |
-| showSuccessMessage(): void | public | Menampilkan pesan sukses setelah check-in disimpan. |
+| *showPage(): void* | *public* | *Menampilkan formulir daily check-in.* |
+| *getInput(): Object* | *public* | *Mengambil indikator harian dan catatan refleksi dari formulir.* |
+| *showError(message: String): void* | *public* | *Menampilkan pesan kesalahan jika masukan tidak valid.* |
+| *showSuccessMessage(): void* | *public* | *Menampilkan pesan sukses setelah check-in disimpan.* |
 
 Tabel 5.13.2 Atribut Kelas CheckInPage
 
 | Nama Atribut | Visibility | Tipe |
 |---|---|---|
-| moodInput | private | Integer |
-| sleepDurationInput | private | Float |
-| dietInput | private | String |
-| triggerInput | private | String |
-| reflectionInput | private | String |
+| *moodInput* | *private* | *Integer* |
+| *sleepDurationInput* | *private* | *Float* |
+| *dietInput* | *private* | *String* |
+| *triggerInput* | *private* | *String* |
+| *reflectionInput* | *private* | *String* |
 
 ### 5.13.1 Algoritma/Query
 
@@ -2214,7 +2212,7 @@ Tabel 5.13.1.2 Query Operasi getInput()
 
 | No Query | Query | Keterangan |
 |---|---|---|
-| *-* | *-* | Mengambil nilai formulir tanpa mengakses basis data. |
+| *-* | *-* | *Mengambil nilai formulir tanpa mengakses basis data.* |
 
 **Nama Kelas:** CheckInPage
 
@@ -2231,7 +2229,7 @@ Tabel 5.13.1.3 Query Operasi showError(message)
 
 | No Query | Query | Keterangan |
 |---|---|---|
-| *-* | *-* | Menampilkan pesan kesalahan pada antarmuka. |
+| *-* | *-* | *Menampilkan pesan kesalahan pada antarmuka.* |
 
 **Nama Kelas:** CheckInPage
 
@@ -2248,7 +2246,7 @@ Tabel 5.13.1.4 Query Operasi showSuccessMessage()
 
 | No Query | Query | Keterangan |
 |---|---|---|
-| *-* | *-* | Menampilkan pesan keberhasilan pada antarmuka. |
+| *-* | *-* | *Menampilkan pesan keberhasilan pada antarmuka.* |
 
 ## 5.14 Kelas CheckInController
 
@@ -2259,15 +2257,14 @@ Tabel 5.13.1.4 Query Operasi showSuccessMessage()
 Tabel 5.14.1 Operasi Kelas CheckInController
 | Nama Operasi | Visibility | Keterangan |
 |---|---|---|
-| submitCheckIn(data: Object): Boolean | public | Memvalidasi, mengenkripsi, dan menyimpan data check-in. |
-| validateCheckInFormat(data: Object): Boolean | private | Memeriksa rentang nilai mood dan durasi tidur. |
-| encryptJournal(reflectionText: String): String | private | Mengenkripsi catatan refleksi menggunakan AES-256. |
+| *submitCheckIn(data: Object): Boolean* | *public* | *Memvalidasi, mengenkripsi, dan menyimpan data check-in.* |
+| *validateCheckInFormat(data: Object): Boolean* | *private | *Memeriksa rentang nilai mood dan durasi tidur.* |
+| *encryptJournal(reflectionText: String): String* | *private* | *Mengenkripsi catatan refleksi menggunakan AES-256.* |
 
- Tabel 5.14.2 Atribut Kelas CheckInController
-
+Tabel 5.14.2 Atribut Kelas CheckInController
 | Nama Atribut | Visibility | Tipe |
 |---|---|---|
-| currentCheckIn | private | CheckIn |
+| *currentCheckIn* | *private* | *CheckIn* |
 
 ### 5.14.1 Algoritma/Query
 
@@ -2305,7 +2302,7 @@ Tabel 5.14.1.1 Query Operasi submitCheckIn(data)
 
 | No Query | Query | Keterangan |
 |---|---|---|
-| Q-C14-01 | INSERT INTO tbl_check_in (id_pelajar, tanggal, skala_mood, jam_tidur, pola_makan, pemicu_stres, catatan_refleksi) VALUES (@idPelajar, CURRENT_DATE, @encryptedMood, @encryptedSleep, @encryptedDiet, @encryptedTrigger, @encryptedJournal); | Menyimpan data daily check-in ke basis data dalam bentuk terenkripsi. |
+| *Q-C14-01* | *INSERT INTO tbl_check_in (id_pelajar, tanggal, skala_mood, jam_tidur, pola_makan, pemicu_stres, catatan_refleksi) VALUES (@idPelajar, CURRENT_DATE, @encryptedMood, @encryptedSleep, @encryptedDiet, @encryptedTrigger, @encryptedJournal);* | *Menyimpan data daily check-in ke basis data dalam bentuk terenkripsi.* |
 
 **Nama Kelas:** CheckInController
 
@@ -2328,7 +2325,7 @@ Tabel 5.14.1.2 Query Operasi validateCheckInFormat(data)
 
 | No Query | Query | Keterangan |
 |---|---|---|
-| *-* | *-* | Memvalidasi nilai masukan tanpa mengakses basis data. |
+| *-* | *-* | *Memvalidasi nilai masukan tanpa mengakses basis data.* |
 
 **Nama Kelas:** CheckInController
 
@@ -2349,7 +2346,7 @@ Tabel 5.14.1.3 Query Operasi encryptJournal(reflectionText)
 
 | No Query | Query | Keterangan |
 |---|---|---|
-| *-* | *-* | Mengenkripsi catatan di memori tanpa menjalankan query SQL. |
+| *-* | *-* | *Mengenkripsi catatan di memori tanpa menjalankan query SQL.* |
 
 ## 5.15 Kelas NotifikasiPengingatController
 
@@ -2361,14 +2358,14 @@ Tabel 5.15.1 Operasi Kelas NotifikasiPengingatController
 
 | Nama Operasi | Visibility | Keterangan |
 |---|---|---|
-| sendDailyReminder(idPelajar: String): void | public | Mengirim pengingat daily check-in melalui peramban dan email. |
-| checkPendingCheckIn(): List<String> | public | Mengambil daftar ID pelajar yang belum melakukan check-in hari ini. |
+| *sendDailyReminder(idPelajar: String): void* | *public* | *Mengirim pengingat daily check-in melalui peramban dan email.* |
+| *checkPendingCheckIn(): List<String>* | *public* | *Mengambil daftar ID pelajar yang belum melakukan check-in hari ini.* |
 
 Tabel 5.15.2 Atribut Kelas NotifikasiPengingatController
 | Nama Atribut | Visibility | Tipe |
 |---|---|---|
-| reminderSchedule | private | Time |
-| status | private | String |
+| *reminderSchedule* | *private* | *Time* |
+| *status* | *private* | *String* |
 
 ### 5.15.1 Algoritma/Query
 **Nama Kelas:** NotifikasiPengingatController
@@ -2385,7 +2382,7 @@ Procedure sendDailyReminder(idPelajar)
 Tabel 5.15.1.1 Query Operasi sendDailyReminder(idPelajar)
 | No Query | Query | Keterangan |
 |---|---|---|
-| *-* | *-* | Mengirim notifikasi melalui layanan eksternal tanpa menjalankan query SQL secara langsung. |
+| *-* | *-* | *Mengirim notifikasi melalui layanan eksternal tanpa menjalankan query SQL secara langsung.* |
 
 **Nama Kelas:** NotifikasiPengingatController
 **Nama Operasi:** checkPendingCheckIn()
@@ -2400,7 +2397,7 @@ Function checkPendingCheckIn() → List<String>
 Tabel 5.15.1.2 Query Operasi checkPendingCheckIn()
 | No Query | Query | Keterangan |
 |---|---|---|
-| Q-C15-01 | SELECT p.id_pelajar FROM tbl_pelajar p WHERE NOT EXISTS (SELECT 1 FROM tbl_check_in c WHERE c.id_pelajar = p.id_pelajar AND c.tanggal = CURRENT_DATE); | Mengambil ID pelajar yang belum melakukan daily check-in pada hari berjalan. |
+| *Q-C15-01* | *SELECT p.id_pelajar FROM tbl_pelajar p WHERE NOT EXISTS (SELECT 1 FROM tbl_check_in c WHERE c.id_pelajar = p.id_pelajar AND c.tanggal = CURRENT_DATE);* | *Mengambil ID pelajar yang belum melakukan daily check-in pada hari berjalan.* |
 
 ## 5.16 Kelas ReportPage
 **Nama Kelas:** ReportPage
