@@ -4217,7 +4217,7 @@ Tabel 6.12. Spesifikasi Objek Antarmuka I-12
 
 ## 6.13 Rancangan Antarmuka I-13
 **Antarmuka:** *I-13*  
-**Nama Layar:** *ProfilTenagaKesehatanPage
+**Nama Layar:** *ProfilTenagaKesehatanPage*
 
 <p align="center">
 <img alt="Rancangan Antarmuka I-13 - ProfilTenagaKesehatan" src="./assets/antarmuka/profil-tenaga-kesehatan.png" width="50%">
@@ -4249,6 +4249,39 @@ Tabel 6.13. Spesifikasi Objek Antarmuka I-13
 | *Btn_JadwalkanKonsultasi* | *Button* | *"Jadwalkan Konsultasi"* | *Jika diklik akan mengarahkan pengguna ke halaman penjadwalan konsultasi.* |
 | *Btn_Kembali* | *Button* | *"Kembali"* | *Jika diklik akan mengarahkan pengguna kembali ke halaman pencarian tenaga kesehatan.* |
 
+## 6.14 Rancangan Antarmuka I-14
+**Antarmuka:** *I-14*  
+**Nama Layar:** *PengajuanKonsultasi*
+<p align="center">
+<img alt="Rancangan Antarmuka I-14 - PengajuanKonsultasi" src="./assets/antarmuka/pengajuan-konsultasi.png" width="50%">
+</p>
+<p align="center">
+<i>Gambar 6.14. Rancangan Antarmuka I-14 - PengajuanKonsultasi</i>
+</p>
+
+Tabel 6.14. Spesifikasi Objek Antarmuka I-14
+
+| Id_Objek | Jenis | Konten | Keterangan |
+| :--- | :--- | :--- | :--- |
+| *Sidebar* | *Box* | *Berisi logo, menu, setelan, dan keluar* | *Panel navigasi di sisi kiri halaman.* |
+| *Logo_App* | *Image/Logo* | *Logo MahaSehat* | *Menampilkan identitas/logo aplikasi MahaSehat.* |
+| *Nav_Dashboard* | *Link Menu* | *"Dashboard"* | *Link navigasi ke halaman Dashboard, menandakan sedang aktif.* |
+| *Nav_LaporanKesehatan* | *Link Menu* | *"Laporan Kesehatan"* | *Link navigasi ke halaman laporan kesehatan.* |
+| *Nav_Konsultasi* | *Link Menu* | *"Konsultasi"* | *Link navigasi ke halaman konsultasi.* |
+| *Nav_Setelan* | *Link Menu* | *"Setelan"* | *Link navigasi ke halaman setelan.* |
+| *Nav_Keluar* | *Link Menu* | *"Keluar"* | *Link navigasi keluar.* |
+| *Header_User* | *Container/Header Bar* | *Informasi profil (Nama: "Albert Einstein", Peran: "Pengguna", dan ikon profil)* | *Menampilkan identitas pengguna yang sedang masuk.* |
+| *Title_Penjadwalan* | *Text* | *"Penjadwalan Konsultasi"* | *Judul yang menginformasikan bahwa halaman ini untuk menjadwalkan konsultasi.* |
+| *Image_ProfilNakes* | *Image* | *Foto profil tenaga kesehatan* | *Menampilkan foto resmi profesional tenaga kesehatan.* |
+| *Text_NamaNakes* | *Label/Text* | *Teks nama dan gelar profesional tenaga kesehatan* | *Identitas utama tenaga kesehatan.* |
+| *Text_Spesialisasi* | *Label/Text* | *Teks spesialisasi, afiliasi tempat praktik, dan latar belakang pendidikan* | *Informasi kredibilitas profesional.* |
+| *Text_DeskripsiNakes* | *Label/Paragraph* | *Ringkasan kasus yang pernah ditangani* | *Memberikan gambaran keahlian kepada pengguna sebelum memesan sesi.* |
+| *Widget_Kalender* | *Calendar* | *Kalender interaktif bulan Oktober 2026 dengan penanda tanggal aktif* | *Komponen bagi pengguna untuk memilih tanggal sesi konsultasi.* |
+| *Group_SlotJam* | *Button Group* | *Daftar tombol pilihan rentang waktu (10.00-11.00, dst.)* | *Pilihan jam konsultasi yang tersedia pada tanggal yang dipilih.* |
+| *Text_Harga* | *Text Value* | *Informasi harga konsultasi (IDR300.000)* | *Menampilkan rincian biaya layanan konsultasi.* |
+| *Btn_JadwalkanKonsultasi* | *Button* | *"Jadwalkan Konsultasi"* | *Jika diklik akan mengirimkan penjadwalan konsultasi ke tenaga kesehatan bersangkutan.* |
+| *Btn_Kembali* | *Button* | *"Kembali"* | *Jika diklik akan mengarahkan pengguna kembali ke halaman profil tenaga kesehatan.* |
+
 ## 6.Y Rancangan Antarmuka Keseluruhan
 
 Tuliskan daftar gambar seluruh antarmuka. Berikan ID unik untuk setiap tampilan dan gunakan ID yang sama pada subbab perancangan antarmuka masing-masing.
@@ -4270,6 +4303,7 @@ Tabel 6.Y. Rancangan Antarmuka Keseluruhan
 | *[I-11]* | <img src="./assets/antarmuka/izin-akses-lokasi.png" alt="Izin Akses Lokasi" width="400">  |
 | *[I-12]* | <img src="./assets/antarmuka/cari-tenaga-kesehatan.png" alt="Cari Tenaga Kesehatan" width="400">  |
 | *[I-13]* | <img src="./assets/antarmuka/profil-tenaga-kesehatan.png" alt="Profil Tenaga Kesehatan" width="400">  |
+| *[I-14]* | <img src="./assets/antarmuka/pengajuan-konsultasi.png" alt="Profil Tenaga Kesehatan" width="400">  |
 
 <br>
 
