@@ -846,66 +846,1039 @@ Tabel 4.1. Daftar Kelas Perancangan Keseluruhan
 
 # BAB 5: Perancangan Rinci Kelas
 
-Bagian ini diisi dengan daftar seluruh kelas dalam tabel berikut:
+Seluruh kelas perancangan Mahasehat beserta kelas analisis terkait pada SKPL ditunjukkan pada tabel berikut.
 
 Tabel 5.1. Daftar Kelas Perancangan dan Kelas Analisis Terkait
 
 | No | Nama Kelas Perancangan | Nama Kelas Analisis Terkait |
 | :--- | :--- | :--- |
-| 1 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL atau -]* |
-| 2 | *[Nama kelas perancangan]* | *[Nama kelas analisis pada SKPL atau -]* |
-| ... | *...* | *...* |
+| 1 | *Pengguna* | *Pengguna* |
+| 2 | *Pelajar* | *Pelajar* |
+| 3 | *OrangTuaWali* | *OrangTuaWali* |
+| 4 | *TenagaKesehatan* | *TenagaKesehatan* |
+| 5 | *RiwayatKesehatan* | *RiwayatKesehatan* |
+| 6 | *CheckIn* | *CheckIn* |
+| 7 | *LaporanKesehatan* | *LaporanKesehatan* |
+| 8 | *FasilitasKesehatan* | *FasilitasKesehatan* |
+| 9 | *JadwalKonsultasi* | *JadwalKonsultasi* |
+| 10 | *RegistrationPage* | *RegistrationPage* |
+| 11 | *AuthController* | *AuthController* |
+| 12 | *KonfirmasiRegistrasiPage* | *KonfirmasiRegistrasiPage* |
+| 13 | *CheckInPage* | *CheckInPage* |
+| 14 | *CheckInController* | *CheckInController* |
+| 15 | *NotifikasiPengingatController* | *NotifikasiPengingatController* |
+| 16 | *ReportPage* | *ReportPage* |
+| 17 | *ReportController* | *ReportController* |
+| 18 | *CariTenagaKesehatanPage* | *CariTenagaKesehatanPage* |
+| 19 | *ProfilTenagaKesehatanPage* | *ProfilTenagaKesehatanPage* |
+| 20 | *TenagaKesehatanController* | *TenagaKesehatanController* |
+| 21 | *PengajuanKonsultasiPage* | *PengajuanKonsultasiPage* |
+| 22 | *JadwalKonsultasiController* | *JadwalKonsultasiController* |
+| 23 | *KonsultasiController* | *KonsultasiController* |
+| 24 | *NotifikasiDaruratController* | *NotifikasiDaruratController* |
+| 25 | *LoginPage* | *LoginPage* |
+| 26 | *ResetPasswordPage* | *ResetPasswordPage* |
+| 27 | *PasswordController* | *PasswordController* |
+| 28 | *DashboardPage* | *DashboardPage* |
+| 29 | *SettingPage* | *SettingPage* |
 
-Untuk **setiap kelas**, identifikasi operasi berdasarkan tanggung jawab kelas beserta *visibility*-nya, serta atribut beserta *visibility* dan tipenya. Buat subbab tersendiri untuk setiap kelas.
+Setiap kelas pada Tabel 5.1 dirinci pada subbab tersendiri, berisi operasi beserta *visibility*-nya, atribut beserta *visibility* dan tipenya, serta algoritma dan query untuk operasi yang dianggap penting.
 
-## 5.1 Kelas [Nama Kelas 1]
+## 5.1 Kelas Pengguna
 
-**Nama Kelas:** *[Nama kelas]*  
-**ID Kelas:** *[ID kelas]*
+**Nama Kelas:** *Pengguna*  
+**ID Kelas:** *C01*
 
-Tabel 5.1.1. Operasi Kelas [Nama Kelas 1]
+Pengguna adalah kelas abstrak (*entity*) yang menyimpan data akun bersama milik ketiga aktor. Kelas Pelajar, OrangTuaWali, dan TenagaKesehatan mewarisi kelas ini. Atribut `password` menyimpan hasil *hash* bcrypt, bukan teks password asli. Formulir registrasi (I-01 s.d. I-03) dan formulir masuk akun (I-07) memakai e-mail, sehingga `username` diisi sama dengan e-mail. Nilai `statusAkun` adalah "Aktif", "Belum Terverifikasi" (pelajar di bawah 18 tahun yang menunggu persetujuan wali), atau "Ditolak" (wali menekan Btn_TidakSetuju pada I-06).
+
+Tabel 5.1.1. Operasi Kelas Pengguna
 
 | Nama Operasi | Visibility (private, public) | Keterangan |
 | :--- | :--- | :--- |
-| *[Signature operasi, termasuk parameter dan tipe kembalian]* | *[Visibility]* | *[Tanggung jawab operasi]* |
-| *...* | *...* | *...* |
+| *findByUsernameOrEmail(usernameOrEmail: String): Pengguna* | *public* | *Operasi statis. Mencari akun berdasarkan username atau e-mail saat login (UC09) dan mengembalikan objek subkelas sesuai role, atau null bila akun tidak ditemukan. Algo-C01-01.* |
+| *findByEmail(email: String): Pengguna* | *public* | *Operasi statis. Mencari akun berdasarkan e-mail saat permintaan reset password (UC09 skenario alternatif 3). Algo-C01-02.* |
+| *verifyPassword(password: String): Boolean* | *public* | *Mencocokkan password masukan dengan hash yang tersimpan. Algo-C01-03.* |
+| *getStatusAkun(): String* | *public* | *Mengembalikan status akun ("Aktif", "Belum Terverifikasi", atau "Ditolak") untuk pemeriksaan status saat login (UC09 skenario alternatif 2).* |
+| *getRole(): String* | *public* | *Mengembalikan peran pengguna ("Pelajar", "OrangTuaWali", atau "TenagaKesehatan") untuk menentukan isi dashboard.* |
+| *setPassword(newPassword: String): Boolean* | *public* | *Menyimpan password baru dalam bentuk hash setelah divalidasi oleh PasswordController. Algo-C01-04.* |
 
-Tabel 5.1.2. Atribut Kelas [Nama Kelas 1]
+Tabel 5.1.2. Atribut Kelas Pengguna
 
 | Nama Atribut | Visibility (private, public) | Tipe |
 | :--- | :--- | :--- |
-| *[Nama atribut]* | *[Visibility]* | *[Tipe sesuai bahasa pemrograman yang digunakan]* |
-| *...* | *...* | *...* |
+| *idPengguna* | *private* | *int* |
+| *username* | *private* | *String* |
+| *email* | *private* | *String* |
+| *password* | *private* | *String* |
+| *role* | *private* | *String* |
+| *statusAkun* | *private* | *String* |
 
 ### 5.1.1 Algoritma/Query
 
-Bagian ini diisi untuk kerangka algoritma proses yang dianggap cukup penting. Algoritma dapat dituliskan sebagai *pseudocode*. Implementasi *skeleton code* juga dapat digunakan untuk kelas yang sudah terdefinisi pada bahasa pemrograman tertentu.
-
-**Nama Kelas:** *[Nama kelas]*  
-**Nama Operasi:** *[Signature operasi]*  
-**ID Algoritma:** *[Algo-001]*
+**Nama Kelas:** *Pengguna*  
+**Nama Operasi:** *findByUsernameOrEmail(usernameOrEmail: String): Pengguna*  
+**ID Algoritma:** *Algo-C01-01*
 
 ```text
-[Tuliskan pseudocode algoritma operasi di sini.]
+Function findByUsernameOrEmail(usernameOrEmail: String) → Pengguna
+    kunci ← lowercase(trim(usernameOrEmail))
+    if kunci = "" then
+        return null
+    end if
+
+    baris ← jalankan Q-C01-01 dengan parameter (kunci)
+    if baris tidak ditemukan then
+        return null                                  // ditangani AuthController sebagai kredensial tidak valid
+    end if
+
+    // Pengguna adalah kelas abstrak, sehingga objek yang dibentuk adalah subkelasnya
+    depend on baris.role
+        "Pelajar"         : pengguna ← objek Pelajar baru
+        "OrangTuaWali"    : pengguna ← objek OrangTuaWali baru
+        "TenagaKesehatan" : pengguna ← objek TenagaKesehatan baru
+    end depend
+    isi atribut idPengguna, username, email, password, role, statusAkun pada pengguna dari baris
+    return pengguna
+end Function
 ```
 
-Jika operasi mengacu pada query tertentu, lengkapi tabel berikut. 
-
-Tabel 5.1.1. Query Operasi [Nama Operasi]
+Tabel 5.1.1.1. Query Operasi findByUsernameOrEmail
 
 | No Query | Query | Keterangan |
 | :--- | :--- | :--- |
-| *[Q-001]* | *[Tuliskan query]* | *[Fungsi query]* |
-| *...* | *...* | *...* |
-
+| *Q-C01-01* | *SELECT id_pengguna, username, email, password_hash, role, status_akun FROM pengguna WHERE LOWER(username) = @kunci OR LOWER(email) = @kunci LIMIT 1;* | *Mengambil satu akun yang username atau e-mailnya sama dengan masukan. Perbandingan tidak membedakan huruf besar dan kecil.* |
 
 ### 5.1.2 Algoritma/Query
 
-*[Ulangi pola 5.1.1 untuk operasi penting berikutnya pada kelas yang sama, jika ada.]*
+**Nama Kelas:** *Pengguna*  
+**Nama Operasi:** *findByEmail(email: String): Pengguna*  
+**ID Algoritma:** *Algo-C01-02*
 
-## 5.2 Kelas [Nama Kelas Berikutnya]
+```text
+Function findByEmail(email: String) → Pengguna
+    kunci ← lowercase(trim(email))
+    if kunci tidak berformat e-mail then
+        return null
+    end if
 
-*[Ulangi pola 5.1: nama dan ID kelas, tabel operasi, tabel atribut, serta subbab algoritma/query untuk operasi penting jika diperlukan.]*
+    baris ← jalankan Q-C01-02 dengan parameter (kunci)
+    if baris tidak ditemukan then
+        return null                                  // PasswordController menampilkan "e-mail tidak terdaftar"
+    end if
+
+    bentuk objek subkelas sesuai baris.role, sama seperti Algo-C01-01
+    return pengguna
+end Function
+```
+
+Tabel 5.1.2.1. Query Operasi findByEmail
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C01-02* | *SELECT id_pengguna, username, email, password_hash, role, status_akun FROM pengguna WHERE LOWER(email) = @email LIMIT 1;* | *Mengambil akun yang terdaftar dengan e-mail tersebut.* |
+
+### 5.1.3 Algoritma/Query
+
+**Nama Kelas:** *Pengguna*  
+**Nama Operasi:** *verifyPassword(password: String): Boolean*  
+**ID Algoritma:** *Algo-C01-03*
+
+```text
+Function verifyPassword(password: String) → Boolean
+    if password = "" then
+        return false
+    end if
+    // this.password berisi hash bcrypt; bcrypt.compare membandingkan dalam waktu konstan
+    return bcrypt.compare(password, this.password)
+end Function
+```
+
+### 5.1.4 Algoritma/Query
+
+**Nama Kelas:** *Pengguna*  
+**Nama Operasi:** *setPassword(newPassword: String): Boolean*  
+**ID Algoritma:** *Algo-C01-04*
+
+```text
+Function setPassword(newPassword: String) → Boolean
+    // aturan panjang dan kecocokan konfirmasi sudah diperiksa PasswordController.validateNewPassword()
+    hashBaru ← bcrypt.hash(newPassword, 12)          // cost factor 12
+    jumlahBaris ← jalankan Q-C01-03 dengan parameter (hashBaru, this.idPengguna)
+    if jumlahBaris = 1 then
+        this.password ← hashBaru
+        return true
+    else
+        return false
+    end if
+end Function
+```
+
+Tabel 5.1.4.1. Query Operasi setPassword
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C01-03* | *UPDATE pengguna SET password_hash = @hashBaru WHERE id_pengguna = @idPengguna;* | *Mengganti hash password akun.* |
+
+## 5.2 Kelas Pelajar
+
+**Nama Kelas:** *Pelajar*  
+**ID Kelas:** *C02*
+
+Pelajar adalah subkelas Pengguna (*entity*) yang dipakai pada UC01, UC03, UC04, UC05, UC06, dan UC08. Atribut `lokasiSaatIni` menyimpan koordinat `"lat,lng"` dan bernilai string kosong (`NULL` pada basis data) sampai pelajar memberikan izin lokasi.
+
+Tabel 5.2.1. Operasi Kelas Pelajar
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *getCheckInHistory(): List&lt;CheckIn>* | *public* | *Mengembalikan riwayat check-in pelajar dari yang terbaru, dipakai untuk statistik dan laporan (UC04). Algo-C02-01.* |
+| *setCheckIn(checkIn: CheckIn): void* | *public* | *Menyimpan check-in baru sebagai riwayat milik pelajar (UC03). Algo-C02-02.* |
+| *getLokasiSaatIni(): String* | *public* | *Mengembalikan lokasi terakhir pelajar dalam format "lat,lng".* |
+| *setLokasiSaatIni(lokasi: String): void* | *public* | *Mencatat lokasi perangkat setelah pelajar mengizinkan akses lokasi (UC05). Algo-C02-03.* |
+| *updateEmergencyStatus(status: Boolean): void* | *public* | *Mengubah status darurat pelajar, menjadi true saat ambang darurat terlampaui dan false setelah ditindaklanjuti wali (UC08). Algo-C02-04.* |
+| *ajukanKonsultasi(jadwal: JadwalKonsultasi, keluhan: String): Boolean* | *public* | *Mengajukan konsultasi pada jadwal yang dipilih dan mengembalikan false bila jadwal sudah tidak tersedia (UC06). Algo-C02-05.* |
+
+Tabel 5.2.2. Atribut Kelas Pelajar
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *idPelajar* | *private* | *String* |
+| *nama* | *private* | *String* |
+| *lokasiSaatIni* | *private* | *String* |
+| *statusDarurat* | *private* | *Boolean* |
+| *tanggalLahir* | *private* | *Date* |
+| *nomorTelepon* | *private* | *String* |
+
+### 5.2.1 Algoritma/Query
+
+**Nama Kelas:** *Pelajar*  
+**Nama Operasi:** *getCheckInHistory(): List&lt;CheckIn>*  
+**ID Algoritma:** *Algo-C02-01*
+
+```text
+Function getCheckInHistory() → List<CheckIn>
+    daftar ← []
+    barisHasil ← jalankan Q-C02-01 dengan parameter (this.idPelajar)
+    for each baris in barisHasil do
+        checkIn ← objek CheckIn yang atributnya diisi dari baris
+        // catatanRefleksi tetap terenkripsi (KNF01); dekripsi dan pembatasan
+        // akses wali (KNF02) dilakukan oleh controller yang memakai data ini
+        tambahkan checkIn ke daftar
+    end for
+    return daftar                                    // daftar kosong memicu UC04 skenario alternatif 1
+end Function
+```
+
+Tabel 5.2.1.1. Query Operasi getCheckInHistory
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C02-01* | *SELECT id_check_in, tanggal_check_in, skala_mood, jam_tidur, jam_bangun, pola_makan, pemicu_stres, catatan_refleksi FROM check_in WHERE id_pelajar = @idPelajar ORDER BY tanggal_check_in DESC;* | *Mengambil seluruh riwayat check-in seorang pelajar. Indeks (id_pelajar, tanggal_check_in) dipakai agar pembuatan grafik memenuhi KNF04 (maksimal 1.500 ms).* |
+
+### 5.2.2 Algoritma/Query
+
+**Nama Kelas:** *Pelajar*  
+**Nama Operasi:** *setCheckIn(checkIn: CheckIn): void*  
+**ID Algoritma:** *Algo-C02-02*
+
+```text
+Procedure setCheckIn(checkIn: CheckIn)
+    data ← checkIn.getCheckInData()
+    // data.catatanRefleksi sudah berupa ciphertext dari CheckInController.encryptJournal(),
+    // atau null bila pelajar melewati refleksi (UC03 skenario alternatif 1)
+    jalankan Q-C02-02 dengan parameter (data.idCheckIn, this.idPelajar, data.tanggalCheckIn,
+        data.skalaMood, data.jamTidur, data.jamBangun, data.polaMakan,
+        data.pemicuStres, data.catatanRefleksi)
+end Procedure
+```
+
+Tabel 5.2.2.1. Query Operasi setCheckIn
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C02-02* | *INSERT INTO check_in (id_check_in, id_pelajar, tanggal_check_in, skala_mood, jam_tidur, jam_bangun, pola_makan, pemicu_stres, catatan_refleksi) VALUES (@idCheckIn, @idPelajar, @tanggalCheckIn, @skalaMood, @jamTidur, @jamBangun, @polaMakan, @pemicuStres, @catatanRefleksi);* | *Menyimpan satu data check-in milik pelajar.* |
+
+### 5.2.3 Algoritma/Query
+
+**Nama Kelas:** *Pelajar*  
+**Nama Operasi:** *setLokasiSaatIni(lokasi: String): void*  
+**ID Algoritma:** *Algo-C02-03*
+
+```text
+Procedure setLokasiSaatIni(lokasi: String)
+    // lokasi berformat "lat,lng" dari Geolocation API
+    lat, lng ← pisahkan lokasi berdasarkan tanda koma
+    if lat atau lng bukan angka or lat di luar [-90, 90] or lng di luar [-180, 180] then
+        lempar galat "Format lokasi tidak valid"
+    end if
+    jalankan Q-C02-03 dengan parameter (lokasi, this.idPelajar)
+    this.lokasiSaatIni ← lokasi
+end Procedure
+```
+
+Tabel 5.2.3.1. Query Operasi setLokasiSaatIni
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C02-03* | *UPDATE pelajar SET lokasi_saat_ini = @lokasi WHERE id_pelajar = @idPelajar;* | *Menyimpan lokasi terakhir pelajar.* |
+
+### 5.2.4 Algoritma/Query
+
+**Nama Kelas:** *Pelajar*  
+**Nama Operasi:** *updateEmergencyStatus(status: Boolean): void*  
+**ID Algoritma:** *Algo-C02-04*
+
+```text
+Procedure updateEmergencyStatus(status: Boolean)
+    if this.statusDarurat = status then
+        return                                       // tidak ada perubahan
+    end if
+    jalankan Q-C02-04 dengan parameter (status, this.idPelajar)
+    this.statusDarurat ← status
+end Procedure
+```
+
+Tabel 5.2.4.1. Query Operasi updateEmergencyStatus
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C02-04* | *UPDATE pelajar SET status_darurat = @status WHERE id_pelajar = @idPelajar;* | *Mengubah status darurat pelajar (KF18).* |
+
+### 5.2.5 Algoritma/Query
+
+**Nama Kelas:** *Pelajar*  
+**Nama Operasi:** *ajukanKonsultasi(jadwal: JadwalKonsultasi, keluhan: String): Boolean*  
+**ID Algoritma:** *Algo-C02-05*
+
+```text
+Function ajukanKonsultasi(jadwal: JadwalKonsultasi, keluhan: String) → Boolean
+    if trim(keluhan) = "" then
+        // galat terpisah agar tidak tertukar dengan nilai false (jadwal tidak tersedia)
+        lempar galat "Keluhan wajib diisi"
+    end if
+    if not jadwal.isAvailable() then
+        return false                                 // UC06 skenario alternatif 1: jadwal tidak lagi tersedia
+    end if
+    // reservasi() mengunci baris jadwal sehingga dua pelajar tidak dapat memesan slot yang sama
+    return jadwal.reservasi(this.idPelajar, trim(keluhan))
+end Function
+```
+
+## 5.3 Kelas OrangTuaWali
+
+**Nama Kelas:** *OrangTuaWali*  
+**ID Kelas:** *C03*
+
+OrangTuaWali adalah subkelas Pengguna (*entity*) yang terhubung dengan pelajar melalui proses registrasi (UC01) dan konfirmasi (UC02). Pelajar mengisi nomor telepon orang tua/wali pada formulir I-01; data wali dilengkapi ketika orang tua/wali mendaftar sendiri melalui formulir I-02 dengan nomor telepon yang sama.
+
+Tabel 5.3.1. Operasi Kelas OrangTuaWali
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *getSummaryReport(): SummaryData* | *public* | *Menyusun ringkasan kondisi pelajar yang diwalikan untuk 7 hari terakhir tanpa teks jurnal pribadi pelajar (KNF02). Algo-C03-01.* |
+
+Tabel 5.3.2. Atribut Kelas OrangTuaWali
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *idWali* | *private* | *String* |
+| *nama* | *private* | *String* |
+| *email* | *private* | *String* |
+| *nomorTelepon* | *private* | *String* |
+
+Struktur data `SummaryData` yang dikembalikan `getSummaryReport()`:
+
+```text
+SummaryData
+    namaPelajar            : String
+    periode                : String     // "Mingguan"
+    ringkasanKondisi       : String
+    indikatorRisiko        : String     // "Rendah", "Sedang", "Tinggi", atau "Belum Dapat Dinilai"
+    jumlahHariTidakCheckIn : int
+```
+
+### 5.3.1 Algoritma/Query
+
+**Nama Kelas:** *OrangTuaWali*  
+**Nama Operasi:** *getSummaryReport(): SummaryData*  
+**ID Algoritma:** *Algo-C03-01*
+
+```text
+Function getSummaryReport() → SummaryData
+    pelajar ← jalankan Q-C03-01 dengan parameter (this.idWali)
+    if pelajar tidak ditemukan then
+        lempar galat "Akun wali belum terhubung dengan pelajar"
+    end if
+
+    // Q-C03-02 tidak mengambil kolom catatan_refleksi sehingga teks jurnal tidak pernah sampai ke wali (KNF02)
+    daftar ← objek CheckIn dari setiap baris hasil Q-C03-02 dengan parameter (pelajar.id_pelajar)
+    laporan ← objek LaporanKesehatan baru
+    hasil ← laporan.evaluateThreshold(daftar)        // Algo-C07-01
+
+    return SummaryData {
+        namaPelajar            ← pelajar.nama,
+        periode                ← hasil.periode,
+        ringkasanKondisi       ← hasil.ringkasanKondisi,
+        indikatorRisiko        ← hasil.indikatorRisiko,
+        jumlahHariTidakCheckIn ← hasil.jumlahHariTidakCheckIn
+    }
+end Function
+```
+
+Tabel 5.3.1.1. Query Operasi getSummaryReport
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C03-01* | *SELECT id_pelajar, nama FROM pelajar WHERE id_wali = @idWali LIMIT 1;* | *Mencari pelajar yang terhubung dengan wali. Satu wali terhubung dengan satu pelajar sesuai alur registrasi UC01.* |
+| *Q-C03-02* | *SELECT id_check_in, tanggal_check_in, skala_mood, jam_tidur, jam_bangun, pola_makan, pemicu_stres FROM check_in WHERE id_pelajar = @idPelajar AND tanggal_check_in >= CURRENT_DATE - 6 ORDER BY tanggal_check_in DESC;* | *Mengambil check-in 7 hari terakhir tanpa kolom catatan_refleksi.* |
+
+## 5.4 Kelas TenagaKesehatan
+
+**Nama Kelas:** *TenagaKesehatan*  
+**ID Kelas:** *C04*
+
+TenagaKesehatan adalah subkelas Pengguna (*entity*) untuk psikolog atau psikiater yang dapat dipilih pelajar (UC05), menyediakan jadwal konsultasi (UC06), dan meninjau pengajuan (UC07). Atribut `lokasi` menyimpan lokasi kerja yang diisi tenaga kesehatan saat registrasi (Input_Lokasi pada I-03). Jarak ke pelajar dihitung dari lokasi FasilitasKesehatan (UC05).
+
+Tabel 5.4.1. Operasi Kelas TenagaKesehatan
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *findAll(): List&lt;TenagaKesehatan>* | *public* | *Operasi statis. Mengambil seluruh tenaga kesehatan untuk daftar pencarian (UC05). Algo-C04-01.* |
+| *findById(idTenagaKesehatan: String): TenagaKesehatan* | *public* | *Operasi statis. Mengambil tenaga kesehatan yang dipilih pelajar (UC06). Algo-C04-02.* |
+| *getProfil(): String* | *public* | *Menyusun teks profil berisi nama, jenis tenaga kesehatan, dan kontak untuk halaman profil dan daftar ringkasan. Algo-C04-03.* |
+| *getJadwalTersedia(): List&lt;JadwalKonsultasi>* | *public* | *Mengembalikan jadwal milik tenaga kesehatan ini yang belum lewat dan masih tersedia (UC06). Algo-C04-04.* |
+
+Tabel 5.4.2. Atribut Kelas TenagaKesehatan
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *idTenagaKesehatan* | *private* | *String* |
+| *nama* | *private* | *String* |
+| *email* | *private* | *String* |
+| *nomorTelepon* | *private* | *String* |
+| *jenisTenagaKesehatan* | *private* | *String* |
+| *lokasi* | *private* | *String* |
+
+### 5.4.1 Algoritma/Query
+
+**Nama Kelas:** *TenagaKesehatan*  
+**Nama Operasi:** *findAll(): List&lt;TenagaKesehatan>*  
+**ID Algoritma:** *Algo-C04-01*
+
+```text
+Function findAll() → List<TenagaKesehatan>
+    daftar ← []
+    for each baris in hasil Q-C04-01 do
+        tambahkan objek TenagaKesehatan yang diisi dari baris ke daftar
+    end for
+    return daftar                                    // daftar kosong ditampilkan sebagai "belum ada tenaga kesehatan"
+end Function
+```
+
+Tabel 5.4.1.1. Query Operasi findAll
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C04-01* | *SELECT id_tenaga_kesehatan, nama, email, nomor_telepon, jenis_tenaga_kesehatan, lokasi FROM tenaga_kesehatan ORDER BY nama;* | *Mengambil seluruh tenaga kesehatan berurutan nama.* |
+
+### 5.4.2 Algoritma/Query
+
+**Nama Kelas:** *TenagaKesehatan*  
+**Nama Operasi:** *findById(idTenagaKesehatan: String): TenagaKesehatan*  
+**ID Algoritma:** *Algo-C04-02*
+
+```text
+Function findById(idTenagaKesehatan: String) → TenagaKesehatan
+    baris ← jalankan Q-C04-02 dengan parameter (idTenagaKesehatan)
+    if baris tidak ditemukan then
+        return null
+    end if
+    return objek TenagaKesehatan yang diisi dari baris
+end Function
+```
+
+Tabel 5.4.2.1. Query Operasi findById
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C04-02* | *SELECT id_tenaga_kesehatan, nama, email, nomor_telepon, jenis_tenaga_kesehatan, lokasi FROM tenaga_kesehatan WHERE id_tenaga_kesehatan = @idTenagaKesehatan;* | *Mengambil satu tenaga kesehatan berdasarkan ID.* |
+
+### 5.4.3 Algoritma/Query
+
+**Nama Kelas:** *TenagaKesehatan*  
+**Nama Operasi:** *getProfil(): String*  
+**ID Algoritma:** *Algo-C04-03*
+
+```text
+Function getProfil() → String
+    return this.nama + " (" + this.jenisTenagaKesehatan + ")" + baris baru
+         + "E-mail: " + this.email + baris baru
+         + "Telepon: " + this.nomorTelepon
+end Function
+```
+
+### 5.4.4 Algoritma/Query
+
+**Nama Kelas:** *TenagaKesehatan*  
+**Nama Operasi:** *getJadwalTersedia(): List&lt;JadwalKonsultasi>*  
+**ID Algoritma:** *Algo-C04-04*
+
+```text
+Function getJadwalTersedia() → List<JadwalKonsultasi>
+    tersedia ← []
+    for each baris in hasil Q-C04-03 dengan parameter (this.idTenagaKesehatan) do
+        jadwal ← objek JadwalKonsultasi yang diisi dari baris
+        if jadwal.isAvailable() then                 // Algo-C09-02
+            tambahkan jadwal ke tersedia
+        end if
+    end for
+    return tersedia
+end Function
+```
+
+Tabel 5.4.4.1. Query Operasi getJadwalTersedia
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C04-03* | *SELECT id_jadwal, tanggal, waktu, status_ketersediaan, status_pengajuan, id_pelajar, keluhan FROM jadwal_konsultasi WHERE id_tenaga_kesehatan = @idTenagaKesehatan AND tanggal >= CURRENT_DATE ORDER BY tanggal, waktu;* | *Mengambil jadwal tenaga kesehatan mulai hari ini, berurutan waktu. Kondisi pada kolom tanggal dapat memakai indeks (id_tenaga_kesehatan, tanggal, waktu); slot hari ini yang jamnya sudah lewat disaring oleh isAvailable().* |
+
+## 5.5 Kelas RiwayatKesehatan
+
+**Nama Kelas:** *RiwayatKesehatan*  
+**ID Kelas:** *C05*
+
+RiwayatKesehatan (*entity*) menyimpan riwayat kesehatan mental yang diisi pelajar saat registrasi (UC01). Data ini dibuat dan disimpan oleh AuthController pada proses registrasi dan dienkripsi dengan AES-256 sebelum masuk ke basis data (KNF01), sehingga atribut `riwayatKesehatan` berisi *ciphertext*.
+
+Tabel 5.5.1. Operasi Kelas RiwayatKesehatan
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| - | - | Kelas ini tidak memiliki operasi selain pembentukan objek pada UC01. |
+
+Tabel 5.5.2. Atribut Kelas RiwayatKesehatan
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *riwayatKesehatan* | *private* | *String* |
+
+## 5.6 Kelas CheckIn
+
+**Nama Kelas:** *CheckIn*  
+**ID Kelas:** *C06*
+
+CheckIn (*entity*) merepresentasikan satu pengisian *daily check-in*. Atribut `jamTidur` dan `jamBangun` bertipe Time (jam dan menit). Perlindungan data mengikuti dua lapis. Seluruh riwayat check-in disimpan pada media penyimpanan server basis data yang terenkripsi AES-256 (KF07, KNF01). Selain itu, `catatanRefleksi` sebagai teks jurnal pribadi dienkripsi lagi di tingkat aplikasi oleh `CheckInController.encryptJournal()`, sehingga atribut ini berisi *ciphertext*, atau `null` bila pelajar tidak mengisi refleksi.
+
+Tabel 5.6.1. Operasi Kelas CheckIn
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *createCheckIn(data: CheckInData): CheckIn* | *public* | *Membentuk data check-in baru dari masukan CheckInPage yang sudah diproses CheckInController, lalu memvalidasinya (UC03). Penyimpanan dilakukan oleh Pelajar.setCheckIn(). Algo-C06-01.* |
+| *getCheckInData(): CheckInData* | *public* | *Mengembalikan isi check-in dalam bentuk CheckInData untuk disimpan (UC03) atau diolah menjadi statistik (UC04).* |
+| *validateData(): Boolean* | *public* | *Memeriksa kelengkapan dan rentang nilai data check-in. Algo-C06-02.* |
+
+Tabel 5.6.2. Atribut Kelas CheckIn
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *idCheckIn* | *private* | *String* |
+| *tanggalCheckIn* | *private* | *Date* |
+| *skalaMood* | *private* | *int* |
+| *jamTidur* | *private* | *Time* |
+| *jamBangun* | *private* | *Time* |
+| *polaMakan* | *private* | *String* |
+| *pemicuStres* | *private* | *String* |
+| *catatanRefleksi* | *private* | *String* |
+
+Struktur data `CheckInData` yang dipakai CheckInPage, CheckInController, dan CheckIn:
+
+```text
+CheckInData
+    idCheckIn       : String     // kosong saat dikirim dari CheckInPage, diisi oleh createCheckIn()
+    tanggalCheckIn  : Date       // kosong saat dikirim dari CheckInPage, diisi oleh createCheckIn()
+    skalaMood       : int        // 1–5
+    jamTidur        : Time
+    jamBangun       : Time
+    polaMakan       : String
+    pemicuStres     : String
+    catatanRefleksi : String     // ciphertext setelah encryptJournal(), null bila tanpa refleksi
+```
+
+### 5.6.1 Algoritma/Query
+
+**Nama Kelas:** *CheckIn*  
+**Nama Operasi:** *createCheckIn(data: CheckInData): CheckIn*  
+**ID Algoritma:** *Algo-C06-01*
+
+```text
+Function createCheckIn(data: CheckInData) → CheckIn
+    this.idCheckIn       ← UUID baru
+    this.tanggalCheckIn  ← tanggal hari ini (zona waktu Asia/Jakarta)
+    this.skalaMood       ← data.skalaMood
+    this.jamTidur        ← data.jamTidur
+    this.jamBangun       ← data.jamBangun
+    this.polaMakan       ← trim(data.polaMakan)
+    this.pemicuStres     ← trim(data.pemicuStres)
+    this.catatanRefleksi ← data.catatanRefleksi      // null pada UC03 skenario alternatif 1
+
+    if not this.validateData() then                  // Algo-C06-02
+        lempar galat "Data check-in tidak valid"
+    end if
+    return this
+end Function
+```
+
+### 5.6.2 Algoritma/Query
+
+**Nama Kelas:** *CheckIn*  
+**Nama Operasi:** *validateData(): Boolean*  
+**ID Algoritma:** *Algo-C06-02*
+
+```text
+Function validateData() → Boolean
+    if this.skalaMood bukan bilangan bulat or this.skalaMood < 1 or this.skalaMood > 5 then
+        return false
+    end if
+    if this.jamTidur atau this.jamBangun tidak sesuai pola "HH:mm" (00:00–23:59) then
+        return false
+    end if
+    if this.jamTidur = this.jamBangun then
+        return false                                 // durasi tidur nol
+    end if
+    if this.polaMakan = "" then
+        return false
+    end if
+    if this.tanggalCheckIn > tanggal hari ini then
+        return false
+    end if
+    if this.catatanRefleksi ≠ null and this.catatanRefleksi = "" then
+        return false                                 // refleksi kosong harus dikirim sebagai null
+    end if
+    return true
+end Function
+```
+
+## 5.7 Kelas LaporanKesehatan
+
+**Nama Kelas:** *LaporanKesehatan*  
+**ID Kelas:** *C07*
+
+LaporanKesehatan (*entity*) mengolah sekumpulan data check-in menjadi ringkasan kondisi, indikator risiko, dan penilaian kondisi darurat (UC04, UC08). Nilai atribut dihitung ulang setiap kali `evaluateThreshold()` dipanggil sehingga kelas ini tidak disimpan sebagai tabel tersendiri.
+
+Tabel 5.7.1. Operasi Kelas LaporanKesehatan
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *evaluateThreshold(data: List&lt;CheckIn>): ThresholdResult* | *public* | *Menghitung ringkasan kondisi, indikator risiko, dan jumlah hari tidak check-in, lalu menilai apakah ambang batas terlampaui (KF10). Dipakai ReportController (UC04) dan NotifikasiDaruratController (UC08). Algo-C07-01.* |
+| *detectEmergency(): Boolean* | *public* | *Menentukan apakah kondisi pelajar termasuk darurat berdasarkan hasil evaluateThreshold() terakhir (KF18). Algo-C07-02.* |
+
+Tabel 5.7.2. Atribut Kelas LaporanKesehatan
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *periode* | *private* | *String* |
+| *ringkasanKondisi* | *private* | *String* |
+| *indikatorRisiko* | *private* | *String* |
+| *jumlahHariTidakCheckIn* | *private* | *int* |
+
+Struktur data `ThresholdResult` yang dikembalikan `evaluateThreshold()`:
+
+```text
+ThresholdResult
+    periode                : String     // "Mingguan" atau "Bulanan"
+    ringkasanKondisi       : String
+    indikatorRisiko        : String     // "Rendah", "Sedang", "Tinggi", atau "Belum Dapat Dinilai"
+    jumlahHariTidakCheckIn : int
+    ambangTerlampaui       : Boolean
+```
+
+Konstanta ambang batas yang dipakai Algo-C07-01 dan Algo-C07-02:
+
+| Konstanta | Nilai | Dasar |
+| :--- | :--- | :--- |
+| *BATAS_MOOD_RENDAH* | *2* | *Skala mood 1–5 pada CheckInPage; nilai 1–2 dianggap mood rendah* |
+| *HARI_MOOD_RENDAH_BERUNTUN* | *3* | *Pola tidak biasa yang ditandai laporan (KF10)* |
+| *BATAS_RATA_MOOD_SEDANG* | *2,5* | *Rata-rata mood periode di bawah titik tengah skala* |
+| *BATAS_RATA_TIDUR_JAM* | *5* | *Rata-rata durasi tidur kurang dari 5 jam per malam* |
+| *BATAS_HARI_TIDAK_CHECKIN* | *3* | *Pelajar dianggap tidak aktif check-in (KF18)* |
+
+### 5.7.1 Algoritma/Query
+
+**Nama Kelas:** *LaporanKesehatan*  
+**Nama Operasi:** *evaluateThreshold(data: List&lt;CheckIn>): ThresholdResult*  
+**ID Algoritma:** *Algo-C07-01*
+
+```text
+Function evaluateThreshold(data: List<CheckIn>) → ThresholdResult
+    if data kosong then
+        this.periode ← "Mingguan"
+        this.ringkasanKondisi ← "Belum ada data check-in pada periode ini."
+        this.indikatorRisiko ← "Belum Dapat Dinilai"
+        this.jumlahHariTidakCheckIn ← 0
+        return hasil dengan ambangTerlampaui ← false
+    end if
+
+    urutkan data dari tanggalCheckIn terbaru ke terlama
+    rentangHari ← selisih hari antara tanggal terlama dan terbaru + 1
+    this.periode ← "Mingguan" if rentangHari ≤ 7 else "Bulanan"
+    // KF06: selisih tanggal hari ini dengan tanggal check-in terakhir
+    this.jumlahHariTidakCheckIn ← selisih hari antara hari ini dan tanggal check-in terbaru
+
+    totalMood ← 0; totalTidur ← 0
+    moodRendahBeruntun ← 0; masihBeruntun ← true; tanggalSebelumnya ← null
+    for each c in data do                            // dari yang terbaru
+        isi ← c.getCheckInData()
+        totalMood ← totalMood + isi.skalaMood
+        durasi ← menit(isi.jamBangun) − menit(isi.jamTidur)
+        if durasi ≤ 0 then durasi ← durasi + 24 × 60 end if   // tidur melewati tengah malam
+        totalTidur ← totalTidur + durasi / 60
+
+        // hitung hari berturut-turut dengan mood rendah mulai dari check-in terbaru;
+        // rangkaian putus bila mood tidak rendah atau ada tanggal yang terlewat
+        berurutan ← tanggalSebelumnya = null or selisih hari(isi.tanggalCheckIn, tanggalSebelumnya) = 1
+        if masihBeruntun and berurutan and isi.skalaMood ≤ BATAS_MOOD_RENDAH then
+            moodRendahBeruntun ← moodRendahBeruntun + 1
+        else
+            masihBeruntun ← false
+        end if
+        tanggalSebelumnya ← isi.tanggalCheckIn
+    end for
+    rataMood ← totalMood / jumlah(data)
+    rataTidur ← totalTidur / jumlah(data)
+
+    if moodRendahBeruntun ≥ HARI_MOOD_RENDAH_BERUNTUN then
+        this.indikatorRisiko ← "Tinggi"
+    else if rataMood ≤ BATAS_RATA_MOOD_SEDANG or rataTidur < BATAS_RATA_TIDUR_JAM then
+        this.indikatorRisiko ← "Sedang"
+    else
+        this.indikatorRisiko ← "Rendah"
+    end if
+
+    this.ringkasanKondisi ← "Rata-rata mood " + bulatkan(rataMood, 1) + " dari 5, rata-rata tidur "
+        + bulatkan(rataTidur, 1) + " jam, " + this.jumlahHariTidakCheckIn + " hari tanpa check-in."
+
+    ambang ← this.indikatorRisiko = "Tinggi" or this.jumlahHariTidakCheckIn ≥ BATAS_HARI_TIDAK_CHECKIN
+    return ThresholdResult { periode, ringkasanKondisi, indikatorRisiko, jumlahHariTidakCheckIn dari this,
+                             ambangTerlampaui ← ambang }
+end Function
+```
+
+### 5.7.2 Algoritma/Query
+
+**Nama Kelas:** *LaporanKesehatan*  
+**Nama Operasi:** *detectEmergency(): Boolean*  
+**ID Algoritma:** *Algo-C07-02*
+
+```text
+Function detectEmergency() → Boolean
+    if this.indikatorRisiko belum diisi or this.indikatorRisiko = "Belum Dapat Dinilai" then
+        return false                                 // evaluateThreshold() belum dijalankan atau data belum cukup
+    end if
+    // KF18: status darurat bila pelajar tidak aktif check-in DAN kondisinya memburuk
+    tidakAktif ← this.jumlahHariTidakCheckIn ≥ BATAS_HARI_TIDAK_CHECKIN
+    memburuk ← this.indikatorRisiko = "Tinggi" or this.indikatorRisiko = "Sedang"
+    return tidakAktif and memburuk
+end Function
+```
+
+## 5.8 Kelas FasilitasKesehatan
+
+**Nama Kelas:** *FasilitasKesehatan*  
+**ID Kelas:** *C08*
+
+FasilitasKesehatan (*entity*) menyimpan data klinik atau fasilitas tempat tenaga kesehatan berpraktik. Atribut `lokasi` menyimpan koordinat `"lat,lng"` agar jarak ke lokasi pelajar dapat dihitung (UC05).
+
+Tabel 5.8.1. Operasi Kelas FasilitasKesehatan
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *findAll(): List&lt;FasilitasKesehatan>* | *public* | *Operasi statis. Mengambil seluruh fasilitas kesehatan untuk daftar pencarian (UC05). Algo-C08-01.* |
+| *getLokasi(): String* | *public* | *Mengembalikan koordinat fasilitas untuk perhitungan jarak.* |
+| *getEstimasiBiaya(): Double* | *public* | *Mengembalikan estimasi biaya konsultasi dalam rupiah.* |
+
+Tabel 5.8.2. Atribut Kelas FasilitasKesehatan
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *idFasilitas* | *private* | *String* |
+| *namaFasilitas* | *private* | *String* |
+| *lokasi* | *private* | *String* |
+| *estimasiBiaya* | *private* | *Double* |
+
+### 5.8.1 Algoritma/Query
+
+**Nama Kelas:** *FasilitasKesehatan*  
+**Nama Operasi:** *findAll(): List&lt;FasilitasKesehatan>*  
+**ID Algoritma:** *Algo-C08-01*
+
+```text
+Function findAll() → List<FasilitasKesehatan>
+    daftar ← []
+    for each baris in hasil Q-C08-01 do
+        tambahkan objek FasilitasKesehatan yang diisi dari baris ke daftar
+    end for
+    return daftar
+end Function
+```
+
+Tabel 5.8.1.1. Query Operasi findAll
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C08-01* | *SELECT id_fasilitas, nama_fasilitas, lokasi, estimasi_biaya FROM fasilitas_kesehatan ORDER BY nama_fasilitas;* | *Mengambil seluruh fasilitas kesehatan berurutan nama.* |
+
+## 5.9 Kelas JadwalKonsultasi
+
+**Nama Kelas:** *JadwalKonsultasi*  
+**ID Kelas:** *C09*
+
+JadwalKonsultasi (*entity*) merepresentasikan satu slot konsultasi milik tenaga kesehatan beserta status pengajuannya. Nilai `statusPengajuan` adalah `"Belum Diajukan"`, `"Diajukan"` (UC06), `"Disetujui"` (UC07), atau `"Rescheduled"` (UC07 skenario alternatif 1). Atribut `idPelajar` dan `keluhan` bernilai `null` selama slot belum diajukan.
+
+Tabel 5.9.1. Operasi Kelas JadwalKonsultasi
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *findById(idJadwal: String): JadwalKonsultasi* | *public* | *Operasi statis. Mengambil satu jadwal berdasarkan ID, dipakai KonsultasiController saat tenaga kesehatan menyetujui atau menjadwalkan ulang pengajuan (UC07). Mengembalikan null bila jadwal tidak ditemukan. Algo-C09-01.* |
+| *isAvailable(): Boolean* | *public* | *Memeriksa apakah slot masih tersedia dan belum lewat waktunya (UC06). Algo-C09-02.* |
+| *reservasi(idPelajar: String, keluhan: String): Boolean* | *public* | *Memesan slot untuk pelajar dalam satu transaksi, lalu mengubah ketersediaan dan status pengajuan menjadi "Diajukan" (UC06). Mengembalikan false bila slot sudah diambil. Algo-C09-03.* |
+| *getDate(): Date* | *public* | *Mengembalikan tanggal konsultasi.* |
+| *getTime(): Time* | *public* | *Mengembalikan waktu konsultasi berformat "HH:mm".* |
+| *getStatus(): String* | *public* | *Mengembalikan status pengajuan.* |
+| *updateAvailability(status: Boolean): void* | *public* | *Mengubah status ketersediaan slot. Algo-C09-04.* |
+| *updateStatus(statusBaru: String): void* | *public* | *Mengubah status pengajuan, misalnya menjadi "Disetujui" saat tenaga kesehatan menyetujui pengajuan (UC07). Algo-C09-05.* |
+| *updateSchedule(tanggalBaru: Date, waktuBaru: Time): void* | *public* | *Memindahkan konsultasi ke tanggal dan waktu baru, lalu mengubah status menjadi "Rescheduled" (UC07 skenario alternatif 1). Algo-C09-06.* |
+
+Tabel 5.9.2. Atribut Kelas JadwalKonsultasi
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *idJadwal* | *private* | *String* |
+| *tanggal* | *private* | *Date* |
+| *waktu* | *private* | *Time* |
+| *statusKetersediaan* | *private* | *Boolean* |
+| *statusPengajuan* | *private* | *String* |
+| *idPelajar* | *private* | *String* |
+| *keluhan* | *private* | *String* |
+
+### 5.9.1 Algoritma/Query
+
+**Nama Kelas:** *JadwalKonsultasi*  
+**Nama Operasi:** *findById(idJadwal: String): JadwalKonsultasi*  
+**ID Algoritma:** *Algo-C09-01*
+
+```text
+Function findById(idJadwal: String) → JadwalKonsultasi
+    baris ← jalankan Q-C09-01 dengan parameter (idJadwal)
+    if baris tidak ditemukan then
+        return null
+    end if
+    return objek JadwalKonsultasi yang diisi dari baris
+end Function
+```
+
+Tabel 5.9.1.1. Query Operasi findById
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C09-01* | *SELECT id_jadwal, tanggal, waktu, status_ketersediaan, status_pengajuan, id_pelajar, keluhan FROM jadwal_konsultasi WHERE id_jadwal = @idJadwal;* | *Mengambil satu jadwal konsultasi berdasarkan ID.* |
+
+### 5.9.2 Algoritma/Query
+
+**Nama Kelas:** *JadwalKonsultasi*  
+**Nama Operasi:** *isAvailable(): Boolean*  
+**ID Algoritma:** *Algo-C09-02*
+
+```text
+Function isAvailable() → Boolean
+    waktuMulai ← gabungkan(this.tanggal, this.waktu)
+    // memakai nilai yang sudah dimuat; perebutan slot oleh dua pelajar dicegah di reservasi()
+    return this.statusKetersediaan and waktuMulai > sekarang
+end Function
+```
+
+### 5.9.3 Algoritma/Query
+
+**Nama Kelas:** *JadwalKonsultasi*  
+**Nama Operasi:** *reservasi(idPelajar: String, keluhan: String): Boolean*  
+**ID Algoritma:** *Algo-C09-03*
+
+```text
+Function reservasi(idPelajar: String, keluhan: String) → Boolean
+    MULAI TRANSAKSI
+        baris ← jalankan Q-C09-02 dengan parameter (this.idJadwal)      // mengunci baris jadwal
+        if baris tidak ditemukan or baris.status_ketersediaan = false then
+            BATALKAN TRANSAKSI
+            this.statusKetersediaan ← false
+            return false                             // UC06 skenario alternatif 1
+        end if
+        jalankan Q-C09-03 dengan parameter (idPelajar, keluhan, this.idJadwal)
+        this.idPelajar ← idPelajar
+        this.keluhan ← keluhan
+        // kedua operasi berikut berjalan pada koneksi transaksi yang sama
+        this.updateAvailability(false)               // Algo-C09-04
+        this.updateStatus("Diajukan")                // Algo-C09-05
+    SIMPAN TRANSAKSI (COMMIT)
+    return true
+end Function
+```
+
+Tabel 5.9.3.1. Query Operasi reservasi
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C09-02* | *SELECT status_ketersediaan FROM jadwal_konsultasi WHERE id_jadwal = @idJadwal FOR UPDATE;* | *Membaca ketersediaan terbaru sekaligus mengunci baris sampai transaksi selesai, sehingga pengajuan lain pada slot yang sama harus menunggu.* |
+| *Q-C09-03* | *UPDATE jadwal_konsultasi SET id_pelajar = @idPelajar, keluhan = @keluhan WHERE id_jadwal = @idJadwal;* | *Mencatat pelajar yang mengajukan dan keluhannya.* |
+
+### 5.9.4 Algoritma/Query
+
+**Nama Kelas:** *JadwalKonsultasi*  
+**Nama Operasi:** *updateAvailability(status: Boolean): void*  
+**ID Algoritma:** *Algo-C09-04*
+
+```text
+Procedure updateAvailability(status: Boolean)
+    jalankan Q-C09-04 dengan parameter (status, this.idJadwal)
+    this.statusKetersediaan ← status
+end Procedure
+```
+
+Tabel 5.9.4.1. Query Operasi updateAvailability
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C09-04* | *UPDATE jadwal_konsultasi SET status_ketersediaan = @status WHERE id_jadwal = @idJadwal;* | *Mengubah ketersediaan slot.* |
+
+### 5.9.5 Algoritma/Query
+
+**Nama Kelas:** *JadwalKonsultasi*  
+**Nama Operasi:** *updateStatus(statusBaru: String): void*  
+**ID Algoritma:** *Algo-C09-05*
+
+```text
+Procedure updateStatus(statusBaru: String)
+    if statusBaru not in {"Belum Diajukan", "Diajukan", "Disetujui", "Rescheduled"} then
+        lempar galat "Status pengajuan tidak dikenal"
+    end if
+    if statusBaru = "Disetujui" and this.statusPengajuan not in {"Diajukan", "Rescheduled"} then
+        lempar galat "Hanya pengajuan yang sudah diajukan yang dapat disetujui"
+    end if
+    if statusBaru = "Rescheduled" and this.statusPengajuan not in {"Diajukan", "Disetujui", "Rescheduled"} then
+        lempar galat "Slot yang belum diajukan tidak dapat dijadwalkan ulang"
+    end if
+    jalankan Q-C09-05 dengan parameter (statusBaru, this.idJadwal)
+    this.statusPengajuan ← statusBaru
+end Procedure
+```
+
+Tabel 5.9.5.1. Query Operasi updateStatus
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C09-05* | *UPDATE jadwal_konsultasi SET status_pengajuan = @statusBaru WHERE id_jadwal = @idJadwal;* | *Mengubah status pengajuan konsultasi.* |
+
+### 5.9.6 Algoritma/Query
+
+**Nama Kelas:** *JadwalKonsultasi*  
+**Nama Operasi:** *updateSchedule(tanggalBaru: Date, waktuBaru: Time): void*  
+**ID Algoritma:** *Algo-C09-06*
+
+```text
+Procedure updateSchedule(tanggalBaru: Date, waktuBaru: Time)
+    if gabungkan(tanggalBaru, waktuBaru) ≤ sekarang then
+        lempar galat "Jadwal baru harus setelah waktu sekarang"
+    end if
+    bentrok ← jalankan Q-C09-06 dengan parameter (tanggalBaru, waktuBaru, this.idJadwal)
+    if bentrok ditemukan then
+        lempar galat "Tenaga kesehatan sudah memiliki jadwal pada waktu tersebut"
+    end if
+    jalankan Q-C09-07 dengan parameter (tanggalBaru, waktuBaru, this.idJadwal)
+    this.tanggal ← tanggalBaru
+    this.waktu ← waktuBaru
+    this.updateStatus("Rescheduled")                 // Algo-C09-05
+end Procedure
+```
+
+Tabel 5.9.6.1. Query Operasi updateSchedule
+
+| No Query | Query | Keterangan |
+| :--- | :--- | :--- |
+| *Q-C09-06* | *SELECT 1 FROM jadwal_konsultasi j WHERE j.id_tenaga_kesehatan = (SELECT id_tenaga_kesehatan FROM jadwal_konsultasi WHERE id_jadwal = @idJadwal) AND j.tanggal = @tanggalBaru AND j.waktu = @waktuBaru AND j.id_jadwal != @idJadwal LIMIT 1;* | *Memeriksa apakah tenaga kesehatan yang sama sudah memiliki slot lain pada tanggal dan waktu baru.* |
+| *Q-C09-07* | *UPDATE jadwal_konsultasi SET tanggal = @tanggalBaru, waktu = @waktuBaru WHERE id_jadwal = @idJadwal;* | *Memindahkan jadwal konsultasi ke tanggal dan waktu baru.* |
+
+## 5.10 Kelas RegistrationPage
+
+**Nama Kelas:** *RegistrationPage*  
+**ID Kelas:** *C10*
+
+RegistrationPage (*boundary*) menampilkan formulir registrasi akun dan meneruskan data yang diisi ke AuthController (UC01). Halaman ini memiliki tiga tab peran sesuai rancangan antarmuka I-01 (Pelajar), I-02 (Orang Tua/Wali), dan I-03 (Tenaga Kesehatan). Pada tab Pelajar, nomor telepon orang tua/wali wajib diisi bila usia pelajar di bawah 18 tahun (KF02). Setelah pendaftaran berhasil, halaman menampilkan pop-up I-04 bila akun menunggu persetujuan wali, atau pop-up I-05 bila akun langsung aktif.
+
+Tabel 5.10.1. Operasi Kelas RegistrationPage
+
+| Nama Operasi | Visibility (private, public) | Keterangan |
+| :--- | :--- | :--- |
+| *displayFormRegistrasi(): void* | *public* | *Menampilkan formulir registrasi sesuai tab peran yang aktif. Tab Pelajar menjadi tampilan awal.* |
+| *selectRole(role: String): void* | *public* | *Menerima aksi pengguna yang memilih tab Tab_Role_Pelajar, Tab_Role_OrangTuawali, atau Tab_Role_TenagaKesehatan, lalu menampilkan formulir peran tersebut.* |
+| *getDataPelajar(): Pelajar* | *public* | *Membaca isian formulir I-01: nama, e-mail, nomor telepon, tanggal lahir, riwayat kesehatan, dan kata sandi.* |
+| *getDataWali(): OrangTuaWali* | *public* | *Membaca data orang tua/wali. Pada tab Pelajar hanya nomor telepon wali yang terisi; pada tab Orang Tua/Wali seluruh isian formulir I-02 dibaca.* |
+| *getDataTenagaKesehatan(): TenagaKesehatan* | *public* | *Membaca isian formulir I-03: nama, e-mail, nomor telepon, jenis tenaga kesehatan, lokasi, dan kata sandi.* |
+| *submitRegistrasi(): void* | *public* | *Memeriksa isian formulir, mengirim data registrasi sesuai peran ke AuthController, lalu menampilkan pop-up I-04 (pelajar di bawah 18 tahun) atau I-05 (akun langsung aktif). Dijalankan saat Btn_Daftar ditekan. Algo-C10-01.* |
+
+Tabel 5.10.2. Atribut Kelas RegistrationPage
+
+| Nama Atribut | Visibility (private, public) | Tipe |
+| :--- | :--- | :--- |
+| *selectedRole* | *private* | *String* |
+| *inputDataPelajar* | *private* | *Pelajar* |
+| *inputDataWali* | *private* | *OrangTuaWali* |
+| *inputDataTenagaKesehatan* | *private* | *TenagaKesehatan* |
+
+### 5.10.1 Algoritma/Query
+
+**Nama Kelas:** *RegistrationPage*  
+**Nama Operasi:** *submitRegistrasi(): void*  
+**ID Algoritma:** *Algo-C10-01*
+
+```text
+Procedure submitRegistrasi()
+    // pemeriksaan cepat di sisi klien; validasi utama tetap dilakukan AuthController.validateData()
+    kolomKosong ← daftar kolom wajib pada tab selectedRole yang belum diisi
+    if Input_KataSandi ≠ Input_KonfirmasiKataSandi then
+        tambahkan "Konfirmasi Kata Sandi" ke kolomKosong
+    end if
+
+    depend on selectedRole
+        "Pelajar":
+            this.inputDataPelajar ← this.getDataPelajar()
+            this.inputDataWali ← this.getDataWali()           // hanya berisi nomor telepon wali
+            usia ← selisih tahun antara this.inputDataPelajar.tanggalLahir dan hari ini
+            if usia < 18 and nomor telepon wali kosong then
+                tambahkan "Nomor Telepon Orang Tua/Wali" ke kolomKosong        // KF02
+            end if
+            data ← { peran: "Pelajar", pelajar: inputDataPelajar, wali: inputDataWali }
+        "OrangTuaWali":
+            this.inputDataWali ← this.getDataWali()
+            data ← { peran: "OrangTuaWali", wali: inputDataWali }
+        "TenagaKesehatan":
+            this.inputDataTenagaKesehatan ← this.getDataTenagaKesehatan()
+            data ← { peran: "TenagaKesehatan", tenagaKesehatan: inputDataTenagaKesehatan }
+    end depend
+
+    if kolomKosong tidak kosong then
+        tandai kolomKosong pada formulir
+        return
+    end if
+
+    // formulir I-01 sampai I-03 tidak memiliki kolom username, sehingga username akun diisi dengan e-mail
+    nonaktifkan Btn_Daftar agar data tidak terkirim dua kali
+    respons ← kirim data ke AuthController melalui HTTPS
+    aktifkan kembali Btn_Daftar
+    if respons gagal then
+        tampilkan pesan kesalahan dari respons dan minta pengguna memperbaiki isian   // UC01 skenario alternatif 1
+    else if selectedRole = "Pelajar" and usia < 18 then
+        tampilkan pop-up I-04 "Pendaftaran Berhasil Dikirim!"    // akun menunggu persetujuan wali (KF02, UC02)
+    else
+        tampilkan pop-up I-05 "Akun Berhasil Dibuat!"            // Btn_Masuk mengarah ke LoginPage (I-07)
+    end if
+end Procedure
+```
 
 ## 5.11 Kelas AuthController
 **Nama Kelas:** *AuthController*  
