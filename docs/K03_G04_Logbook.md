@@ -22,16 +22,14 @@
 ---
 
 ### Daftar Isi
-- [Logbook Pekerjaan](#logbook-pekerjaan)
-  - [Tugas Besar IF2150 - Rekayasa Perangkat Lunak](#tugas-besar-if2150---rekayasa-perangkat-lunak)
-    - [Daftar Isi](#daftar-isi)
-    - [Milestone 1](#milestone-1)
-    - [Milestone 2](#milestone-2)
-    - [Milestone 3](#milestone-3)
-    - [Milestone 4](#milestone-4)
-    - [Milestone 5](#milestone-5)
-    - [Milestone 6](#milestone-6)
-    - [Milestone 7](#milestone-7)
+* [Milestone 1](#milestone-1)
+* [Milestone 2](#milestone-2)
+* [Milestone 3](#milestone-3)
+* [Milestone 4](#milestone-4)
+* [Milestone 5](#milestone-5)
+* [Milestone 6](#milestone-6)
+* [Milestone 7](#milestone-7)
+* [Milestone 8](#milestone-8)
 
 ---
 
@@ -161,7 +159,7 @@
 | *07-10-2026* | *Rendy Salastra Putra* | *Melengkapi bagian logical view* | *3* | *Done* | *Bingung apa beberapa komponen harus digabung biar garis hubung ga clutter dan tabrakan* |
 
 ### Milestone 7
-**Periode:** 07/09/2026 - 21/10/2026
+**Periode:** 07/10/2026 - 21/10/2026
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -179,3 +177,17 @@
 | *21-10-2026* | *Rendy Salastra Putra* | *Membuat sequence diagram untuk UC03 dan UC04* | *2* | *Done* | *-* |
 | *21-10-2026* | *Rendy Salastra Putra* | *Membuat class diagram untuk UC03 dan UC04* | *1* | *Done* | *-* |
 | *21-10-2026* | *Rendy Salastra Putra* | *Mengintegrasi gambar dengan dokumen utama, merevisi logical view, dan melengkapi subbab 2.1* | *1* | *Done* | *-* |
+
+### Milestone 8
+**Periode:** 21/10/2026 - 28/10/2026
+
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| *25-10-2026* | *Sophia Imelda Rogate Marpaung* | *Melengkapi bagian dari milestone sebelumnya* | *1* | *Done* | *-* |
+| *27-10-2026* | *Christabelcyne Costan* | *Push algoritma C11-C13 dari lokal dan menambahkan C14-C17* | *2* | *Done* | *-* |
+| *28-10-2026* | *Sophia Imelda Rogate Marpaung* | *Menambah perancangan rinci kelas C21-C29* | *5* | *Done* | *-* |
+| *28-10-2026* | *Sophia Imelda Rogate Marpaung* | *Update daftar kelas keseluruhan dan aturan penomoran* | *0,5* | *Done* | *-* |
+| *28-10-2026* | *Cynthia Winda Wijaya* | *Menambah antarmuka 1-13* | *7* | *Done* | *-* |
+| *28-10-2026* | *Rendy Salastra Putra* | *Menambah antarmuka 14-22* | *7* | *Done* | *-* |
+| *28-10-2026* | *Christabelcyne Costan* | *Menambah C18-C20 dan melengkapi C11-C17* | *3* | *Done* | *-* |
+| *28-10-2026* | *Sophia Imelda Rogate Marpaung* | *Mengisi form asistensi* | *0,25* | *Done* | *-* |
