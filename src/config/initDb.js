@@ -42,7 +42,11 @@ async function initializeDatabase() {
       console.log('[DB Init] Seed data berhasil dimasukkan (Password akun uji: Password123!).');
     }
   } catch (err) {
-    console.error('[DB Init] Gagal menginisialisasi basis data:', err.message);
+    console.error('[DB Init] Gagal menginisialisasi basis data:');
+    console.error(err);
+    if (err.code === 'ECONNREFUSED' || (err.errors || []).some((e) => e.code === 'ECONNREFUSED')) {
+      console.error('[DB Init] Pastikan PostgreSQL berjalan dan DATABASE_URL/DB_* pada .env sudah benar.');
+    }
     process.exitCode = 1;
   } finally {
     await db.pool.end();
