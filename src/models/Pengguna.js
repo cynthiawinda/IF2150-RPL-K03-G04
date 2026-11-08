@@ -54,10 +54,11 @@ class Pengguna {
     return rows[0] ? Pengguna.dariBaris(rows[0]) : null;
   }
 
-  static async findByTokenKonfirmasi(token, executor = db) {
+  /** Bila kunci = true (dipakai di dalam transaksi), baris dikunci agar setuju dan tolak tidak bisa terjadi bersamaan. */
+  static async findByTokenKonfirmasi(token, executor = db, { kunci = false } = {}) {
     const { rows } = await executor.query(
       `SELECT ${KOLOM} FROM pengguna
-       WHERE token_konfirmasi = $1 AND status_akun = 'Belum Terverifikasi';`,
+       WHERE token_konfirmasi = $1 AND status_akun = 'Belum Terverifikasi'${kunci ? ' FOR UPDATE' : ''};`,
       [token]
     );
     return rows[0] ? Pengguna.dariBaris(rows[0]) : null;
