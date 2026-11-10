@@ -30,6 +30,7 @@
 * [Milestone 6](#milestone-6)
 * [Milestone 7](#milestone-7)
 * [Milestone 8](#milestone-8)
+* [Milestone 9](#milestone-9)
 
 ---
 
@@ -191,3 +192,26 @@
 | *28-10-2026* | *Rendy Salastra Putra* | *Menambah antarmuka 14-22* | *7* | *Done* | *-* |
 | *28-10-2026* | *Christabelcyne Costan* | *Menambah C18-C20 dan melengkapi C11-C17* | *3* | *Done* | *-* |
 | *28-10-2026* | *Sophia Imelda Rogate Marpaung* | *Mengisi form asistensi* | *0,25* | *Done* | *-* |
+
+### Milestone 9
+**Periode:** 28/10/2026 - 11/11/2026
+
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| *05-11-2026* | *Rendy Salastra Putra* | *Inisialisasi struktur proyek* | *4* | *Done* | *-* |
+| *05-11-2026* | *Cynthia Winda Wijaya* | *Implementasi RegistrationPage* | *4* | *Done* | *-* |
+| *06-11-2026* | *Cynthia Winda Wijaya* | *Implementasi LoginPage* | *1,5* | *Done* | *-* |
+| *07-11-2026* | *Cynthia Winda Wijaya* | *Implementasi KonfirmasiRegistrasiPage* | *1,5* | *Done* | *-* |
+| *07-11-2026* | *Haikal Muhammad Royyan* | *Implementasi model entity C01-C09 dan NotifikasiDarurat* | *3* | *Done* | *-* |
+| *07-11-2026* | *Rendy Salastra Putra* | *Implementasi backend registrasi dan gabungkan FE registrasi* | *3* | *Done* | *-* |
+| *08-11-2026* | *Sophia Imelda Rogate Marpaung* | *Implementasi DashboardPage dan SettingPage* | *4* | *Done* | *-* |
+| *08-11-2026* | *Haikal Muhammad Royyan* | *Tambah pengujian kasus gagal dan scheduler evaluasi darurat* | *3* | *Done* | *-* |
+| *08-11-2026* | *Rendy Salastra Putra* | *Sinkronisasi tampilan registrasi, login, dashboard* | *3* | *Done* | *-* |
+| *09-11-2026* | *Sophia Imelda Rogate Marpaung* | *Implementasi ReportPage* | *2* | *Done* | *-* |
+| *09-11-2026* | *Cynthia Winda Wijaya* | *Implementasi CheckInPage* | *2* | *Done* | *-* |
+| *09-11-2026* | *Rendy Salastra Putra* | *Implementasi antarmuka manajemen konsultasi dan settings nakes* | *3* | *Done* | *-* |
+| *09-11-2026* | *Christabelcyne Costan* | *Menyesuaikan backend check in* | *3* | *Done* | *-* |
+| *10-11-2026* | *Rendy Salastra Putra* | *Implementasi antarmuka settings orang tua wali* | *3* | *Done* | *-* |
+| *10-11-2026* | *Sophia Imelda Rogate Marpaung* | *Implementasi ResetPasswordPage* | *2* | *Done* | *-* |
+| *10-11-2026* | *Christabelcyne Costan* | *Perbaikan model dan sinkronisasi authmiddleware* | *2* | *Done* | *-* |
+| *08-11-2026* | *Haikal Muhammad Royyan* | *Masuk akun dan reset password* | *3* | *Done* | *-* |

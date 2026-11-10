@@ -7,24 +7,24 @@ IMPLEMENTASI PERANGKAT LUNAK
 </h1>
 <br>
 
-## *Nama Perangkat Lunak*
-### *[Logo Perangkat Lunak]*
+*Mahasehat: Mental Health Monitoring App for Students*
+<img alt="Logo Perangkat Lunak" src="./assets/logo-mahasehat.png" width="35%">
 
-### Untuk: *[Nama Asisten]*
+### Untuk: *Stefani Angeline Oroh*
 
 Dipersiapkan oleh:
 | Informasi | Keterangan |
 | --- | --- |
-| Kelas | *\[Kelas\]* |
-| Kelompok | *\[Nomor Kelompok\]*  |
+| Kelas | *03* |
+| Kelompok | *04* |
 
 | NIM | Nama |
 |---|---|
-| *[NIM 1]* | *[Nama Anggota 1]* |
-| *[NIM 2]* | *[Nama Anggota 2]* |
-| *[NIM 3]* | *[Nama Anggota 3]* |
-| *[NIM 4]* | *[Nama Anggota 4]* |
-| *[NIM 5]* | *[Nama Anggota 5]* |
+| *13525021* | *Haikal Muhammad Royyan* |
+| *13525066* | *Cynthia Winda Wijaya* |
+| *13525081* | *Rendy Salastra Putra* |
+| *13525090* | *Sophia Imelda Rogate Marpaung* |
+| *13525141* | *Christabelcyne Costan* |
 ---
 
 > **Petunjuk pengerjaan:** *[Silahkan hapus bagian ini setelah selesai mengerjakan]*
@@ -199,10 +199,10 @@ Tabel B.2. Bukti Best Practices
 
 | Praktik | Bukti | Keterangan |
 | :--- | :--- | :--- |
-| Branching | *[Tautan ke daftar branch / graph commit]* | *[Skema yang dipakai]* |
-| Semantic commit | *[Tautan ke riwayat commit]* | *[Ringkasan]* |
-| Track tasks | *[Tautan ke Issues/Projects]* | *[Jumlah issue, pembagian]* |
-| Pull request dan review | *[Tautan ke 2-3 PR representatif]* | *[Siapa me-review siapa]* |
+| Branching | *https://github.com/cynthiawinda/IF2150-RPL-K03-G04/branches* | *Git workflow* |
+| Semantic commit | *https://github.com/cynthiawinda/IF2150-RPL-K03-G04/commits/main/* | *Menggunakan standar penamaan konvensional berbasis jenis perubahan, seperti feat: untuk penambahan fitur baru, fix: untuk perbaikan bug, docs: untuk dokumentasi, dan refactor: untuk perbaikan struktur kode* |
+| Track tasks | *https://github.com/cynthiawinda/IF2150-RPL-K03-G04/issues* | *[Jumlah issue, pembagian]* |
+| Pull request dan review | *https://github.com/cynthiawinda/IF2150-RPL-K03-G04/pull/20, https://github.com/cynthiawinda/IF2150-RPL-K03-G04/pull/12* | *Haikal Muhammad Royyan mereview Rendy Salastra Putra, Rendy Salastra Putra mereview Sophia Imelda Rogate Marpaung* |
 | Pengujian | *[Tautan ke `src/tests/` dan hasil test]* | *[Apa yang diuji, cara menjalankan]* |
 
 ### B.2.1 Profiling dan Optimasi
@@ -229,8 +229,11 @@ Tabel B.4. Kontribusi Anggota
 
 | NIM | Nama | Modul / Fitur yang Dikerjakan | Persentase Kontribusi |
 | :--- | :--- | :--- | :--- |
-| *[NIM 1]* | *[Nama]* | *[Modul/fitur]* | *[%]* |
-| *...* | *...* | *...* | *...* |
+| *13525021* | *Haikal Muhammad Royyan* | *[Modul/fitur]* | *[%]* |
+| *13525066* | *Cynthia Winda Wijaya* | *...* | *...* |
+| *13525081* | *Rendy Salastra Putra* | *...* | *...* |
+| *13525090* | *Sophia Imelda Rogate Marpaung* | *...* | *...* |
+| *13525141* | *Christabelcyne Costan* | *...* | *...* |
 
 ## B.5 Traceability Kelas Perancangan ke Implementasi
 
