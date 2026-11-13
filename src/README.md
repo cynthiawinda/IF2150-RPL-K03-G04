@@ -56,7 +56,7 @@ npm ci
    ```bash
    npm run db:seed
    ```
-   *(Catatan: `npm run db:init` hanya untuk database kosong; `schema.sql` belum idempotent dan tidak menghapus tabel lama. Jika tabel sudah ada, cukup jalankan `npm start`.)*
+   *(Catatan: `npm run db:init` membuat ulang tabel kosong tanpa data uji. `schema.sql` diawali `DROP TABLE IF EXISTS`, sehingga `db:init` maupun `db:seed` menghapus seluruh data lama. Jika database sudah berisi data yang ingin disimpan, cukup jalankan `npm start`.)*
 
 ---
 
@@ -93,7 +93,7 @@ Seluruh akun uji pada `seed.sql` menggunakan kata sandi yang sama: **`Password12
 | :--- | :--- | :--- | :--- | :--- |
 | **Pelajar (Dewasa)** | `budi.pelajar@mahasehat.id` | `Password123!` | `Aktif` | Memiliki riwayat check-in 5 hari, terhubung ke Wali `WALI-001` |
 | **Pelajar (Skenario Darurat)** | `citra.pelajar@mahasehat.id` | `Password123!` | `Aktif` | Mood rendah 3 hari beruntun lalu tidak check-in lagi, terhubung ke Wali `WALI-002` (UC08) |
-| **Pelajar (< 18 Thn)** | `andi.siswa@mahasehat.id` | `Password123!` | `Belum Terverifikasi` | Menunggu konfirmasi wali (`TOKEN-WALI-ANDI-2026` untuk uji UC02), belum terhubung ke wali |
+| **Pelajar (< 18 Thn)** | `andi.siswa@mahasehat.id` | `Password123!` | `Belum Terverifikasi` | Menunggu konfirmasi wali (`TOKEN-WALI-ANDI-2026` untuk uji UC02), belum terhubung ke wali. Tautan berlaku 7 hari sejak `npm run db:seed`; jalankan ulang perintah tersebut bila sudah lewat |
 | **Orang Tua / Wali** | `santoso.wali@mahasehat.id` | `Password123!` | `Aktif` | Memantau laporan Budi tanpa melihat teks jurnal pribadi (KNF02) |
 | **Orang Tua / Wali (Skenario Darurat)** | `ratna.wali@mahasehat.id` | `Password123!` | `Aktif` | Wali Citra, penerima notifikasi darurat (UC08) |
 | **Tenaga Kesehatan (Psikolog)** | `siti.psikolog@mahasehat.id` | `Password123!` | `Aktif` | Klinik Kesehatan Mental Tenang (memiliki pengajuan `JDW-003` untuk uji UC07) |
@@ -147,7 +147,7 @@ src/
 
 | NIM | Nama Anggota | Peran & Modul / Fitur yang Diimplementasikan | Use Case & Kelas DPPL Terkait |
 | :--- | :--- | :--- | :--- |
-| **13525021** | Haikal Muhammad Royyan | Backend autentikasi, model C01-C09, notifikasi darurat, scheduler, skema/seed, pengujian | UC01, UC02, UC08, UC09, UC10 (C01-C11, C24) |
+| **13525021** | Haikal Muhammad Royyan | Fondasi basis data (skema, seed, model C01-C09), konfirmasi registrasi oleh wali, notifikasi darurat beserta job harian, masuk akun dan atur ulang kata sandi, keluar akun, pengujian | UC02, UC08, UC09, UC10 (C01-C09, C11 konfirmasi/masuk/keluar, C24, C27) |
 | **13525066** | Cynthia Winda Wijaya | Registrasi, login, konfirmasi registrasi, pop-up notifikasi, pencarian nakes, check-in, routing konsultasi | UC01, UC02, UC03, UC05, UC08 (C10, C12, C13, C18, C25, C26) |
 | **13525081** | Rendy Salastra Putra | Integrasi FE-BE, design system/auth layout, sidebar, manajemen konsultasi, setelan nakes dan orang tua/wali | UC06, UC07, C21-C23, C29 |
 | **13525090** | Sophia Imelda Rogate Marpaung | Dashboard tiga peran, setelan awal, laporan kesehatan, reset password, aset | UC03, UC04 (C16, C28, C29) |
@@ -162,7 +162,7 @@ src/
 | **Statistik & Laporan** (UC04) | `GET /api/reports/summary`<br>`GET /api/reports/riwayat` | Ringkasan agregat 7/30/90 hari dan riwayat check-in pelajar | `routes/reportRoutes.js` |
 | **Cari Nakes** (UC05) | `GET /api/tenaga-kesehatan`<br>`GET /api/tenaga-kesehatan/:id`<br>`PUT /api/tenaga-kesehatan/lokasi-pelajar`<br>`PATCH /api/tenaga-kesehatan/me/tarif` | Daftar nakes + jarak, detail profil dan slot, simpan lokasi/tarif | `routes/tenagaKesehatanRoutes.js` |
 | **Pengajuan & Kelola Konsultasi** (UC06, UC07) | `POST /api/konsultasi`<br>`GET /api/konsultasi/saya`<br>`GET /api/konsultasi/masuk`<br>`GET /api/konsultasi/jadwal`<br>`PUT /api/konsultasi/:id/status`<br>`PUT /api/konsultasi/:id/jadwal`<br>`POST /api/konsultasi/:id/tolak` | Pelajar mengajukan; nakes melihat, menyetujui, menjadwalkan ulang, atau menolak | `routes/konsultasiRoutes.js` |
-| **Notifikasi Darurat** (UC08) | `GET /api/emergency/wali`<br>`PUT /api/emergency/:id/confirm`<br>`PUT /api/emergency/:id/follow-up` | Daftar notifikasi aktif, konfirmasi diterima, tindak lanjut wali | `routes/emergencyRoutes.js` |
+| **Notifikasi Darurat** (UC08) | `GET /api/emergency/wali`<br>`PUT /api/emergency/:id/confirm`<br>`PUT /api/emergency/:id/follow-up` | Daftar notifikasi darurat aktif milik wali yang login, konfirmasi diterima, dan tandai sudah ditindaklanjuti. Deteksi dan pengiriman e-mail dijalankan job harian (`npm run job:darurat`) | `routes/emergencyRoutes.js` |
 
 ---
 
