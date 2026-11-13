@@ -42,23 +42,10 @@ exports.getPengajuanKonsultasi = tanganiAsync(async (req, res) => {
   const nakes = await nakesDariSesi(req);
   const idNakes = nakes.idTenagaKesehatan || nakes.id_tenaga_kesehatan;
 
-  const { rows: jadwalRows } = await db.query(`
-    SELECT j.id_jadwal, j.tanggal, j.waktu, j.status_pengajuan, j.keluhan, 
-           p.id_pelajar, p.nama AS nama_pelajar, p.nomor_telepon, p.tanggal_lahir
-    FROM jadwal_konsultasi j
-    JOIN pelajar p ON j.id_pelajar = p.id_pelajar
-    WHERE j.id_tenaga_kesehatan = $1 
-      AND j.status_pengajuan IN ('Diajukan', 'Rescheduled', 'Disetujui')
-    ORDER BY j.tanggal ASC, j.waktu ASC;
-  `, [idNakes]);
+  const { rows: jadwalRows } = await JadwalKonsultasi.findPengajuanDenganRiwayat(idNakes);
 
-  const formattedData = await Promise.all(jadwalRows.map(async (row) => {
-    const { rows: checkIns } = await db.query(`
-      SELECT skala_mood, jam_tidur, jam_bangun 
-      FROM check_in 
-      WHERE id_pelajar = $1 
-      ORDER BY tanggal_check_in DESC LIMIT 7;
-    `, [row.id_pelajar]);
+  const formattedData = jadwalRows.map((row) => {
+    const checkIns = row.check_ins || [];
 
     let totalMood = 0;
     let totalTidur = 0;
@@ -82,15 +69,15 @@ exports.getPengajuanKonsultasi = tanganiAsync(async (req, res) => {
     const avgTidur = checkIns.length ? (totalTidur / checkIns.length).toFixed(1) : '0.0';
 
     const tanggalString = typeof row.tanggal === 'string' ? row.tanggal : row.tanggal.toISOString().split('T')[0];
-     const waktuString = String(row.waktu).slice(0, 5);
+    const waktuString = String(row.waktu).slice(0, 5);
  
     const inisial = row.nama_pelajar.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
     const usia = row.tanggal_lahir ? hitungUsia(row.tanggal_lahir) : '?';
     
     return {
-       id: row.id_jadwal,
+      id: row.id_jadwal,
       nama: row.nama_pelajar,
-      inisial: inisial,
+      inisial,
       avatarColor: '#78C9C0',
       sekolah: `Usia ${usia} Tahun`,
       nis: row.nomor_telepon,
@@ -100,13 +87,13 @@ exports.getPengajuanKonsultasi = tanganiAsync(async (req, res) => {
       metode: 'Daring (Google Meet)',
       keluhan: row.keluhan || 'Tidak ada keluhan tertulis.',
       moodRerata: `${avgMood} / 5.0`,
-      moodBars: moodBars,
+      moodBars,
       tidurRerata: `${avgTidur} Jam`,
-      tidurBars: tidurBars,
+      tidurBars,
       linkMeet: '',
-      catatan: ''
+      catatan: '',
     };
-  }));
+  });
 
   return kirim(res, 200, 'Berhasil mengambil daftar permohonan konsultasi.', formattedData);
 });

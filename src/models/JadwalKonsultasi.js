@@ -44,6 +44,45 @@ class JadwalKonsultasi {
     });
   }
 
+  static async findPengajuanDenganRiwayat(idTenagaKesehatan) {
+    const { rows } = await db.query(
+      `SELECT
+         j.id_jadwal, j.tanggal, j.waktu,
+         j.status_pengajuan,
+         j.keluhan,
+         p.id_pelajar, p.nama AS nama_pelajar,
+         p.nomor_telepon,p.tanggal_lahir,
+         COALESCE(
+           (
+             SELECT json_agg(
+               json_build_object(
+                 'skala_mood', riwayat.skala_mood,
+                 'jam_tidur', riwayat.jam_tidur,
+                 'jam_bangun', riwayat.jam_bangun
+               )
+               ORDER BY riwayat.tanggal_check_in ASC
+             )
+             FROM (
+               SELECT skala_mood, jam_tidur, jam_bangun, tanggal_check_in
+               FROM check_in
+               WHERE id_pelajar = p.id_pelajar
+               ORDER BY tanggal_check_in DESC
+               LIMIT 7
+             ) riwayat
+           ),
+           '[]'::json
+         ) AS check_ins
+       FROM jadwal_konsultasi j
+       JOIN pelajar p ON p.id_pelajar = j.id_pelajar
+       WHERE j.id_tenaga_kesehatan = $1
+         AND j.status_pengajuan IN ('Diajukan', 'Rescheduled', 'Disetujui')
+       ORDER BY j.tanggal ASC, j.waktu ASC;`,
+      [idTenagaKesehatan]
+    );
+
+    return rows;
+  }
+
   /** Algo-C09-02 */
   isAvailable() {
     return this.statusKetersediaan && gabungTanggalWaktu(this.tanggal, this.waktu) > new Date();

@@ -49,7 +49,7 @@ exports.ajukanJadwalKonsultasi = tanganiAsync(async (req, res) => {
 
   const pelajar = await pelajarDariSesi(req);
 
-    const jadwal = await JadwalKonsultasi.findById(id_jadwal);
+  const jadwal = await JadwalKonsultasi.findById(id_jadwal);
   if (!jadwal) {
     throw new AppError(404, 'Jadwal konsultasi tidak ditemukan.');
   }
