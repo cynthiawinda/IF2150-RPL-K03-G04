@@ -179,7 +179,17 @@ Tabel B.1. Perubahan dari DPPL
 
 | No | Bagian DPPL | Rancangan Awal | Implementasi Akhir | Alasan |
 | :--- | :--- | :--- | :--- | :--- |
-| 1 | *[mis. Kelas C05, layar I-03, tabel `orders`]* | *[Yang direncanakan]* | *[Yang dibuat]* | *[Alasan perubahan]* |
+| 1 | *Algo-C11-02 `registerAccount()`* | *Kata sandi disimpan dengan `ENCRYPT_AES256`* | *Kata sandi di-hash dengan bcrypt (cost 12) melalui `Pengguna.hashPassword()` dan diperiksa dengan `verifyPassword()`* | *Mengikuti deskripsi kelas C01 yang menyimpan hash bcrypt; kata sandi cukup diverifikasi, tidak perlu dapat didekripsi kembali* |
+| 2 | *C01, Q-C11-01 s.d. Q-C11-05* | *Status akun `PENDING`/`AKTIF` pada algoritma C11, sedangkan C01 memakai `Aktif`/`Belum Terverifikasi`/`Ditolak`* | *Hanya nilai C01 yang dipakai (dibatasi `CHECK` pada tabel `pengguna`); login hanya diterima untuk akun `Aktif`* | *Menyatukan dua penamaan status agar akun `Ditolak` tidak bisa masuk* |
+| 3 | *Query C11, skema basis data* | *Nama tabel berawalan `tbl_` (`tbl_pengguna`)* | *Tabel tanpa awalan (`pengguna`, `pelajar`, `orang_tua_wali`, dan seterusnya) di `src/config/schema.sql`* | *Menyamakan dengan query kelas lain di DPPL (misalnya Q-C03-02 dan Q-C24-01) yang sudah tanpa awalan* |
+| 4 | *C11, layar I-06* | *Hanya `validateConfirmation()` dan `confirmAccount()`* | *Ditambah data pendaftaran untuk wali (`GET /api/auth/confirm/:token`) dan penolakan (`POST /api/auth/reject/:token`, akun menjadi `Ditolak`)* | *I-06 menampilkan data pelajar dan memiliki tombol Tidak Setuju* |
+| 5 | *C11, UC02 skenario alternatif 1* | *Batas waktu tautan konfirmasi tidak dirancang* | *Tautan berlaku 7 hari sejak registrasi; setelah itu akun ditandai `Ditolak` (gagal terverifikasi)* | *SKPL UC02 meminta tautan kedaluwarsa setelah batas waktu tertentu* |
+| 6 | *C11 `startSession()`, `endSession()` (Algo-C11-09, Algo-C11-10)* | *Sesi disimpan pada `SESSION`* | *Token JWT yang memuat `versi_token`; logout dan reset kata sandi menaikkan `versi_token` sehingga token lama ditolak* | *Tabel 2.1 memakai JWT; logout harus benar-benar mengakhiri sesi di server (KNF12)* |
+| 7 | *C24, Q-C24-01, Q-C24-02* | *Notifikasi hanya diperbarui (UPDATE), tanpa pemicu deteksi dan tanpa tempat penyimpanan* | *Entity `NotifikasiDarurat` (tabel `notifikasi_darurat`), job harian `node-cron` (`EMERGENCY_CRON`), pengiriman diulang hingga 3 kali bila gagal, dan dikirim ulang bila 24 jam belum direspons* | *UC08 tidak bisa berjalan tanpa pemicu dan catatan notifikasi (KF18, KF19, KNF06, UC08 skenario alternatif 1)* |
+| 8 | *C24 `loadEmergencyDetail()` (Algo-C24-02)* | *Menghitung `detectEmergency()` saat dipanggil* | *Membaca notifikasi aktif milik wali yang login; wali lain ditolak (403)* | *Deteksi sudah dijalankan job harian; wali hanya boleh melihat pelajar yang diwalikannya* |
+| 9 | *C24 penilaian darurat (Q-C03-02)* | *Check-in 7 hari terakhir* | *7 check-in terakhir milik pelajar* | *Pelajar yang berhenti check-in sama sekali tidak punya data 7 hari terakhir sehingga tidak pernah terdeteksi* |
+| 10 | *C27 `generateResetLink()` (Algo-C27-03)* | *Bentuk token tidak dirancang (`SECURITY.createResetToken`)* | *Token acak 32 byte; yang disimpan hanya hash SHA-256, berlaku 1 jam, dan sekali pakai* | *Tautan tidak dapat dipakai walaupun isi tabel bocor* |
+| 11 | *C27 `validateNewPassword()` (Algo-C27-04)* | *Kata sandi baru dan konfirmasi wajib dicocokkan di server* | *Konfirmasi dicocokkan bila dikirim; panjang minimal 8 karakter tetap wajib* | *ResetPasswordPage sudah mencocokkan konfirmasi sebelum mengirim permintaan* |
 | *...* | *...* | *...* | *...* | *...* |
 
 ## B.2 Bukti Penerapan Best Practices
@@ -212,13 +222,19 @@ Jika tidak ada perbaikan yang perlu dilakukan, jelaskan hasil profiling dan alas
 
 Tuliskan kendala yang ditemui, fitur yang belum sempurna (*known issues*), serta hal yang perlu diketahui asisten saat menjalankan atau menilai aplikasi (misalnya akun uji khusus, urutan menjalankan, atau batasan).
 
+- *Bila `SMTP_HOST` pada `.env` dikosongkan, e-mail (konfirmasi wali, atur ulang kata sandi, notifikasi darurat) tidak dikirim, tetapi isinya dicetak ke log server. Tautan konfirmasi dan atur ulang kata sandi dapat disalin dari log tersebut.*
+- *Token uji `TOKEN-WALI-ANDI-2026` (UC02) berlaku 7 hari sejak `npm run db:seed`. Jalankan ulang perintah tersebut sebelum menguji bila sudah lewat.*
+- *Notifikasi darurat (UC08) dibuat oleh job harian. Untuk menguji tanpa menunggu jadwal, jalankan `npm run job:darurat`, lalu masuk sebagai `ratna.wali@mahasehat.id` (wali dari `citra.pelajar@mahasehat.id`).*
+- *Pengaitan pelajar ke akun wali memakai e-mail atau nomor telepon wali yang diisi saat registrasi. Kepemilikan e-mail wali belum diverifikasi saat wali mendaftar.*
+- *Belum ada pembatasan jumlah percobaan login.*
+
 ## B.4 Kontribusi Anggota
 
 Tabel B.4. Kontribusi Anggota
 
 | NIM | Nama | Modul / Fitur yang Dikerjakan | Persentase Kontribusi |
 | :--- | :--- | :--- | :--- |
-| *13525021* | *Haikal Muhammad Royyan* | *[Modul/fitur]* | *[%]* |
+| *13525021* | *Haikal Muhammad Royyan* | *Backend: fondasi basis data (skema, seed, model C01–C09), konfirmasi registrasi oleh wali (UC02), notifikasi darurat beserta job harian (UC08), masuk akun dan atur ulang kata sandi (UC09), keluar akun (UC10), serta pengujian otomatis modul tersebut* | *[%]* |
 | *13525066* | *Cynthia Winda Wijaya* | *...* | *...* |
 | *13525081* | *Rendy Salastra Putra* | *...* | *...* |
 | *13525090* | *Sophia Imelda Rogate Marpaung* | *...* | *...* |
@@ -233,16 +249,26 @@ Tabel B.5. Traceability Kelas Perancangan ke Implementasi
 | ID Kelas | Nama Kelas Perancangan | Bentuk Implementasi | Lokasi (File dan Nama) | Keterangan |
 | :--- | :--- | :--- | :--- | :--- |
 | *C01* | *Pengguna* | *Data sesi di `localStorage`* | *`LoginPage.js` (`mahasehat_user`, `mahasehat_token`, `role`)* | *Atribut (nama, email, nomorTelepon, role) disimpan di `mahasehat_user`. Operasi keluar ada di handler Keluar tiap halaman.* |
+| *C01* | *Pengguna* | *Backend: kelas, tabel* | *`src/models/Pengguna.js` - `Pengguna`; tabel `pengguna`* | *Kelas induk C02–C04. Atribut `password` disimpan sebagai `password_hash`; ditambah `versi_token`, `token_konfirmasi`, dan token atur ulang kata sandi* |
 | *C02* | *Pelajar* | *Role `pelajar` dan kumpulan halaman* | *`DashboardPagePelajar.*`, `SettingPagePelajar.*`, `CheckInPage.*`, `CariTenagaKesehatanPage.*`, `ReportPagePelajar.*`, `RegistrationPagePelajar.*`* | *Diwujudkan sebagai peran dan halamannya, bukan kelas tersendiri.* |
+| *C02* | *Pelajar* | *Backend: kelas, tabel* | *`src/models/Pelajar.js` - `Pelajar`; tabel `pelajar`* | *Turunan `Pengguna`. Ditambah `getRiwayatTerbaruSemuaAktif()` untuk job notifikasi darurat* |
 | *C03* | *OrangTuaWali* | *Role `orangtuawali` dan kumpulan halaman* | *`DashboardPageOrangTuaWali.*`, `SettingPageOrangTuaWali.*`, `ReportPageOrangTuaWali.*`, `RegistrationPageOrangTuaWali.*`, `NotifikasiDarurat.*`* | *Data pelajar yang didampingi dibaca dari `studentAccountStatus`. Profil disimpan di `mahasehat_ortu_profile`.* |
+| *C03* | *OrangTuaWali* | *Backend: kelas, tabel* | *`src/models/OrangTuaWali.js` - `OrangTuaWali`; tabel `orang_tua_wali`* | *Turunan `Pengguna`* |
 | *C04* | *TenagaKesehatan* | *Role `tenagakesehatan` dan kumpulan halaman* | *`DashboardPageTenagaKesehatan.*`, `SettingPageTenagaKesehatan.*`, `ManajemenKonsultasiPage.*`, `RegistrationPageTenagaKesehatan.*`* | *Profil praktik disimpan di `mahasehat_nakes_profile`.* |
+| *C04* | *TenagaKesehatan* | *Backend: kelas, tabel* | *`src/models/TenagaKesehatan.js` - `TenagaKesehatan`; tabel `tenaga_kesehatan`* | *Turunan `Pengguna`* |
 | *C05* | *RiwayatKesehatan* | *Tabel basis data dan model* | *`CheckIn.js*`, `Pelajar.js*`* | *...* |
+| *C05* | *RiwayatKesehatan* | *Backend: kelas, tabel* | *`src/models/RiwayatKesehatan.js` - `RiwayatKesehatan`; tabel `riwayat_kesehatan`* | *Isi disimpan terenkripsi AES-256* |
 | *C06* | *CheckIn* | *Objek payload* | *`CheckInPage.js` (payload `{date, mood, sleep, meal, note}`)* | *Catatan dienkripsi AES-GCM lewat `encryptNote`.* |
+| *C06* | *CheckIn* | *Backend: kelas, tabel* | *`src/models/CheckIn.js` - `CheckIn`; tabel `check_in`* | *`catatan_refleksi` disimpan terenkripsi AES-256* |
 | *C07* | *LaporanKesehatan* | *Ringkasan dan grafik di halaman* | *`ReportChart.js`, `ReportPagePelajar.js`, `ReportPageOrangTuaWali.js`; ringkasan di `DashboardPageOrangTuaWali.js`; grafik mini di `ManajemenKonsultasiPage.js` (`moodBars`, `tidurBars`)* | *...* |
+| *C07* | *LaporanKesehatan* | *Backend: kelas* | *`src/models/LaporanKesehatan.js` - `LaporanKesehatan`* | *Dihitung dari data check-in setiap kali `evaluateThreshold()` dipanggil, tanpa tabel* |
 | *C08* | *FasilitasKesehatan* | *Field pada data nakes* | *`CariTenagaKesehatanPage.js` (`petakanNakes`: `fasilitas`, `alamat`, `lat`, `lng`)* | *...* |
+| *C08* | *FasilitasKesehatan* | *Backend: kelas, tabel* | *`src/models/FasilitasKesehatan.js` - `FasilitasKesehatan`; tabel `fasilitas_kesehatan`* | *-* |
 | *C09* | *JadwalKonsultasi* | *Objek dan `localStorage`* | *`CariTenagaKesehatanPage.js` (`buatPengajuan`); `ManajemenKonsultasiPage.js` (`DEFAULT_CONSULTATIONS`); `SettingPageTenagaKesehatan.js` (`generateSlots`)* | *Disimpan di `mahasehat_consultations_data` dengan status Menunggu, Disetujui, Ditolak, Selesai. Slot praktik nakes dibuat dari rentang jam dan durasi sesi.* |
+| *C09* | *JadwalKonsultasi* | *Backend: kelas, tabel* | *`src/models/JadwalKonsultasi.js` - `JadwalKonsultasi`; tabel `jadwal_konsultasi`* | *-* |
 | *C10* | *RegistrationPage* | *Halaman per peran* | *`RegistrationPagePelajar.*`, `RegistrationPageOrangTuaWali.*`, `RegistrationPageTenagaKesehatan.*`, gaya bersama `RegistrationPage.css`; halaman sukses `RegistrationSuccessPage.*`, `RegistrationSuccessPelajarPage.html`* | *...* |
 | *C11* | *AuthController* | *Panggilan API dari frontend* | *`LoginPage.js`: `POST /api/auth/login`* | *...* |
+| *C11* | *AuthController* | *Backend: fungsi, route, middleware* | *`src/controllers/authController.js` - `daftar`, `dataKonfirmasi`, `setujuiRegistrasi`, `tolakRegistrasi`, `masuk`, `profilSaya`, `keluar`; `src/routes/authRoutes.js`; `src/middleware/authMiddleware.js` - `generateToken`, `authenticate`* | *`registerAccount()` menjadi `daftar`; `validateConfirmation()` dan `confirmAccount()` menjadi `dataKonfirmasi` dan `setujuiRegistrasi`; `login()`, `validateCredentials()`, `checkAccountStatus()`, dan `startSession()` menjadi `masuk` dan `generateToken`; `logout()` dan `endSession()` menjadi `keluar`. Atribut `currentUser` menjadi isi token JWT (`req.user`)* |
 | *C12* | *KonfirmasiRegistrasiPage* | *Halaman* | *`KonfirmasiRegistrasiPage.*`* | *...* |
 | *C13* | *CheckInPage* | *Halaman wizard* | *`CheckInPage.*` (`window.CheckInPage.init`)* | *State di objek `state`, tampilan di `views[0..6]`, handler di `actions`.* |
 | *C14* | *CheckInController* | *Callback `onSubmit`* | *`CheckInPage.html` (`onSubmit`, TODO `POST /api/check-in`)* | *...* |
@@ -256,9 +282,11 @@ Tabel B.5. Traceability Kelas Perancangan ke Implementasi
 | *C22* | *JadwalKonsultasiController* | *Fungsi di JS* | *`CariTenagaKesehatanPage.js` (`simpanPengajuan`); `ManajemenKonsultasiPage.js` (`initData`, `saveData`, `updateStatus`)* | *...* |
 | *C23* | *KonsultasiController* | *Fungsi di JS* | *`CariTenagaKesehatanPage.js` (`simpanPengajuan`); `ManajemenKonsultasiPage.js` (`initData`, `saveData`, `updateStatus`)* | *...* |
 | *C24* | *NotifikasiDaruratController* | *Fungsi di JS* | *`NotifikasiDarurat.js` (handler `Btn_Diterima` untuk confirmReceived, `Btn_SudahDitindaklanjuti` untuk markFollowUp)* | *...* |
+| *C24* | *NotifikasiDaruratController* | *Backend: kelas, route, job* | *`src/controllers/NotifikasiDaruratController.js` - `NotifikasiDaruratController`; `src/routes/emergencyRoutes.js`; `src/jobs/scheduler.js`; `src/jobs/jalankanEvaluasiDarurat.js`* | *Keempat operasi DPPL menjadi metode dengan nama yang sama. Ditambah `jalankanEvaluasiHarian()` untuk job harian dan entity `src/models/NotifikasiDarurat.js` (tabel `notifikasi_darurat`)* |
 | *C25* | *LoginPage* | *Halaman* | *`LoginPage.html`, `LoginPage.js`, `AuthLayout.css`* | *Validasi email dan sandi, toggle sandi, redirect per peran lewat `HALAMAN_PER_ROLE`.* |
 | *C26* | *ResetPasswordPage* | *Halaman* | *`ResetPasswordPage.html`, `ResetPasswordPage.js`* | *Dibuka dari "Lupa kata sandi?" di Login dan "Ubah kata sandi" di Setelan.* |
 | *C27* | *PasswordController* | *Handler pemulihan & perubahan sandi* | *`passwordController.js*`, `authRoutes.js*`* | *...* |
+| *C27* | *PasswordController* | *Backend: fungsi, route* | *`src/controllers/passwordController.js` - `lupaPassword`, `resetPassword`; `src/routes/authRoutes.js` - `POST /api/auth/forgot-password`, `POST /api/auth/reset-password`* | *`sendResetLink()` dan `generateResetLink()` menjadi `lupaPassword`; `resetPassword()` dan `validateNewPassword()` menjadi `resetPassword`* |
 | *C28* | *DashboardController* | *Fungsi di JS per peran* | *`DashboardPagePelajar.js`, `DashboardPageOrangTuaWali.js`, `DashboardPageTenagaKesehatan.js`; pemilihan dashboard di `HALAMAN_PER_ROLE` pada `LoginPage.js`* | *...* |
 | *C29* | *SettingPage* | *Halaman per peran* | *`SettingPagePelajar.*`, `SettingPageOrangTuaWali.*`, `SettingPageTenagaKesehatan.*`* | *Dipecah menjadi tiga halaman per peran.* |
 
