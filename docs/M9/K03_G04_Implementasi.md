@@ -62,6 +62,7 @@ Tabel B.1. Perubahan dari DPPL
 | 19 | C24 penilaian darurat (Q-C03-02) | Check-in 7 hari terakhir | 7 check-in terakhir milik pelajar | Pelajar yang berhenti check-in sama sekali tidak punya data 7 hari terakhir sehingga tidak pernah terdeteksi |
 | 20 | C27 `generateResetLink()` (Algo-C27-03) | Bentuk token tidak dirancang (`SECURITY.createResetToken`) | Token acak 32 byte; yang disimpan hanya hash SHA-256, berlaku 1 jam, dan sekali pakai | Tautan tidak dapat dipakai walaupun isi tabel bocor |
 | 21 | C27 `validateNewPassword()` (Algo-C27-04) | Kata sandi baru dan konfirmasi wajib dicocokkan di server | Konfirmasi dicocokkan bila dikirim; panjang minimal 8 karakter tetap wajib | ResetPasswordPage sudah mencocokkan konfirmasi sebelum mengirim permintaan |
+| 22 | Layar I-13 dan I-23 | Menjadi halaman terpisah dari CariTenagaKesehatanPage | Jadi modal pop up di halaman CariTenagaKesehatan | Jika detail tenaga kesehatan dibuat sebagai halaman terpisah, pengguna harus meninggalkan halaman pencarian utama. Ketika pengguna menutup atau kembali dari halaman detail tersebut, scroll position atau hasil filter pencarian sebelumnya sering kali hilang atau berubah |
 
 ## B.2 Bukti Penerapan Best Practices
 
