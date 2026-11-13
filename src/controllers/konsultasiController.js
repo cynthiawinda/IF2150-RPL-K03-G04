@@ -9,6 +9,14 @@ function ambilIdPengguna(req) {
   return req.user.idPengguna;
 }
 
+async function nakesDariSesi(req) {
+  const nakes = await TenagaKesehatan.findByIdPengguna(ambilIdPengguna(req));
+  if (!nakes) {
+    throw new AppError(403, 'Akses ditolak. Profil tenaga kesehatan tidak ditemukan.');
+  }
+  return nakes;
+}
+
 async function jadwalMilikNakes(req) {
   const nakes = await nakesDariSesi(req);
   const idNakes = nakes.idTenagaKesehatan || nakes.id_tenaga_kesehatan;
