@@ -7,7 +7,7 @@ IMPLEMENTASI PERANGKAT LUNAK
 </h1>
 <br>
 
-*Mahasehat: Mental Health Monitoring App for Students*
+## *Mahasehat: Mental Health Monitoring App for Students*
 <img alt="Logo Perangkat Lunak" src="./assets/logo-mahasehat.png" width="35%">
 
 ### Untuk: *Stefani Angeline Oroh*
@@ -25,17 +25,6 @@ Dipersiapkan oleh:
 | *13525081* | *Rendy Salastra Putra* |
 | *13525090* | *Sophia Imelda Rogate Marpaung* |
 | *13525141* | *Christabelcyne Costan* |
----
-
-> **Petunjuk pengerjaan:** *[Silahkan hapus bagian ini setelah selesai mengerjakan]*
->
-> Dokumen ini adalah **spesifikasi sekaligus template laporan singkat** Tugas 9. Bagian **Ketentuan Implementasi** (Bagian A) adalah aturan yang harus kalian ikuti, boleh dihapus dari laporan akhir. Bagian **Laporan Implementasi** (Bagian B) adalah yang **wajib kalian isi**. Gunakan nama, ID, kebutuhan, use case, dan kelas yang konsisten dengan SKPL, APL, dan DPPL.
-
----
-
-**Deadline:** Rabu, 11 November 2026, 21.50 WIB
-**Asistensi akbar:** *[Hari, DD Bulan YYYY, HH.MM WIB, lokasi/link]*
-
 ---
 
 # BAGIAN A: Ketentuan Implementasi
@@ -243,10 +232,35 @@ Tabel B.5. Traceability Kelas Perancangan ke Implementasi
 
 | ID Kelas | Nama Kelas Perancangan | Bentuk Implementasi | Lokasi (File dan Nama) | Keterangan |
 | :--- | :--- | :--- | :--- | :--- |
-| *[C01]* | *[Nama kelas pada DPPL]* | *[mis. Kelas / Fungsi / Komponen / Route / Tabel]* | *[mis. `src/models/user.py` - `User`]* | *[Cara atribut dan operasi kelas diwujudkan; "-" jika tidak ada penjelasan tambahan]* |
-| *[C02]* | *[Nama kelas pada DPPL]* | *[Bentuk implementasi]* | *[mis. `src/components/LoginForm.tsx` - `LoginForm`]* | *[mis. atribut menjadi *state*, operasi menjadi *handler*]* |
-| *[C03]* | *[Nama kelas pada DPPL]* | *[Bentuk implementasi]* | *[mis. `src/routes/auth.js` - `POST /login`]* | *[Keterangan]* |
-| *...* | *...* | *...* | *...* | *...* |
+| *C01* | *Pengguna* | *Data sesi di `localStorage`* | *`LoginPage.js` (`mahasehat_user`, `mahasehat_token`, `role`)* | *Atribut (nama, email, nomorTelepon, role) disimpan di `mahasehat_user`. Operasi keluar ada di handler Keluar tiap halaman.* |
+| *C02* | *Pelajar* | *Role `pelajar` dan kumpulan halaman* | *`DashboardPagePelajar.*`, `SettingPagePelajar.*`, `CheckInPage.*`, `CariTenagaKesehatanPage.*`, `ReportPagePelajar.*`, `RegistrationPagePelajar.*`* | *Diwujudkan sebagai peran dan halamannya, bukan kelas tersendiri.* |
+| *C03* | *OrangTuaWali* | *Role `orangtuawali` dan kumpulan halaman* | *`DashboardPageOrangTuaWali.*`, `SettingPageOrangTuaWali.*`, `ReportPageOrangTuaWali.*`, `RegistrationPageOrangTuaWali.*`, `NotifikasiDarurat.*`* | *Data pelajar yang didampingi dibaca dari `studentAccountStatus`. Profil disimpan di `mahasehat_ortu_profile`.* |
+| *C04* | *TenagaKesehatan* | *Role `tenagakesehatan` dan kumpulan halaman* | *`DashboardPageTenagaKesehatan.*`, `SettingPageTenagaKesehatan.*`, `ManajemenKonsultasiPage.*`, `RegistrationPageTenagaKesehatan.*`* | *Profil praktik disimpan di `mahasehat_nakes_profile`.* |
+| *C05* | *RiwayatKesehatan* | *...* | *...* | *...* |
+| *C06* | *CheckIn* | *Objek payload* | *`CheckInPage.js` (payload `{date, mood, sleep, meal, note}`)* | *Catatan dienkripsi AES-GCM lewat `encryptNote`.* |
+| *C07* | *LaporanKesehatan* | *Ringkasan dan grafik di halaman* | *`ReportChart.js`, `ReportPagePelajar.js`, `ReportPageOrangTuaWali.js`; ringkasan di `DashboardPageOrangTuaWali.js`; grafik mini di `ManajemenKonsultasiPage.js` (`moodBars`, `tidurBars`)* | *...* |
+| *C08* | *FasilitasKesehatan* | *Field pada data nakes* | *`CariTenagaKesehatanPage.js` (`petakanNakes`: `fasilitas`, `alamat`, `lat`, `lng`)* | *...* |
+| *C09* | *JadwalKonsultasi* | *Objek dan `localStorage`* | *`CariTenagaKesehatanPage.js` (`buatPengajuan`); `ManajemenKonsultasiPage.js` (`DEFAULT_CONSULTATIONS`); `SettingPageTenagaKesehatan.js` (`generateSlots`)* | *Disimpan di `mahasehat_consultations_data` dengan status Menunggu, Disetujui, Ditolak, Selesai. Slot praktik nakes dibuat dari rentang jam dan durasi sesi.* |
+| *C10* | *RegistrationPage* | *Halaman per peran* | *`RegistrationPagePelajar.*`, `RegistrationPageOrangTuaWali.*`, `RegistrationPageTenagaKesehatan.*`, gaya bersama `RegistrationPage.css`; halaman sukses `RegistrationSuccessPage.*`, `RegistrationSuccessPelajarPage.html`* | *...* |
+| *C11* | *AuthController* | *Panggilan API dari frontend* | *`LoginPage.js`: `POST /api/auth/login`* | *...* |
+| *C12* | *KonfirmasiRegistrasiPage* | *Halaman* | *`KonfirmasiRegistrasiPage.*`* | *...* |
+| *C13* | *CheckInPage* | *Halaman wizard* | *`CheckInPage.*` (`window.CheckInPage.init`)* | *State di objek `state`, tampilan di `views[0..6]`, handler di `actions`.* |
+| *C14* | *CheckInController* | *Callback `onSubmit`* | *`CheckInPage.html` (`onSubmit`, TODO `POST /api/check-in`)* | *...* |
+| *C15* | *NotifikasiPengingatController* | *...* | *...* | *...* |
+| *C16* | *ReportPage* | *Halaman per peran* | *`ReportPagePelajar.*`, `ReportPageOrangTuaWali.*`, gaya bersama `ReportPage.css`* | *...* |
+| *C17* | *ReportController* | *...* | *...* | *...* |
+| *C18* | *CariTenagaKesehatanPage* | *Halaman* | *`CariTenagaKesehatanPage.*`* | *Pencarian, filter spesialisasi, urut jarak (izin lokasi), dialog buat janji.* |
+| *C19* | *ProfilTenagaKesehatanPage* | *Dialog di halaman Cari* | *`CariTenagaKesehatanPage.html` (`Modal_Detail`); `isiDetail()` di JS* | *Digabung ke C18, bukan halaman terpisah.* |
+| *C20* | *TenagaKesehatanController* | *Panggilan API dari frontend* | *`CariTenagaKesehatanPage.js` (`panggilApi`): `GET /api/tenaga-kesehatan/`, `GET /api/tenaga-kesehatan/:id`, `PUT /api/tenaga-kesehatan/lokasi-pelajar`* | *...* |
+| *C21* | *PengajuanKonsultasiPage* | *Halaman* | *`ManajemenKonsultasiPage.*`* | *Antrean, detail, setujui, jadwal ulang. Sisi pelajar mengajukan lewat `Modal_Janji` di `CariTenagaKesehatanPage`.* |
+| *C22* | *JadwalKonsultasiController* | *Fungsi di JS* | *`CariTenagaKesehatanPage.js` (`simpanPengajuan`); `ManajemenKonsultasiPage.js` (`initData`, `saveData`, `updateStatus`)* | *...* |
+| *C23* | *KonsultasiController* | *Fungsi di JS* | *`CariTenagaKesehatanPage.js` (`simpanPengajuan`); `ManajemenKonsultasiPage.js` (`initData`, `saveData`, `updateStatus`)* | *...* |
+| *C24* | *NotifikasiDaruratController* | *Fungsi di JS* | *`NotifikasiDarurat.js` (handler `Btn_Diterima` untuk confirmReceived, `Btn_SudahDitindaklanjuti` untuk markFollowUp)* | *...* |
+| *C25* | *LoginPage* | *Halaman* | *`LoginPage.html`, `LoginPage.js`, `AuthLayout.css`* | *Validasi email dan sandi, toggle sandi, redirect per peran lewat `HALAMAN_PER_ROLE`.* |
+| *C26* | *ResetPasswordPage* | *Halaman* | *`ResetPasswordPage.html`, `ResetPasswordPage.js`* | *Dibuka dari "Lupa kata sandi?" di Login dan "Ubah kata sandi" di Setelan.* |
+| *C27* | *PasswordController* | *...* | *...* | *...* |
+| *C28* | *DashboardController* | *Fungsi di JS per peran* | *`DashboardPagePelajar.js`, `DashboardPageOrangTuaWali.js`, `DashboardPageTenagaKesehatan.js`; pemilihan dashboard di `HALAMAN_PER_ROLE` pada `LoginPage.js`* | *...* |
+| *C29* | *SettingPage* | *Halaman per peran* | *`SettingPagePelajar.*`, `SettingPageOrangTuaWali.*`, `SettingPageTenagaKesehatan.*`* | *Dipecah menjadi tiga halaman per peran.* |
 
 Catatan:
 - Satu kelas perancangan boleh diwujudkan oleh beberapa file/unit, dan satu file/unit boleh mewujudkan beberapa kelas perancangan. Tuliskan semuanya.
