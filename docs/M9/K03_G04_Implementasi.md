@@ -256,7 +256,6 @@ Tabel B.5. Traceability Kelas Perancangan ke Implementasi
 | *C03* | *OrangTuaWali* | *Backend: kelas, tabel* | *`src/models/OrangTuaWali.js` - `OrangTuaWali`; tabel `orang_tua_wali`* | *Turunan `Pengguna`* |
 | *C04* | *TenagaKesehatan* | *Role `tenagakesehatan` dan kumpulan halaman* | *`DashboardPageTenagaKesehatan.*`, `SettingPageTenagaKesehatan.*`, `ManajemenKonsultasiPage.*`, `RegistrationPageTenagaKesehatan.*`* | *Profil praktik disimpan di `mahasehat_nakes_profile`.* |
 | *C04* | *TenagaKesehatan* | *Backend: kelas, tabel* | *`src/models/TenagaKesehatan.js` - `TenagaKesehatan`; tabel `tenaga_kesehatan`* | *Turunan `Pengguna`* |
-| *C05* | *RiwayatKesehatan* | *Tabel basis data dan model* | *`CheckIn.js*`, `Pelajar.js*`* | *...* |
 | *C05* | *RiwayatKesehatan* | *Backend: kelas, tabel* | *`src/models/RiwayatKesehatan.js` - `RiwayatKesehatan`; tabel `riwayat_kesehatan`* | *Isi disimpan terenkripsi AES-256* |
 | *C06* | *CheckIn* | *Objek payload* | *`CheckInPage.js` (payload `{date, mood, sleep, meal, note}`)* | *Catatan dienkripsi AES-GCM lewat `encryptNote`.* |
 | *C06* | *CheckIn* | *Backend: kelas, tabel* | *`src/models/CheckIn.js` - `CheckIn`; tabel `check_in`* | *`catatan_refleksi` disimpan terenkripsi AES-256* |
@@ -285,7 +284,6 @@ Tabel B.5. Traceability Kelas Perancangan ke Implementasi
 | *C24* | *NotifikasiDaruratController* | *Backend: kelas, route, job* | *`src/controllers/NotifikasiDaruratController.js` - `NotifikasiDaruratController`; `src/routes/emergencyRoutes.js`; `src/jobs/scheduler.js`; `src/jobs/jalankanEvaluasiDarurat.js`* | *Keempat operasi DPPL menjadi metode dengan nama yang sama. Ditambah `jalankanEvaluasiHarian()` untuk job harian dan entity `src/models/NotifikasiDarurat.js` (tabel `notifikasi_darurat`)* |
 | *C25* | *LoginPage* | *Halaman* | *`LoginPage.html`, `LoginPage.js`, `AuthLayout.css`* | *Validasi email dan sandi, toggle sandi, redirect per peran lewat `HALAMAN_PER_ROLE`.* |
 | *C26* | *ResetPasswordPage* | *Halaman* | *`ResetPasswordPage.html`, `ResetPasswordPage.js`* | *Dibuka dari "Lupa kata sandi?" di Login dan "Ubah kata sandi" di Setelan.* |
-| *C27* | *PasswordController* | *Handler pemulihan & perubahan sandi* | *`passwordController.js*`, `authRoutes.js*`* | *...* |
 | *C27* | *PasswordController* | *Backend: fungsi, route* | *`src/controllers/passwordController.js` - `lupaPassword`, `resetPassword`; `src/routes/authRoutes.js` - `POST /api/auth/forgot-password`, `POST /api/auth/reset-password`* | *`sendResetLink()` dan `generateResetLink()` menjadi `lupaPassword`; `resetPassword()` dan `validateNewPassword()` menjadi `resetPassword`* |
 | *C28* | *DashboardController* | *Fungsi di JS per peran* | *`DashboardPagePelajar.js`, `DashboardPageOrangTuaWali.js`, `DashboardPageTenagaKesehatan.js`; pemilihan dashboard di `HALAMAN_PER_ROLE` pada `LoginPage.js`* | *...* |
 | *C29* | *SettingPage* | *Halaman per peran* | *`SettingPagePelajar.*`, `SettingPageOrangTuaWali.*`, `SettingPageTenagaKesehatan.*`* | *Dipecah menjadi tiga halaman per peran.* |
