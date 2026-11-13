@@ -201,12 +201,14 @@
 | *05-11-2026* | *Rendy Salastra Putra* | *Inisialisasi struktur proyek* | *4* | *Done* | *-* |
 | *05-11-2026* | *Cynthia Winda Wijaya* | *Implementasi RegistrationPage* | *4* | *Done* | *-* |
 | *06-11-2026* | *Cynthia Winda Wijaya* | *Implementasi LoginPage* | *1,5* | *Done* | *-* |
+| *06-11-2026* | *Christabelcyne Costan* | *Implementasi pekerjaan awal backend check in* | *2* | *Done* | *-* |
 | *07-11-2026* | *Cynthia Winda Wijaya* | *Implementasi KonfirmasiRegistrasiPage* | *1,5* | *Done* | *-* |
 | *07-11-2026* | *Haikal Muhammad Royyan* | *Implementasi model entity C01-C09 dan NotifikasiDarurat* | *3* | *Done* | *-* |
 | *07-11-2026* | *Rendy Salastra Putra* | *Implementasi backend registrasi dan gabungkan FE registrasi* | *3* | *Done* | *-* |
 | *08-11-2026* | *Sophia Imelda Rogate Marpaung* | *Implementasi DashboardPage dan SettingPage* | *4* | *Done* | *-* |
 | *08-11-2026* | *Haikal Muhammad Royyan* | *Tambah pengujian kasus gagal dan scheduler evaluasi darurat* | *3* | *Done* | *-* |
 | *08-11-2026* | *Rendy Salastra Putra* | *Sinkronisasi tampilan registrasi, login, dashboard* | *3* | *Done* | *-* |
+| *08-11-2026* | *Haikal Muhammad Royyan* | *Masuk akun dan reset password* | *3* | *Done* | *-* |
 | *09-11-2026* | *Sophia Imelda Rogate Marpaung* | *Implementasi ReportPage* | *2* | *Done* | *-* |
 | *09-11-2026* | *Cynthia Winda Wijaya* | *Implementasi CheckInPage* | *2* | *Done* | *-* |
 | *09-11-2026* | *Rendy Salastra Putra* | *Implementasi antarmuka manajemen konsultasi dan settings nakes* | *3* | *Done* | *-* |
@@ -214,4 +216,7 @@
 | *10-11-2026* | *Rendy Salastra Putra* | *Implementasi antarmuka settings orang tua wali* | *3* | *Done* | *-* |
 | *10-11-2026* | *Sophia Imelda Rogate Marpaung* | *Implementasi ResetPasswordPage* | *2* | *Done* | *-* |
 | *10-11-2026* | *Christabelcyne Costan* | *Perbaikan model dan sinkronisasi authmiddleware* | *2* | *Done* | *-* |
-| *08-11-2026* | *Haikal Muhammad Royyan* | *Masuk akun dan reset password* | *3* | *Done* | *-* |
+| *10-11-2026* | *Christabelcyne Costan* | *Implementasi backend cari tenaga kesehatan* | *2* | *Done* | *-* |
+| *10-11-2026* | *Christabelcyne Costan* | *Implementasi backend cari laporan kesehatan* | *3* | *Done* | *-* |
+| *11-11-2026* | *Christabelcyne Costan* | *Implementasi backend manajemen konsultasi* | *4* | *Done* | *-* |
+| *13-11-2026* | *Christabelcyne Costan* | *Memperbaiki backend manajemen konsultasi* | *3* | *Done* | *-* |
