@@ -236,7 +236,7 @@ Tabel B.5. Traceability Kelas Perancangan ke Implementasi
 | *C02* | *Pelajar* | *Role `pelajar` dan kumpulan halaman* | *`DashboardPagePelajar.*`, `SettingPagePelajar.*`, `CheckInPage.*`, `CariTenagaKesehatanPage.*`, `ReportPagePelajar.*`, `RegistrationPagePelajar.*`* | *Diwujudkan sebagai peran dan halamannya, bukan kelas tersendiri.* |
 | *C03* | *OrangTuaWali* | *Role `orangtuawali` dan kumpulan halaman* | *`DashboardPageOrangTuaWali.*`, `SettingPageOrangTuaWali.*`, `ReportPageOrangTuaWali.*`, `RegistrationPageOrangTuaWali.*`, `NotifikasiDarurat.*`* | *Data pelajar yang didampingi dibaca dari `studentAccountStatus`. Profil disimpan di `mahasehat_ortu_profile`.* |
 | *C04* | *TenagaKesehatan* | *Role `tenagakesehatan` dan kumpulan halaman* | *`DashboardPageTenagaKesehatan.*`, `SettingPageTenagaKesehatan.*`, `ManajemenKonsultasiPage.*`, `RegistrationPageTenagaKesehatan.*`* | *Profil praktik disimpan di `mahasehat_nakes_profile`.* |
-| *C05* | *RiwayatKesehatan* | *...* | *...* | *...* |
+| *C05* | *RiwayatKesehatan* | *Tabel basis data dan model* | *`CheckIn.js*`, `Pelajar.js*`* | *...* |
 | *C06* | *CheckIn* | *Objek payload* | *`CheckInPage.js` (payload `{date, mood, sleep, meal, note}`)* | *Catatan dienkripsi AES-GCM lewat `encryptNote`.* |
 | *C07* | *LaporanKesehatan* | *Ringkasan dan grafik di halaman* | *`ReportChart.js`, `ReportPagePelajar.js`, `ReportPageOrangTuaWali.js`; ringkasan di `DashboardPageOrangTuaWali.js`; grafik mini di `ManajemenKonsultasiPage.js` (`moodBars`, `tidurBars`)* | *...* |
 | *C08* | *FasilitasKesehatan* | *Field pada data nakes* | *`CariTenagaKesehatanPage.js` (`petakanNakes`: `fasilitas`, `alamat`, `lat`, `lng`)* | *...* |
@@ -246,9 +246,9 @@ Tabel B.5. Traceability Kelas Perancangan ke Implementasi
 | *C12* | *KonfirmasiRegistrasiPage* | *Halaman* | *`KonfirmasiRegistrasiPage.*`* | *...* |
 | *C13* | *CheckInPage* | *Halaman wizard* | *`CheckInPage.*` (`window.CheckInPage.init`)* | *State di objek `state`, tampilan di `views[0..6]`, handler di `actions`.* |
 | *C14* | *CheckInController* | *Callback `onSubmit`* | *`CheckInPage.html` (`onSubmit`, TODO `POST /api/check-in`)* | *...* |
-| *C15* | *NotifikasiPengingatController* | *...* | *...* | *...* |
+| *C15* | *NotifikasiPengingatController* | *Skrip scheduler* | *`scheduler.js*`, `notifikasiController.js*` | *...* |
 | *C16* | *ReportPage* | *Halaman per peran* | *`ReportPagePelajar.*`, `ReportPageOrangTuaWali.*`, gaya bersama `ReportPage.css`* | *...* |
-| *C17* | *ReportController* | *...* | *...* | *...* |
+| *C17* | *ReportController* | *Handler laporan analitik* | *`reportController.js*`, `reportRoute.js*`,* | *Mengelola pemrosesan data statistik, grafik kesehatan, dan evaluasi ambang batas laporan dari basis data.* |
 | *C18* | *CariTenagaKesehatanPage* | *Halaman* | *`CariTenagaKesehatanPage.*`* | *Pencarian, filter spesialisasi, urut jarak (izin lokasi), dialog buat janji.* |
 | *C19* | *ProfilTenagaKesehatanPage* | *Dialog di halaman Cari* | *`CariTenagaKesehatanPage.html` (`Modal_Detail`); `isiDetail()` di JS* | *Digabung ke C18, bukan halaman terpisah.* |
 | *C20* | *TenagaKesehatanController* | *Panggilan API dari frontend* | *`CariTenagaKesehatanPage.js` (`panggilApi`): `GET /api/tenaga-kesehatan/`, `GET /api/tenaga-kesehatan/:id`, `PUT /api/tenaga-kesehatan/lokasi-pelajar`* | *...* |
@@ -258,7 +258,7 @@ Tabel B.5. Traceability Kelas Perancangan ke Implementasi
 | *C24* | *NotifikasiDaruratController* | *Fungsi di JS* | *`NotifikasiDarurat.js` (handler `Btn_Diterima` untuk confirmReceived, `Btn_SudahDitindaklanjuti` untuk markFollowUp)* | *...* |
 | *C25* | *LoginPage* | *Halaman* | *`LoginPage.html`, `LoginPage.js`, `AuthLayout.css`* | *Validasi email dan sandi, toggle sandi, redirect per peran lewat `HALAMAN_PER_ROLE`.* |
 | *C26* | *ResetPasswordPage* | *Halaman* | *`ResetPasswordPage.html`, `ResetPasswordPage.js`* | *Dibuka dari "Lupa kata sandi?" di Login dan "Ubah kata sandi" di Setelan.* |
-| *C27* | *PasswordController* | *...* | *...* | *...* |
+| *C27* | *PasswordController* | *Handler pemulihan & perubahan sandi* | *`passwordController.js*`, `authRoutes.js*`* | *...* |
 | *C28* | *DashboardController* | *Fungsi di JS per peran* | *`DashboardPagePelajar.js`, `DashboardPageOrangTuaWali.js`, `DashboardPageTenagaKesehatan.js`; pemilihan dashboard di `HALAMAN_PER_ROLE` pada `LoginPage.js`* | *...* |
 | *C29* | *SettingPage* | *Halaman per peran* | *`SettingPagePelajar.*`, `SettingPageOrangTuaWali.*`, `SettingPageTenagaKesehatan.*`* | *Dipecah menjadi tiga halaman per peran.* |
 
