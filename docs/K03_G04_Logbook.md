@@ -220,6 +220,7 @@
 | *08-11-2026* | *Haikal Muhammad Royyan* | *Implementasi notifikasi darurat UC08, scheduler, dan pengujian* | *4* | *Done* | *-* |
 | *08-11-2026* | *Haikal Muhammad Royyan* | *Menambahkan cara menjalankan evaluasi notifikasi darurat di README* | *0,5* | *Done* | *-* |
 | *08-11-2026* | *Haikal Muhammad Royyan* | *Menyesuaikan keterangan SMTP di .env.example* | *0,5* | *Done* | *-* |
+| *08-11-2026* | *Haikal Muhammad Royyan* | *Review PR registrasi akun (UC01) dan perbaikan temuan review* | *2* | *Done* | *-* |
 | *08-11-2026* | *Rendy Salastra Putra* | *Implementasi ulang UI LoginPage* | *2* | *Done* | *-* |
 | *08-11-2026* | *Rendy Salastra Putra* | *Implementasi UI registrasi untuk tiga peran* | *4* | *Done* | *-* |
 | *08-11-2026* | *Rendy Salastra Putra* | *Penyesuaian konsistensi antarmuka KonfirmasiRegistrasiPage* | *1,5* | *Done* | *-* |
@@ -258,6 +259,8 @@
 | *13-11-2026* | *Christabelcyne Costan* | *Perbaikan bug check-in, pencarian nakes dari sesi, refactor konsultasi ke MVC, validasi, dan lokasi pelajar* | *6* | *Done* | *-* |
 | *13-11-2026* | *Christabelcyne Costan* | *Update logbook pribadi dan traceability C05/C15/C17/C27* | *1,5* | *Done* | *-* |
 | *13-11-2026* | *Cynthia Winda Wijaya* | *Upload foto asistensi dan perbaikan routing/controller konsultasi* | *2* | *Done* | *-* |
+| *13-11-2026* | *Haikal Muhammad Royyan* | *Menyusun README dan laporan bagian backend* | *2* | *Done* | *-* |
+| *13-11-2026* | *Haikal Muhammad Royyan* | *Perbaikan celah token konfirmasi pada dashboard wali* | *1,5* | *Done* | *-* |
 | *13-11-2026* | *Rendy Salastra Putra* | *Integrasi FE–BE, perbaikan bug hasil uji manual, dan penyeragaman feedback UI* | *6* | *Done* | *Endpoint dan halaman belum saling terhubung* |
 | *13-11-2026* | *Rendy Salastra Putra* | *Merapikan data demo, dokumentasi, dan commit akhir M9* | *1,5* | *Done* | *-* |
 | *13-11-2026* | *Sophia Imelda Rogate Marpaung* | *Menghapus DashboardPage perantara dan merapikan tampilan serta assets* | *2* | *Done* | *-* |
