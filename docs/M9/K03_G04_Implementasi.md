@@ -190,7 +190,7 @@ Tabel B.1. Perubahan dari DPPL
 | 9 | *C24 penilaian darurat (Q-C03-02)* | *Check-in 7 hari terakhir* | *7 check-in terakhir milik pelajar* | *Pelajar yang berhenti check-in sama sekali tidak punya data 7 hari terakhir sehingga tidak pernah terdeteksi* |
 | 10 | *C27 `generateResetLink()` (Algo-C27-03)* | *Bentuk token tidak dirancang (`SECURITY.createResetToken`)* | *Token acak 32 byte; yang disimpan hanya hash SHA-256, berlaku 1 jam, dan sekali pakai* | *Tautan tidak dapat dipakai walaupun isi tabel bocor* |
 | 11 | *C27 `validateNewPassword()` (Algo-C27-04)* | *Kata sandi baru dan konfirmasi wajib dicocokkan di server* | *Konfirmasi dicocokkan bila dikirim; panjang minimal 8 karakter tetap wajib* | *ResetPasswordPage sudah mencocokkan konfirmasi sebelum mengirim permintaan* |
-| *...* | *...* | *...* | *...* | *...* |
+| *12* | *Layar I-13 dan I-23* | *Menjadi halaman terpisah dari CariTenagaKesehatanPage* | *Jadi modal pop up di halaman CariTenagaKesehatan* | *Jika detail tenaga kesehatan dibuat sebagai halaman terpisah, pengguna harus meninggalkan halaman pencarian utama. Ketika pengguna menutup atau kembali dari halaman detail tersebut, scroll position atau hasil filter pencarian sebelumnya sering kali hilang atau berubah* |
 
 ## B.2 Bukti Penerapan Best Practices
 
@@ -234,11 +234,11 @@ Tabel B.4. Kontribusi Anggota
 
 | NIM | Nama | Modul / Fitur yang Dikerjakan | Persentase Kontribusi |
 | :--- | :--- | :--- | :--- |
-| *13525021* | *Haikal Muhammad Royyan* | *Backend: fondasi basis data (skema, seed, model C01–C09), konfirmasi registrasi oleh wali (UC02), notifikasi darurat beserta job harian (UC08), masuk akun dan atur ulang kata sandi (UC09), keluar akun (UC10), serta pengujian otomatis modul tersebut* | *[%]* |
-| *13525066* | *Cynthia Winda Wijaya* | *...* | *...* |
-| *13525081* | *Rendy Salastra Putra* | *...* | *...* |
-| *13525090* | *Sophia Imelda Rogate Marpaung* | *...* | *...* |
-| *13525141* | *Christabelcyne Costan* | *...* | *...* |
+| *13525021* | *Haikal Muhammad Royyan* | *Backend: fondasi basis data (skema, seed, model C01–C09), konfirmasi registrasi oleh wali (UC02), notifikasi darurat beserta job harian (UC08), masuk akun dan atur ulang kata sandi (UC09), keluar akun (UC10), serta pengujian otomatis modul tersebut* | *20%* |
+| *13525066* | *Cynthia Winda Wijaya* | *Frontend: halaman check in, registrasi, masuk, konfirmasi registrasi, notif darurat, cari nakes* | *20%* |
+| *13525081* | *Rendy Salastra Putra* | *fullstack: semua* | *20%* |
+| *13525090* | *Sophia Imelda Rogate Marpaung* | *frontend: halaman reset password, setting, dashboard, report page* | *20%* |
+| *13525141* | *Christabelcyne Costan* | *backend: UC03 check-in, UC04 laporan, UC05 cari nakes, UC06–07 jadwal & konsultasi* | *20%* |
 
 ## B.5 Traceability Kelas Perancangan ke Implementasi
 
