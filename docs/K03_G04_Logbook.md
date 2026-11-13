@@ -194,7 +194,7 @@
 | *28-10-2026* | *Sophia Imelda Rogate Marpaung* | *Mengisi form asistensi* | *0,25* | *Done* | *-* |
 
 ### Milestone 9
-**Periode:** 28/10/2026 - 11/11/2026
+**Periode:** 28/10/2026 - 13/11/2026
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -209,6 +209,7 @@
 | *08-11-2026* | *Haikal Muhammad Royyan* | *Tambah pengujian kasus gagal dan scheduler evaluasi darurat* | *3* | *Done* | *-* |
 | *08-11-2026* | *Rendy Salastra Putra* | *Sinkronisasi tampilan registrasi, login, dashboard* | *3* | *Done* | *-* |
 | *08-11-2026* | *Haikal Muhammad Royyan* | *Masuk akun dan reset password* | *3* | *Done* | *-* |
+| *08-11-2026* | *Haikal Muhammad Royyan* | *Review PR registrasi akun (UC01) dan perbaikan temuan review* | *2* | *Done* | *-* |
 | *09-11-2026* | *Sophia Imelda Rogate Marpaung* | *Implementasi ReportPage* | *2* | *Done* | *-* |
 | *09-11-2026* | *Cynthia Winda Wijaya* | *Implementasi CheckInPage* | *2* | *Done* | *-* |
 | *09-11-2026* | *Rendy Salastra Putra* | *Implementasi antarmuka manajemen konsultasi dan settings nakes* | *3* | *Done* | *-* |
@@ -218,5 +219,10 @@
 | *10-11-2026* | *Christabelcyne Costan* | *Perbaikan model dan sinkronisasi authmiddleware* | *2* | *Done* | *-* |
 | *10-11-2026* | *Christabelcyne Costan* | *Implementasi backend cari tenaga kesehatan* | *2* | *Done* | *-* |
 | *10-11-2026* | *Christabelcyne Costan* | *Implementasi backend cari laporan kesehatan* | *3* | *Done* | *-* |
+| *10-11-2026* | *Haikal Muhammad Royyan* | *Konfirmasi registrasi akun pelajar oleh orang tua/wali (UC02)* | *3* | *Done* | *-* |
 | *11-11-2026* | *Christabelcyne Costan* | *Implementasi backend manajemen konsultasi* | *4* | *Done* | *-* |
+| *11-11-2026* | *Haikal Muhammad Royyan* | *Keluar akun (UC10)* | *2* | *Done* | *-* |
+| *11-11-2026* | *Haikal Muhammad Royyan* | *Batas waktu 7 hari tautan konfirmasi wali (UC02)* | *2* | *Done* | *-* |
 | *13-11-2026* | *Christabelcyne Costan* | *Memperbaiki backend manajemen konsultasi* | *3* | *Done* | *-* |
+| *13-11-2026* | *Haikal Muhammad Royyan* | *Menyusun README dan laporan bagian backend* | *2* | *Done* | *-* |
+| *13-11-2026* | *Haikal Muhammad Royyan* | *Perbaikan celah token konfirmasi pada dashboard wali* | *1,5* | *Done* | *-* |
