@@ -108,6 +108,38 @@ class TenagaKesehatan extends Pengguna {
     );
     return rows.map((baris) => new JadwalKonsultasi(baris)).filter((jadwal) => jadwal.isAvailable());
   }
+
+  /** Perbarui identitas tenaga kesehatan. */
+  async perbaruiProfil({ nama, nomorTelepon, email, jenisTenagaKesehatan, nomorStr, lokasi }, executor = db) {
+    await executor.query(
+      `UPDATE tenaga_kesehatan
+          SET nama = $1, nomor_telepon = $2, email = $3,
+              jenis_tenaga_kesehatan = COALESCE($4, jenis_tenaga_kesehatan),
+              nomor_str = COALESCE($5, nomor_str),
+              lokasi = COALESCE($6, lokasi)
+        WHERE id_tenaga_kesehatan = $7;`,
+      [nama, nomorTelepon, email, jenisTenagaKesehatan || null, nomorStr || null, lokasi || null, this.idTenagaKesehatan]
+    );
+    this.nama = nama;
+    this.nomorTelepon = nomorTelepon;
+    this.email = email;
+  }
+
+  /**
+   * Perbarui tarif konsultasi. Tarif disimpan di fasilitas_kesehatan.estimasi_biaya,
+   * jadi nakes harus terhubung ke sebuah fasilitas.
+   * @returns {Promise<boolean>} true bila ada fasilitas yang diperbarui.
+   */
+  async setEstimasiBiaya(tarif, executor = db) {
+    if (!this.idFasilitas) return false;
+    const hasil = await executor.query(
+      `UPDATE fasilitas_kesehatan
+          SET estimasi_biaya = $1
+        WHERE id_fasilitas = $2;`,
+      [tarif, this.idFasilitas]
+    );
+    return hasil.rowCount > 0;
+  }
 }
 
 module.exports = TenagaKesehatan;

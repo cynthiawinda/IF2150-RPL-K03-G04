@@ -66,6 +66,24 @@ class OrangTuaWali extends Pengguna {
   }
 
   /**
+   * Pelajar yang mencantumkan e-mail wali ini dan masih menunggu konfirmasi.
+   * Token konfirmasi tidak ikut dikembalikan: e-mail akun wali tidak diverifikasi, sehingga
+   * persetujuan hanya boleh lewat tautan yang dikirim ke e-mail wali (UC02).
+   */
+  async getPengajuanMenunggu() {
+    const { rows } = await db.query(
+      `SELECT p.nama, u.created_at AS tanggal_daftar
+       FROM pelajar p JOIN pengguna u ON u.id_pengguna = p.id_pengguna
+       WHERE LOWER(p.email_wali) = LOWER($1) AND u.status_akun = 'Belum Terverifikasi'
+         AND u.created_at >= NOW() - INTERVAL '${Pengguna.MASA_BERLAKU_KONFIRMASI}'
+       ORDER BY u.created_at DESC
+       LIMIT 1;`,
+      [this.email]
+    );
+    return rows[0] ? { nama: rows[0].nama, tanggalDaftar: rows[0].tanggal_daftar } : null;
+  }
+
+  /**
    * Memilih pelajar yang dilaporkan. Bila wali terhubung dengan lebih dari satu pelajar,
    * idPelajar menentukan pilihannya; yang bukan miliknya ditolak.
    */
@@ -101,6 +119,17 @@ class OrangTuaWali extends Pengguna {
       indikatorRisiko: hasil.indikatorRisiko,
       jumlahHariTidakCheckIn: hasil.jumlahHariTidakCheckIn,
     };
+  }
+
+  /** Perbarui identitas wali. */
+  async perbaruiProfil({ nama, nomorTelepon, email }, executor = db) {
+    await executor.query(
+      'UPDATE orang_tua_wali SET nama = $1, nomor_telepon = $2, email = $3 WHERE id_wali = $4;',
+      [nama, nomorTelepon, email, this.idWali]
+    );
+    this.nama = nama;
+    this.nomorTelepon = nomorTelepon;
+    this.email = email;
   }
 }
 

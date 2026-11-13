@@ -1,13 +1,19 @@
 const TenagaKesehatan = require('../models/TenagaKesehatan');
+const Pelajar = require('../models/Pelajar');
 const AppError = require('../utils/AppError');
 const { kirim, tanganiAsync } = require('../utils/respon');
 const { calculateDistanceKm } = require('../utils/distance');
 
+function angka(nilai) {
+  if (nilai === undefined || nilai === null || String(nilai).trim() === '') return NaN;
+  return Number(nilai);
+}
+
 /** Ambil koordinat pengguna dari query (GET) atau body (PUT). Null bila tidak valid. */
 function lokasiPengguna(req) {
   const sumber = { ...req.query, ...(req.body || {}) };
-  const lat = Number(sumber.lat !== undefined ? sumber.lat : sumber.latitude);
-  const lng = Number(sumber.lng !== undefined ? sumber.lng : sumber.longitude);
+  const lat = angka(sumber.lat !== undefined ? sumber.lat : sumber.latitude);
+  const lng = angka(sumber.lng !== undefined ? sumber.lng : sumber.longitude);
   if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
   if (lat < -90 || lat > 90 || lng < -180 || lng > 180) return null;
   return { lat, lng };
@@ -55,8 +61,33 @@ exports.processLocationPermission = tanganiAsync(async (req, res) => {
     throw new AppError(400, 'Koordinat lokasi tidak valid.');
   }
 
+  if (req.user.role === 'Pelajar') {
+    const pelajar = await Pelajar.findByIdPengguna(req.user.idPengguna);
+    if (pelajar) await pelajar.setLokasiSaatIni(`${lokasi.lat},${lokasi.lng}`);
+  }
+
   const daftar = await TenagaKesehatan.findSemuaDenganFasilitas();
   return kirim(res, 200, 'Daftar tenaga kesehatan terdekat.', denganJarak(daftar, lokasi));
+});
+
+/** Ubah tarif konsultasi milik tenaga kesehatan yang sedang login. */
+exports.updateTarif = tanganiAsync(async (req, res) => {
+  const tarif = angka(req.body && req.body.estimasi_biaya);
+  if (!Number.isFinite(tarif) || tarif <= 0) {
+    throw new AppError(400, 'Tarif konsultasi tidak valid.');
+  }
+
+  const nakes = await TenagaKesehatan.findByIdPengguna(req.user.idPengguna);
+  if (!nakes) {
+    throw new AppError(403, 'Hanya tenaga kesehatan yang dapat mengubah tarif.');
+  }
+
+  const berhasil = await nakes.setEstimasiBiaya(Math.round(tarif));
+  if (!berhasil) {
+    throw new AppError(400, 'Tenaga kesehatan belum terhubung ke fasilitas, tarif tidak dapat disimpan.');
+  }
+
+  return kirim(res, 200, 'Tarif konsultasi berhasil diperbarui.', { estimasi_biaya: Math.round(tarif) });
 });
 
 /** Q-C20-02 & Algo-C04-04 */
@@ -70,7 +101,7 @@ exports.selectTenagaKesehatan = tanganiAsync(async (req, res) => {
   const nakes = await TenagaKesehatan.findById(id);
   const jadwal = nakes ? await nakes.getJadwalTersedia() : [];
   const lokasi = lokasiPengguna(req);
-
+  const jarak = lokasi ? calculateDistanceKm(lokasi, detail.lokasi || detail.lokasi_kerja) : -1;
   return kirim(res, 200, 'Detail tenaga kesehatan.', {
     ...detail,
     jarak_km: lokasi ? Math.max(calculateDistanceKm(lokasi, detail.lokasi || detail.lokasi_kerja), -1) : null,
