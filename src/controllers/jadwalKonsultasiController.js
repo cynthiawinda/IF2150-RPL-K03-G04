@@ -3,7 +3,7 @@ const Pelajar = require('../models/Pelajar');
 const JadwalKonsultasi = require('../models/JadwalKonsultasi');
 const AppError = require('../utils/AppError');
 const { kirim, tanganiAsync } = require('../utils/respon');
-const db = require('../config/db');
+const { tanggalValid } = require('../utils/waktu');
 
 function ambilIdPengguna(req) {
   return req.user.idPengguna;
