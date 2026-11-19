@@ -320,10 +320,18 @@ Tabel 4.5. Hasil Pengujian KNF
 
 | ID Pengujian | ID KNF | Parameter | Target Terukur | Metode dan Alat | Hasil Aktual | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| *KNF01-TC01* | *KNF01* | *Reliability* | *Tidak ada data hilang/ganda saat jaringan putus di tengah transaksi* | *Simulasi putus koneksi saat bayar, lalu cek status di DB* | *[Hasil aktual]* | *Pass/Fail* |
-| *KNF02-TC01* | *KNF02* | *Security* | *Password tersimpan sebagai hash, bukan plain-text* | *Inspeksi tabel pengguna di DB* | *[...]* | *Pass/Fail* |
-| *KNFXX-TC01* | *KNFXX* | *Response time* | *Halaman tampil ≤ 4 detik* | *Chrome DevTools, 5 kali ukur, ambil rata-rata* | *[Rata-rata ... detik, maks ... detik]* | *Pass/Fail* |
-| *...* | *...* | *...* | *...* | *...* | *...* | *...* |
+| *KNF01-TC01* | *KNF01* | *Security* | *Seluruh riwayat check-in dan catatan kesehatan pengguna tersimpan terenkripsi menggunakan algoritma AES-256 (bukan plain-text)* | *Inspeksi langsung tabel data check-in dan catatan kesehatan pada basis data PostgreSQL melalui ```psql```* | *[Hasil aktual]* | *Pass/Fail* |
+| *KNF02-TC01* | *KNF02* | *Security* | *Akun orang tua/wali hanya dapat mengakses ringkasan data kondisi yang ditentukan dan tidak memiliki akses ke teks jurnal pribadi pelajar* | *Uji akses antarmuka dan endpoint API menggunakan akun wali (```santoso.wali@mahasehat.id```) melalui Google Chrome & DevTools Network* | *[...]* | *Pass/Fail* |
+| *KNF03-TC01* | *KNF03* | *Response time* | *Hasil rekomendasi tenaga kesehatan berdasarkan lokasi tampil dalam waktu <= 2.000 ms* | *Chrome DevTools pada halaman ```CariTenagaKesehatanPage.html```, 5 kali ukur, ambil rata-rata* | *[Rata-rata ... detik, maks ... detik]* | *Pass/Fail* |
+| *KNF04-TC01* | *KNF04* | *Response time* | *Grafik perkembangan kesehatan dihasilkan dan ditampilkan dalam waktu <= 1.500 ms* | *Chrome DevTools pada halaman ```ReportPagePelajar.html```, 5 kali ukur, ambil rata-rata* | *[Rata-rata ... detik, maks ... detik]* | *Pass/Fail* |
+| *KNF05-TC01* | *KNF05* | *Availability* | *Tingkat ketersediaan minimal 99,5% (24/7, downtime maksimal 3,6 jam/bulan)* | *CPengujian ketersediaan layanan melalui endpoint ```/api/health``` dan akses halaman web lokal menggunakan Google Chrome dan PowerShell (curl), 20 kali pengukuran berulang* | *[Tingkat keberhasilan respons ... (.../20 permintaan mengembalikan status 200 OK dengan "status": "OK", tanpa downtime selama sesi pengujian)]* | *Pass/Fail* |
+| *KNF06-TC01* | *KNF06* | *Reliability* | *Sistem melakukan percobaan pengiriman ulang (retry attempt) notifikasi darurat secara otomatis hingga 3 kali apabila terjadi gangguan koneksi/transmisi* | *Simulasi kegagalan koneksi/SMTP saat notifikasi darurat terpicu dan inspeksi log terminal server* | *[...]* | *Pass/Fail* |
+| *KNF07-TC01* | *KNF07* | *Ergonomy* | *Pengisian daily check-in oleh pengguna pelajar selesai dalam waktu <= 60 detik dengan <= 4 langkah navigasi antarmuka* | *Pengujian alur pengisian daily check-in dan pencatatan waktu menggunakan stopwatch serta penghitungan langkah antarmuka, 3 kali pengulangan* | *[...]* | *Pass/Fail* |
+| *KNF08-TC01* | *KNF08* | *Portability* | *Dapat diakses dan berjalan secara responsif pada Google Chrome 100+, Safari 15+, dan Firefox 100+ di perangkat Android 8.0+, iOS 14+, dan Windows 10/11* | *Pengujian fungsional dan tampilan responsif lintas peramban pada Windows 11 (Google Chrome & Microsoft Edge) serta emulasi perangkat mobile Android (Samsung Galaxy A55) dan iOS (iPhone 16 Pro Max) melalui Chrome DevTools Device Toolbar* | *[...]* | *Pass/Fail* |
+| *KNF09-TC01* | *KNF09* | *Memory* | *Penggunaan memori lokal (client-side memory usage) pada peramban maksimal sebesar 150 MB* | *Pengukuran JS Heap Snapshot menggunakan Chrome DevTools (tab Memory) pada 5 halaman utama (```ReportPagePelajar```, ```DashboardPagePelajar```, ```CariTenagaKesehatanPage```, ```SettingPagePelajar```, ```LoginPage```)* | *[...]* | *Pass/Fail* |
+| *KNF10-TC01* | *KNF10* | *Safety* | *Menampilkan pop-up tombol rujukan darurat resmi saat kondisi ambang batas darurat terpenuhi tanpa menghalangi pengguna menutup tampilan atau mencari bantuan* | *Simulasi pengisian check-in dengan nilai di atas ambang batas darurat pada antarmuka pelajar* | *[...]* | *Pass/Fail* |
+| *KNF11-TC01* | *KNF11* | *Ergonomy* | *Halaman login menampilkan formulir masuk yang sederhana dan mudah digunakan (kolom email/username, kata sandi, dan tombol masuk)* | *Inspeksi antarmuka dan uji kegunaan formulir login pada ```LoginPage.html``` melalui Google Chrome* | *[...]* | *Pass/Fail* |
+| *KNF12-TC01* | *KNF12* | *Security* | *Sistem memvalidasi autentikasi, membatasi akses dashboard sesuai role pengguna, dan mengakhiri sesi saat logout sehingga token tidak dapat dipakai kembali* | *Uji login multi-peran (Pelajar/Wali/Nakes), percobaan akses route lintas peran tanpa otorisasi, serta pengujian logout dan pemakaian ulang token lama* | *[...]* | *Pass/Fail* |
 
 <br>
 
@@ -340,7 +348,18 @@ Tabel 4.6. Bukti Hasil Pengujian
 | *INT-TC01* | *[Sisipkan bukti pengujian integrasi]* |
 | *UC01-TC01* | *[Sisipkan tangkapan layar UC01-TC01 sesuai prosedur pengujian]* |
 | *UC01-TC02* | *[Sisipkan tangkapan layar UC01-TC02 sesuai prosedur pengujian]* |
-| *KNF01-TC01* | *[Sisipkan bukti pengukuran parameter KNF01-TC01]* |
+| *KNF01-TC01* | *![KNF01-TC01](./assets/KNF01-TC01.png)* |
+| *KNF02-TC01* | *![KNF02-TC01](./assets/KNF02-TC01.png)* |
+| *KNF03-TC01* | *![KNF03-TC01](./assets/KNF03-TC01.png)* |
+| *KNF04-TC01* | *![KNF04-TC01](./assets/KNF04-TC01.png)* |
+| *KNF05-TC01* | *![KNF05-TC01](./assets/KNF05-TC01.png)* |
+| *KNF06-TC01* | *![KNF06-TC01](./assets/KNF06-TC01.png)* |
+| *KNF07-TC01* | *![KNF07-TC01](./assets/KNF07-TC01.png)* |
+| *KNF08-TC01* | *![KNF08-TC01](./assets/KNF08-TC01.png)* |
+| *KNF09-TC01* | *![KNF09-TC01](./assets/KNF09-TC01.png)* |
+| *KNF10-TC01* | *![KNF10-TC01](./assets/KNF10-TC01.png)* |
+| *KNF11-TC01* | *![KNF11-TC01](./assets/KNF11-TC01.png)* |
+| *KNF12-TC01* | *![KNF12-TC01](./assets/KNF12-TC01.png)* |
 | *...* | *...* |
 
 <br>
