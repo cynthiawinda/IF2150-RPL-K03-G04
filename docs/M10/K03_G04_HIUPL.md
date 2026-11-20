@@ -321,13 +321,34 @@ Tabel 4.4.1. Hasil Pengujian Use Case [UC01]
 
 | ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| *UC01-TC01* | *KF01* | *Normal* | *1. Buka halaman Registrasi.<br>2. Masukkan data diri, riwayat kesehatan mental, dan kontak orang tua/wali bagi pelajar.<br>3. Klik tombol "Daftar".* | *User: rpl@gmail.com<br>Pass: 123456* | *Pengguna diarahkan ke Halaman Dashboard.* | *Pengguna diarahkan ke Halaman Dashboard sesuai hasil yang diharapkan.* | *Pass* |
-| *UC01-TC02* | *KF01* | *Alternatif 1: [Nama skenario]* | *[Langkah-langkah pengujian]* | *[Data masukan]* | *[Hasil yang diharapkan]* | *[Hasil aktual]* | *[Pass/Fail. Jika Fail: penjelasan dan solusi]* |
-| *...* | *...* | *...* | *...* | *...* | *...* | *...* | *...* |
+| *UC01-TC01* | *KF01* | *Normal* | *1. Buka halaman Registrasi<br>2. Masukkan data diri, riwayat kesehatan mental, dan kontak orang tua/wali bagi pelajar<br>3. Klik tombol "Buat Akun"* | *Nama: Budi<br>Email: budi@gmail.com<br>Nomor telepon: 0812930345<br>Email orang tua/wali: ortubudi@gmail.com<br>Tanggal lahir: 31 12 2000<br>Riwayat kesehatan: burnout<br>Kata sandi: Pass123!<br>Konfirmasi kata sandi: Pass123!* | *Pengguna diarahkan ke halaman Notifikasi Keberhasilan.* | *Pengguna diarahkan ke halaman Notifikasi Keberhasilan sesuai hasil yang diharapkan.* | *Pass* |
+| *UC01-TC02* | *KF01* | *Alternatif 1: Masukan pengguna tidak valid* | *1. Buka halaman Registrasi.<br>2. Masukkan data diri yang tidak sesuai format, riwayat kesehatan mental, dan kontak orang tua/wali bagi pelajar.<br>3. Klik tombol "Buat Akun".* | *Nama: Budi12<br>Email: budi@gmail.com<br>Nomor telepon: 0812930345<br>Email orang tua/wali: ortubudi@gmail.com<br>Tanggal lahir: 31 12 2000<br>Riwayat kesehatan: burnout<br>Kata sandi: Pass123!<br>Konfirmasi kata sandi: Pass123!* | *Perangkat Lunak menampilkan pesan sesuai kesalahan masukan pengguna.* | *Perangkat Lunak menampilkan pesan sesuai dengan kesalahan masukan pengguna seperti yang diharapkan.* | *Pass* |
 
-### 4.4.2 Use Case [Nama Use Case 2]
+### 4.4.2 Use Case Mengonfirmasi Registrasi Akun
 
-*[Lanjutkan untuk seluruh use case dengan pola yang sama, hingga 4.4.N.]*
+**ID Use Case:** *UC02*  
+**Nama Use Case:** *Mengonfirmasi Registrasi Akun*
+
+Tabel 4.4.2. Hasil Pengujian Use Case [UC02]
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *UC02-TC01* | *KF02* | *Normal* | *1. Buka tautan konfirmasi registrasi akun yang valid<br>2. Klik tombol "Setujui Akun".* | *Tautan konfirmasi pembuatan akun yang valid dan aksi klik tombol "Setujui Akun"* | *Halaman konfirmasi registrasi ditampilkan, akun pelajar diaktifkan, dan muncul pesan keberhasilan* | *Halaman konfirmasi registrasi ditampilkan, sesudah menekan tombol "Setujui Akun" muncul pesan keberhasilan dan akun pelajar diaktifkan.* | *Pass* |
+| *UC02-TC02* | *KF02* | *Alternatif 1: Orang tua/wali tidak mengonfirmasi registrasi akun* | *1. Buka tautan konfirmasi registrasi akun yang sudah melewati batas waktu atau tidak disetujui dalam batas waktu tertentu.* | *Tautan konfirmasi registrasi akun yang sudah kadaluwarsa* | *Perangkat Lunak mendeteksi tautan yang telah kadaluwarsa, menandai akun pelajar gagal terverifikasi* | *Perangkat Lunak mendeteksi tautan yang telah kadaluwarsa, menandai akun pelajar gagal terverifikasi dan menampilkan pesan kesalahan* | *Pass* |
+
+<br>
+
+### 4.4.3 Use Case Melakukan Daily Check-In
+
+**ID Use Case:** *UC03*  
+**Nama Use Case:** *Melakukan Daily Check-In*
+
+Tabel 4.4.3. Hasil Pengujian Use Case [UC03]
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *UC03-TC01* | *KF03, KF04, KF05, KF07* | *Normal* | *1. Mulai daily check-in<br>2. Pilih salah satu opsi suasana hati pada form suasana hati<br>3. Isi waktu tidur dan waktu bangun<br>4. Pilih opsi pola makan hari ini<br>5. Isi catatan refleksi harian<br>6. Periksa ringkasan check-in dan klik tombol "Simpan check-in"* | *Suasana hati: "Baik (skala 4/5), waktu tidur: 22.30 dan waktu bangun: 06.00, pola makan: "Teratur", catatan refleksi harian "stress akademik tugas besar"* | *Setiap langkah tercatat, halaman berpindah sesuai alur, ringkasan ditampilkan, data check-in tersimpan, dan pesan keberhasilan ditampilkan* | *Setiap langkah tercatat, halaman berpindah sesuai alur, ringkasan ditampilkan, data check-in tersimpan, dan pesan keberhasilan ditampilkan sesuai harapan* | *Pass* |
+| *UC03-TC02* | *KF03, KF04, KF05, KF07* | *Alternatif 1: Pelajar tidak mengisi catatan refleksi harian* | *1. Mulai daily check-in<br>2. Pilih salah satu opsi suasana hati pada form suasana hati<br>3. Isi waktu tidur dan waktu bangun<br>4. Pilih opsi pola makan hari ini<br>5. Catatan refleksi harian dikosongkan<br>6. Periksa ringkasan check-in dan klik tombol "Simpan check-in"* | *Suasana hati: "Biasa (skala 3/5), waktu tidur: 22.30 dan waktu bangun: 06.00, pola makan: "Kurang teratur", catatan refleksi harian dikosongkan* | *Pop-up konfirmasi untuk memastikan apakah pelajar ingin melanjutkan tanpa membuat catatan refleksi muncul, setelah dikonfirmasi rangkuman tampil, dan data check-in tersimpan dengan pesan keberhasilan ditampilkan.* | *Ketika catatan refleksi dikosongkan, tidak muncul pop-up konfirmasi dan sistem langsung melanjutkan ke tahap berikutnya / menyimpan data* | *Fail karena form refleksi harian tidak menyertakan pengecekan masukan kosong untuk menampilkan pop up konfirmasi. Harusnya menambahkan pengecekan masukan kosong untuk menampilkan pop-up konfirmasi melanjutkan tanpa refleksi* |
 
 <br>
 
@@ -365,8 +386,12 @@ Tabel 4.6. Bukti Hasil Pengujian
 | *C02-UT01 – C02-UT08* | *[Sisipkan hasil keluaran unit test]* |
 | *C02 (coverage)* | *[Sisipkan laporan coverage kelas C02]* |
 | *INT-TC01* | *[Sisipkan bukti pengujian integrasi]* |
-| *UC01-TC01* | *[Sisipkan tangkapan layar UC01-TC01 sesuai prosedur pengujian]* |
-| *UC01-TC02* | *[Sisipkan tangkapan layar UC01-TC02 sesuai prosedur pengujian]* |
+| *UC01-TC01* | *![UC01-TC01-1](./assets/UC01-TC01-1.png)<br><br>![UC01-TC01-2](./assets/UC01-TC01-2.png)![UC01-TC01-3](./assets/UC01-TC01-3.png)* |
+| *UC01-TC02* | *![UC01-TC02-1](./assets/UC01-TC02-1.png)<br><br>![UC01-TC02-2](./assets/UC01-TC02-2.png)* |
+| *UC02-TC01* | *![UC02-TC01-1](./assets/UC02-TC01-1.png)<br><br>![UC02-TC01-2](./assets/UC02-TC01-2.png)<br><br>![UC02-TC01-3](./assets/UC02-TC01-3.png)* |
+| *UC02-TC02* | *![UC02-TC02](./assets/UC02-TC02.png)* |
+| *UC03-TC01* | *![UC03-TC01-1](./assets/UC03-TC01-1.png)<br><br>![UC03-TC01-2](./assets/UC03-TC01-2.png)<br><br>![UC03-TC01-3](./assets/UC03-TC01-3.png)<br><br>![UC03-TC01-4](./assets/UC03-TC01-4.png)<br><br>![UC03-TC01-5](./assets/UC03-TC01-5.png)<br><br>![UC03-TC01-6](./assets/UC03-TC01-6.png)<br><br>![UC03-TC01-7](./assets/UC03-TC01-7.png)* |
+| *UC03-TC02* | *![UC03-TC02-1](./assets/UC03-TC02-1.png)<br><br>![UC03-TC02-2](./assets/UC03-TC02-2.png)<br><br>[UC03-TC02-3](./assets/UC03-TC02-3.png)* |
 | *KNF01-TC01* | *![KNF01-TC01](./assets/KNF01-TC01.png)* |
 | *KNF02-TC01* | *![KNF02-TC01](./assets/KNF02-TC01.png)* |
 | *KNF03-TC01* | *![KNF03-TC01](./assets/KNF03-TC01.png)* |
