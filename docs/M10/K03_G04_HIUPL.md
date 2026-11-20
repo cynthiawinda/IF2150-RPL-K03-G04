@@ -1242,15 +1242,15 @@ Tabel 5.2. Matriks Kerunutan KNF terhadap Pengujian
 
 | ID KNF | Parameter | KF/UC Terkait | Test Case |
 | :--- | :--- | :--- | :--- |
-| *KNF01* | *Security* | *KF05 / UC03* | *KNF01-TC01* |
-| *KNF02* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
-| *KNF03* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
-| *KNF04* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
-| *KNF05* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
-| *KNF06* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
-| *KNF07* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
-| *KNF08* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
-| *KNF09* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
-| *KNF10* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
-| *KNF11* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
-| *KNF12* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
+| *KNF01* | *Security* | *KF07 / UC03* | *KNF01-TC01* |
+| *KNF02* | *Security* | *KF09, KF17 / UC04* | *KNF02-TC01* |
+| *KNF03* | *Response time* | *KF11, KF12 / UC05* | *KNF03-TC01* |
+| *KNF04* | *Response time* | *KF08 / UC04* | *KNF04-TC01* |
+| *KNF05* | *Availability* | *KF03, KF19 / UC03, UC08 (ketersediaan layanan sistem)* | *KNF05-TC01* |
+| *KNF06* | *Reliability* | *KF18, KF19 / UC08* | *KNF06-TC01* |
+| *KNF07* | *Ergonomy* | *KF04, KF05, KF07 / UC03* | *KNF07-TC01* |
+| *KNF08* | *Portability* | *KF01, KF08, KF11 / UC01, UC04, UC05 (seluruh antarmuka web)* | *KNF08-TC01* |
+| *KNF09* | *Memory* | *KF04, KF07 / UC03 (seluruh antarmuka sisi klien)* | *KNF09-TC01* |
+| *KNF10* | *Safety* | *KF18, KF19 / UC08* | *KNF10-TC01* |
+| *KNF11* | *Ergonomy* | *KF22 / UC09* | *KNF11-TC01* |
+| *KNF12* | *Security* | *KF22, KF23, KF24 / UC09, UC10* | *KNF12-TC01* |
