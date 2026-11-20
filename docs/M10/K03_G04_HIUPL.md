@@ -405,6 +405,447 @@ Tabel 4.2.6b. Ringkasan Cakupan Kelas C27
 
 <!-- Subbab 4.2.7 dst.: kelas C04, C05, C06, C07, C08, C09, C14, C17, C20, C23 -->
 
+### 4.2.3 Kelas [Nama Kelas 2]
+
+*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
+
+### 4.2.4 Kelas TenagaKesehatan
+
+**ID Kelas:** *C04*  
+**Nama Kelas:** *TenagaKesehatan*  
+**Tingkat:** *Sedang*
+
+Tabel 4.2.4. Hasil Pengujian Unit Kelas C04
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *C04-UT01* | *`getProfil()`* | *Normal* | *Tenaga kesehatan Siti Rahma, Psikolog* | *Teks profil memuat nama, jenis, e-mail, dan telepon* | *Sesuai* | *Pass* |
+| *C04-UT02* | *`findAll()`* | *Normal* | *Basis data mengembalikan 2 baris* | *Mengembalikan 2 objek TenagaKesehatan sesuai urutan query* | *Sesuai* | *Pass* |
+| *C04-UT03* | *`findAll()`* | *Batas* | *Basis data tidak punya data* | *Mengembalikan array kosong* | *Sesuai* | *Pass* |
+| *C04-UT04* | *`findById()`* | *Normal* | *ID NAKES-1 ada di basis data* | *Mengembalikan objek dengan atribut sesuai baris* | *Sesuai* | *Pass* |
+| *C04-UT05* | *`findById()`* | *Negatif* | *ID tidak ada di basis data* | *Mengembalikan null* | *Sesuai* | *Pass* |
+| *C04-UT06* | *`findDetailDenganFasilitas()`* | *Negatif* | *ID tidak ada di basis data* | *Mengembalikan null* | *Sesuai* | *Pass* |
+| *C04-UT07* | *`getJadwalTersedia()`* | *Normal* | *3 slot: masa depan tersedia, masa depan terisi, masa lalu tersedia* | *Hanya slot masa depan yang tersedia dikembalikan* | *Sesuai* | *Pass* |
+| *C04-UT08* | *`getJadwalTersedia()`* | *Batas* | *Tenaga kesehatan belum punya slot* | *Mengembalikan array kosong* | *Sesuai* | *Pass* |
+| *C04-UT09* | *`perbaruiProfil()`* | *Normal* | *Nama, telepon, e-mail, jenis, STR, lokasi diisi semua* | *Query UPDATE dijalankan dan atribut objek ikut berubah* | *Sesuai* | *Pass* |
+| *C04-UT10* | *`perbaruiProfil()`* | *Batas* | *Jenis, STR, dan lokasi tidak diisi* | *Ketiganya dikirim sebagai null agar nilai lama dipertahankan (COALESCE)* | *Sesuai* | *Pass* |
+| *C04-UT11* | *`setEstimasiBiaya()`* | *Negatif* | *Tenaga kesehatan belum terhubung ke fasilitas* | *Mengembalikan false tanpa menjalankan query* | *Sesuai* | *Pass* |
+| *C04-UT12* | *`setEstimasiBiaya()`* | *Normal* | *Tarif 150000 dan fasilitas FAS-1 ada* | *Mengembalikan true dan query memakai tarif serta ID fasilitas* | *Sesuai* | *Pass* |
+| *C04-UT13* | *`setEstimasiBiaya()`* | *Negatif* | *Query tidak mengubah baris apa pun (rowCount 0)* | *Mengembalikan false* | *Sesuai* | *Pass* |
+| *C04-UT14* | *`tambah()`* | *Normal* | *Data baru tanpa ID fasilitas* | *Mengembalikan ID berawalan NAKES- dan ID fasilitas dikirim sebagai null* | *Sesuai* | *Pass* |
+
+### 4.2.5 Kelas [Nama Kelas 2]
+
+*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
+
+### 4.2.6 Kelas CheckIn
+
+**ID Kelas:** *C06*  
+**Nama Kelas:** *CheckIn*  
+**Tingkat:** *Mendalam*
+
+Tabel 4.2.6. Hasil Pengujian Unit Kelas C06
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *C06-UT01* | *`createCheckIn()`* | *Normal* | *Mood 3, tidur 22:00, bangun 06:00, pola makan " Teratur "* | *Objek terbentuk dengan ID, tanggal hari ini, dan pola makan terpotong spasi* | *Sesuai* | *Pass* |
+| *C06-UT02* | *`createCheckIn()`* | *Batas* | *Mood 1 dan mood 5* | *Keduanya diterima* | *Sesuai* | *Pass* |
+| *C06-UT03* | *`createCheckIn()`* | *Negatif* | *Mood 0 dan mood 6* | *Melempar AppError status 400 "Data check-in tidak valid."* | *Sesuai* | *Pass* |
+| *C06-UT04* | *`createCheckIn()`* | *Negatif* | *Mood 2.5 (bukan bilangan bulat) dan mood "3" (string)* | *Melempar kesalahan data tidak valid* | *Sesuai* | *Pass* |
+| *C06-UT05* | *`createCheckIn()`* | *Negatif* | *Jam tidur "25:00" dan jam bangun "6:00" (format salah)* | *Melempar kesalahan data tidak valid* | *Sesuai* | *Pass* |
+| *C06-UT06* | *`createCheckIn()`* | *Negatif* | *Jam tidur sama dengan jam bangun* | *Melempar kesalahan data tidak valid* | *Sesuai* | *Pass* |
+| *C06-UT07* | *`createCheckIn()`* | *Negatif* | *Pola makan kosong, spasi saja, atau tidak diisi* | *Melempar kesalahan data tidak valid* | *Sesuai* | *Pass* |
+| *C06-UT08* | *`createCheckIn()`* | *Negatif* | *Catatan refleksi berupa string kosong* | *Melempar kesalahan data tidak valid* | *Sesuai* | *Pass* |
+| *C06-UT09* | *`createCheckIn()`* | *Batas* | *Catatan refleksi null dan pemicu stres tidak diisi* | *Diterima, catatan tetap null dan pemicu menjadi string kosong* | *Sesuai* | *Pass* |
+| *C06-UT10* | *`validateData()`* | *Negatif* | *Tanggal check-in besok (masa depan)* | *Mengembalikan false* | *Sesuai* | *Pass* |
+| *C06-UT11* | *`validateData()`* | *Normal* | *Baris basis data dengan jam format HH:mm:ss* | *Jam dipotong menjadi HH:mm dan data dinyatakan valid* | *Sesuai* | *Pass* |
+| *C06-UT12* | *`getCheckInData()`* | *Normal* | *Check-in valid dengan catatan terenkripsi* | *Mengembalikan objek berisi seluruh atribut check-in* | *Sesuai* | *Pass* |
+
+Tabel 4.2.6b. Ringkasan Cakupan Kelas C06
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | *createCheckIn(), getCheckInData(), validateData()* |
+| Operasi yang diuji | *createCheckIn(), getCheckInData(), validateData()* |
+| ID Algoritma yang tercakup | *Algo-C06-01, Algo-C06-02* |
+| Coverage (wajib ≥ 70%) | *100% baris / 100% cabang (Jest `--coverage`, bukti pada 4.6)* |
+
+### 4.2.7 Kelas LaporanKesehatan
+
+**ID Kelas:** *C07*  
+**Nama Kelas:** *LaporanKesehatan*  
+**Tingkat:** *Mendalam*
+
+Tabel 4.2.7. Hasil Pengujian Unit Kelas C07
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *C07-UT01* | *`evaluateThreshold()`* | *Batas* | *Tidak ada data check-in dan tanpa tanggal terakhir* | *Indikator "Belum Dapat Dinilai", 0 hari tanpa check-in, ambang tidak terlampaui* | *Sesuai* | *Pass* |
+| *C07-UT02* | *`evaluateThreshold()`* | *Batas* | *Tidak ada data periode ini, check-in terakhir 20 hari lalu* | *Jumlah hari tanpa check-in = 20 dan ambang terlampaui* | *Sesuai* | *Pass* |
+| *C07-UT03* | *`evaluateThreshold()`* | *Normal* | *Check-in hari ini mood 4 dan kemarin mood 5, tidur 8 jam* | *Risiko "Rendah", ringkasan memuat rata-rata mood 4.5 dan tidur 8 jam* | *Sesuai* | *Pass* |
+| *C07-UT04* | *`evaluateThreshold()`* | *Normal* | *Mood 2, 1, 2 selama 3 hari berturut-turut sampai hari ini* | *Risiko "Tinggi" dan ambang terlampaui* | *Sesuai* | *Pass* |
+| *C07-UT05* | *`evaluateThreshold()`* | *Batas* | *Mood rendah hanya 2 hari berturut-turut* | *Tidak "Tinggi", menjadi "Sedang" karena rata-rata mood 2* | *Sesuai* | *Pass* |
+| *C07-UT06* | *`evaluateThreshold()`* | *Batas* | *Rata-rata mood tepat 2.5 (mood 2 dan 3)* | *Risiko "Sedang"* | *Sesuai* | *Pass* |
+| *C07-UT07* | *`evaluateThreshold()`* | *Batas* | *Rata-rata tidur tepat 5 jam dan mood 3* | *Risiko "Rendah" (batas 5 jam belum dianggap kurang)* | *Sesuai* | *Pass* |
+| *C07-UT08* | *`evaluateThreshold()`* | *Batas* | *Rata-rata tidur 4.9 jam dan mood 4* | *Risiko "Sedang"* | *Sesuai* | *Pass* |
+| *C07-UT09* | *`evaluateThreshold()`* | *Batas* | *Mood 2 pada hari ke-0, 1, dan 3 (hari ke-2 terlewat)* | *Rangkaian putus sehingga tidak "Tinggi"* | *Sesuai* | *Pass* |
+| *C07-UT10* | *`evaluateThreshold()`* | *Batas* | *Rentang data tepat 7 hari dan 8 hari* | *Periode "Mingguan" untuk 7 hari dan "Bulanan" untuk 8 hari* | *Sesuai* | *Pass* |
+| *C07-UT11* | *`evaluateThreshold()`* | *Batas* | *Check-in terakhir tepat 3 hari lalu, kondisi baik* | *Ambang terlampaui (>= 3 hari) walau risiko "Rendah"* | *Sesuai* | *Pass* |
+| *C07-UT12* | *`detectEmergency()`* | *Normal* | *Tidak check-in 4 hari dan mood rendah 3 hari berturut-turut* | *Mengembalikan true* | *Sesuai* | *Pass* |
+| *C07-UT13* | *`detectEmergency()`* | *Negatif* | *Belum pernah memanggil evaluateThreshold()* | *Mengembalikan false* | *Sesuai* | *Pass* |
+| *C07-UT14* | *`detectEmergency()`* | *Negatif* | *Tidak ada data check-in ("Belum Dapat Dinilai")* | *Mengembalikan false* | *Sesuai* | *Pass* |
+| *C07-UT15* | *`detectEmergency()`* | *Batas* | *Risiko "Tinggi" tetapi baru 2 hari tidak check-in* | *Mengembalikan false* | *Sesuai* | *Pass* |
+| *C07-UT16* | *`detectEmergency()`* | *Batas* | *Risiko "Sedang" dan tepat 3 hari tidak check-in* | *Mengembalikan true* | *Sesuai* | *Pass* |
+| *C07-UT17* | *`detectEmergency()`* | *Negatif* | *Tidak check-in 5 hari tetapi kondisi terakhir baik ("Rendah")* | *Mengembalikan false* | *Sesuai* | *Pass* |
+| *C07-UT18* | *`hitungDurasiTidur()`* | *Batas* | *22:00 ke 06:00, 01:00 ke 06:30, dan jam tidur sama dengan jam bangun* | *8 jam, 5.5 jam, dan 24 jam (melewati tengah malam dihitung benar)* | *Sesuai* | *Pass* |
+
+Tabel 4.2.7b. Ringkasan Cakupan Kelas C07
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | *evaluateThreshold(), detectEmergency()* |
+| Operasi yang diuji | *evaluateThreshold(), detectEmergency() (beserta hitungDurasiTidur())* |
+| ID Algoritma yang tercakup | *Algo-C07-01, Algo-C07-02* |
+| Coverage (wajib ≥ 70%) | *100% baris / 94.44% cabang (Jest `--coverage`, bukti pada 4.6)* |
+
+### 4.2.8 Kelas FasilitasKesehatan
+
+**ID Kelas:** *C08*  
+**Nama Kelas:** *FasilitasKesehatan*  
+**Tingkat:** *Sedang*
+
+Tabel 4.2.8. Hasil Pengujian Unit Kelas C08
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *C08-UT01* | *`getLokasi()`* | *Normal* | *Fasilitas dengan lokasi "-6.9175,107.6191"* | *Mengembalikan string lokasi tersebut* | *Sesuai* | *Pass* |
+| *C08-UT02* | *`getEstimasiBiaya()`* | *Normal* | *Fasilitas dengan estimasi biaya 150000* | *Mengembalikan 150000* | *Sesuai* | *Pass* |
+| *C08-UT03* | *`getLokasi()`* | *Batas* | *Fasilitas dengan lokasi null* | *Mengembalikan null tanpa kesalahan* | *Sesuai* | *Pass* |
+| *C08-UT04* | *`findAll()`* | *Normal* | *Basis data mengembalikan 2 fasilitas* | *Mengembalikan 2 objek FasilitasKesehatan dengan atribut terisi* | *Sesuai* | *Pass* |
+| *C08-UT05* | *`findAll()`* | *Batas* | *Basis data tidak punya fasilitas* | *Mengembalikan array kosong* | *Sesuai* | *Pass* |
+| *C08-UT06* | *`findAll()`* | *Negatif* | *Query ke basis data gagal* | *Galat diteruskan ke pemanggil (promise ditolak)* | *Sesuai* | *Pass* |
+
+### 4.2.9 Kelas JadwalKonsultasi
+
+**ID Kelas:** *C09*  
+**Nama Kelas:** *JadwalKonsultasi*  
+**Tingkat:** *Mendalam*
+
+Tabel 4.2.9. Hasil Pengujian Unit Kelas C09
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *C09-UT01* | *`getDate(), getTime(), getStatus()`* | *Normal* | *Baris basis data dengan waktu "10:00:00"* | *Tanggal "2099-01-01", waktu dipotong "10:00", status "Belum Diajukan"* | *Sesuai* | *Pass* |
+| *C09-UT02* | *`isAvailable()`* | *Normal* | *Slot masa depan dan statusKetersediaan true* | *Mengembalikan true* | *Sesuai* | *Pass* |
+| *C09-UT03* | *`isAvailable()`* | *Negatif* | *Slot masa depan tetapi statusKetersediaan false* | *Mengembalikan false* | *Sesuai* | *Pass* |
+| *C09-UT04* | *`isAvailable()`* | *Negatif* | *Slot sudah lewat (tanggal 2000-01-01) walau statusKetersediaan true* | *Mengembalikan false* | *Sesuai* | *Pass* |
+| *C09-UT05* | *`findById()`* | *Normal* | *ID J1 ada di basis data* | *Mengembalikan objek JadwalKonsultasi dengan atribut sesuai* | *Sesuai* | *Pass* |
+| *C09-UT06* | *`findById()`* | *Negatif* | *ID tidak ada di basis data* | *Mengembalikan null* | *Sesuai* | *Pass* |
+| *C09-UT07* | *`updateAvailability()`* | *Normal* | *Ubah ketersediaan menjadi false* | *Query UPDATE dijalankan dan statusKetersediaan objek menjadi false* | *Sesuai* | *Pass* |
+| *C09-UT08* | *`updateStatus()`* | *Negatif* | *Status "Ditolak" (tidak dikenal)* | *Melempar AppError status 400* | *Sesuai* | *Pass* |
+| *C09-UT09* | *`updateStatus()`* | *Negatif* | *Menyetujui slot berstatus "Belum Diajukan"* | *Melempar AppError status 409 dan status tidak berubah* | *Sesuai* | *Pass* |
+| *C09-UT10* | *`updateStatus()`* | *Normal* | *Menyetujui slot berstatus "Diajukan"* | *Query UPDATE dijalankan dan status menjadi "Disetujui"* | *Sesuai* | *Pass* |
+| *C09-UT11* | *`updateStatus()`* | *Batas* | *Menyetujui slot berstatus "Rescheduled"* | *Diterima, status menjadi "Disetujui"* | *Sesuai* | *Pass* |
+| *C09-UT12* | *`updateStatus()`* | *Negatif* | *Menjadwalkan ulang slot berstatus "Belum Diajukan"* | *Melempar AppError status 409* | *Sesuai* | *Pass* |
+| *C09-UT13* | *`updateStatus()`* | *Normal* | *Menjadwalkan ulang slot berstatus "Disetujui"* | *Status menjadi "Rescheduled"* | *Sesuai* | *Pass* |
+| *C09-UT14* | *`reservasi()`* | *Normal* | *Slot tersedia, pelajar PLJ-1 dengan keluhan* | *Mengembalikan true, slot tidak tersedia, status "Diajukan", pelajar dan keluhan tercatat* | *Sesuai* | *Pass* |
+| *C09-UT15* | *`reservasi()`* | *Negatif* | *Slot sudah diambil pelajar lain (status_ketersediaan false di basis data)* | *Mengembalikan false dan tidak ada UPDATE yang dijalankan* | *Sesuai* | *Pass* |
+| *C09-UT16* | *`reservasi()`* | *Negatif* | *Slot tidak ditemukan di basis data (baris kosong)* | *Mengembalikan false* | *Sesuai* | *Pass* |
+| *C09-UT17* | *`updateSchedule()`* | *Negatif* | *Jadwal baru di masa lalu (2000-01-01 09:00)* | *Melempar AppError status 400 dan transaksi tidak dijalankan* | *Sesuai* | *Pass* |
+| *C09-UT18* | *`updateSchedule()`* | *Negatif* | *Waktu baru bentrok dengan jadwal lain tenaga kesehatan yang sama* | *Melempar AppError status 409 dan jadwal tidak berubah* | *Sesuai* | *Pass* |
+| *C09-UT19* | *`updateSchedule()`* | *Normal* | *Waktu baru di masa depan dan tidak bentrok, status "Diajukan"* | *Tanggal dan waktu berubah, status menjadi "Rescheduled"* | *Sesuai* | *Pass* |
+| *C09-UT20* | *`updateSchedule()`* | *Negatif* | *Slot berstatus "Belum Diajukan" dijadwalkan ulang* | *Melempar AppError status 409 dan tanggal tidak berubah* | *Sesuai* | *Pass* |
+| *C09-UT21* | *`tolakPengajuan()`* | *Negatif* | *Menolak slot berstatus "Belum Diajukan"* | *Melempar AppError status 409 dan tidak ada query dijalankan* | *Sesuai* | *Pass* |
+| *C09-UT22* | *`tolakPengajuan()`* | *Normal* | *Menolak slot berstatus "Diajukan" milik PLJ-1* | *Slot kembali kosong: pelajar dan keluhan null, status "Belum Diajukan", tersedia true* | *Sesuai* | *Pass* |
+| *C09-UT23* | *`findPengajuanMasuk()`* | *Normal* | *Basis data mengembalikan 1 pengajuan dengan nama pelajar* | *Mengembalikan objek JadwalKonsultasi yang memuat namaPelajar* | *Sesuai* | *Pass* |
+| *C09-UT24* | *`findByPelajar() dan findByTenagaKesehatan()`* | *Normal* | *Basis data mengembalikan 1 baris untuk masing-masing* | *Objek memuat nama tenaga kesehatan (findByPelajar) dan nama pelajar (findByTenagaKesehatan)* | *Sesuai* | *Pass* |
+
+Tabel 4.2.9b. Ringkasan Cakupan Kelas C09
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | *getDate(), getTime(), getStatus(), updateAvailability(), updateStatus(), isAvailable(), reservasi(), updateSchedule(), findById()* |
+| Operasi yang diuji | *Seluruh operasi pada kolom kiri, ditambah tolakPengajuan(), findPengajuanMasuk(), findByPelajar(), findByTenagaKesehatan()* |
+| ID Algoritma yang tercakup | *Algo-C09-01 sampai Algo-C09-06* |
+| Coverage (wajib ≥ 70%) | *100% baris / 92.85% cabang (Jest `--coverage`, bukti pada 4.6)* |
+
+### 4.2.10 Kelas [Nama Kelas 2]
+
+*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
+
+### 4.2.11 Kelas [Nama Kelas 2]
+
+*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
+
+### 4.2.12 Kelas [Nama Kelas 2]
+
+*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
+
+### 4.2.13 Kelas [Nama Kelas 2]
+
+*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
+
+### 4.2.14 Kelas CheckInController
+
+**ID Kelas:** *C14*  
+**Nama Kelas:** *CheckInController*  
+**Tingkat:** *Mendalam*
+
+Tabel 4.2.14. Hasil Pengujian Unit Kelas C14
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *C14-UT17* | *`validateCheckInFormat()`* | *Normal* | *Mood 3* | *Mengembalikan true* | *Sesuai* | *Pass* |
+| *C14-UT18* | *`validateCheckInFormat()`* | *Batas* | *Mood 1 dan 5 (diterima), mood 0 dan 6 (ditolak)* | *true untuk 1 dan 5, false untuk 0 dan 6* | *Sesuai* | *Pass* |
+| *C14-UT19* | *`validateCheckInFormat()`* | *Normal* | *Mood berupa string "4"* | *Mengembalikan true (dikonversi ke angka)* | *Sesuai* | *Pass* |
+| *C14-UT20* | *`validateCheckInFormat()`* | *Negatif* | *Mood undefined, null, "", 2.5, "abc", dan tanpa argumen* | *Seluruhnya mengembalikan false* | *Sesuai* | *Pass* |
+| *C14-UT21* | *`validateCheckInFormat()`* | *Normal* | *Hanya properti skalaMood (tanpa mood) bernilai 2* | *Mengembalikan true* | *Sesuai* | *Pass* |
+| *C14-UT22* | *`encryptJournal()`* | *Negatif* | *null, undefined, "", dan "   "* | *Seluruhnya mengembalikan null* | *Sesuai* | *Pass* |
+| *C14-UT23* | *`encryptJournal()`* | *Normal* | *Catatan "Hari ini saya cemas"* | *Ciphertext berformat iv:data yang bila didekripsi kembali ke teks asli* | *Sesuai* | *Pass* |
+| *C14-UT24* | *`encryptJournal()`* | *Normal* | *Catatan berupa objek { cipher, iv, key }* | *Objek diubah ke JSON lalu dienkripsi, dekripsi menghasilkan JSON yang sama* | *Sesuai* | *Pass* |
+| *C14-UT25* | *`submitCheckIn()`* | *Normal* | *Mood 4, tidur 23:00-06:30, makan "Teratur", pemicu ["Akademik","Keluarga"], catatan "Saya cemas"* | *Respons 201, check-in tersimpan, pemicu digabung, catatan tersimpan terenkripsi* | *Sesuai* | *Pass* |
+| *C14-UT26* | *`submitCheckIn()`* | *Batas* | *Hanya mood 3 (tanpa tidur, makan, pemicu, catatan)* | *Memakai nilai bawaan tidur 22:30, bangun 06:00, makan "Teratur", catatan null* | *Sesuai* | *Pass* |
+| *C14-UT27* | *`submitCheckIn()`* | *Batas* | *Catatan berisi spasi saja* | *Check-in tetap diterima dan catatan disimpan null* | *Sesuai* | *Pass* |
+| *C14-UT28* | *`submitCheckIn()`* | *Negatif* | *Mood 9 (di luar 1-5)* | *Diteruskan ke next sebagai AppError 400 dan check-in tidak disimpan* | *Sesuai* | *Pass* |
+| *C14-UT29* | *`submitCheckIn()`* | *Negatif* | *Body kosong (tanpa mood)* | *Diteruskan ke next sebagai AppError 400* | *Sesuai* | *Pass* |
+| *C14-UT30* | *`submitCheckIn()`* | *Negatif* | *Profil pelajar tidak ditemukan* | *Diteruskan ke next sebagai AppError 404* | *Sesuai* | *Pass* |
+| *C14-UT31* | *`submitCheckIn()`* | *Negatif* | *Jam tidur sama dengan jam bangun (23:00 dan 23:00)* | *Diteruskan ke next sebagai AppError 400 dari validasi CheckIn* | *Sesuai* | *Pass* |
+| *C14-UT32* | *`getHistory()`* | *Normal* | *Pelajar punya 1 riwayat check-in* | *Respons 200 berisi riwayat tersebut* | *Sesuai* | *Pass* |
+| *C14-UT33* | *`getTodayStatus()`* | *Normal* | *Pelajar sudah check-in hari ini* | *sudah_check_in true dan memuat check-in hari ini* | *Sesuai* | *Pass* |
+| *C14-UT34* | *`getTodayStatus()`* | *Negatif* | *Pelajar belum check-in hari ini* | *sudah_check_in false dan check_in null* | *Sesuai* | *Pass* |
+
+Tabel 4.2.14b. Ringkasan Cakupan Kelas C14
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | *submitCheckIn(), validateCheckInFormat(), encryptJournal()* |
+| Operasi yang diuji | *submitCheckIn(), validateCheckInFormat(), encryptJournal(), getHistory(), getTodayStatus()* |
+| ID Algoritma yang tercakup | *Algo-C14-01, Algo-C14-02, Algo-C14-03* |
+| Coverage (wajib ≥ 70%) | *100% baris / 90.24% cabang (Jest `--coverage`, bukti pada 4.6)* |
+
+### 4.2.15 Kelas [Nama Kelas 2]
+
+*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
+
+### 4.2.16 Kelas [Nama Kelas 2]
+
+*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
+
+### 4.2.17 Kelas ReportController
+
+**ID Kelas:** *C17*  
+**Nama Kelas:** *ReportController*  
+**Tingkat:** *Mendalam*
+
+Tabel 4.2.17. Hasil Pengujian Unit Kelas C17
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *C17-UT01* | *`summary()`* | *Negatif* | *Pengguna berperan TenagaKesehatan* | *Diteruskan ke next sebagai AppError 403* | *Sesuai* | *Pass* |
+| *C17-UT02* | *`summary()`* | *Normal* | *Pelajar dengan 3 check-in (mood 4, 4, 5; tidur 8 jam) sampai hari ini* | *Respons 200: rata-rata mood 4.3, rata-rata tidur 8, streak 3, risiko "Rendah", sudah_check_in true* | *Sesuai* | *Pass* |
+| *C17-UT03* | *`summary()`* | *Normal* | *Pelajar membuka laporan sendiri, check-in memuat catatan terenkripsi "Saya cemas"* | *Catatan didekripsi pada respons dan jurnal diminta dari basis data (denganJurnal true)* | *Sesuai* | *Pass* |
+| *C17-UT04* | *`summary()`* | *Normal* | *Wali membuka laporan pelajar yang punya catatan terenkripsi (KNF02)* | *Catatan kosong, jurnal tidak pernah diminta (denganJurnal false), ringkasan memakai data wali* | *Sesuai* | *Pass* |
+| *C17-UT05* | *`summary()`* | *Negatif* | *Profil wali tidak ditemukan* | *Diteruskan ke next sebagai AppError 404* | *Sesuai* | *Pass* |
+| *C17-UT06* | *`summary()`* | *Negatif* | *Profil pelajar tidak ditemukan* | *Diteruskan ke next sebagai AppError 404* | *Sesuai* | *Pass* |
+| *C17-UT07* | *`summary()`* | *Batas* | *Pelajar belum pernah check-in* | *Risiko "Belum Dapat Dinilai", streak 0, indeks 0, pola makan "-", sudah_check_in false* | *Sesuai* | *Pass* |
+| *C17-UT08* | *`summary()`* | *Normal* | *Pola makan "Teratur", "kurang teratur", "Tidak teratur" masing-masing 1 kali* | *jenis_makan menghitung 1 untuk tiga kategori resmi* | *Sesuai* | *Pass* |
+| *C17-UT09* | *`summary()`* | *Normal* | *Pemicu "Ujian, Keluarga" (hari ini) dan "Tugas" (kemarin)* | *stres: Akademik 67% dan Keluarga 33%, rerata pemicu 1.5* | *Sesuai* | *Pass* |
+| *C17-UT10* | *`summary()`* | *Batas* | *Check-in hari ini dan 2 hari lalu (kemarin terlewat), serta check-in hanya kemarin* | *Streak 1 untuk kasus pertama dan streak 0 untuk kasus kedua* | *Sesuai* | *Pass* |
+| *C17-UT11* | *`summary()`* | *Normal* | *Check-in 2 hari terakhir dengan mood 3 (kemarin) dan 5 (hari ini)* | *Seri grafik 7 hari berurutan lama ke baru dengan mood [3, 5]* | *Sesuai* | *Pass* |
+| *C17-UT12* | *`riwayat()`* | *Negatif* | *Pengguna berperan OrangTuaWali* | *Diteruskan ke next sebagai AppError 403* | *Sesuai* | *Pass* |
+| *C17-UT13* | *`riwayat()`* | *Normal* | *Pelajar punya 1 check-in dengan catatan terenkripsi, tidur 22:00-06:00* | *Respons 200 memuat tanggal, mood, tidur 8, catatan terdekripsi; riwayat diminta 30 entri* | *Sesuai* | *Pass* |
+| *C17-UT14* | *`riwayat()`* | *Batas* | *Check-in tanpa catatan refleksi* | *Catatan berupa string kosong* | *Sesuai* | *Pass* |
+| *C17-UT15* | *`riwayat()`* | *Negatif* | *Profil pelajar tidak ditemukan* | *Diteruskan ke next sebagai AppError 404* | *Sesuai* | *Pass* |
+
+Tabel 4.2.17b. Ringkasan Cakupan Kelas C17
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | *calculateStatistics(), buildTrendChart(), applyPrivacyRestriction()* |
+| Operasi yang diuji | *summary() (statistik, seri grafik, pembatasan data wali; mengimplementasikan ketiga operasi DPPL) dan riwayat()* |
+| ID Algoritma yang tercakup | *Algo-C17-01, Algo-C17-02, Algo-C17-03* |
+| Coverage (wajib ≥ 70%) | *95.59% baris / 71.96% cabang (Jest `--coverage`, bukti pada 4.6)* |
+
+### 4.2.18 Kelas [Nama Kelas 2]
+
+*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
+
+### 4.2.19 Kelas [Nama Kelas 2]
+
+*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
+
+### 4.2.20 Kelas TenagaKesehatanController
+
+**ID Kelas:** *C20*  
+**Nama Kelas:** *TenagaKesehatanController*  
+**Tingkat:** *Mendalam*
+
+Tabel 4.2.20. Hasil Pengujian Unit Kelas C20
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *C20-UT23* | *`loadTenagaKesehatan()`* | *Normal* | *Tanpa koordinat pengguna* | *Mengembalikan 3 tenaga kesehatan dengan jarak_km null dan urutan asli* | *Sesuai* | *Pass* |
+| *C20-UT24* | *`loadTenagaKesehatan()`* | *Normal* | *Koordinat pengguna di Bandung (-6.9,107.6)* | *Urut dari terdekat (Bandung lalu Jakarta), yang tanpa lokasi di urutan terakhir dengan jarak_km null* | *Sesuai* | *Pass* |
+| *C20-UT25* | *`loadTenagaKesehatan()`* | *Normal* | *Filter spesialisasi "psikiater" (huruf kecil)* | *Hanya Hendra yang dikembalikan* | *Sesuai* | *Pass* |
+| *C20-UT26* | *`loadTenagaKesehatan()`* | *Normal* | *Pencarian "jakarta" pada nama fasilitas* | *Hanya tenaga kesehatan di Klinik Jakarta yang dikembalikan* | *Sesuai* | *Pass* |
+| *C20-UT27* | *`loadTenagaKesehatan()`* | *Negatif* | *Latitude 95 (di luar rentang)* | *Koordinat diabaikan, seluruh jarak_km null* | *Sesuai* | *Pass* |
+| *C20-UT28* | *`loadTenagaKesehatan()`* | *Negatif* | *Latitude berupa string kosong dan longitude "abc"* | *Koordinat diabaikan, seluruh jarak_km null* | *Sesuai* | *Pass* |
+| *C20-UT29* | *`loadTenagaKesehatan()`* | *Batas* | *Koordinat dikirim lewat nama latitude dan longitude* | *Koordinat dipakai, jarak_km Bandung terisi* | *Sesuai* | *Pass* |
+| *C20-UT30* | *`processLocationPermission()`* | *Negatif* | *Koordinat tidak valid (lat "abc")* | *Diteruskan ke next sebagai AppError 400* | *Sesuai* | *Pass* |
+| *C20-UT31* | *`processLocationPermission()`* | *Normal* | *Pelajar memberi izin lokasi (-6.9,107.6)* | *Lokasi disimpan "-6.9,107.6" dan daftar berjarak dikembalikan dengan status 200* | *Sesuai* | *Pass* |
+| *C20-UT32* | *`processLocationPermission()`* | *Normal* | *Pengguna bukan Pelajar (OrangTuaWali) memberi lokasi* | *Lokasi tidak disimpan, daftar tetap dikembalikan* | *Sesuai* | *Pass* |
+| *C20-UT33* | *`processLocationPermission()`* | *Batas* | *Role Pelajar tetapi profil pelajar tidak ditemukan* | *Tidak melempar kesalahan, daftar tetap dikembalikan (200)* | *Sesuai* | *Pass* |
+| *C20-UT34* | *`updateTarif()`* | *Negatif* | *Tarif 0, -5, "abc", dan tidak diisi* | *Seluruhnya diteruskan ke next sebagai AppError 400* | *Sesuai* | *Pass* |
+| *C20-UT35* | *`updateTarif()`* | *Negatif* | *Pengguna bukan tenaga kesehatan (profil tidak ditemukan)* | *Diteruskan ke next sebagai AppError 403* | *Sesuai* | *Pass* |
+| *C20-UT36* | *`updateTarif()`* | *Negatif* | *Tenaga kesehatan belum terhubung ke fasilitas (setEstimasiBiaya false)* | *Diteruskan ke next sebagai AppError 400* | *Sesuai* | *Pass* |
+| *C20-UT37* | *`updateTarif()`* | *Normal* | *Tarif 150000.6 dari tenaga kesehatan terhubung fasilitas* | *Tarif dibulatkan menjadi 150001, respons 200 memuat estimasi_biaya 150001* | *Sesuai* | *Pass* |
+| *C20-UT38* | *`selectTenagaKesehatan()`* | *Negatif* | *ID tenaga kesehatan tidak ada* | *Diteruskan ke next sebagai AppError 404* | *Sesuai* | *Pass* |
+| *C20-UT39* | *`selectTenagaKesehatan()`* | *Normal* | *ID N1 ada, punya 1 jadwal tersedia, koordinat pengguna (-6.9,107.6)* | *Detail dengan jarak_km terisi dan jadwal_tersedia berisi 1 slot* | *Sesuai* | *Pass* |
+| *C20-UT40* | *`selectTenagaKesehatan()`* | *Batas* | *Tanpa koordinat pengguna* | *jarak_km bernilai null* | *Sesuai* | *Pass* |
+| *C20-UT41* | *`selectTenagaKesehatan()`* | *Negatif* | *Koordinat pengguna valid tetapi lokasi faskes tidak ada* | *jarak_km seharusnya null (sama seperti loadTenagaKesehatan)* | *jarak_km bernilai -1* | *Fail. Penyebab: selectTenagaKesehatan memakai Math.max(calculateDistanceKm(...), -1) sehingga kode galat -1 tampil sebagai jarak, sedangkan loadTenagaKesehatan memakai null. Usulan: jarak >= 0 ? jarak : null.* |
+| *C20-UT42* | *`selectTenagaKesehatan()`* | *Batas* | *Detail ada tetapi profil tenaga kesehatan tidak ditemukan (findById null)* | *Jadwal tersedia berupa array kosong* | *Sesuai* | *Pass* |
+
+Tabel 4.2.20b. Ringkasan Cakupan Kelas C20
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | *loadTenagaKesehatan(), processLocationPermission(), calculateDistances(), selectTenagaKesehatan()* |
+| Operasi yang diuji | *loadTenagaKesehatan(), processLocationPermission(), selectTenagaKesehatan(), updateTarif(); perhitungan jarak diuji di 4.2.XX distance.js* |
+| ID Algoritma yang tercakup | *Algo-C20-01, Algo-C20-02, Algo-C20-03, Algo-C20-04* |
+| Coverage (wajib ≥ 70%) | *100% baris / 98.46% cabang (Jest `--coverage`, bukti pada 4.6)* |
+
+### 4.2.21 Kelas [Nama Kelas 2]
+
+*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
+
+### 4.2.22 Kelas [Nama Kelas 2]
+
+*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
+
+### 4.2.23 Kelas KonsultasiController
+
+**ID Kelas:** *C23*  
+**Nama Kelas:** *KonsultasiController*  
+**Tingkat:** *Mendalam*
+
+Tabel 4.2.23. Hasil Pengujian Unit Kelas C23
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *C23-UT01* | *`ajukan()`* | *Negatif* | *Profil pelajar tidak ditemukan* | *Diteruskan ke next sebagai AppError 404* | *Sesuai* | *Pass* |
+| *C23-UT02* | *`ajukan()`* | *Negatif* | *ID jadwal kosong atau tidak dikirim* | *Diteruskan ke next sebagai AppError 400* | *Sesuai* | *Pass* |
+| *C23-UT03* | *`ajukan()`* | *Batas* | *Keluhan 9 karakter* | *Diteruskan ke next sebagai AppError 400 "Keluhan minimal 10 karakter."* | *Sesuai* | *Pass* |
+| *C23-UT04* | *`ajukan()`* | *Batas* | *Keluhan tepat 10 karakter* | *Diterima, respons 201* | *Sesuai* | *Pass* |
+| *C23-UT05* | *`ajukan()`* | *Negatif* | *Jadwal dengan ID tersebut tidak ada* | *Diteruskan ke next sebagai AppError 404* | *Sesuai* | *Pass* |
+| *C23-UT06* | *`ajukan()`* | *Negatif* | *Slot berstatus "Diajukan" (sudah diambil pelajar lain)* | *Diteruskan ke next sebagai AppError 409 dan pengajuan tidak dibuat* | *Sesuai* | *Pass* |
+| *C23-UT07* | *`ajukan()`* | *Negatif* | *Slot direbut pelajar lain saat transaksi (ajukanKonsultasi false)* | *Diteruskan ke next sebagai AppError 409 "Slot sudah tidak tersedia."* | *Sesuai* | *Pass* |
+| *C23-UT08* | *`ajukan()`* | *Normal* | *Slot J1 kosong dan keluhan 26 karakter* | *Respons 201 memuat id_jadwal J1 dan pengajuan dibuat dengan keluhan yang sudah dipangkas spasinya* | *Sesuai* | *Pass* |
+| *C23-UT09* | *`daftarSaya()`* | *Normal* | *Pelajar punya 1 pengajuan* | *Respons 200 berisi daftar pengajuan milik pelajar tersebut* | *Sesuai* | *Pass* |
+| *C23-UT10* | *`daftarSaya()`* | *Negatif* | *Profil pelajar tidak ditemukan* | *Diteruskan ke next sebagai AppError 404* | *Sesuai* | *Pass* |
+| *C23-UT11* | *`daftarMasuk() dan daftarJadwal()`* | *Normal* | *Tenaga kesehatan NAKES-1 membuka daftar pengajuan dan daftar jadwal* | *Kedua daftar diambil berdasarkan ID profil tenaga kesehatan, respons 200* | *Sesuai* | *Pass* |
+| *C23-UT12* | *`ubahStatus()`* | *Negatif* | *Status "Ditolak" dan status kosong* | *Diteruskan ke next sebagai AppError 400 tanpa mengambil jadwal* | *Sesuai* | *Pass* |
+| *C23-UT13* | *`ubahStatus()`* | *Negatif* | *Jadwal tidak ditemukan* | *Diteruskan ke next sebagai AppError 404* | *Sesuai* | *Pass* |
+| *C23-UT14* | *`ubahStatus()`* | *Negatif* | *Jadwal milik tenaga kesehatan lain (NAKES-9)* | *Diteruskan ke next sebagai AppError 403 dan status tidak diubah* | *Sesuai* | *Pass* |
+| *C23-UT15* | *`ubahStatus()`* | *Normal* | *Tenaga kesehatan pemilik menyetujui pengajuan berstatus "Diajukan"* | *updateStatus("Disetujui") dipanggil, respons 200 memuat status baru* | *Sesuai* | *Pass* |
+| *C23-UT16* | *`ubahStatus()`* | *Normal* | *Status "Rescheduled" dikirim oleh pemilik jadwal* | *Diterima dan updateStatus("Rescheduled") dipanggil* | *Sesuai* | *Pass* |
+| *C23-UT17* | *`ubahStatus()`* | *Negatif* | *Model menolak transisi status (melempar AppError 409)* | *Galat diteruskan ke next apa adanya* | *Sesuai* | *Pass* |
+| *C23-UT18* | *`jadwalUlang()`* | *Negatif* | *Tanggal "01-01-2099" dan jam "10:00:00" (format salah)* | *Diteruskan ke next sebagai AppError 400 dan jadwal tidak dipindah* | *Sesuai* | *Pass* |
+| *C23-UT19* | *`jadwalUlang()`* | *Negatif* | *Jadwal milik tenaga kesehatan lain* | *Diteruskan ke next sebagai AppError 403* | *Sesuai* | *Pass* |
+| *C23-UT20* | *`jadwalUlang()`* | *Normal* | *Pemilik jadwal memindah ke 2099-02-02 13:00* | *updateSchedule dipanggil dengan tanggal dan waktu baru, respons 200* | *Sesuai* | *Pass* |
+| *C23-UT21* | *`jadwalUlang()`* | *Negatif* | *Model menolak jadwal bentrok (AppError 409)* | *Galat diteruskan ke next* | *Sesuai* | *Pass* |
+| *C23-UT22* | *`tolakPengajuan()`* | *Normal* | *Pemilik jadwal menolak pengajuan berstatus "Diajukan"* | *tolakPengajuan dipanggil pada model, respons 200 dengan status "Belum Diajukan"* | *Sesuai* | *Pass* |
+| *C23-UT23* | *`tolakPengajuan()`* | *Negatif* | *Jadwal milik tenaga kesehatan lain* | *Diteruskan ke next sebagai AppError 403 dan pengajuan tidak ditolak* | *Sesuai* | *Pass* |
+| *C23-UT24* | *`tolakPengajuan()`* | *Negatif* | *Model menolak karena pengajuan belum menunggu (AppError 409)* | *Galat diteruskan ke next* | *Sesuai* | *Pass* |
+
+Tabel 4.2.23b. Ringkasan Cakupan Kelas C23
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | *approvePengajuan(), reschedule()* |
+| Operasi yang diuji | *ajukan(), daftarSaya(), daftarMasuk(), daftarJadwal(), ubahStatus() (approvePengajuan), jadwalUlang() (reschedule), tolakPengajuan()* |
+| ID Algoritma yang tercakup | *Algo-C23-01, Algo-C23-02* |
+| Coverage (wajib ≥ 70%) | *100% baris / 87.8% cabang (Jest `--coverage`, bukti pada 4.6)* |
+
+### 4.2.XX Modul encryption.js
+
+**Nama Modul:** *encryption.js*  
+**Tingkat:** *Mendalam*
+
+Modul ini dipakai operasi encryptJournal() pada C14 CheckInController (KNF01), sehingga ID pengujiannya memakai awalan C14.
+
+Tabel 4.2.XX. Hasil Pengujian Unit Modul encryption.js
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *C14-UT01* | *`encryptAES256()`* | *Normal* | *Teks "Hari ini saya merasa cemas"* | *Format `<iv_hex>:<ciphertext_hex>`, teks asli tidak terlihat* | *Sesuai* | *Pass* |
+| *C14-UT02* | *`encryptAES256()`* | *Normal* | *Teks yang sama dienkripsi dua kali* | *Ciphertext berbeda (IV acak)* | *Sesuai* | *Pass* |
+| *C14-UT03* | *`encryptAES256()`* | *Negatif* | *null dan undefined* | *Mengembalikan null* | *Sesuai* | *Pass* |
+| *C14-UT04* | *`encryptAES256()`* | *Batas* | *String kosong dan string spasi saja* | *Mengembalikan null* | *Sesuai* | *Pass* |
+| *C14-UT05* | *`encryptAES256()`* | *Normal* | *Angka 12345* | *Dikonversi ke string, dekripsi menghasilkan "12345"* | *Sesuai* | *Pass* |
+| *C14-UT06* | *`encryptAES256()`* | *Negatif* | *AES_SECRET_KEY tidak diatur* | *Melempar kesalahan "AES_SECRET_KEY belum diatur"* | *Sesuai* | *Pass* |
+| *C14-UT07* | *`encryptAES256()`* | *Batas* | *null tanpa AES_SECRET_KEY* | *Mengembalikan null tanpa kesalahan* | *Sesuai* | *Pass* |
+| *C14-UT08* | *`encryptAES256()`* | *Batas* | *Kunci "pendek" (bukan 32 byte)* | *Tetap valid (derivasi SHA-256), dekripsi benar* | *Sesuai* | *Pass* |
+| *C14-UT09* | *`decryptAES256()`* | *Normal* | *Enkripsi lalu dekripsi teks biasa* | *Kembali ke teks asli* | *Sesuai* | *Pass* |
+| *C14-UT10* | *`decryptAES256()`* | *Normal* | *Teks Unicode dan emoji* | *Kembali ke teks asli* | *Sesuai* | *Pass* |
+| *C14-UT11* | *`decryptAES256()`* | *Batas* | *Teks "  halo  "* | *Hasil "halo" (spasi pinggir dihapus)* | *Sesuai* | *Pass* |
+| *C14-UT12* | *`decryptAES256()`* | *Negatif* | *null, undefined, "", 123, {}* | *Mengembalikan null* | *Sesuai* | *Pass* |
+| *C14-UT13* | *`decryptAES256()`* | *Batas* | *Teks biasa tanpa :* | *Dikembalikan apa adanya* | *Sesuai* | *Pass* |
+| *C14-UT14* | *`decryptAES256()`* | *Batas* | *Teks "a:b:c" (lebih dari satu :)* | *Dikembalikan apa adanya* | *Sesuai* | *Pass* |
+| *C14-UT15* | *`decryptAES256()`* | *Negatif* | *Ciphertext didekripsi dengan kunci berbeda* | *Mengembalikan "[Data Terenkripsi]"* | *Sesuai* | *Pass* |
+| *C14-UT16* | *`decryptAES256()`* | *Negatif* | *Ciphertext rusak dan IV tidak valid* | *Mengembalikan "[Data Terenkripsi]"* | *Sesuai* | *Pass* |
+
+Tabel 4.2.XXb. Ringkasan Cakupan Modul encryption.js
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | *encryptAES256(), decryptAES256()* |
+| Operasi yang diuji | *encryptAES256(), decryptAES256()* |
+| ID Algoritma yang tercakup | *-* |
+| Coverage (wajib ≥ 70%) | *100% baris / 100% cabang (Jest `--coverage`, bukti pada 4.6)* |
+
+### 4.2.XX Modul distance.js
+
+**Nama Modul:** *distance.js*  
+**Tingkat:** *Mendalam*
+
+Modul ini dipakai operasi calculateDistances() pada C20 TenagaKesehatanController, sehingga ID pengujiannya memakai awalan C20.
+
+Tabel 4.2.XX. Hasil Pengujian Unit Modul distance.js
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *C20-UT01* | *`parseCoordinates()`* | *Normal* | *String "-6.9175,107.6191"* | *{lat: -6.9175, lng: 107.6191}* | *Sesuai* | *Pass* |
+| *C20-UT02* | *`parseCoordinates()`* | *Normal* | *String dengan spasi di sekitar koma* | *Spasi diabaikan, koordinat terbaca* | *Sesuai* | *Pass* |
+| *C20-UT03* | *`parseCoordinates()`* | *Normal* | *Objek {lat: -6.9, lng: 107.6}* | *Mengembalikan objek koordinat yang sama* | *Sesuai* | *Pass* |
+| *C20-UT04* | *`parseCoordinates()`* | *Negatif* | *null, undefined, ""* | *Mengembalikan null* | *Sesuai* | *Pass* |
+| *C20-UT05* | *`parseCoordinates()`* | *Negatif* | *"-6.9" dan "1,2,3"* | *Mengembalikan null* | *Sesuai* | *Pass* |
+| *C20-UT06* | *`parseCoordinates()`* | *Negatif* | *"abc,def" dan "-6.9,xyz"* | *Mengembalikan null* | *Sesuai* | *Pass* |
+| *C20-UT07* | *`parseCoordinates()`* | *Batas* | *"90,180" dan "-90,-180"* | *Diterima* | *Sesuai* | *Pass* |
+| *C20-UT08* | *`parseCoordinates()`* | *Batas* | *Lat 90.0001 / -90.0001, lng 180.0001 / -180.0001* | *Mengembalikan null* | *Sesuai* | *Pass* |
+| *C20-UT09* | *`parseCoordinates()`* | *Negatif* | *Objek tanpa lat atau lng* | *Mengembalikan null* | *Sesuai* | *Pass* |
+| *C20-UT10* | *`parseCoordinates()`* | *Negatif* | *Masukan angka 5* | *Mengembalikan null* | *Sesuai* | *Pass* |
+| *C20-UT11* | *`parseCoordinates()`* | *Batas* | *"0,0" dan {lat: 0, lng: 0}* | *Diterima sebagai titik valid* | *Sesuai* | *Pass* |
+| *C20-UT12* | *`parseCoordinates()`* | *Negatif* | *"Infinity,0"* | *Mengembalikan null* | *Sesuai* | *Pass* |
+| *C20-UT13* | *`parseCoordinates()`* | *Negatif* | *String "," (kedua bagian kosong)* | *Mengembalikan null* | *Mengembalikan {lat: 0, lng: 0}* | *Fail. Penyebab: Number('') bernilai 0 sehingga lolos pengecekan NaN. Usulan: tolak bagian string kosong sebelum konversi.* |
+| *C20-UT14* | *`parseCoordinates()`* | *Negatif* | *Objek {lat: null, lng: null}* | *Mengembalikan null* | *Mengembalikan {lat: 0, lng: 0}* | *Fail. Penyebab: Number(null) bernilai 0 dan null !== undefined. Usulan: tolak nilai null atau '' sebelum konversi.* |
+| *C20-UT15* | *`calculateDistanceKm()`* | *Batas* | *Dua titik yang sama* | *Jarak 0 km* | *Sesuai* | *Pass* |
+| *C20-UT16* | *`calculateDistanceKm()`* | *Normal* | *"0,0" ke "0,1"* | *111.19 km* | *Sesuai* | *Pass* |
+| *C20-UT17* | *`calculateDistanceKm()`* | *Batas* | *"0,0" ke "0,180" (antipodal)* | *20015.09 km* | *Sesuai* | *Pass* |
+| *C20-UT18* | *`calculateDistanceKm()`* | *Normal* | *Bandung ke Jakarta dan sebaliknya* | *Jarak sama (simetris)* | *Sesuai* | *Pass* |
+| *C20-UT19* | *`calculateDistanceKm()`* | *Normal* | *Bandung (-6.9175,107.6191) ke Jakarta (-6.2088,106.8456)* | *Antara 110 dan 120 km* | *Sesuai* | *Pass* |
+| *C20-UT20* | *`calculateDistanceKm()`* | *Normal* | *Campuran objek dan string* | *111.19 km* | *Sesuai* | *Pass* |
+| *C20-UT21* | *`calculateDistanceKm()`* | *Negatif* | *Salah satu titik null, "abc", atau lat 91* | *Mengembalikan -1* | *Sesuai* | *Pass* |
+| *C20-UT22* | *`calculateDistanceKm()`* | *Normal* | *Bandung ke Jakarta* | *Dibulatkan 2 angka di belakang koma* | *Sesuai* | *Pass* |
+
+Tabel 4.2.XXb. Ringkasan Cakupan Modul distance.js
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | *parseCoordinates(), calculateDistanceKm()* |
+| Operasi yang diuji | *parseCoordinates(), calculateDistanceKm()* |
+| ID Algoritma yang tercakup | *Algo-C02-03, Algo-C20-03* |
+| Coverage (wajib ≥ 70%) | *100% baris / 100% cabang (Jest `--coverage`, bukti pada 4.6)* |
+
 <br>
 
 ## 4.3 Pengujian Integrasi
