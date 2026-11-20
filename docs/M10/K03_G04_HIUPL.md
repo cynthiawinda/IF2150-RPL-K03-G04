@@ -143,58 +143,142 @@ Gambar 2.1 menggambarkan interaksi tiga aktor utama dengan sistem MahaSehat. Pel
 
 # BAB 3: Implementasi
 
-Bagian ini diisi dengan informasi tentang elemen P/L yang dikembangkan (*executable files*, *configuration files*, *data files*, dan sebagainya) serta perubahannya terhadap rancangan pada DPPL (jika ada).
+Bab ini memuat elemen P/L Mahasehat yang dibangun pada Tugas 9 (tag `v9.0`), yaitu lingkungan implementasi, kelas, layar antarmuka, dan file pendukung. Mahasehat ditulis dalam JavaScript yang langsung dijalankan oleh Node.js di sisi server dan oleh peramban di sisi klien, sehingga tidak ada file *executable* hasil kompilasi. Karena itu, kolom Nama File Executable pada Tabel 3.2 dan Tabel 3.3 diisi `-`. Seluruh modul server dimuat saat `src/server.js` dijalankan dengan `npm start`, sedangkan file antarmuka disajikan Express sebagai file statis dari folder `src/frontend` dengan alamat `http://localhost:3000/views/<NamaHalaman>.html`. Perubahan terhadap rancangan DPPL mengikuti Tabel B.1 dokumen Implementasi (Tugas 9).
 
 ## 3.1 Lingkungan Implementasi
 
-Tuliskan *hardware* dan *software* yang digunakan untuk implementasi, mencakup *operating system*, bahasa pemrograman beserta versinya, *framework*/*library*, DBMS, *development tools*, dan *version control*. Lingkungan ini harus konsisten dengan **Subbab 2.1 DPPL**; jelaskan jika ada perubahan. Cantumkan juga *framework* dan alat pengujian yang dipakai.
+Lingkungan implementasi mengacu pada Tabel 2.1 DPPL. Perbedaan terhadap rancangan dijelaskan langsung pada kolom keterangan.
 
 Tabel 3.1. Lingkungan Implementasi
 
 | Aspek | Keterangan |
 | :--- | :--- |
-| *Hardware* | *[Spesifikasi perangkat keras]* |
-| *Operating System* | *[Nama dan versi OS]* |
-| *Bahasa Pemrograman* | *[Bahasa dan versi]* |
-| *Framework/Library* | *[Daftar framework/library beserta versi]* |
-| *DBMS* | *[Nama dan versi DBMS]* |
-| *Development Tools* | *[IDE, version control, tools lain]* |
-| *Testing Tools* | *[Framework unit test, alat ukur performa, alat coverage]* |
+| *Hardware* | Laptop pengembang masing-masing anggota. Pengujian use case UC04–UC07 dijalankan pada laptop dengan prosesor Intel Core i7-1165G7 2,80 GHz dan RAM 16 GB |
+| *Operating System* | Pengembangan dan pengujian: Windows 11. Klien: peramban di Windows, Android, dan iOS sesuai Tabel 2.1 DPPL. Ubuntu Server 22.04 LTS pada DPPL adalah sasaran *deployment*; sampai tag `v9.0`, aplikasi masih dijalankan secara lokal |
+| *Bahasa Pemrograman* | JavaScript (ECMAScript 2020+) di Node.js 20 atau lebih baru (`"engines": { "node": ">=20" }` pada `src/package.json`); pengujian UC04–UC07 dijalankan dengan Node.js 26.13.0. Sisi klien memakai HTML5, CSS3, dan JavaScript tanpa *framework*. TypeScript yang disebut pada DPPL tidak dipakai |
+| *Framework/Library* | Express 4.22.3 (server HTTP dan *routing* MVC), pg 8.23.1 (driver PostgreSQL), bcryptjs 2.4.3 (*hash* kata sandi), jsonwebtoken 9.0.3 (token sesi JWT), node-cron 4.6.0 (job harian notifikasi darurat), nodemailer 10.3.1 (e-mail SMTP), dotenv 16.6.1 (konfigurasi `.env`), cors 2.8.6, modul bawaan `crypto` Node.js (AES-256-CBC untuk catatan refleksi dan riwayat kesehatan), serta Web Geolocation API dan rumus Haversine (`src/utils/distance.js`) untuk jarak fasilitas kesehatan. Google Maps API dan Google Calendar API pada DPPL belum dipakai; kuncinya tersedia di `.env.example`, tetapi tidak dipanggil oleh kode |
+| *DBMS* | PostgreSQL 15+ sesuai DPPL. Skema dibuat dari `src/config/schema.sql`. Pengujian UC04–UC07 memakai basis data uji PGlite 0.5.17 (PostgreSQL 18.7) yang diakses oleh driver `pg` lewat protokol PostgreSQL |
+| *Development Tools* | Visual Studio Code, Git dan GitHub (*version control*, *issue*, dan *pull request* pada repositori `cynthiawinda/IF2150-RPL-K03-G04`), npm (manajemen paket), nodemon 3.1.14 (*reload* otomatis saat pengembangan) |
+| *Testing Tools* | Jest 29.7.0 (*test runner* unit dan integrasi), Supertest 7.3.1 (uji endpoint HTTP), `jest --coverage` dengan Istanbul (laporan *coverage* per kelas), Google Chrome DevTools (tab Network untuk *response time* dan akses API, tab Memory untuk *heap snapshot*), Microsoft Edge dan emulasi perangkat DevTools (uji lintas peramban dan responsif), `psql` (inspeksi isi basis data), stopwatch (waktu pengisian check-in), serta pengujian manual di peramban untuk use case dengan bukti tangkapan layar |
 
 ## 3.2 Implementasi Modul
 
-Daftar modul/kelas yang **TELAH** diimplementasikan. Gunakan nama dan ID kelas yang sama dengan DPPL, dan konsisten dengan Tabel B.5 pada dokumen Implementasi (Tugas 9).
+Tabel 3.2 memakai ID dan nama kelas DPPL dan sejalan dengan Tabel B.5 dokumen Implementasi (Tugas 9). Kelas yang digabung, dipindahkan, atau belum dibuat tetap dicantumkan beserta keterangannya.
 
 Tabel 3.2. Implementasi Modul
 
 | No | ID Kelas | Nama Modul/Kelas | Nama File Fisik | Nama File Executable |
 | :--- | :--- | :--- | :--- | :--- |
-| 1 | *[C01]* | *[Nama modul/kelas]* | *[path/ke/file]* | *[Nama file executable, atau - jika tidak ada]* |
-| 2 | *[C02]* | *[Nama modul/kelas]* | *[path/ke/file]* | *[...]* |
-| ... | *...* | *...* | *...* | *...* |
+| 1 | *C01* | Pengguna | `src/models/Pengguna.js` (tabel `pengguna`) | - |
+| 2 | *C02* | Pelajar | `src/models/Pelajar.js` (tabel `pelajar`) | - |
+| 3 | *C03* | OrangTuaWali | `src/models/OrangTuaWali.js` (tabel `orang_tua_wali`) | - |
+| 4 | *C04* | TenagaKesehatan | `src/models/TenagaKesehatan.js` (tabel `tenaga_kesehatan`) | - |
+| 5 | *C05* | RiwayatKesehatan | `src/models/RiwayatKesehatan.js` (tabel `riwayat_kesehatan`) | - |
+| 6 | *C06* | CheckIn | `src/models/CheckIn.js` (tabel `check_in`) | - |
+| 7 | *C07* | LaporanKesehatan | `src/models/LaporanKesehatan.js` (dihitung dari data check-in, tanpa tabel) | - |
+| 8 | *C08* | FasilitasKesehatan | `src/models/FasilitasKesehatan.js` (tabel `fasilitas_kesehatan`) | - |
+| 9 | *C09* | JadwalKonsultasi | `src/models/JadwalKonsultasi.js` (tabel `jadwal_konsultasi`) | - |
+| 10 | *C10* | RegistrationPage | `src/frontend/views/RegistrationPagePelajar.html`, `RegistrationPageOrangTuaWali.html`, `RegistrationPageTenagaKesehatan.html` beserta file `.js` masing-masing dan `RegistrationPage.css` | - |
+| 11 | *C11* | AuthController | `src/controllers/authController.js`, `src/routes/authRoutes.js`, `src/middleware/authMiddleware.js` | - |
+| 12 | *C12* | KonfirmasiRegistrasiPage | `src/frontend/views/KonfirmasiRegistrasiPage.html`, `.js`, `.css` | - |
+| 13 | *C13* | CheckInPage | `src/frontend/views/CheckInPage.html`, `.js`, `.css` | - |
+| 14 | *C14* | CheckInController | `src/controllers/checkInController.js`, `src/routes/checkInRoutes.js` | - |
+| 15 | *C15* | NotifikasiPengingatController | Belum diimplementasikan. Scheduler `src/jobs/scheduler.js` hanya menjalankan evaluasi notifikasi darurat (Tabel B.1 butir 4, Tugas 9) | - |
+| 16 | *C16* | ReportPage | `src/frontend/views/ReportPage.html` (pengalih sesuai peran), `ReportPagePelajar.html`, `ReportPagePelajar.js`, `ReportPageOrangTuaWali.html`, `ReportPageOrangTuaWali.js`, `ReportChart.js`, `ReportPage.css` | - |
+| 17 | *C17* | ReportController | `src/controllers/ReportController.js`, `src/routes/reportRoutes.js` | - |
+| 18 | *C18* | CariTenagaKesehatanPage | `src/frontend/views/CariTenagaKesehatanPage.html`, `.js`, `.css` | - |
+| 19 | *C19* | ProfilTenagaKesehatanPage | Dialog `#Modal_Detail` pada `src/frontend/views/CariTenagaKesehatanPage.html`; datanya dari `TenagaKesehatanController.selectTenagaKesehatan` (Tabel B.1 butir 2, Tugas 9) | - |
+| 20 | *C20* | TenagaKesehatanController | `src/controllers/TenagaKesehatanController.js`, `src/routes/tenagaKesehatanRoutes.js` | - |
+| 21 | *C21* | PengajuanKonsultasiPage | Dialog `#Modal_Janji` pada `src/frontend/views/CariTenagaKesehatanPage.html` dan `CariTenagaKesehatanPage.js`; dikirim ke `KonsultasiController.ajukan` (Tabel B.1 butir 1, Tugas 9) | - |
+| 22 | *C22* | JadwalKonsultasiController | Digabung ke `src/controllers/KonsultasiController.js` (`daftarJadwal`, `jadwalUlang`, `daftarMasuk`) dan `src/routes/konsultasiRoutes.js` (Tabel B.1 butir 3, Tugas 9) | - |
+| 23 | *C23* | KonsultasiController | `src/controllers/KonsultasiController.js`, `src/routes/konsultasiRoutes.js` | - |
+| 24 | *C24* | NotifikasiDaruratController | `src/controllers/NotifikasiDaruratController.js`, `src/routes/emergencyRoutes.js`, `src/jobs/scheduler.js`, `src/jobs/jalankanEvaluasiDarurat.js` | - |
+| 25 | *C25* | LoginPage | `src/frontend/views/LoginPage.html`, `LoginPage.js`, `AuthLayout.css` | - |
+| 26 | *C26* | ResetPasswordPage | `src/frontend/views/ResetPasswordPage.html`, `ResetPasswordPage.js` | - |
+| 27 | *C27* | PasswordController | `src/controllers/passwordController.js` (rute di `src/routes/authRoutes.js`) | - |
+| 28 | *C28* | DashboardPage | `src/frontend/views/DashboardPagePelajar.*`, `DashboardPageOrangTuaWali.*`, `DashboardPageTenagaKesehatan.*` (`.html`, `.js`, `.css`) | - |
+| 29 | *C29* | SettingPage | `src/frontend/views/SettingPagePelajar.*`, `SettingPageOrangTuaWali.*`, `SettingPageTenagaKesehatan.*` (`.html`, `.js`, `.css`), `session.js` | - |
+| 30 | - | NotifikasiDarurat (kelas tambahan) | `src/models/NotifikasiDarurat.js` (tabel `notifikasi_darurat`); menyimpan notifikasi darurat yang dibuat job harian C24 (Tabel B.1 butir 17, Tugas 9) | - |
 
 ## 3.3 Implementasi Antarmuka
 
-Daftar antarmuka yang telah diimplementasikan. Gunakan ID dan nama layar yang sama dengan ID dan nama layar pada tugas DPPL.
+Tabel 3.3 memakai ID dan nama layar Bab 6 DPPL. Semua file berada di `src/frontend/views/`. Beberapa layar DPPL diimplementasikan sebagai langkah atau dialog di dalam satu halaman, sehingga kolom Nama File Fisik juga menyebut ID elemen atau langkahnya. Layar tambahan yang belum memiliki ID di DPPL dicantumkan pada baris 24–30.
 
 Tabel 3.3. Implementasi Antarmuka
 
 | No | ID Antarmuka | Nama Antarmuka | Nama File Fisik | Nama File Executable |
 | :--- | :--- | :--- | :--- | :--- |
-| 1 | *[I-01]* | *[Nama layar]* | *[path/ke/file]* | *[Nama file executable, atau - jika tidak ada]* |
-| 2 | *[I-02]* | *[Nama layar]* | *[path/ke/file]* | *[...]* |
-| ... | *...* | *...* | *...* | *...* |
+| 1 | *I-01* | RegistrationPagePelajar | `RegistrationPagePelajar.html`, `RegistrationPagePelajar.js`, `RegistrationPage.css` | - |
+| 2 | *I-02* | RegistrationPageOrangTuaWali | `RegistrationPageOrangTuaWali.html`, `RegistrationPageOrangTuaWali.js`, `RegistrationPage.css` | - |
+| 3 | *I-03* | RegistrationPageTenagaKesehatan | `RegistrationPageTenagaKesehatan.html`, `RegistrationPageTenagaKesehatan.js`, `RegistrationPage.css` | - |
+| 4 | *I-04* | RegistrationSuccessPelajarPage | `RegistrationSuccessPelajarPage.html`, `RegistrationSuccessPage.css` | - |
+| 5 | *I-05* | RegistrationSuccessPage | `RegistrationSuccessPage.html`, `RegistrationSuccessPage.css` | - |
+| 6 | *I-06* | KonfirmasiRegistrasiPage | `KonfirmasiRegistrasiPage.html`, `.js`, `.css` | - |
+| 7 | *I-07* | LoginPage | `LoginPage.html`, `LoginPage.js`, `AuthLayout.css` | - |
+| 8 | *I-08* | ResetPasswordPage1 | `ResetPasswordPage.html` langkah `#Step_Email` dan pemberitahuan `#Step_Terkirim`, `ResetPasswordPage.js` | - |
+| 9 | *I-09* | ResetPasswordPage2 | `ResetPasswordPage.html` langkah `#Step_KataSandiBaru`, `ResetPasswordPage.js` | - |
+| 10 | *I-10* | PasswordChangedMessage | Pop-up `#Popup_SandiDiganti` pada `ResetPasswordPage.html` | - |
+| 11 | *I-11* | IzinAksesLokasiPopUp | Dialog `#Modal_IzinLokasi` pada `CariTenagaKesehatanPage.html` | - |
+| 12 | *I-12* | CariTenagaKesehatanPage | `CariTenagaKesehatanPage.html`, `.js`, `.css` | - |
+| 13 | *I-13* | ProfilTenagaKesehatanPage | Dialog `#Modal_Detail` pada `CariTenagaKesehatanPage.html` (Tabel B.1 butir 22, Tugas 9) | - |
+| 14 | *I-14* | ReportPage | `ReportPage.html`, `ReportPagePelajar.html`, `ReportPageOrangTuaWali.html` beserta file `.js` masing-masing, `ReportChart.js`, `ReportPage.css` | - |
+| 15 | *I-15* | DashboardPageBelumCheckIn | `DashboardPagePelajar.html`, kartu `#Card_CheckIn` saat check-in hari ini belum diisi (`DashboardPagePelajar.js`) | - |
+| 16 | *I-16* | DashboardPageSudahCheckIn | `DashboardPagePelajar.html`, kartu `#Card_CheckIn` saat check-in hari ini sudah diisi (`DashboardPagePelajar.js`) | - |
+| 17 | *I-17* | CheckInMoodPage | `CheckInPage.html`, langkah 1 pada `CheckInPage.js` | - |
+| 18 | *I-18* | CheckInTidurPage | `CheckInPage.html`, langkah 2 pada `CheckInPage.js` | - |
+| 19 | *I-19* | CheckInTidurModal | Pemilih waktu bawaan peramban (`<input type="time">`) pada langkah 2 `CheckInPage.js`, menggantikan dialog pemilih jam dan menit | - |
+| 20 | *I-20* | CheckInMakanPage | `CheckInPage.html`, langkah 3 pada `CheckInPage.js` | - |
+| 21 | *I-21* | CheckInCatatanPage | `CheckInPage.html`, langkah 4 pada `CheckInPage.js` (pemicu stres dan catatan refleksi dalam satu langkah) | - |
+| 22 | *I-22* | CheckInPeriksaKembaliPage | `CheckInPage.html`, langkah 5 (ringkasan) pada `CheckInPage.js` | - |
+| 23 | *I-23* | PengajuanKonsultasi | Dialog `#Modal_Janji` pada `CariTenagaKesehatanPage.html` (Tabel B.1 butir 22, Tugas 9) | - |
+| 24 | - | DashboardPageOrangTuaWali | `DashboardPageOrangTuaWali.html`, `.js`, `.css` | - |
+| 25 | - | DashboardPageTenagaKesehatan | `DashboardPageTenagaKesehatan.html`, `.js`, `.css` | - |
+| 26 | - | ManajemenKonsultasiPage | `ManajemenKonsultasiPage.html`, `.js`, `.css`; layar UC07 untuk tenaga kesehatan beserta dialog `#Modal_JadwalUlang` dan `#Modal_KonfirmasiTolak` | - |
+| 27 | - | NotifikasiDarurat | `NotifikasiDarurat.html`, `.js`, `.css`, dan modal otomatis `emergency-alert.js` untuk peran wali (UC08) | - |
+| 28 | - | SettingPagePelajar | `SettingPagePelajar.html`, `.js`, `.css` | - |
+| 29 | - | SettingPageOrangTuaWali | `SettingPageOrangTuaWali.html`, `.js`, `.css` | - |
+| 30 | - | SettingPageTenagaKesehatan | `SettingPageTenagaKesehatan.html`, `.js`, `.css` | - |
 
 ## 3.4 File Lain
-
-Daftar file lain yang dibuat selain file kelas dan antarmuka, misalnya file *utility*, *configuration*, *database schema/seed*, *file test*, atau *data*.
 
 Tabel 3.4. File Lain
 
 | No | Nama File | Keterangan |
 | :--- | :--- | :--- |
-| 1 | *[Nama file]* | *[Fungsi file]* |
-| ... | *...* | *...* |
+| 1 | `src/server.js` | Titik masuk aplikasi: membaca `.env`, menjalankan server HTTP pada `PORT`, dan memulai scheduler notifikasi darurat |
+| 2 | `src/app.js` | Konfigurasi Express: *middleware* JSON dan CORS, penyajian file statis `src/frontend`, router `/api`, pengalihan `/`, `/konfirmasi-registrasi`, dan `/reset-password`, serta penanganan galat global |
+| 3 | `src/routes/index.js` | Router utama `/api` yang memasang rute auth, check-in, laporan, tenaga kesehatan, konsultasi, dan darurat, serta *healthcheck* `GET /api/health` |
+| 4 | `src/package.json`, `src/package-lock.json` | Daftar dependensi dengan versi terkunci dan *script* `start`, `dev`, `db:init`, `db:seed`, `job:darurat`, `test` |
+| 5 | `src/.env.example` | Contoh konfigurasi: koneksi PostgreSQL, `JWT_SECRET`, `AES_SECRET_KEY`, SMTP, kunci API eksternal, dan `EMERGENCY_CRON` |
+| 6 | `src/config/db.js` | *Pool* koneksi PostgreSQL dan *helper* transaksi `withTransaction` |
+| 7 | `src/config/schema.sql` | DDL seluruh tabel, `CHECK` *constraint*, dan indeks; diawali `DROP TABLE IF EXISTS` |
+| 8 | `src/config/seed.sql` | Data uji fiktif untuk tiga peran, check-in, fasilitas kesehatan, dan jadwal konsultasi relatif terhadap `CURRENT_DATE` |
+| 9 | `src/config/initDb.js` | *Script* `npm run db:init` dan `npm run db:seed`; menjalankan `schema.sql` dan `seed.sql`, lalu mengganti penanda *hash* akun uji dengan *hash* bcrypt `Password123!` |
+| 10 | `src/utils/encryption.js` | Enkripsi dan dekripsi AES-256-CBC untuk catatan refleksi dan riwayat kesehatan (KNF01) |
+| 11 | `src/utils/distance.js` | Validasi koordinat dan perhitungan jarak Haversine ke fasilitas kesehatan (KF12) |
+| 12 | `src/utils/waktu.js` | Tanggal hari ini zona Asia/Jakarta, selisih dan penambahan hari, validasi tanggal dan jam, hitung usia, gabung tanggal-waktu |
+| 13 | `src/utils/AppError.js` | Kelas galat dengan kode status HTTP dan pesan yang aman ditampilkan ke pengguna |
+| 14 | `src/utils/respon.js` | Format respons JSON seragam (`success`, `message`, `data`), konversi nama atribut ke *snake_case*, dan pembungkus *handler* asinkron |
+| 15 | `src/utils/mailer.js` | E-mail konfirmasi registrasi untuk wali dan e-mail atur ulang kata sandi |
+| 16 | `src/utils/kirimEmail.js` | Pengiriman e-mail notifikasi darurat; jika `SMTP_HOST` kosong, isi e-mail dicetak ke log server |
+| 17 | `src/frontend/views/base.css`, `components.css`, `sidebar.css` | Gaya dasar, komponen bersama (tombol, kartu, *badge*, dialog), dan *sidebar* |
+| 18 | `src/frontend/views/sidebar.js` | Perilaku *sidebar* responsif di semua halaman ber-*sidebar* |
+| 19 | `src/frontend/views/session.js` | Penjaga sesi (arahkan ke LoginPage bila token tidak ada) dan logout bersama |
+| 20 | `src/frontend/views/feedback.js` | *Toast* umpan balik untuk aksi berhasil dan gagal |
+| 21 | `src/frontend/assets/*.png` | Logo Mahasehat dan ikon menu |
+| 22 | `src/tests/setupEnv.js` | Nilai *environment* khusus pengujian; suite integrasi hanya berjalan bila `TEST_DATABASE_URL` terisi |
+| 23 | `src/tests/foundation.test.js` | Uji utilitas fondasi: enkripsi AES-256 (KNF01), validasi koordinat (Algo-C02-03), dan jarak Haversine (Algo-C20-03) |
+| 24 | `src/tests/fondasiDb.test.js` | Uji integrasi basis data untuk `Pelajar.setCheckIn` (check-in ganda) dan pengaturan *password* akun uji pada `initDb --seed` |
+| 25 | `src/tests/authRegister.test.js`, `authKonfirmasiWali.test.js`, `authMasuk.test.js`, `authKeluar.test.js` | Uji registrasi (UC01), konfirmasi wali (UC02), masuk dan atur ulang kata sandi (UC09), serta keluar akun (UC10) |
+| 26 | `src/tests/laporanKesehatan.test.js` | Uji `LaporanKesehatan.evaluateThreshold` (Algo-C07-01), `detectEmergency` (Algo-C07-02), `CheckIn.createCheckIn` (Algo-C06-01, Algo-C06-02), dan utilitas waktu |
+| 27 | `src/tests/notifikasiDarurat.test.js`, `scheduler.test.js` | Uji notifikasi darurat (UC08) dan scheduler evaluasi darurat harian |
+| 28 | `src/tests/unitAuthEmergency.test.js` | Uji unit Subbab 4.2 untuk C01, C02, C03, C11 (beserta `authMiddleware`), C24, dan C27 |
+| 29 | `src/tests/tenagaKesehatan.test.js`, `checkIn.test.js`, `laporanKesehatanUnit.test.js`, `fasilitasKesehatan.test.js`, `jadwalKonsultasi.test.js` | Uji unit Subbab 4.2 untuk kelas *entity* C04, C06, C07, C08, dan C09 |
+| 30 | `src/tests/checkInController.test.js`, `reportController.test.js`, `tenagaKesehatanController.test.js`, `konsultasiController.test.js` | Uji unit Subbab 4.2 untuk *controller* C14, C17, C20, dan C23 |
+| 31 | `src/tests/encryption.test.js`, `distance.test.js` | Uji unit Subbab 4.2 untuk modul `encryption.js` dan `distance.js` |
+| 32 | `src/tests/integrasiKomponen.test.js` | Uji integrasi Subbab 4.3 dengan basis data PostgreSQL nyata (`TEST_DATABASE_URL`), tanpa *mock* |
+| 33 | `src/README.md`, `CARA-TEST.md` | Panduan instalasi, konfigurasi, menjalankan aplikasi, dan akun uji |
+| 34 | `.gitignore` | Mengecualikan `node_modules`, `.env`, dan folder `coverage` dari repositori |
 
 <br>
 
@@ -225,14 +309,14 @@ Tabel 4.1.1. Identifikasi Tingkat Pengujian Kelas
 | *C13* | *CheckInPage* | *Tidak perlu* | *Hanya tampilan form, validasi ada di C06 dan C14* | *UC03-TCYY, KNF07-TC01* |
 | *C14* | *CheckInController* | *Mendalam* | *Validasi format masukan dan enkripsi jurnal* | *C14-UTYY, INT-TCYY, KNF01-TC01* |
 | *C15* | *NotifikasiPengingatController* | *Tidak perlu* | *Tidak diimplementasikan, jadi tidak ada kode yang diuji* | *-* |
-| *C16* | *ReportPage* | *Tidak perlu* | *Hanya menampilkan grafik dan filter periode* | *UC04-TCYY, KNF04-TC01* |
+| *C16* | *ReportPage* | *Tidak perlu* | *Hanya menampilkan grafik dan filter periode* | *UC04-TC01 s.d. UC04-TC05, KNF04-TC01* |
 | *C17* | *ReportController* | *Mendalam* | *Agregasi statistik dan pembatasan data wali (tanpa teks jurnal)* | *C17-UTYY, INT-TCYY, KNF02-TC01* |
-| *C18* | *CariTenagaKesehatanPage* | *Tidak perlu* | *Hanya tampilan pencarian, filter, dan modal* | *UC05-TCYY, KNF03-TC01* |
-| *C19* | *ProfilTenagaKesehatanPage* | *Tidak perlu* | *Hanya dialog dalam halaman Cari, tanpa logika* | *UC05-TCYY, UC06-TCYY* |
+| *C18* | *CariTenagaKesehatanPage* | *Tidak perlu* | *Hanya tampilan pencarian, filter, dan modal* | *UC05-TC01, UC05-TC02, UC06-TC01 s.d. UC06-TC03, KNF03-TC01* |
+| *C19* | *ProfilTenagaKesehatanPage* | *Tidak perlu* | *Hanya dialog dalam halaman Cari, tanpa logika* | *UC05-TC01, UC05-TC02, UC06-TC01* |
 | *C20* | *TenagaKesehatanController* | *Mendalam* | *Izin lokasi, perhitungan jarak, dan integrasi lokasi eksternal* | *C20-UTYY, INT-TCYY, KNF03-TC01* |
-| *C21* | *PengajuanKonsultasiPage* | *Tidak perlu* | *Dihapus dan digabung ke modal halaman Cari, logikanya ada di C23* | *UC06-TCYY, UC07-TCYY* |
-| *C22* | *JadwalKonsultasiController* | *Tidak perlu* | *Digabung ke C23, operasinya diuji bersama C23* | *C23-UTYY, UC06-TCYY* |
-| *C23* | *KonsultasiController* | *Mendalam* | *Aturan status pengajuan, reschedule, dan hak akses per peran* | *C23-UTYY, INT-TCYY, UC07-TCYY* |
+| *C21* | *PengajuanKonsultasiPage* | *Tidak perlu* | *Dihapus dan digabung ke modal halaman Cari, logikanya ada di C23* | *UC06-TC01 s.d. UC06-TC03* |
+| *C22* | *JadwalKonsultasiController* | *Tidak perlu* | *Digabung ke C23, operasinya diuji bersama C23* | *C23-UTYY, UC06-TC01, UC07-TC03* |
+| *C23* | *KonsultasiController* | *Mendalam* | *Aturan status pengajuan, reschedule, dan hak akses per peran* | *C23-UTYY, INT-TCYY, UC07-TC01 s.d. UC07-TC03* |
 | *C24* | *NotifikasiDaruratController* | *Mendalam* | *Evaluasi darurat, kirim e-mail, dan retry maksimal 3 kali* | *C24-UT01 s.d. C24-UT10, INT-TC11, INT-TC12, INT-TC15, KNF06-TC01, UC08-TC01, UC08-TC02* |
 | *C25* | *LoginPage* | *Tidak perlu* | *Hanya tampilan form login* | *UC09-TC01 s.d. UC09-TC03, KNF11-TC01* |
 | *C26* | *ResetPasswordPage* | *Tidak perlu* | *Hanya tampilan dua langkah reset password* | *UC09-TC04* |
@@ -936,6 +1020,70 @@ Tabel 4.4.3. Hasil Pengujian Use Case [UC03]
 | *UC03-TC01* | *KF03, KF04, KF05, KF07* | *Normal* | *1. Mulai daily check-in<br>2. Pilih salah satu opsi suasana hati pada form suasana hati<br>3. Isi waktu tidur dan waktu bangun<br>4. Pilih opsi pola makan hari ini<br>5. Isi catatan refleksi harian<br>6. Periksa ringkasan check-in dan klik tombol "Simpan check-in"* | *Suasana hati: "Baik (skala 4/5), waktu tidur: 22.30 dan waktu bangun: 06.00, pola makan: "Teratur", catatan refleksi harian "stress akademik tugas besar"* | *Setiap langkah tercatat, halaman berpindah sesuai alur, ringkasan ditampilkan, data check-in tersimpan, dan pesan keberhasilan ditampilkan* | *Setiap langkah tercatat, halaman berpindah sesuai alur, ringkasan ditampilkan, data check-in tersimpan, dan pesan keberhasilan ditampilkan sesuai harapan* | *Pass* |
 | *UC03-TC02* | *KF03, KF04, KF05, KF07* | *Alternatif 1: Pelajar tidak mengisi catatan refleksi harian* | *1. Mulai daily check-in<br>2. Pilih salah satu opsi suasana hati pada form suasana hati<br>3. Isi waktu tidur dan waktu bangun<br>4. Pilih opsi pola makan hari ini<br>5. Catatan refleksi harian dikosongkan<br>6. Periksa ringkasan check-in dan klik tombol "Simpan check-in"* | *Suasana hati: "Biasa (skala 3/5), waktu tidur: 22.30 dan waktu bangun: 06.00, pola makan: "Kurang teratur", catatan refleksi harian dikosongkan* | *Pop-up konfirmasi untuk memastikan apakah pelajar ingin melanjutkan tanpa membuat catatan refleksi muncul, setelah dikonfirmasi rangkuman tampil, dan data check-in tersimpan dengan pesan keberhasilan ditampilkan.* | *Ketika catatan refleksi dikosongkan, tidak muncul pop-up konfirmasi dan sistem langsung melanjutkan ke tahap berikutnya / menyimpan data* | *Fail karena form refleksi harian tidak menyertakan pengecekan masukan kosong untuk menampilkan pop up konfirmasi. Harusnya menambahkan pengecekan masukan kosong untuk menampilkan pop-up konfirmasi melanjutkan tanpa refleksi* |
 
+**Lingkungan uji UC04–UC07.** Pengujian dijalankan pada 19–20 November 2026 terhadap kode aplikasi tag `v9.0` (`fb77692`). Sampai 20 November 2026, perubahan `src/` di `main` hanya berupa file test baru di `src/tests/`, sehingga hasil ini tetap berlaku untuk `main`. Server dijalankan dengan `npm start` setelah `npm run db:seed`, lalu diakses lewat peramban berbasis Chromium dengan *viewport* 1280×800. Basis data uji adalah PGlite 0.5.17 (PostgreSQL 18.7) yang diakses driver `pg`. `SMTP_HOST` dikosongkan sehingga setiap e-mail yang dikirim aplikasi tercetak di log server. Semua akun memakai kata sandi seed `Password123!`. Dua akun pelajar tanpa riwayat check-in dibuat lewat `POST /api/auth/register` untuk pengujian ini, yaitu `dewi.pelajar@mahasehat.id` (tanggal lahir 2004-08-21) dan `eko.pelajar@mahasehat.id` (tanggal lahir 2003-02-10); keduanya langsung `Aktif` karena berusia di atas 18 tahun. Tangkapan layar setiap test case dilampirkan pada Tabel 4.6.
+
+### 4.4.4 Use Case Melihat Statistik dan Laporan Kondisi
+
+**ID Use Case:** *UC04*  
+**Nama Use Case:** *Melihat Statistik dan Laporan Kondisi*
+
+Tabel 4.4.4. Hasil Pengujian Use Case UC04
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *UC04-TC01* | *KF08* | *Normal (pelajar), langkah 1–3* | *1. Masuk sebagai pelajar.<br>2. Klik menu "Laporan Kesehatan".<br>3. Klik periode "30 Hari".<br>4. Pada kartu Catatan, klik tanggal 17 dan 19 November.* | *Akun `budi.pelajar@mahasehat.id`; data seed berisi 5 check-in pada 15–19 November 2026, catatan refleksi hanya pada 19 November* | *Statistik kondisi tampil dari data check-in, berubah sesuai periode yang dipilih, dan pola yang dipilih menampilkan informasinya* | *Periode 7 hari menampilkan grafik harian Data Mood (4, 3, 2, 3, 4), Data Tidur (7,5; 6,5; 5,5; 7; 7,5 jam), Pemicu per Hari, Data Jenis Makan, dan Faktor Pemicu Stress (Akademik 80%, Kesehatan 20%). Periode 30 hari mengelompokkan data menjadi "Minggu Ketiga" dengan rerata mood 3,2 dan tidur 6,8 jam. Tanggal 19 November menampilkan catatan refleksi yang sudah didekripsi, sedangkan 17 November menampilkan "Belum ada catatan refleksi untuk tanggal ini.", sesuai isi basis data* | *Pass* |
+| *UC04-TC02* | *KF09, KF10* | *Normal (pelajar), langkah 4* | *1. Masuk sebagai pelajar.<br>2. Telusuri halaman Laporan Kesehatan pada setiap periode.<br>3. Buka Dashboard pelajar.* | *Akun `budi.pelajar@mahasehat.id`* | *Rangkuman kondisi kesehatan dan rekomendasi kesehatan ditampilkan berdasarkan periode yang dipilih* | *Halaman Laporan Kesehatan pelajar hanya berisi grafik dan catatan; rangkuman kondisi dan rekomendasi tidak ditampilkan pada periode mana pun. Dashboard menampilkan Indeks Kesehatan Mental 69/100 berlabel "Stabil" yang dihitung dari 90 hari terakhir, tetapi tanpa rekomendasi dan tidak mengikuti periode yang dipilih* | *Fail. Penyebab: `ReportPagePelajar.js` tidak memakai `ringkasan_kondisi` dan `indikator_risiko` dari `GET /api/reports/summary`, padahal kedua data tersebut sudah dipakai halaman wali. Solusi: tambahkan kartu Indikator Risiko dan Ringkasan Kondisi pada `ReportPagePelajar.html`, dengan teks rekomendasi per tingkat risiko seperti `LABEL_RISIKO` pada `ReportPageOrangTuaWali.js`* |
+| *UC04-TC03* | *KF09, KF17* | *Normal (orang tua/wali)* | *1. Masuk sebagai wali.<br>2. Klik menu "Laporan Kesehatan".<br>3. Gunakan periode 7 hari.* | *Akun `santoso.wali@mahasehat.id` (wali Budi Pratama)* | *Laporan rangkuman kondisi pelajar yang diwalikan tampil tanpa catatan pribadi pelajar* | *Halaman menampilkan "Ringkasan kondisi Budi Pratama", Indikator Risiko "Rendah" beserta penjelasannya, Ringkasan Kondisi "Rata-rata mood 3.2 dari 5, rata-rata tidur 6.8 jam, 0 hari tanpa check-in", kartu rerata, Tren Mood, dan Tren Tidur. Catatan refleksi tidak ditampilkan dan ada pesan "Demi privasi pelajar, catatan pribadi dan detail check-in tidak ditampilkan." Temuan: kartu "Pola Makan 1.0 x / Hari, Rata-rata frekuensi makan" berisi rata-rata jumlah pemicu stres per hari (lihat catatan temuan T-01)* | *Pass* |
+| *UC04-TC04* | *KF06, KF10* | *Normal (orang tua/wali), pola tidak biasa* | *1. Masuk sebagai wali.<br>2. Klik menu "Laporan Kesehatan".* | *Akun `ratna.wali@mahasehat.id` (wali Citra Lestari); data seed Citra berisi 3 check-in pada 13–15 November 2026 dengan mood 2, 1, 2 dan tidur 4; 3,5; 3,5 jam, lalu tidak check-in lagi* | *Pola di luar ambang batas ditandai, dan jumlah hari tanpa check-in dihitung dari check-in terakhir sampai hari ini* | *Indikator Risiko "Tinggi" dengan saran "Disarankan berbicara dengan pelajar dan mempertimbangkan konsultasi dengan tenaga kesehatan." Ringkasan "Rata-rata mood 1.7 dari 5, rata-rata tidur 3.7 jam, 4 hari tanpa check-in"; kartu Tanpa Check-In bernilai 4 hari (15 sampai 19 November)* | *Pass* |
+| *UC04-TC05* | *KF08* | *Alternatif 1: Data check-in belum dapat divisualisasikan* | *1. Masuk sebagai pelajar yang belum pernah check-in.<br>2. Klik menu "Laporan Kesehatan".<br>3. Klik menu "Dashboard" pada *sidebar* untuk kembali.* | *Akun `dewi.pelajar@mahasehat.id` tanpa data check-in* | *Muncul pemberitahuan bahwa data check-in belum mencukupi, dan pengguna dapat kembali ke halaman sebelumnya* | *Grafik tidak ditampilkan. Kartu "Data belum cukup" berisi pesan "Data check-in belum cukup untuk divisualisasikan. Isi daily check-in secara rutin agar laporan dapat ditampilkan." beserta tombol "Isi Check-In". Halaman tidak punya tombol "Kembali" khusus; kembali ke Dashboard lewat menu *sidebar* berhasil* | *Pass* |
+
+
+### 4.4.5 Use Case Menentukan Tenaga Kesehatan
+
+**ID Use Case:** *UC05*  
+**Nama Use Case:** *Menentukan Tenaga Kesehatan*
+
+Tabel 4.4.5. Hasil Pengujian Use Case UC05
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *UC05-TC01* | *KF11, KF12* | *Normal* | *1. Masuk sebagai pelajar yang belum pernah memberi jawaban izin lokasi.<br>2. Klik menu "Konsultasi".<br>3. Klik "Izinkan" pada dialog Akses lokasi.<br>4. Klik "Lihat Detail" pada kartu Siti Rahmawati.* | *Akun `dewi.pelajar@mahasehat.id`; lokasi perangkat disimulasikan di koordinat -6,8985, 107,6100 dengan mengganti `navigator.geolocation` sebelum tombol "Izinkan" diklik* | *Daftar tenaga kesehatan beserta lokasi dan estimasi biaya tampil bersama permintaan izin lokasi; setelah izin diberikan, jarak ke setiap fasilitas tampil; profil tenaga kesehatan yang dipilih tampil* | *Dialog "Akses lokasi" tampil di atas daftar 3 tenaga kesehatan yang memuat nama fasilitas dan tarif per sesi (Rp75.000, Rp150.000, Rp250.000). Setelah izin diberikan, daftar diurutkan dari yang terdekat: dr. Hendra Wijaya 0,6 km, Siti Rahmawati 0,8 km, Nadia Kusuma 1,6 km. Jarak ini sama dengan perhitungan Haversine manual (0,61; 0,78; 1,56 km). Dialog detail Siti menampilkan fasilitas, alamat, jarak 0,8 km, tarif, jam reguler, dan tombol "Jadwalkan". Temuan: Nomor STR tampil "-" (lihat catatan temuan T-02)* | *Pass* |
+| *UC05-TC02* | *KF11* | *Alternatif 1: Akses Lokasi Tidak Diberikan* | *1. Hapus jawaban izin lokasi yang tersimpan (`localStorage` kunci `lokasiAktif`), lalu muat ulang halaman.<br>2. Klik "Jangan Izinkan".<br>3. Klik "Lihat Detail" pada kartu Nadia Kusuma.* | *Akun `dewi.pelajar@mahasehat.id`* | *Lokasi pelajar tidak diakses, daftar tenaga kesehatan tetap tampil tanpa informasi jarak, dan profil yang dipilih tetap tampil* | *Daftar 3 tenaga kesehatan tetap tampil tanpa jarak, dengan keterangan "3 tenaga kesehatan.". Setelah halaman dimuat ulang, log jaringan hanya mencatat `GET /api/tenaga-kesehatan/`, tanpa `PUT /api/tenaga-kesehatan/lokasi-pelajar`. Dialog detail Nadia menampilkan "Jarak: Lokasi tidak diizinkan"* | *Pass* |
+
+
+### 4.4.6 Use Case Mengajukan Jadwal Konsultasi
+
+**ID Use Case:** *UC06*  
+**Nama Use Case:** *Mengajukan Jadwal Konsultasi*
+
+Tabel 4.4.6. Hasil Pengujian Use Case UC06
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *UC06-TC01* | *KF13* | *Normal* | *1. Pada halaman Cari Tenaga Kesehatan, klik "Lihat Detail" pada dr. Hendra Wijaya, lalu "Jadwalkan".<br>2. Pilih slot Sabtu, 21 November 2026 pukul 14.00 WIB.<br>3. Isi kolom Keluhan utama.<br>4. Klik "Buat Janji".<br>5. Periksa baris jadwal pada tabel `jadwal_konsultasi`.* | *Akun `dewi.pelajar@mahasehat.id`; keluhan "Mood turun naik dan susah tidur sejak awal semester."* | *Formulir pengajuan menampilkan jadwal yang tersedia, dan pengajuan tersimpan untuk ditinjau tenaga kesehatan* | *Dialog "Buat janji" menampilkan 2 slot dr. Hendra (20 November 10.00 WIB dan 21 November 14.00 WIB). Setelah dikirim, muncul pesan "Pengajuan konsultasi dengan dr. Hendra Wijaya, Sp.KJ terkirim. Tenaga kesehatan akan meninjau permohonanmu." Baris `JDW-005` kini terisi `id_pelajar` Dewi dengan `status_ketersediaan = false` dan `status_pengajuan = 'Diajukan'`* | *Pass* |
+| *UC06-TC02* | *KF13, KF14* | *Alternatif 1: Jadwal Konsultasi Tidak Lagi Tersedia* | *1. Dewi membuka formulir janji Nadia Kusuma (slot 20 November 15.00 WIB dan 22 November 09.30 WIB).<br>2. Selagi formulir terbuka, akun Eko mengajukan slot 22 November 09.30 WIB lewat `POST /api/konsultasi`.<br>3. Dewi memilih slot 22 November 09.30 WIB, mengisi keluhan, lalu klik "Buat Janji".<br>4. Dewi klik "Buat Janji" lagi dengan slot yang tersisa.* | *Akun `dewi.pelajar@mahasehat.id` dan `eko.pelajar@mahasehat.id`; keluhan Dewi "Sering cemas dan sulit fokus belajar dua minggu terakhir."* | *Muncul pemberitahuan bahwa jadwal yang dipilih sudah tidak tersedia beserta pilihan jadwal lain; jadwal lain yang dipilih tersimpan sebagai pengajuan* | *Server menolak pengajuan pertama (409). Formulir menampilkan "Slot ini sudah diajukan pelajar lain." dan slot 22 November dihapus dari pilihan sehingga tersisa 20 November 15.00 WIB. Pengajuan kedua berhasil dan baris `JDW-006` tersimpan "Diajukan" atas nama Dewi. Catatan: ketersediaan diperiksa saat pengajuan dikirim, bukan saat slot dipilih seperti langkah 2 skenario SKPL* | *Pass* |
+| *UC06-TC03* | *KF14* | *Normal, langkah 3: ketersediaan diperbarui selama formulir dibuka* | *1. Dewi membuka formulir janji Nadia Kusuma.<br>2. Akun Eko mengajukan slot 22 November 09.30 WIB lewat `POST /api/konsultasi`.<br>3. Formulir dibiarkan terbuka 30 detik tanpa dikirim.<br>4. Periksa daftar slot dan log jaringan.* | *Akun `dewi.pelajar@mahasehat.id` dan `eko.pelajar@mahasehat.id`* | *Slot yang sudah diambil pelajar lain hilang dari formulir tanpa perlu mengirim pengajuan* | *Setelah 30 detik, slot 22 November 09.30 WIB masih tampil dan masih bisa dipilih. Log jaringan hanya mencatat dua `GET /api/tenaga-kesehatan/NAKES-003` saat dialog detail dan dialog janji dibuka; tidak ada permintaan pembaruan berkala* | *Fail. Penyebab: `bukaJanji()` pada `CariTenagaKesehatanPage.js` memuat slot satu kali saat dialog dibuka. Solusi: muat ulang slot secara berkala (misalnya setiap 15 detik selama `#Modal_Janji` terbuka) dan setiap kali slot dipilih, lalu hapus slot yang sudah tidak tersedia dari pilihan* |
+
+
+### 4.4.7 Use Case Mengelola Pengajuan Konsultasi
+
+**ID Use Case:** *UC07*  
+**Nama Use Case:** *Mengelola Pengajuan Konsultasi*
+
+Tabel 4.4.7. Hasil Pengujian Use Case UC07
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| *UC07-TC01* | *KF15* | *Normal, persetujuan* | *1. Masuk sebagai tenaga kesehatan.<br>2. Klik menu "Konsultasi".<br>3. Pilih pengajuan Dewi Anggraini dan tinjau detailnya.<br>4. Klik "Setujui Permohonan".<br>5. Periksa baris jadwal pada tabel `jadwal_konsultasi`.* | *Akun `nadia.psikolog@mahasehat.id`; pengajuan `JDW-006` (Dewi) dan `JDW-007` (Eko) hasil UC06* | *Daftar pengajuan masuk tampil beserta detail dan tombol aksi; setelah disetujui, status pengajuan menjadi "Disetujui"* | *Halaman Manajemen Konsultasi menampilkan 2 pengajuan berstatus "Menunggu" (Dewi 20 November 15.00 WIB, Eko 22 November 09.30 WIB) beserta keluhan, dan panel detail memuat tombol "Setujui Permohonan", "Jadwalkan Ulang", dan "Tolak". Setelah disetujui, muncul pesan "Permohonan konsultasi Dewi Anggraini berhasil disetujui.", tombol berubah menjadi "Telah Disetujui", dan penanda pada menu Konsultasi turun dari 2 menjadi 1. Baris `JDW-006` berstatus `'Disetujui'`* | *Pass* |
+| *UC07-TC02* | *KF16* | *Normal, notifikasi persetujuan ke pelajar* | *1. Setelah UC07-TC01, periksa log server.<br>2. Masuk sebagai Dewi dan buka Dashboard.* | *Akun `dewi.pelajar@mahasehat.id`; `SMTP_HOST` kosong sehingga e-mail apa pun tercetak di log server* | *Pelajar menerima notifikasi bahwa pengajuannya disetujui* | *Log server tidak mencatat e-mail apa pun, dan aplikasi tidak menampilkan notifikasi. Jadwal yang disetujui hanya muncul pada kartu "Jadwal konsultasi" di Dashboard Dewi (Nadia Kusuma, Jumat 20 November 2026, 15.00 WIB) saat Dewi membuka dashboard sendiri* | *Fail. Penyebab: `KonsultasiController.ubahStatus` hanya mengubah status tanpa mengirim notifikasi. Solusi: setelah status berubah, kirim e-mail ke pelajar dengan `src/utils/kirimEmail.js` dan tandai jadwal yang baru disetujui pada dashboard pelajar* |
+| *UC07-TC03* | *KF15, KF16* | *Alternatif 1: Reschedule Jadwal Konsultasi* | *1. Pilih pengajuan Eko Saputra.<br>2. Klik "Jadwalkan Ulang".<br>3. Isi tanggal 24/11/2026 dan pilih waktu "10.00 - 11.00 WIB".<br>4. Klik "Simpan Jadwal Baru".* | *Akun `nadia.psikolog@mahasehat.id`; pengajuan `JDW-007`* | *Formulir jadwal alternatif tampil; setelah dikirim, status pengajuan menjadi `Rescheduled` (pengganti status "Menunggu Konfirmasi Ulang", Tabel B.1 butir 5 Tugas 9) dan pelajar menerima notifikasi tawaran jadwal baru* | *Dialog "Jadwalkan Ulang Sesi Konsultasi" tampil dengan input tanggal dan empat pilihan jam (bukan daftar slot yang tersedia). Penyimpanan selalu gagal: server membalas 400 "Tanggal (YYYY-MM-DD) dan jam (HH:MM) wajib diisi." dan status tetap "Diajukan". Pesan galat tampil di belakang lapisan dialog sehingga sulit dibaca. Sebagai pembanding, `PUT /api/konsultasi/JDW-007/jadwal` dengan `waktu` "10.00" juga ditolak, sedangkan dengan "10:00" berhasil dan status menjadi `Rescheduled`; tidak ada e-mail ke pelajar yang tercetak di log* | *Fail. Penyebab: nilai opsi jam pada `ManajemenKonsultasiPage.html` memakai titik ("10.00 - 11.00 WIB"), sehingga `ManajemenKonsultasiPage.js` mengirim "10.00", padahal `KonsultasiController.jadwalUlang` hanya menerima format HH:MM. Solusi: ubah nilai opsi menjadi "09:00", "10:00", "13:00", dan "15:00" (atau ganti titik dengan titik dua sebelum dikirim), tampilkan pesan galat di atas dialog, dan kirim notifikasi ke pelajar seperti solusi UC07-TC02* |
+
+
+**Catatan temuan UC04–UC07** (tidak menggagalkan skenario SKPL, tetapi perlu diperbaiki):
+
+- **T-01.** Pada laporan wali, kartu "Pola Makan" berlabel "x / Hari, Rata-rata frekuensi makan" diisi `rerata_pemicu`, yaitu rata-rata jumlah pemicu stres per hari (`ReportPageOrangTuaWali.js`, `Value_RerataMakan`). Data seed Budi memiliki pemicu 1, 1, 2, 1, 0 per hari, sehingga kartu menampilkan 1.0.
+- **T-02.** Dialog profil tenaga kesehatan selalu menampilkan Nomor STR "-" karena endpoint daftar `GET /api/tenaga-kesehatan` tidak mengirim `nomor_str`; kolom itu hanya dikirim oleh endpoint detail. Jam reguler "Senin–Jumat, 08.00–17.00" juga masih teks tetap di HTML.
+
 ### 4.4.8 Use Case Menerima dan Menindaklanjuti Notifikasi Darurat
 
 **ID Use Case:** *UC08*  
@@ -1016,6 +1164,19 @@ Tabel 4.6. Bukti Hasil Pengujian
 | *UC02-TC02* | *![UC02-TC02](./assets/UC02-TC02.png)* |
 | *UC03-TC01* | *![UC03-TC01-1](./assets/UC03-TC01-1.png)<br><br>![UC03-TC01-2](./assets/UC03-TC01-2.png)<br><br>![UC03-TC01-3](./assets/UC03-TC01-3.png)<br><br>![UC03-TC01-4](./assets/UC03-TC01-4.png)<br><br>![UC03-TC01-5](./assets/UC03-TC01-5.png)<br><br>![UC03-TC01-6](./assets/UC03-TC01-6.png)<br><br>![UC03-TC01-7](./assets/UC03-TC01-7.png)* |
 | *UC03-TC02* | *![UC03-TC02-1](./assets/UC03-TC02-1.png)<br><br>![UC03-TC02-2](./assets/UC03-TC02-2.png)<br><br>[UC03-TC02-3](./assets/UC03-TC02-3.png)* |
+| *UC04-TC01* | *![UC04-TC01-1](./assets/UC04-TC01-1.jpg)<br><br>![UC04-TC01-2](./assets/UC04-TC01-2.jpg)<br><br>![UC04-TC01-3](./assets/UC04-TC01-3.jpg)* |
+| *UC04-TC02* | *![UC04-TC02](./assets/UC04-TC02.jpg)* |
+| *UC04-TC03* | *![UC04-TC03](./assets/UC04-TC03.jpg)* |
+| *UC04-TC04* | *![UC04-TC04](./assets/UC04-TC04.jpg)* |
+| *UC04-TC05* | *![UC04-TC05-1](./assets/UC04-TC05-1.jpg)<br><br>![UC04-TC05-2](./assets/UC04-TC05-2.jpg)* |
+| *UC05-TC01* | *![UC05-TC01-1](./assets/UC05-TC01-1.jpg)<br><br>![UC05-TC01-2](./assets/UC05-TC01-2.jpg)<br><br>![UC05-TC01-3](./assets/UC05-TC01-3.jpg)* |
+| *UC05-TC02* | *![UC05-TC02-1](./assets/UC05-TC02-1.jpg)<br><br>![UC05-TC02-2](./assets/UC05-TC02-2.jpg)* |
+| *UC06-TC01* | *![UC06-TC01-1](./assets/UC06-TC01-1.jpg)<br><br>![UC06-TC01-2](./assets/UC06-TC01-2.jpg)* |
+| *UC06-TC02* | *![UC06-TC02-1](./assets/UC06-TC02-1.jpg)<br><br>![UC06-TC02-2](./assets/UC06-TC02-2.jpg)<br><br>![UC06-TC02-3](./assets/UC06-TC02-3.jpg)* |
+| *UC06-TC03* | *![UC06-TC03](./assets/UC06-TC03.jpg)* |
+| *UC07-TC01* | *![UC07-TC01-1](./assets/UC07-TC01-1.jpg)<br><br>![UC07-TC01-2](./assets/UC07-TC01-2.jpg)* |
+| *UC07-TC02* | *![UC07-TC02](./assets/UC07-TC02.jpg)* |
+| *UC07-TC03* | *![UC07-TC03-1](./assets/UC07-TC03-1.jpg)<br><br>![UC07-TC03-2](./assets/UC07-TC03-2.jpg)* |
 | *UC08-TC01* | *![UC08-TC01-1](./assets/UC08-TC01-1.png)<br><br>![UC08-TC01-2](./assets/UC08-TC01-2.png)<br><br>![UC08-TC01-3](./assets/UC08-TC01-3.png)* |
 | *UC08-TC02* | *![UC08-TC02](./assets/UC08-TC02.png)* |
 | *UC09-TC01* | *![UC09-TC01-1](./assets/UC09-TC01-1.png)<br><br>![UC09-TC01-2](./assets/UC09-TC01-2.png)* |
