@@ -64,14 +64,12 @@ Dipersiapkan oleh:
 # BAB 1: Pendahuluan
 
 ## 1.1 Tujuan Penulisan Dokumen
-Dokumen ini menjelaskan deskripsi umum perangkat lunak, implementasi, hasil pengujian perangkat lunak, dan traceability. HIUPL digunakan sebagai acuan teknis bagi pengembang perangkat lunak untuk melakukan pengujian perangkat lunak.
-Tuliskan uraian ringkas mengenai isi dokumen, tujuan pembuatan dokumen HIUPL ini, dan siapa saja target pembacanya.
+Dokumen ini bertujuan mendokumentasikan deskripsi umum perangkat lunak, hasil implementasi, hasil pengujian perangkat lunak, serta traceability antar-komponen spesifikasi, implementasi, dan pengujian. HIUPL berfungsi sebagai catatan teknis hasil pelaksanaan implementasi dan pengujian serta bahan evaluasi kesesuaian dan tindak lanjut perbaikan perangkat lunak.
 
 ## 1.2 Lingkup Masalah
 Mahasehat merupakan aplikasi berbasis web yang membantu pelajar dalam memantau dan memahami kondisi kesehatan mental sehari-hari serta memperoleh akses terhadap layanan kesehatan mental. Aplikasi ini menyediakan fitur pencatatan suasana hati, pola tidur, aktivitas fisik, pola makan, tingkat stres, dan refleksi harian. Data tersebut digunakan dan disajikan dalam bentuk statistik dan laporan untuk melihat perkembangan kondisi pelajar sehingga pelajar dapat mengenali pola atau perubahan pada kondisi kesehatan mentalnya. Selain pemantauan mandiri, Mahasehat menyediakan akses terhadap layanan kesehatan mental melalui tenaga kesehatan. Pelajar dapat mencari tenaga kesehatan sesuai kebutuhan, melihat jadwal yang tersedia, serta mengajukan konsultasi. Selain itu, orang tua/wali dilibatkan dalam pemantauan kondisi pelajar melalui informasi dan notifikasi tertentu, sementara tenaga kesehatan dapat mengakses informasi kesehatan yang relevan untuk mendukung proses konsultasi.
 
 ## 1.3 Definisi, Istilah, dan Singkatan
-Semua definisi dan singkatan yang digunakan dalam dokumen ini beserta penjelasannya.
 
 Tabel 1.3. Definisi Istilah dan Singkatan
 
@@ -105,7 +103,6 @@ Tabel 1.4. Aturan Penomoran
 | *Test Case Integrasi* | *INT-TCYY* | *YY adalah nomor urut test case integrasi* |
 | *Test Case Use Case* | *UCXX-TCYY* | *XX adalah nomor use case, YY adalah nomor urut test case pada use case tersebut* |
 | *Test Case KNF* | *KNFXX-TCYY* | *XX adalah nomor KNF, YY adalah nomor urut test case pada KNF tersebut* |
-| *...* | *...* | *...* |
 | *Algoritma* | *Algo-CXX-XX* | *Mewakili singkatan kata "Algoritma", diikuti ID kelas dan dua digit unik untuk membedakan tiap algoritma.* |
 
 ## 1.5 Referensi
