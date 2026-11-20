@@ -1211,16 +1211,44 @@ Tabel 5.1. Matriks Kerunutan KF terhadap Implementasi dan Pengujian
 
 | KF ID | KNF Terkait | Use Case ID | Kelas Terkait | Implementasi File Terkait | Test Case (UC) | Test Case (Unit/Integrasi/KNF) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| *KF05* | *KNF01* | *UC03* | *C02 - Pesanan* | *`src/...`* | *UC03-TC01* | *C02-UT05, INT-TC04, KNF01-TC01* |
-| *KF01* | *-* | *UC01<br>UC02* | *[C01 - Nama kelas]<br>[C02 - Nama kelas]* | *[path/ke/file1]<br>[path/ke/file2]* | *UC01-TC01, UC01-TC02<br>UC02-TC01* | *-* |
-| *KF02* | *[KNFXX atau -]* | *[UCXX]* | *[CXX - Nama kelas]* | *[path/ke/file]* | *[UCXX-TCYY]* | *[CXX-UTYY, INT-TCYY, KNFXX-TCYY atau -]* |
-| *KFXX* | *-* | *[UCXX atau -]* | *[CXX - Nama kelas atau -]* | *Tidak diimplementasikan: [alasan]* | *-* | *-* |
-| *...* | *...* | *...* | *...* | *...* | *...* | *...* |
+| *KF01* | *KNF08* | *UC01* | *C01 - Pengguna, C02 - Pelajar, C03 - OrangTuaWali, C04 - TenagaKesehatan, C05 - RiwayatKesehatan, C10 - RegistrationPage, C11 - AuthController* | *src/models/Pengguna.js, src/models/Pelajar.js, src/models/OrangTuaWali.js, src/models/TenagaKesehatan.js, src/models/RiwayatKesehatan.js, src/frontend/views/RegistrationPagePelajar.html, src/controllers/authController.js* | *UC01-TC01, UC01-TC02* | *C01-UT01 s.d. C01-UT12, C11-UT01 s.d. C11-UT03, INT-TC01, KNF08-TC01* |
+| *KF02* | *-* | *UC02* | *C02 - Pelajar, C03 - OrangTuaWali, C11 - AuthController, C12 - KonfirmasiRegistrasiPage* | *src/models/Pelajar.js, src/models/OrangTuaWali.js, src/controllers/authController.js, src/frontend/views/KonfirmasiRegistrasiPage.html* | *UC02-TC01, UC02-TC02* | *C03-UT04, C11-UT04 s.d. C11-UT07, INT-TC01* |
+| *KF03* | *KNF05* | *UC03* | *C02 - Pelajar, C15 - NotifikasiPengingatController* | *Tidak diimplementasikan: scheduler (src/jobs/scheduler.js) hanya menjalankan evaluasi notifikasi darurat, bukan pengingat check-in harian* | *UC03-TC01, UC03-TC02* | *KNF05-TC01* |
+| *KF04* | *KNF07, KNF09* | *UC03* | *C02 - Pelajar, C06 - CheckIn, C13 - CheckInPage, C14 - CheckInController* | *src/models/CheckIn.js, src/frontend/views/CheckInPage.html, src/controllers/checkInController.js* | *UC03-TC01, UC03-TC02* | *C02-UT02, C06-UT01 s.d. C06-UT12, C14-UT17 s.d. C14-UT34, INT-TC04, KNF07-TC01, KNF09-TC01* |
+| *KF05* | *KNF07* | *UC03* | *C06 - CheckIn, C13 - CheckInPage, C14 - CheckInController* | *src/models/CheckIn.js, src/frontend/views/CheckInPage.html, src/controllers/checkInController.js* | *UC03-TC01, UC03-TC02* | *C06-UT03 s.d. C06-UT11, C14-UT17 s.d. C14-UT21, C14-UT28 s.d. C14-UT31, INT-TC05, KNF07-TC01* |
+| *KF06* | *-* | *UC04* | *C03 - OrangTuaWali, C06 - CheckIn, C07 - LaporanKesehatan, C16 - ReportPage, C17 - ReportController* | *src/models/CheckIn.js, src/models/LaporanKesehatan.js, src/controllers/ReportController.js* | *UC04-TC01, UC04-TC03, UC04-TC04* | *C07-UT02, C07-UT11, C07-UT16, C17-UT02, C17-UT10* |
+| *KF07* | *KNF01, KNF09* | *UC03* | *C06 - CheckIn, C14 - CheckInController* | *src/models/CheckIn.js, src/controllers/checkInController.js, src/utils/encryption.js* | *UC03-TC01, UC03-TC02* | *C14-UT01 s.d. C14-UT16, C14-UT22 s.d. C14-UT25, INT-TC04, KNF01-TC01, KNF09-TC01* |
+| *KF08* | *KNF04, KNF08* | *UC04* | *C06 - CheckIn, C07 - LaporanKesehatan, C16 - ReportPage, C17 - ReportController* | *src/models/LaporanKesehatan.js, src/frontend/views/ReportPagePelajar.html, src/frontend/views/ReportPageOrangTuaWali.html, src/frontend/views/ReportChart.js, src/controllers/ReportController.js* | *UC04-TC01, UC04-TC03, UC04-TC05* | *C07-UT10, C17-UT02, C17-UT11, INT-TC06, KNF04-TC01, KNF08-TC01* |
+| *KF09* | *KNF02 | *UC04* | *C02 - Pelajar, C03 - OrangTuaWali, C07 - LaporanKesehatan, C16 - ReportPage, C17 - ReportController* | *src/models/LaporanKesehatan.js, src/frontend/views/ReportPagePelajar.html, src/frontend/views/ReportPageOrangTuaWali.html, src/controllers/ReportController.js* | *UC04-TC02, UC04-TC03, UC04-TC04* | *C03-UT01 s.d. C03-UT03, C17-UT01 s.d. C17-UT07, INT-TC06, INT-TC07, KNF02-TC01* |
+| *KF10* | *-* | *UC04* | *C07 - LaporanKesehatan, C17 - ReportController* | *src/models/LaporanKesehatan.js, src/controllers/ReportController.js* | *UC04-TC02, UC04-TC04* | *C07-UT01 s.d. C07-UT17, C17-UT02, C17-UT07* |
+| *KF11* | *KNF03, KNF08* | *UC05* | *C02 - Pelajar, C04 - TenagaKesehatan, C08 - FasilitasKesehatan, C18 - CariTenagaKesehatanPage, C19 - ProfilTenagaKesehatanPage, C20 - TenagaKesehatanController* | *src/models/TenagaKesehatan.js, src/models/FasilitasKesehatan.js, src/frontend/views/CariTenagaKesehatanPage.html, src/controllers/TenagaKesehatanController.js* | *UC05-TC01, UC05-TC02* | *C04-UT01 s.d. C04-UT14, C08-UT01 s.d. C08-UT06, C20-UT23 s.d. C20-UT42, KNF03-TC01, KNF08-TC01* |
+| *KF12* | *KNF03* | *UC05* | *C02 - Pelajar, C08 - FasilitasKesehatan, C18 - CariTenagaKesehatanPage, C20 - TenagaKesehatanController* | *src/frontend/views/CariTenagaKesehatanPage.html, src/controllers/TenagaKesehatanController.js, src/utils/distance.js* | *UC05-TC01, UC05-TC02* | *C02-UT03, C20-UT01 s.d. C20-UT24, C20-UT30 s.d. C20-UT33, C20-UT39 s.d. C20-UT41, INT-TC08, KNF03-TC01* |
+| *KF13* | *-* | *UC06* | *C02 - Pelajar, C04 - TenagaKesehatan, C09 - JadwalKonsultasi, C19 - ProfilTenagaKesehatanPage, C21 - PengajuanKonsultasiPage, C22 - JadwalKonsultasiController* | *src/models/JadwalKonsultasi.js, src/frontend/views/CariTenagaKesehatanPage.html, src/controllers/KonsultasiController.js* | *UC06-TC01, UC06-TC02, UC06-TC03* | *C02-UT05, C09-UT01 s.d. C09-UT16, C23-UT01 s.d. C23-UT10, INT-TC09* |
+| *KF14* | *-* | *UC06* | *C09 - JadwalKonsultasi, C19 - ProfilTenagaKesehatanPage, C21 - PengajuanKonsultasiPage, C22 - JadwalKonsultasiController* | *src/models/JadwalKonsultasi.js, src/frontend/views/CariTenagaKesehatanPage.js, src/controllers/KonsultasiController.js* | *UC06-TC02, UC06-TC03* | *C04-UT07, C04-UT08, C09-UT02 s.d. C09-UT04, C09-UT15, C23-UT06, C23-UT07, INT-TC09* |
+| *KF15* | *-* | *UC07* | *C02 - Pelajar, C04 - TenagaKesehatan, C09 - JadwalKonsultasi, C21 - PengajuanKonsultasiPage, C23 - KonsultasiController* | *src/models/JadwalKonsultasi.js, src/frontend/views/ManajemenKonsultasiPage.html, src/controllers/KonsultasiController.js* | *UC07-TC01, UC07-TC03* | *C09-UT08 s.d. C09-UT24, C23-UT11 s.d. C23-UT24, INT-TC10* |
+| *KF16* | *-* | *UC07* | *C04 - TenagaKesehatan, C09 - JadwalKonsultasi, C23 - KonsultasiController* | *src/models/JadwalKonsultasi.js, src/controllers/KonsultasiController.js* | *UC07-TC01, UC07-TC02, UC07-TC03* | *C09-UT10, C09-UT11, C09-UT13, C09-UT19, C23-UT15, C23-UT16, C23-UT20, INT-TC10* |
+| *KF17* | *KNF02* | *UC04* | *C02 - Pelajar, C03 - OrangTuaWali, C07 - LaporanKesehatan, C16 - ReportPage, C17 - ReportController* | *src/models/LaporanKesehatan.js, src/frontend/views/ReportPageOrangTuaWali.html, src/controllers/ReportController.js* | *UC04-TC03, UC04-TC04* | *C03-UT01, C17-UT04, INT-TC07, KNF02-TC01* |
+| *KF18* | *KNF10* | *UC08* | *C02 - Pelajar, C07 - LaporanKesehatan, C24 - NotifikasiDaruratController* | *src/models/LaporanKesehatan.js, src/models/NotifikasiDarurat.js, src/controllers/NotifikasiDaruratController.js, src/jobs/jalankanEvaluasiDarurat.js* | *UC08-TC01, UC08-TC02* | *C02-UT04, C07-UT12 s.d. C07-UT17, C24-UT08 s.d. C24-UT10, INT-TC11, KNF10-TC01* |
+| *KF19* | *KNF05, KNF06, KNF10* | *UC08* | *C02 - Pelajar, C03 - OrangTuaWali, C24 - NotifikasiDaruratController* | *src/controllers/NotifikasiDaruratController.js, src/utils/kirimEmail.js* | UC08-TC01, UC08-TC02* | *C24-UT01 s.d. C24-UT04, C24-UT08 s.d. C24-UT10, INT-TC11, INT-TC14, INT-TC15, KNF05-TC01, KNF06-TC01, KNF10-TC01* |
+| *KF20* | *-* | *UC08* | *C03 - OrangTuaWali, C24 - NotifikasiDaruratController* | *src/controllers/NotifikasiDaruratController.js* | *UC08-TC01* | *C24-UT05, C24-UT06, INT-TC12* |
+| *KF21* | *-* | *UC08* | *C03 - OrangTuaWali, C24 - NotifikasiDaruratController* | *src/controllers/NotifikasiDaruratController.js* | *UC08-TC01* | *C24-UT07, INT-TC12* |
+| *KF22* | *KNF11* | *UC09* | *C01 - Pengguna, C25 - LoginPage* | *src/frontend/views/LoginPage.html, src/frontend/views/LoginPage.js* | *UC09-TC01 s.d. UC09-TC04* | *KNF11-TC01* |
+| *KF23* | *KNF12* | *UC09* | *C01 - Pengguna, C02 - Pelajar, C03 - OrangTuaWali, C04 - TenagaKesehatan, C11 - AuthController, C25 - LoginPage, C26 - ResetPasswordPage, C27 - PasswordController, C28 - DashboardPage* | *src/models/Pengguna.js, src/controllers/authController.js, src/controllers/passwordController.js, src/frontend/views/LoginPage.html, src/frontend/views/ResetPasswordPage.html, src/frontend/views/DashboardPagePelajar.html, src/frontend/views/DashboardPageOrangTuaWali.html, src/frontend/views/DashboardPageTenagaKesehatan.html* | *UC09-TC01 s.d. UC09-TC04* | *C01-UT07 s.d. C01-UT12, C11-UT08 s.d. C11-UT14, C27-UT01 s.d. C27-UT07, INT-TC02, INT-TC03, KNF12-TC01* |
+| *KF24* | *KNF12* | *UC10* | *C01 - Pengguna, C11 - AuthController, C25 - LoginPage, C29 - SettingPage* | *src/controllers/authController.js, src/frontend/views/SettingPagePelajar.html, src/frontend/views/session.js, src/frontend/views/LoginPage.html* | *UC10-TC01, UC10-TC02* | *C01-UT12, C11-UT13, C11-UT14, INT-TC02, KNF12-TC01* |
 
 Tabel 5.2. Matriks Kerunutan KNF terhadap Pengujian
 
 | ID KNF | Parameter | KF/UC Terkait | Test Case |
 | :--- | :--- | :--- | :--- |
-| *KNF01* | *Reliability* | *KF05 / UC03* | *KNF01-TC01* |
-| *KNFXX* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
-| *...* | *...* | *...* | *...* |
+| *KNF01* | *Security* | *KF05 / UC03* | *KNF01-TC01* |
+| *KNF02* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
+| *KNF03* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
+| *KNF04* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
+| *KNF05* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
+| *KNF06* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
+| *KNF07* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
+| *KNF08* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
+| *KNF09* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
+| *KNF10* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
+| *KNF11* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
+| *KNF12* | *[Parameter]* | *[KFXX / UCXX atau -]* | *[KNFXX-TCYY]* |
