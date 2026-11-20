@@ -1161,7 +1161,6 @@ Tabel 4.6. Bukti Hasil Pengujian
 | *KNF10-TC01* | *![KNF10-TC01](./assets/KNF10-TC01.png)* |
 | *KNF11-TC01* | *![KNF11-TC01-1](./assets/KNF11-TC01-1.png)<br><br>![KNF11-TC01-2](./assets/KNF11-TC01-2.png)* |
 | *KNF12-TC01* | *![KNF12-TC01](./assets/KNF12-TC01.png)* |
-| *...* | *...* |
 
 <br>
 
