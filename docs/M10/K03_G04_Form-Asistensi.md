@@ -26,10 +26,12 @@
 
 | Catatan |
 | --- |
-| 1. *\[Berikan catatan hasil asistensi\]*  |
-| 2. ... |
-| 3. ... |
-| 4. ... |
+| 1. *Software testing diperlukan untuk menemukan bug lebih awal, menjamin kebutuhan terpenuhi, dan meningkatkan kualitas dan kinerja.*  |
+| 2. *Ada dua cara testing, yaitu manual dan automatic testing* |
+| 3. *DI HIUPL, pengujian manual dilakukan pada pengujian use case dan sebagian KNF. Pengujian otomatis untuk pengujian unit dan integrasi.* |
+| 4. *Pengetahuan mengenai tools yang dapat digunakan untuk unit testing, test coverage, integration testing, nonfuctional testing.* |
+| 5. *Setiap kelas diklasifikasikan menjadi Mendalam, Sedang, dan Tidak Perlu.* |
+
 
 ## Dokumentasi
 
