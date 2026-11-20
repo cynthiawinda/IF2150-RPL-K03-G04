@@ -34,6 +34,7 @@
     - [Milestone 7](#milestone-7)
     - [Milestone 8](#milestone-8)
     - [Milestone 9](#milestone-9)
+    - [Milestone 10](#milestone-10)
 
 ---
 
@@ -265,3 +266,22 @@
 | *13-11-2026* | *Rendy Salastra Putra* | *Merapikan data demo, dokumentasi, dan commit akhir M9* | *1,5* | *Done* | *-* |
 | *13-11-2026* | *Sophia Imelda Rogate Marpaung* | *Menghapus DashboardPage perantara dan merapikan tampilan serta assets* | *2* | *Done* | *-* |
 | *13-11-2026* | *Sophia Imelda Rogate Marpaung* | *Update tabel traceability* | *1* | *Done* | *-* |
+
+### Milestone 10
+**Periode:** 14/11/2026 - 20/11/2026
+
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| *16-11-2026* | *Semua anggota kelompok* | *Melakukan asistensi Milestone 10 dan pembagian tugas pengujian HIUPL* | *1* | *Done* | *-* |
+| *19-11-2026* | *Cynthia Winda Wijaya* | *Mengisi form asistensi, mengunggah foto asistensi dan diagram use case, serta menulis Bab 1 dan Bab 2 HIUPL* | *2* | *Done* | *-* |
+| *20-11-2026* | *Christabelcyne Costan* | *Menulis draft Subbab 4.5 dan 4.6 serta menguji KNF05, KNF08, dan KNF09 beserta tangkapan layarnya* | *3* | *Done* | *Peramban Safari dan Firefox fisik belum diuji sehingga portability diuji memakai Chrome, Edge, dan emulasi mobile* |
+| *20-11-2026* | *Sophia Imelda Rogate Marpaung* | *Mengisi tabel identifikasi tingkat pengujian kelas di Subbab 4.1 dan melengkapi form asistensi* | *1,5* | *Done* | *-* |
+| *20-11-2026* | *Cynthia Winda Wijaya* | *Melengkapi form asistensi dan menguji use case UC01 s.d. UC03 beserta tangkapan layarnya* | *3* | *Done* | *Form refleksi check-in belum memunculkan pop-up konfirmasi saat catatan dikosongkan* |
+| *20-11-2026* | *Cynthia Winda Wijaya* | *Menguji KNF07 dan KNF11 beserta tangkapan layarnya serta merapikan Subbab 1.1 HIUPL* | *1,5* | *Done* | *Alur daily check-in masih 5 langkah sehingga melebihi batas maksimal 4 langkah* |
+| *20-11-2026* | *Rendy Salastra Putra* | *Membuat unit test kelas C01, C02, C03, C11, C24, C27 serta integration test komponen nyata I-24 s.d. I-33* | *2* | *Done* | *-* |
+| *20-11-2026* | *Rendy Salastra Putra* | *Menguji UC08 s.d. UC10 serta KNF06, KNF10, dan KNF12 beserta tangkapan layar dan mengisi Subbab 4.2 s.d. 4.6* | *3* | *Done* | *Eskalasi kontak darurat cadangan dan pop-up rujukan darurat non-blocking belum diimplementasikan* |
+| *20-11-2026* | *Rendy Salastra Putra* | *Menyelesaikan merge conflict pada Tabel 4.5 HIUPL dan mengisi logbook Milestone 10* | *0,5* | *Done* | *Sempat terjadi merge conflict pada baris KNF06-KNF12 dengan commit remote* |
+| *20-11-2026* | *Sophia Imelda Rogate Marpaung* | *Membuat 11 file unit test untuk modul dan kelas lainnya serta mengisi pengujian unit kelas di Subbab 4.2* | *4,5* | *Done* | *-* |
+| *20-11-2026* | *Sophia Imelda Rogate Marpaung* | *Menguji KNF01 s.d. KNF04 serta melengkapi hasil pengujian di Subbab 4.5* | *2* | *Done* | *-* |
+| *20-11-2026* | *Haikal Muhammad Royyan* | *Mengisi BAB 3 lingkungan implementasi dan menguji use case UC04 s.d. UC07 beserta tangkapan layarnya* | *4* | *Done* | *-* |
+| *20-11-2026* | *Christabelcyne Costan* | *Menyusun tabel traceability KF dan KNF di Bab 5 serta merapikan format penulisan dan status KNF05 di HIUPL* | *2,5* | *Done* | *-* |
