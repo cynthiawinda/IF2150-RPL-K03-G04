@@ -1127,7 +1127,7 @@ Tabel 4.6. Bukti Hasil Pengujian
 | *UC02-TC01* | *![UC02-TC01-1](./assets/UC02-TC01-1.png)<br><br>![UC02-TC01-2](./assets/UC02-TC01-2.png)<br><br>![UC02-TC01-3](./assets/UC02-TC01-3.png)* |
 | *UC02-TC02* | *![UC02-TC02](./assets/UC02-TC02.png)* |
 | *UC03-TC01* | *![UC03-TC01-1](./assets/UC03-TC01-1.png)<br><br>![UC03-TC01-2](./assets/UC03-TC01-2.png)<br><br>![UC03-TC01-3](./assets/UC03-TC01-3.png)<br><br>![UC03-TC01-4](./assets/UC03-TC01-4.png)<br><br>![UC03-TC01-5](./assets/UC03-TC01-5.png)<br><br>![UC03-TC01-6](./assets/UC03-TC01-6.png)<br><br>![UC03-TC01-7](./assets/UC03-TC01-7.png)* |
-| *UC03-TC02* | *![UC03-TC02-1](./assets/UC03-TC02-1.png)<br><br>![UC03-TC02-2](./assets/UC03-TC02-2.png)<br><br>[UC03-TC02-3](./assets/UC03-TC02-3.png)* |
+| *UC03-TC02* | *![UC03-TC02-1](./assets/UC03-TC02-1.png)<br><br>![UC03-TC02-2](./assets/UC03-TC02-2.png)<br><br>![UC03-TC02-3](./assets/UC03-TC02-3.png)* |
 | *UC04-TC01* | *![UC04-TC01-1](./assets/UC04-TC01-1.jpg)<br><br>![UC04-TC01-2](./assets/UC04-TC01-2.jpg)<br><br>![UC04-TC01-3](./assets/UC04-TC01-3.jpg)* |
 | *UC04-TC02* | *![UC04-TC02](./assets/UC04-TC02.jpg)* |
 | *UC04-TC03* | *![UC04-TC03](./assets/UC04-TC03.jpg)* |
