@@ -653,19 +653,7 @@ Tabel 4.2.9b. Ringkasan Cakupan Kelas C09
 | ID Algoritma yang tercakup | *Algo-C09-01 sampai Algo-C09-06* |
 | Coverage (wajib ≥ 70%) | *100% baris / 92.85% cabang (Jest `--coverage`, bukti pada 4.6)* |
 
-### 4.2.10 Kelas [Nama Kelas 2]
-
-*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
-
 ### 4.2.11 Kelas [Nama Kelas 2]
-
-*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
-
-### 4.2.12 Kelas [Nama Kelas 2]
-
-*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
-
-### 4.2.13 Kelas [Nama Kelas 2]
 
 *[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
 
@@ -707,14 +695,6 @@ Tabel 4.2.14b. Ringkasan Cakupan Kelas C14
 | ID Algoritma yang tercakup | *Algo-C14-01, Algo-C14-02, Algo-C14-03* |
 | Coverage (wajib ≥ 70%) | *100% baris / 90.24% cabang (Jest `--coverage`, bukti pada 4.6)* |
 
-### 4.2.15 Kelas [Nama Kelas 2]
-
-*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
-
-### 4.2.16 Kelas [Nama Kelas 2]
-
-*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
-
 ### 4.2.17 Kelas ReportController
 
 **ID Kelas:** *C17*  
@@ -749,14 +729,6 @@ Tabel 4.2.17b. Ringkasan Cakupan Kelas C17
 | Operasi yang diuji | *summary() (statistik, seri grafik, pembatasan data wali; mengimplementasikan ketiga operasi DPPL) dan riwayat()* |
 | ID Algoritma yang tercakup | *Algo-C17-01, Algo-C17-02, Algo-C17-03* |
 | Coverage (wajib ≥ 70%) | *95.59% baris / 71.96% cabang (Jest `--coverage`, bukti pada 4.6)* |
-
-### 4.2.18 Kelas [Nama Kelas 2]
-
-*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
-
-### 4.2.19 Kelas [Nama Kelas 2]
-
-*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
 
 ### 4.2.20 Kelas TenagaKesehatanController
 
@@ -797,14 +769,6 @@ Tabel 4.2.20b. Ringkasan Cakupan Kelas C20
 | Operasi yang diuji | *loadTenagaKesehatan(), processLocationPermission(), selectTenagaKesehatan(), updateTarif(); perhitungan jarak diuji di 4.2.XX distance.js* |
 | ID Algoritma yang tercakup | *Algo-C20-01, Algo-C20-02, Algo-C20-03, Algo-C20-04* |
 | Coverage (wajib ≥ 70%) | *100% baris / 98.46% cabang (Jest `--coverage`, bukti pada 4.6)* |
-
-### 4.2.21 Kelas [Nama Kelas 2]
-
-*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
-
-### 4.2.22 Kelas [Nama Kelas 2]
-
-*[Ulangi pola 4.2.1 untuk setiap kelas bertingkat Mendalam atau Sedang.]*
 
 ### 4.2.23 Kelas KonsultasiController
 
