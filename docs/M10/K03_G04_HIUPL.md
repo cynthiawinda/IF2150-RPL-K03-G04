@@ -987,7 +987,7 @@ Pengujian use case dilakukan pada seluruh skenario normal dan alternatif sesuai 
 **ID Use Case:** *UC01*  
 **Nama Use Case:** *Melakukan Registrasi Akun*
 
-Tabel 4.4.1. Hasil Pengujian Use Case [UC01]
+Tabel 4.4.1. Hasil Pengujian Use Case UC01
 
 | ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -999,7 +999,7 @@ Tabel 4.4.1. Hasil Pengujian Use Case [UC01]
 **ID Use Case:** *UC02*  
 **Nama Use Case:** *Mengonfirmasi Registrasi Akun*
 
-Tabel 4.4.2. Hasil Pengujian Use Case [UC02]
+Tabel 4.4.2. Hasil Pengujian Use Case UC02
 
 | ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -1013,7 +1013,7 @@ Tabel 4.4.2. Hasil Pengujian Use Case [UC02]
 **ID Use Case:** *UC03*  
 **Nama Use Case:** *Melakukan Daily Check-In*
 
-Tabel 4.4.3. Hasil Pengujian Use Case [UC03]
+Tabel 4.4.3. Hasil Pengujian Use Case UC03
 
 | ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -1209,8 +1209,6 @@ Petakan setiap KF ke KNF, use case, kelas perancangan, file implementasi, dan te
 
 Tabel 5.1. Matriks Kerunutan KF terhadap Implementasi dan Pengujian
 
-| KF ID | KNF Terkait | Use Case ID | Kelas Terkait | Implementasi File Terkait | Test Case (UC) | Test Case (Unit/Integrasi/KNF) |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | KF ID | KNF Terkait | Use Case ID | Kelas Terkait | Implementasi File Terkait | Test Case (UC) | Test Case (Unit/Integrasi/KNF) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | *KF01* | *KNF08* | *UC01* | *C01 - Pengguna, C02 - Pelajar, C03 - OrangTuaWali, C04 - TenagaKesehatan, C05 - RiwayatKesehatan, C10 - RegistrationPage, C11 - AuthController* | *```src/models/Pengguna.js```, ```src/models/Pelajar.js```, ```src/models/OrangTuaWali.js```, ```src/models/TenagaKesehatan.js```, ```src/models/RiwayatKesehatan.js```, ```src/frontend/views/RegistrationPagePelajar.html```, ```src/controllers/authController.js```* | *UC01-TC01, UC01-TC02* | *C01-UT01 s.d. C01-UT12, C11-UT01 s.d. C11-UT03, INT-TC01, KNF08-TC01* |
