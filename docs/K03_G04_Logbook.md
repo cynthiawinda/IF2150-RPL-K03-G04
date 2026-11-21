@@ -190,6 +190,7 @@
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | *25-10-2026* | *Sophia Imelda Rogate Marpaung* | *Melengkapi bagian dari milestone sebelumnya* | *1* | *Done* | *-* |
 | *27-10-2026* | *Christabelcyne Costan* | *Push algoritma C11-C13 dari lokal dan menambahkan C14-C17* | *2* | *Done* | *-* |
+| *28-10-2026* | *Haikal Muhammad Royyan* | *Menambah perancangan rinci kelas C01-C10 dan melengkapi Tabel 5.1* | *5* | *Done* | *-* |
 | *28-10-2026* | *Sophia Imelda Rogate Marpaung* | *Menambah perancangan rinci kelas C21-C29* | *5* | *Done* | *-* |
 | *28-10-2026* | *Sophia Imelda Rogate Marpaung* | *Update daftar kelas keseluruhan dan aturan penomoran* | *0,5* | *Done* | *-* |
 | *28-10-2026* | *Cynthia Winda Wijaya* | *Menambah antarmuka 1-13* | *7* | *Done* | *-* |
